@@ -1,4 +1,4 @@
-// pages/index.js - OnTonight Landing Page (Premium Platinum Edition)
+// pages/index.js - OnTonight Landing Page (TRUE C3 NEON EDGE THEME)
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 
@@ -69,6 +69,7 @@ export default function LandingPage() {
         <meta name="description" content="Professional identity platform for hospitality. Build portable careers, follow your people, elevate the industry." />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#d4a373" />
+        <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
 
       <div className="page">
@@ -90,7 +91,7 @@ export default function LandingPage() {
           <div className="tab-content">
             {/* HERO */}
             <section className="hero">
-              <div className="hero-grid"></div>
+              <div className="hero-glow"></div>
               <div className="container">
                 <div className="hero-badge">TAMPA · 2025</div>
                 <h1>Your Night.<br />Your People.</h1>
@@ -185,24 +186,23 @@ export default function LandingPage() {
                 {/* ONPRO */}
                 <div className="feature">
                   <div className="feature-visual">
-                    <div className="screenshot-frame">
-                      <div className="frame-chrome">
-                        <div className="chrome-dots"></div>
-                        <div className="chrome-url">app.on-tonight.com</div>
+                    <div className="feature-demo">
+                      <div className="demo-header">
+                        <div className="demo-dots"></div>
+                        <span>OnPro Dashboard</span>
                       </div>
-                      <div className="frame-content">
-                        <div className="mock-profile">
-                          <div className="mock-avatar"></div>
-                          <div className="mock-text">
-                            <div className="mock-line"></div>
-                            <div className="mock-line short"></div>
+                      <div className="demo-content">
+                        <div className="demo-profile">
+                          <div className="demo-avatar"></div>
+                          <div className="demo-info">
+                            <div className="demo-name"></div>
+                            <div className="demo-badge">✓ VERIFIED</div>
                           </div>
-                          <div className="mock-badge">VERIFIED</div>
                         </div>
-                        <div className="mock-bars">
-                          <div className="mock-bar"></div>
-                          <div className="mock-bar"></div>
-                          <div className="mock-bar"></div>
+                        <div className="demo-stats">
+                          <div className="stat-bar t"></div>
+                          <div className="stat-bar e"></div>
+                          <div className="stat-bar eq"></div>
                         </div>
                       </div>
                     </div>
@@ -213,9 +213,9 @@ export default function LandingPage() {
                     <p>Professional profile that follows you. Skills verified through DAPA. Customers follow YOU, not venues.</p>
                     <ul>
                       <li>Verified professional identity</li>
-                      <li>Skills certification</li>
+                      <li>6-axis skills assessment</li>
                       <li>Portable customer base</li>
-                      <li>Career analytics</li>
+                      <li>Career analytics & genome</li>
                     </ul>
                     <div className="feature-price">
                       <strong>FREE</strong>
@@ -227,18 +227,21 @@ export default function LandingPage() {
                 {/* PATRON */}
                 <div className="feature feature-reverse">
                   <div className="feature-visual">
-                    <div className="screenshot-frame">
-                      <div className="frame-chrome">
-                        <div className="chrome-dots"></div>
-                        <div className="chrome-url">app.on-tonight.com/discover</div>
+                    <div className="feature-demo">
+                      <div className="demo-header">
+                        <div className="demo-dots"></div>
+                        <span>Patron Experience</span>
                       </div>
-                      <div className="frame-content">
-                        <div className="mock-search"></div>
-                        <div className="mock-cards">
-                          <div className="mock-card"></div>
-                          <div className="mock-card"></div>
-                          <div className="mock-card"></div>
-                          <div className="mock-card"></div>
+                      <div className="demo-content">
+                        <div className="demo-genome">
+                          <div className="genome-icon">🍷</div>
+                          <div className="genome-label">The Connoisseur</div>
+                          <div className="genome-desc">Quality over everything</div>
+                        </div>
+                        <div className="demo-mypeople">
+                          <div className="person-card"></div>
+                          <div className="person-card"></div>
+                          <div className="person-card"></div>
                         </div>
                       </div>
                     </div>
@@ -248,10 +251,10 @@ export default function LandingPage() {
                     <h3>Find Your People</h3>
                     <p>Follow favorite professionals. See who's working tonight. Never lose touch. Discover verified talent.</p>
                     <ul>
-                      <li>Follow OnPros</li>
-                      <li>Real-time status</li>
-                      <li>OnScene Genome</li>
-                      <li>Smart matching</li>
+                      <li>Follow OnPros in real-time</li>
+                      <li>OnScene Genome personality</li>
+                      <li>Track regulars & check-ins</li>
+                      <li>Smart venue matching</li>
                     </ul>
                     <div className="feature-price">
                       <strong>FREE</strong>
@@ -263,16 +266,22 @@ export default function LandingPage() {
                 {/* VENUE */}
                 <div className="feature">
                   <div className="feature-visual">
-                    <div className="screenshot-frame">
-                      <div className="frame-chrome">
-                        <div className="chrome-dots"></div>
-                        <div className="chrome-url">app.on-tonight.com/venue</div>
+                    <div className="feature-demo">
+                      <div className="demo-header">
+                        <div className="demo-dots"></div>
+                        <span>Venue Analytics</span>
                       </div>
-                      <div className="frame-content">
-                        <div className="mock-chart"></div>
-                        <div className="mock-metrics">
-                          <div className="mock-metric"></div>
-                          <div className="mock-metric"></div>
+                      <div className="demo-content">
+                        <div className="demo-chart"></div>
+                        <div className="demo-metrics">
+                          <div className="metric">
+                            <div className="metric-value"></div>
+                            <div className="metric-label">Check-Ins</div>
+                          </div>
+                          <div className="metric">
+                            <div className="metric-value"></div>
+                            <div className="metric-label">Regulars</div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -282,10 +291,10 @@ export default function LandingPage() {
                     <h3>Retain Talent</h3>
                     <p>Recruit verified professionals. Showcase your team. Reduce turnover costs. Track staff impact.</p>
                     <ul>
-                      <li>Recruit verified talent</li>
-                      <li>Team showcase</li>
-                      <li>Traffic analytics</li>
-                      <li>Retention tools</li>
+                      <li>Recruit DAPA-verified talent</li>
+                      <li>Team showcase & analytics</li>
+                      <li>Check-ins & regulars tracking</li>
+                      <li>Customer traffic insights</li>
                     </ul>
                     <div className="feature-price">
                       <strong>3-Month Trial</strong>
@@ -303,46 +312,27 @@ export default function LandingPage() {
                 <p className="dapa-subtitle">Six professional dimensions. 1,600+ questions. Industry verified.</p>
                 <div className="dapa-grid">
                   <div className="dapa-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <path d="M12 2L2 7L12 12L22 7L12 2Z"></path>
-                      <path d="M2 17L12 22L22 17"></path>
-                      <path d="M2 12L12 17L22 12"></path>
-                    </svg>
+                    <div className="dapa-icon">T</div>
                     <h4>Technical</h4>
                   </div>
                   <div className="dapa-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <path d="M9 12L11 14L15 10"></path>
-                      <circle cx="12" cy="12" r="10"></circle>
-                    </svg>
+                    <div className="dapa-icon">E</div>
                     <h4>Ethical</h4>
                   </div>
                   <div className="dapa-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                    </svg>
+                    <div className="dapa-icon">EQ</div>
                     <h4>Emotional</h4>
                   </div>
                   <div className="dapa-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
-                    </svg>
+                    <div className="dapa-icon">V</div>
                     <h4>Velocity</h4>
                   </div>
                   <div className="dapa-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <line x1="12" y1="1" x2="12" y2="23"></line>
-                      <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                    </svg>
+                    <div className="dapa-icon">$</div>
                     <h4>Commercial</h4>
                   </div>
                   <div className="dapa-item">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                      <circle cx="9" cy="7" r="4"></circle>
-                      <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                      <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                    </svg>
+                    <div className="dapa-icon">L</div>
                     <h4>Leadership</h4>
                   </div>
                 </div>
@@ -529,24 +519,24 @@ export default function LandingPage() {
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         .page { 
-          background: #000;
-          color: #fff;
-          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-          letter-spacing: -0.02em;
+          background: #0a0f14;
+          color: #f8fafc;
+          font-family: 'Urbanist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+          letter-spacing: -0.015em;
           font-weight: 400;
         }
         
         .container { 
           max-width: 1100px;
           margin: 0 auto;
-          padding: 0 20px;
+          padding: 0 24px;
         }
         
         h1 { 
           font-size: 56px;
           font-weight: 600;
-          line-height: 1;
-          letter-spacing: -0.03em;
+          line-height: 1.1;
+          letter-spacing: -0.025em;
           margin-bottom: 16px;
         }
         
@@ -560,47 +550,48 @@ export default function LandingPage() {
         h3 {
           font-size: 24px;
           font-weight: 600;
-          letter-spacing: -0.02em;
+          letter-spacing: -0.015em;
           margin-bottom: 16px;
         }
         
         h4 {
-          font-size: 14px;
+          font-size: 13px;
           font-weight: 500;
-          letter-spacing: -0.01em;
+          letter-spacing: 0.02em;
+          text-transform: uppercase;
         }
         
         p {
           font-size: 15px;
           line-height: 1.6;
-          color: rgba(255,255,255,0.7);
+          color: rgba(248,250,252,0.7);
         }
         
         section {
-          padding: 80px 20px;
+          padding: 80px 24px;
         }
         
         /* NAV */
         .nav {
           position: sticky;
           top: 0;
-          background: rgba(0,0,0,0.8);
+          background: rgba(10,15,20,0.85);
           backdrop-filter: blur(20px);
-          border-bottom: 1px solid rgba(255,255,255,0.06);
+          border-bottom: 1px solid rgba(212,163,115,0.1);
           z-index: 1000;
         }
         
         .nav-container {
           max-width: 1100px;
           margin: 0 auto;
-          padding: 16px 20px;
+          padding: 18px 24px;
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
         
         .nav-logo {
-          font-size: 18px;
+          font-size: 20px;
           font-weight: 600;
           color: #d4a373;
           letter-spacing: -0.02em;
@@ -608,16 +599,16 @@ export default function LandingPage() {
         
         .nav-tabs {
           display: flex;
-          gap: 4px;
+          gap: 6px;
           align-items: center;
         }
         
         .nav-tab {
           background: transparent;
           border: none;
-          color: rgba(255,255,255,0.5);
+          color: rgba(248,250,252,0.5);
           padding: 8px 16px;
-          font-size: 13px;
+          font-size: 14px;
           font-weight: 500;
           cursor: pointer;
           transition: color 0.2s;
@@ -625,7 +616,7 @@ export default function LandingPage() {
         }
         
         .nav-tab:hover {
-          color: rgba(255,255,255,0.9);
+          color: rgba(248,250,252,0.9);
         }
         
         .nav-tab.active {
@@ -634,13 +625,14 @@ export default function LandingPage() {
         
         .nav-cta {
           background: #d4a373;
-          color: #000;
-          padding: 8px 20px;
-          font-size: 13px;
+          color: #0a0f14;
+          padding: 10px 24px;
+          font-size: 14px;
           font-weight: 600;
           text-decoration: none;
           transition: opacity 0.2s;
-          margin-left: 8px;
+          margin-left: 12px;
+          border-radius: 2px;
         }
         
         .nav-cta:hover {
@@ -654,41 +646,40 @@ export default function LandingPage() {
           align-items: center;
           position: relative;
           text-align: center;
-          padding: 100px 20px 80px;
+          padding: 120px 24px 80px;
         }
         
-        .hero-grid {
+        .hero-glow {
           position: absolute;
           top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background-image: 
-            linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-          background-size: 50px 50px;
-          opacity: 0.3;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 800px;
+          height: 800px;
+          background: radial-gradient(circle, rgba(212,163,115,0.08) 0%, transparent 70%);
+          pointer-events: none;
         }
         
         .hero-badge {
           display: inline-block;
           font-size: 10px;
           font-weight: 600;
-          letter-spacing: 0.1em;
-          color: rgba(255,255,255,0.4);
-          border: 1px solid rgba(255,255,255,0.1);
-          padding: 6px 14px;
-          margin-bottom: 40px;
+          letter-spacing: 0.15em;
+          color: #d4a373;
+          border: 1px solid rgba(212,163,115,0.2);
+          padding: 8px 16px;
+          margin-bottom: 48px;
+          border-radius: 2px;
         }
         
         .hero h1 {
           font-size: 72px;
-          margin-bottom: 12px;
-          color: #fff;
+          margin-bottom: 16px;
+          color: #f8fafc;
         }
         
         .hero-subtitle {
-          font-size: 18px;
+          font-size: 20px;
           color: #d4a373;
           margin-bottom: 60px;
           font-weight: 500;
@@ -698,15 +689,15 @@ export default function LandingPage() {
           display: flex;
           gap: 60px;
           justify-content: center;
-          margin-bottom: 50px;
+          margin-bottom: 48px;
           font-size: 13px;
-          color: rgba(255,255,255,0.5);
+          color: rgba(248,250,252,0.5);
         }
         
         .hero-stats span {
           color: #d4a373;
           font-weight: 600;
-          font-size: 20px;
+          font-size: 22px;
           display: block;
           margin-bottom: 4px;
         }
@@ -719,36 +710,39 @@ export default function LandingPage() {
         
         .btn-primary {
           background: #d4a373;
-          color: #000;
+          color: #0a0f14;
           border: none;
-          padding: 14px 32px;
-          font-size: 14px;
-          font-weight: 600;
-          cursor: pointer;
-          transition: opacity 0.2s;
-          font-family: inherit;
-          letter-spacing: -0.01em;
-        }
-        
-        .btn-primary:hover {
-          opacity: 0.9;
-        }
-        
-        .btn-primary:active {
-          transform: translateY(1px);
-        }
-        
-        .btn-secondary {
-          background: transparent;
-          color: #d4a373;
-          border: 1px solid rgba(212,163,115,0.5);
-          padding: 14px 32px;
-          font-size: 14px;
+          padding: 16px 36px;
+          font-size: 15px;
           font-weight: 600;
           cursor: pointer;
           transition: all 0.2s;
           font-family: inherit;
           letter-spacing: -0.01em;
+          border-radius: 2px;
+        }
+        
+        .btn-primary:hover {
+          opacity: 0.9;
+          transform: translateY(-1px);
+        }
+        
+        .btn-primary:active {
+          transform: translateY(0px);
+        }
+        
+        .btn-secondary {
+          background: transparent;
+          color: #d4a373;
+          border: 1px solid rgba(212,163,115,0.4);
+          padding: 16px 36px;
+          font-size: 15px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: all 0.2s;
+          font-family: inherit;
+          letter-spacing: -0.01em;
+          border-radius: 2px;
         }
         
         .btn-secondary:hover {
@@ -757,25 +751,26 @@ export default function LandingPage() {
         }
         
         .btn-secondary:active {
-          transform: translateY(1px);
+          transform: translateY(0px);
         }
         
         .btn-install {
-          margin-top: 20px;
+          margin-top: 24px;
           background: transparent;
-          color: rgba(255,255,255,0.5);
-          border: 1px solid rgba(255,255,255,0.1);
+          color: rgba(248,250,252,0.4);
+          border: 1px solid rgba(248,250,252,0.1);
           padding: 10px 24px;
           font-size: 12px;
           cursor: pointer;
           font-family: inherit;
+          border-radius: 2px;
         }
         
         /* VALUE */
         .value {
-          background: #0a0a0a;
-          border-top: 1px solid rgba(255,255,255,0.06);
-          border-bottom: 1px solid rgba(255,255,255,0.06);
+          background: #0d1117;
+          border-top: 1px solid rgba(212,163,115,0.08);
+          border-bottom: 1px solid rgba(212,163,115,0.08);
         }
         
         .value h2 {
@@ -791,10 +786,14 @@ export default function LandingPage() {
         
         .value-item {
           text-align: center;
+          padding: 32px;
+          background: rgba(212,163,115,0.02);
+          border: 1px solid rgba(212,163,115,0.08);
+          border-radius: 2px;
         }
         
         .value-number {
-          font-size: 36px;
+          font-size: 40px;
           font-weight: 600;
           color: #d4a373;
           margin-bottom: 8px;
@@ -804,19 +803,19 @@ export default function LandingPage() {
         .value-label {
           font-size: 11px;
           text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: rgba(255,255,255,0.4);
+          letter-spacing: 0.08em;
+          color: rgba(248,250,252,0.4);
           margin-bottom: 16px;
         }
         
         .value-item p {
           font-size: 14px;
-          color: rgba(255,255,255,0.6);
+          color: rgba(248,250,252,0.6);
         }
         
         /* QUOTES */
         .quotes {
-          background: #000;
+          background: #0a0f14;
         }
         
         .quotes h2 {
@@ -832,15 +831,16 @@ export default function LandingPage() {
         
         .quote {
           border-left: 2px solid rgba(212,163,115,0.3);
-          padding: 24px;
-          background: rgba(255,255,255,0.01);
+          padding: 28px;
+          background: rgba(212,163,115,0.02);
+          border-radius: 2px;
         }
         
         .quote p {
           font-size: 14px;
-          line-height: 1.6;
+          line-height: 1.65;
           font-style: italic;
-          color: rgba(255,255,255,0.7);
+          color: rgba(248,250,252,0.7);
           margin-bottom: 16px;
         }
         
@@ -849,13 +849,13 @@ export default function LandingPage() {
           color: #d4a373;
           font-style: normal;
           text-transform: uppercase;
-          letter-spacing: 0.05em;
+          letter-spacing: 0.08em;
         }
         
         /* PLATFORM */
         .platform-intro {
           text-align: center;
-          padding: 100px 20px 60px;
+          padding: 100px 24px 60px;
         }
         
         .platform-intro h1 {
@@ -863,21 +863,21 @@ export default function LandingPage() {
         }
         
         .platform-intro p {
-          font-size: 16px;
-          color: rgba(255,255,255,0.5);
+          font-size: 18px;
+          color: rgba(248,250,252,0.5);
         }
         
-        /* FEATURES */
+        /* FEATURES WITH ANIMATED DEMOS */
         .features {
-          padding: 40px 20px 80px;
+          padding: 40px 24px 80px;
         }
         
         .feature {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 60px;
+          gap: 80px;
           align-items: center;
-          margin-bottom: 100px;
+          margin-bottom: 120px;
         }
         
         .feature-reverse {
@@ -888,139 +888,188 @@ export default function LandingPage() {
           direction: ltr;
         }
         
-        .feature-visual {
-          background: rgba(255,255,255,0.01);
-          border: 1px solid rgba(255,255,255,0.06);
-          padding: 20px;
-        }
-        
-        .screenshot-frame {
-          background: #0a0a0a;
+        .feature-demo {
+          background: rgba(212,163,115,0.02);
+          border: 1px solid rgba(212,163,115,0.1);
+          border-radius: 4px;
           overflow: hidden;
         }
         
-        .frame-chrome {
-          background: rgba(255,255,255,0.03);
-          padding: 10px 12px;
+        .demo-header {
+          background: rgba(212,163,115,0.05);
+          padding: 12px 16px;
           display: flex;
           align-items: center;
           gap: 12px;
-          border-bottom: 1px solid rgba(255,255,255,0.06);
+          border-bottom: 1px solid rgba(212,163,115,0.1);
         }
         
-        .chrome-dots {
+        .demo-dots {
           width: 40px;
           height: 8px;
-          background: rgba(255,255,255,0.1);
+          background: linear-gradient(90deg, rgba(212,163,115,0.3), rgba(212,163,115,0.2), rgba(212,163,115,0.1));
+          border-radius: 4px;
         }
         
-        .chrome-url {
-          flex: 1;
-          font-size: 11px;
-          color: rgba(255,255,255,0.3);
-          text-align: center;
+        .demo-header span {
+          font-size: 12px;
+          color: rgba(248,250,252,0.5);
+          font-weight: 500;
         }
         
-        .frame-content {
-          padding: 30px;
+        .demo-content {
+          padding: 40px;
           min-height: 350px;
         }
         
-        .mock-profile {
+        .demo-profile {
           display: flex;
-          gap: 12px;
+          gap: 16px;
           align-items: center;
+          margin-bottom: 32px;
+        }
+        
+        .demo-avatar {
+          width: 60px;
+          height: 60px;
+          background: linear-gradient(135deg, #d4a373, #c99763);
+          border-radius: 50%;
+        }
+        
+        .demo-info {
+          flex: 1;
+        }
+        
+        .demo-name {
+          height: 14px;
+          width: 120px;
+          background: rgba(248,250,252,0.1);
+          margin-bottom: 8px;
+          border-radius: 2px;
+        }
+        
+        .demo-badge {
+          background: rgba(34, 197, 94, 0.15);
+          color: #22c55e;
+          padding: 4px 10px;
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          border: 1px solid rgba(34, 197, 94, 0.3);
+          display: inline-block;
+          border-radius: 2px;
+        }
+        
+        .demo-stats {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+        
+        .stat-bar {
+          height: 32px;
+          border-radius: 2px;
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .stat-bar.t {
+          background: linear-gradient(90deg, rgba(239,68,68,0.2) 0%, rgba(239,68,68,0.05) 100%);
+          border-left: 3px solid #ef4444;
+        }
+        
+        .stat-bar.e {
+          background: linear-gradient(90deg, rgba(34,197,94,0.2) 0%, rgba(34,197,94,0.05) 100%);
+          border-left: 3px solid #22c55e;
+        }
+        
+        .stat-bar.eq {
+          background: linear-gradient(90deg, rgba(236,72,153,0.2) 0%, rgba(236,72,153,0.05) 100%);
+          border-left: 3px solid #ec4899;
+        }
+        
+        .demo-genome {
+          text-align: center;
+          padding: 32px;
+          background: rgba(212,163,115,0.05);
+          border: 1px solid rgba(212,163,115,0.15);
+          border-radius: 4px;
           margin-bottom: 24px;
         }
         
-        .mock-avatar {
-          width: 50px;
-          height: 50px;
-          background: linear-gradient(135deg, #d4a373, #c99763);
+        .genome-icon {
+          font-size: 48px;
+          margin-bottom: 16px;
         }
         
-        .mock-text {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          gap: 6px;
+        .genome-label {
+          font-size: 18px;
+          font-weight: 600;
+          color: #d4a373;
+          margin-bottom: 8px;
         }
         
-        .mock-line {
-          height: 10px;
-          background: rgba(255,255,255,0.06);
+        .genome-desc {
+          font-size: 13px;
+          color: rgba(248,250,252,0.5);
+          font-style: italic;
         }
         
-        .mock-line.short {
-          width: 50%;
-        }
-        
-        .mock-badge {
-          background: rgba(61,220,108,0.1);
-          color: #3ddc6c;
-          padding: 6px 12px;
-          font-size: 9px;
-          font-weight: 700;
-          letter-spacing: 0.1em;
-          border: 1px solid rgba(61,220,108,0.2);
-        }
-        
-        .mock-bars {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-        }
-        
-        .mock-bar {
-          height: 24px;
-          background: linear-gradient(90deg, rgba(212,163,115,0.2) 0%, transparent 100%);
-          border-left: 2px solid #d4a373;
-        }
-        
-        .mock-search {
-          height: 36px;
-          background: rgba(255,255,255,0.03);
-          border: 1px solid rgba(255,255,255,0.06);
-          margin-bottom: 20px;
-        }
-        
-        .mock-cards {
+        .demo-mypeople {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: repeat(3, 1fr);
           gap: 12px;
         }
         
-        .mock-card {
-          height: 100px;
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.04);
-        }
-        
-        .mock-chart {
-          height: 180px;
-          background: linear-gradient(180deg, rgba(212,163,115,0.05) 0%, transparent 100%);
+        .person-card {
+          height: 80px;
+          background: rgba(212,163,115,0.05);
           border: 1px solid rgba(212,163,115,0.1);
+          border-radius: 2px;
+        }
+        
+        .demo-chart {
+          height: 180px;
+          background: linear-gradient(180deg, rgba(212,163,115,0.08) 0%, rgba(212,163,115,0.02) 100%);
+          border: 1px solid rgba(212,163,115,0.1);
+          border-radius: 2px;
           margin-bottom: 20px;
         }
         
-        .mock-metrics {
+        .demo-metrics {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
           gap: 12px;
         }
         
-        .mock-metric {
-          height: 60px;
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.04);
+        .metric {
+          padding: 20px;
+          background: rgba(212,163,115,0.03);
+          border: 1px solid rgba(212,163,115,0.08);
+          border-radius: 2px;
+        }
+        
+        .metric-value {
+          height: 24px;
+          width: 60px;
+          background: rgba(212,163,115,0.2);
+          margin-bottom: 12px;
+          border-radius: 2px;
+        }
+        
+        .metric-label {
+          font-size: 11px;
+          color: rgba(248,250,252,0.4);
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
         }
         
         .feature-tag {
           font-size: 10px;
           font-weight: 600;
-          letter-spacing: 0.1em;
-          color: rgba(255,255,255,0.4);
-          margin-bottom: 12px;
+          letter-spacing: 0.15em;
+          color: #d4a373;
+          margin-bottom: 16px;
         }
         
         .feature-info h3 {
@@ -1028,19 +1077,19 @@ export default function LandingPage() {
         }
         
         .feature-info > p {
-          margin-bottom: 24px;
+          margin-bottom: 28px;
         }
         
         .feature-info ul {
           list-style: none;
-          margin-bottom: 24px;
+          margin-bottom: 28px;
         }
         
         .feature-info li {
           font-size: 14px;
-          line-height: 1.8;
-          color: rgba(255,255,255,0.6);
-          padding-left: 16px;
+          line-height: 2;
+          color: rgba(248,250,252,0.65);
+          padding-left: 20px;
           position: relative;
         }
         
@@ -1052,26 +1101,26 @@ export default function LandingPage() {
         }
         
         .feature-price {
-          border-top: 1px solid rgba(255,255,255,0.06);
-          padding-top: 16px;
+          border-top: 1px solid rgba(212,163,115,0.1);
+          padding-top: 20px;
         }
         
         .feature-price strong {
-          font-size: 16px;
+          font-size: 18px;
           color: #d4a373;
           display: block;
-          margin-bottom: 4px;
+          margin-bottom: 6px;
         }
         
         .feature-price span {
-          font-size: 12px;
-          color: rgba(255,255,255,0.4);
+          font-size: 13px;
+          color: rgba(248,250,252,0.4);
         }
         
         /* DAPA */
         .dapa {
-          background: #0a0a0a;
-          border-top: 1px solid rgba(255,255,255,0.06);
+          background: #0d1117;
+          border-top: 1px solid rgba(212,163,115,0.08);
           text-align: center;
         }
         
@@ -1081,7 +1130,7 @@ export default function LandingPage() {
         
         .dapa-subtitle {
           font-size: 14px;
-          color: rgba(255,255,255,0.4);
+          color: rgba(248,250,252,0.4);
           margin-bottom: 60px;
         }
         
@@ -1094,32 +1143,42 @@ export default function LandingPage() {
         }
         
         .dapa-item {
-          padding: 24px 16px;
-          border: 1px solid rgba(255,255,255,0.06);
-          background: rgba(255,255,255,0.01);
-          transition: all 0.2s;
+          padding: 32px 20px;
+          border: 1px solid rgba(212,163,115,0.1);
+          background: rgba(212,163,115,0.02);
+          transition: all 0.3s;
+          border-radius: 2px;
         }
         
         .dapa-item:hover {
           border-color: rgba(212,163,115,0.3);
-          background: rgba(255,255,255,0.02);
+          background: rgba(212,163,115,0.05);
+          transform: translateY(-2px);
         }
         
-        .dapa-item svg {
-          width: 28px;
-          height: 28px;
+        .dapa-icon {
+          width: 44px;
+          height: 44px;
+          background: linear-gradient(135deg, rgba(212,163,115,0.2), rgba(212,163,115,0.1));
+          border: 1px solid rgba(212,163,115,0.3);
           color: #d4a373;
-          margin-bottom: 12px;
+          font-size: 16px;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 auto 16px;
+          border-radius: 2px;
         }
         
         .dapa-item h4 {
           font-size: 12px;
-          color: rgba(255,255,255,0.7);
+          color: rgba(248,250,252,0.7);
         }
         
         /* GENOME */
         .genome {
-          background: #000;
+          background: #0a0f14;
           text-align: center;
         }
         
@@ -1129,7 +1188,7 @@ export default function LandingPage() {
         
         .genome-subtitle {
           font-size: 14px;
-          color: rgba(255,255,255,0.4);
+          color: rgba(248,250,252,0.4);
           margin-bottom: 60px;
         }
         
@@ -1141,58 +1200,61 @@ export default function LandingPage() {
         }
         
         .genome-item {
-          background: rgba(255,255,255,0.01);
-          border: 1px solid rgba(255,255,255,0.06);
-          padding: 20px 12px;
+          background: rgba(212,163,115,0.02);
+          border: 1px solid rgba(212,163,115,0.1);
+          padding: 24px 16px;
           cursor: pointer;
-          transition: all 0.2s;
+          transition: all 0.3s;
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 8px;
+          gap: 10px;
+          border-radius: 2px;
         }
         
         .genome-item:hover, .genome-item.active {
-          background: rgba(212,163,115,0.05);
+          background: rgba(212,163,115,0.08);
           border-color: rgba(212,163,115,0.3);
+          transform: translateY(-2px);
         }
         
         .genome-emoji {
-          font-size: 24px;
+          font-size: 28px;
         }
         
         .genome-name {
           font-size: 11px;
-          color: rgba(255,255,255,0.7);
+          color: rgba(248,250,252,0.7);
           font-weight: 500;
         }
         
         .genome-detail {
           background: rgba(212,163,115,0.05);
           border: 1px solid rgba(212,163,115,0.2);
-          padding: 40px;
+          padding: 48px;
           max-width: 700px;
           margin: 0 auto;
+          border-radius: 4px;
         }
         
         .genome-detail-header {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 16px;
-          margin-bottom: 20px;
+          gap: 20px;
+          margin-bottom: 24px;
         }
         
         .genome-detail-header span {
-          font-size: 36px;
+          font-size: 40px;
         }
         
         .genome-detail h3 {
-          font-size: 24px;
+          font-size: 26px;
         }
         
         .genome-detail p {
-          margin-bottom: 24px;
+          margin-bottom: 28px;
           text-align: center;
         }
         
@@ -1200,15 +1262,16 @@ export default function LandingPage() {
           background: transparent;
           color: #d4a373;
           border: 1px solid rgba(212,163,115,0.3);
-          padding: 8px 24px;
-          font-size: 12px;
+          padding: 10px 28px;
+          font-size: 13px;
           cursor: pointer;
           font-family: inherit;
+          border-radius: 2px;
         }
         
         /* VISION */
         .vision {
-          padding: 100px 20px;
+          padding: 100px 24px;
         }
         
         .vision h1 {
@@ -1218,7 +1281,7 @@ export default function LandingPage() {
         
         .vision-lead {
           text-align: center;
-          font-size: 16px;
+          font-size: 18px;
           color: #d4a373;
           margin-bottom: 80px;
         }
@@ -1244,7 +1307,7 @@ export default function LandingPage() {
         .vision-highlight {
           color: #d4a373;
           font-weight: 500;
-          padding: 16px;
+          padding: 20px;
           border-left: 2px solid #d4a373;
           background: rgba(212,163,115,0.05);
         }
@@ -1256,8 +1319,8 @@ export default function LandingPage() {
         .vision-list li {
           font-size: 15px;
           line-height: 1.8;
-          color: rgba(255,255,255,0.7);
-          padding-left: 20px;
+          color: rgba(248,250,252,0.7);
+          padding-left: 24px;
           position: relative;
           margin-bottom: 12px;
         }
@@ -1271,10 +1334,11 @@ export default function LandingPage() {
         
         .vision-cta {
           text-align: center;
-          padding: 50px 40px;
+          padding: 56px 48px;
           border: 1px solid rgba(212,163,115,0.2);
-          background: rgba(212,163,115,0.02);
+          background: rgba(212,163,115,0.03);
           margin-top: 60px;
+          border-radius: 4px;
         }
         
         .vision-cta h3 {
@@ -1282,13 +1346,13 @@ export default function LandingPage() {
         }
         
         .vision-cta p {
-          margin-bottom: 24px;
+          margin-bottom: 28px;
         }
         
         /* WAITLIST */
         .waitlist {
-          background: #0a0a0a;
-          border-top: 1px solid rgba(255,255,255,0.06);
+          background: #0d1117;
+          border-top: 1px solid rgba(212,163,115,0.08);
           text-align: center;
         }
         
@@ -1297,9 +1361,9 @@ export default function LandingPage() {
         }
         
         .waitlist-subtitle {
-          font-size: 14px;
+          font-size: 15px;
           color: #d4a373;
-          margin-bottom: 50px;
+          margin-bottom: 48px;
         }
         
         .waitlist-form {
@@ -1316,60 +1380,64 @@ export default function LandingPage() {
         
         input, select {
           width: 100%;
-          padding: 14px 16px;
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.08);
-          color: #fff;
+          padding: 16px 18px;
+          background: rgba(212,163,115,0.03);
+          border: 1px solid rgba(212,163,115,0.1);
+          color: #f8fafc;
           font-family: inherit;
           font-size: 14px;
           transition: all 0.2s;
+          border-radius: 2px;
         }
         
         input:focus, select:focus {
           outline: none;
           border-color: #d4a373;
-          background: rgba(255,255,255,0.03);
+          background: rgba(212,163,115,0.05);
         }
         
         .form-disclaimer {
           font-size: 11px;
-          color: rgba(255,255,255,0.4);
-          margin: 20px 0;
+          color: rgba(248,250,252,0.4);
+          margin: 24px 0;
           line-height: 1.5;
         }
         
         .btn-submit {
           width: 100%;
           background: #d4a373;
-          color: #000;
+          color: #0a0f14;
           border: none;
-          padding: 16px;
-          font-size: 14px;
+          padding: 18px;
+          font-size: 15px;
           font-weight: 600;
           cursor: pointer;
           font-family: inherit;
-          transition: opacity 0.2s;
+          transition: all 0.2s;
+          border-radius: 2px;
         }
         
         .btn-submit:hover {
           opacity: 0.9;
+          transform: translateY(-1px);
         }
         
         .waitlist-success {
-          padding: 80px 40px;
-          border: 1px solid rgba(61,220,108,0.2);
-          background: rgba(61,220,108,0.03);
+          padding: 80px 48px;
+          border: 1px solid rgba(34,220,108,0.2);
+          background: rgba(34,220,108,0.05);
+          border-radius: 4px;
         }
         
         .waitlist-success h2 {
-          color: #3ddc6c;
+          color: #22c55e;
         }
         
         /* FOOTER */
         .footer {
-          background: #000;
-          border-top: 1px solid rgba(255,255,255,0.06);
-          padding: 60px 20px 30px;
+          background: #0a0f14;
+          border-top: 1px solid rgba(212,163,115,0.08);
+          padding: 60px 24px 32px;
         }
         
         .footer-content {
@@ -1379,7 +1447,7 @@ export default function LandingPage() {
         }
         
         .footer-logo {
-          font-size: 16px;
+          font-size: 18px;
           font-weight: 600;
           color: #d4a373;
           margin-bottom: 8px;
@@ -1387,7 +1455,7 @@ export default function LandingPage() {
         
         .footer-brand p {
           font-size: 12px;
-          color: rgba(255,255,255,0.4);
+          color: rgba(248,250,252,0.4);
         }
         
         .footer-links {
@@ -1398,18 +1466,18 @@ export default function LandingPage() {
         .footer-col h5 {
           font-size: 11px;
           text-transform: uppercase;
-          letter-spacing: 0.05em;
-          color: rgba(255,255,255,0.4);
-          margin-bottom: 12px;
+          letter-spacing: 0.08em;
+          color: rgba(248,250,252,0.4);
+          margin-bottom: 14px;
           font-weight: 500;
         }
         
         .footer-col a {
           display: block;
           font-size: 13px;
-          color: rgba(255,255,255,0.5);
+          color: rgba(248,250,252,0.5);
           text-decoration: none;
-          margin-bottom: 8px;
+          margin-bottom: 10px;
           transition: color 0.2s;
         }
         
@@ -1418,24 +1486,24 @@ export default function LandingPage() {
         }
         
         .footer-bottom {
-          padding-top: 30px;
-          border-top: 1px solid rgba(255,255,255,0.06);
+          padding-top: 32px;
+          border-top: 1px solid rgba(212,163,115,0.08);
           display: flex;
           justify-content: space-between;
           font-size: 11px;
-          color: rgba(255,255,255,0.3);
+          color: rgba(248,250,252,0.3);
         }
         
         /* RESPONSIVE */
         @media (max-width: 768px) {
           h1 { font-size: 40px; }
-          .hero h1 { font-size: 48px; }
+          .hero h1 { font-size: 52px; }
           .hero-stats { flex-direction: column; gap: 24px; }
           .value-grid, .quotes-grid, .dapa-grid, .genome-grid { grid-template-columns: 1fr; }
           .feature { grid-template-columns: 1fr; }
           .form-row { grid-template-columns: 1fr; }
-          .footer-content { flex-direction: column; gap: 30px; }
-          .footer-links { flex-direction: column; gap: 30px; }
+          .footer-content { flex-direction: column; gap: 32px; }
+          .footer-links { flex-direction: column; gap: 32px; }
         }
       `}</style>
     </>
