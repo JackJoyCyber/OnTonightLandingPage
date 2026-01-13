@@ -66,7 +66,7 @@ export default function LandingPage() {
     <>
       <Head>
         <title>OnTonight - Professional Identity Platform for Hospitality</title>
-        <meta name="description" content="Professional identity platform for hospitality. Build portable careers, follow your people, elevate the industry. Launching Tampa 2025." />
+        <meta name="description" content="Professional identity platform for hospitality. Build portable careers, follow your people, elevate the industry. Live now in Tampa Bay. Expanding to Miami, Nashville & beyond." />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#d4a373" />
         <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -93,7 +93,7 @@ export default function LandingPage() {
             <section className="hero">
               <div className="hero-glow"></div>
               <div className="container">
-                <div className="hero-badge">TAMPA · 2025</div>
+                <div className="hero-badge">LIVE NOW · JOIN THE MOVEMENT</div>
                 <h1>Your Night.<br />Your People.</h1>
                 <p className="hero-subtitle">Where Regulars Are Made</p>
                 
@@ -405,32 +405,32 @@ export default function LandingPage() {
                 <p className="section-subtitle">The industry's only comprehensive skills verification system. 1,600+ questions across 6 professional dimensions.</p>
                 <div className="dapa-grid">
                   <div className="dapa-item">
-                    <div className="dapa-icon technical">T</div>
+                    <div className="dapa-icon technical">🎯</div>
                     <h4>Technical</h4>
                     <p>Knowledge, procedures, problem-solving</p>
                   </div>
                   <div className="dapa-item">
-                    <div className="dapa-icon ethical">E</div>
+                    <div className="dapa-icon ethical">⚖️</div>
                     <h4>Ethical</h4>
                     <p>Integrity, compliance, judgment</p>
                   </div>
                   <div className="dapa-item">
-                    <div className="dapa-icon emotional">EQ</div>
+                    <div className="dapa-icon emotional">💚</div>
                     <h4>Emotional</h4>
                     <p>Empathy, relationships, boundaries</p>
                   </div>
                   <div className="dapa-item">
-                    <div className="dapa-icon velocity">V</div>
+                    <div className="dapa-icon velocity">⚡</div>
                     <h4>Velocity</h4>
                     <p>Speed, pressure, crisis management</p>
                   </div>
                   <div className="dapa-item">
-                    <div className="dapa-icon commercial">$</div>
+                    <div className="dapa-icon commercial">💰</div>
                     <h4>Commercial</h4>
                     <p>Sales, upselling, revenue awareness</p>
                   </div>
                   <div className="dapa-item">
-                    <div className="dapa-icon leadership">L</div>
+                    <div className="dapa-icon leadership">👑</div>
                     <h4>Leadership</h4>
                     <p>Team dynamics, mentoring, initiative</p>
                   </div>
@@ -515,7 +515,7 @@ export default function LandingPage() {
 
                   <div className="vision-section">
                     <h3>The Path Forward</h3>
-                    <p>We launch in Tampa in 2025 with pilot venues including Haiku Tampa, Ulele, and Beacon Rooftop Bar. From there, we expand to Miami, Nashville, and beyond.</p>
+                    <p>We're live now in Tampa Bay with pilot venues including Haiku Tampa, Ulele, and Beacon Rooftop Bar. From here, we're rapidly expanding to Miami, Nashville, Austin, and major hospitality markets nationwide.</p>
                     <p>Our goal is simple: make OnTonight the professional standard for the entire hospitality industry. Every bartender with a verified DAPA profile. Every regular customer following their favorite OnPros. Every venue showcasing verified talent.</p>
                     <p className="vision-emphasis">We're not building an app. We're building the future of hospitality careers.</p>
                   </div>
@@ -602,11 +602,11 @@ export default function LandingPage() {
               <div className="footer-brand">
                 <div className="footer-logo">OnTonight</div>
                 <p className="footer-tagline">Where Regulars Are Made</p>
-                <p className="footer-location">Launching Tampa · 2025</p>
+                <p className="footer-location">Live Now · Tampa Bay → Miami · Nashville · Austin</p>
               </div>
               <div className="footer-links">
                 <div className="footer-col">
-                  <h5>Product</h5>
+                  <h5>Platform</h5>
                   <a href="#waitlist">For OnPros</a>
                   <a href="#waitlist">For Patrons</a>
                   <a href="#waitlist">For Venues</a>
@@ -622,8 +622,8 @@ export default function LandingPage() {
                 <div className="footer-col">
                   <h5>Connect</h5>
                   <a href="mailto:AdminJoy@On-Tonight.com">Support</a>
-                  <a href="#waitlist">Blog</a>
-                  <a href="#waitlist">Press Kit</a>
+                  <a href="mailto:AdminJoy@On-Tonight.com">Media Inquiries</a>
+                  <a href="#waitlist">Partner With Us</a>
                 </div>
               </div>
             </div>
@@ -639,7 +639,7 @@ export default function LandingPage() {
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         .page { 
-          background: #0a0f14;
+          background: #0d1117;
           color: #f8fafc;
           font-family: 'Urbanist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
           letter-spacing: -0.015em;
@@ -720,7 +720,7 @@ export default function LandingPage() {
         .nav {
           position: sticky;
           top: 0;
-          background: rgba(10,15,20,0.9);
+          background: rgba(13,17,23,0.9);
           backdrop-filter: blur(20px);
           border-bottom: 1px solid rgba(212,163,115,0.1);
           z-index: 1000;
@@ -770,7 +770,7 @@ export default function LandingPage() {
         
         .nav-cta {
           background: #d4a373;
-          color: #0a0f14;
+          color: #0d1117;
           padding: 12px 28px;
           font-size: 15px;
           font-weight: 600;
@@ -866,7 +866,7 @@ export default function LandingPage() {
         
         .btn-primary {
           background: #d4a373;
-          color: #0a0f14;
+          color: #0d1117;
           border: none;
           padding: 18px 40px;
           font-size: 16px;
@@ -923,7 +923,7 @@ export default function LandingPage() {
         
         /* VALUE PROPS */
         .value {
-          background: #0d1117;
+          background: #161b22;
           border-top: 1px solid rgba(212,163,115,0.1);
           border-bottom: 1px solid rgba(212,163,115,0.1);
         }
@@ -984,7 +984,7 @@ export default function LandingPage() {
         
         /* QUOTES */
         .quotes {
-          background: #0a0f14;
+          background: #0d1117;
         }
         
         .quotes h2 {
@@ -1038,7 +1038,7 @@ export default function LandingPage() {
         
         /* MISSION */
         .mission {
-          background: linear-gradient(180deg, #0d1117 0%, #0a0f14 100%);
+          background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
           border-top: 1px solid rgba(212,163,115,0.1);
         }
         
@@ -1265,7 +1265,7 @@ export default function LandingPage() {
         
         /* DAPA */
         .dapa {
-          background: #0d1117;
+          background: #161b22;
           border-top: 1px solid rgba(212,163,115,0.1);
           text-align: center;
         }
@@ -1298,9 +1298,7 @@ export default function LandingPage() {
           height: 56px;
           background: linear-gradient(135deg, rgba(212,163,115,0.2), rgba(212,163,115,0.1));
           border: 1px solid rgba(212,163,115,0.3);
-          color: #d4a373;
-          font-size: 20px;
-          font-weight: 700;
+          font-size: 28px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -1308,12 +1306,12 @@ export default function LandingPage() {
           border-radius: 8px;
         }
         
-        .dapa-icon.technical { border-color: rgba(239,68,68,0.3); color: #ef4444; }
-        .dapa-icon.ethical { border-color: rgba(34,197,94,0.3); color: #22c55e; }
-        .dapa-icon.emotional { border-color: rgba(236,72,153,0.3); color: #ec4899; }
-        .dapa-icon.velocity { border-color: rgba(245,158,11,0.3); color: #f59e0b; }
-        .dapa-icon.commercial { border-color: rgba(34,197,94,0.3); color: #22c55e; }
-        .dapa-icon.leadership { border-color: rgba(139,92,246,0.3); color: #8b5cf6; }
+        .dapa-icon.technical { border-color: rgba(239,68,68,0.3); }
+        .dapa-icon.ethical { border-color: rgba(34,197,94,0.3); }
+        .dapa-icon.emotional { border-color: rgba(236,72,153,0.3); }
+        .dapa-icon.velocity { border-color: rgba(245,158,11,0.3); }
+        .dapa-icon.commercial { border-color: rgba(34,197,94,0.3); }
+        .dapa-icon.leadership { border-color: rgba(139,92,246,0.3); }
         
         .dapa-item h4 {
           font-size: 14px;
@@ -1329,7 +1327,7 @@ export default function LandingPage() {
         
         /* GENOME */
         .genome {
-          background: #0a0f14;
+          background: #0d1117;
           text-align: center;
         }
         
@@ -1521,7 +1519,7 @@ export default function LandingPage() {
         
         /* WAITLIST */
         .waitlist {
-          background: #0d1117;
+          background: #161b22;
           border-top: 1px solid rgba(212,163,115,0.1);
           text-align: center;
         }
@@ -1576,7 +1574,7 @@ export default function LandingPage() {
         .btn-submit {
           width: 100%;
           background: #d4a373;
-          color: #0a0f14;
+          color: #0d1117;
           border: none;
           padding: 20px;
           font-size: 16px;
@@ -1625,7 +1623,7 @@ export default function LandingPage() {
         
         /* FOOTER */
         .footer {
-          background: #0a0f14;
+          background: #0d1117;
           border-top: 1px solid rgba(212,163,115,0.1);
           padding: 80px 24px 40px;
         }
