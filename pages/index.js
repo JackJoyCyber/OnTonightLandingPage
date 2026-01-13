@@ -727,26 +727,37 @@ export default function LandingPage() {
           cursor: pointer;
           transition: opacity 0.2s;
           font-family: inherit;
+          letter-spacing: -0.01em;
         }
         
         .btn-primary:hover {
           opacity: 0.9;
         }
         
+        .btn-primary:active {
+          transform: translateY(1px);
+        }
+        
         .btn-secondary {
           background: transparent;
           color: #d4a373;
-          border: 1px solid rgba(212,163,115,0.3);
+          border: 1px solid rgba(212,163,115,0.5);
           padding: 14px 32px;
           font-size: 14px;
           font-weight: 600;
           cursor: pointer;
           transition: all 0.2s;
           font-family: inherit;
+          letter-spacing: -0.01em;
         }
         
         .btn-secondary:hover {
           border-color: #d4a373;
+          background: rgba(212,163,115,0.05);
+        }
+        
+        .btn-secondary:active {
+          transform: translateY(1px);
         }
         
         .btn-install {
