@@ -476,54 +476,86 @@ export default function LandingPage() {
             <section className="vision">
               <div className="container">
                 <h1>The Vision</h1>
-                <p className="vision-lead">27 years in hospitality. A career change to tech. One mission: professionalize the industry.</p>
+                <p className="vision-lead">This isn't about technology. It's about dignity.</p>
 
                 <div className="vision-content">
                   <div className="vision-section">
-                    <h3>The Problem I Lived</h3>
-                    <p>I spent 27 years in the hospitality industry—behind bars, managing venues, building teams, creating experiences that people remember. I watched incredibly talented bartenders, servers, and sommeliers pour their hearts into their craft, only to see their careers reset to zero every time they changed venues.</p>
-                    <p>Your favorite bartender who knew your drink before you sat down? Gone. The server who remembered your anniversary? Moved on. The sommelier who introduced you to that perfect pairing? Working somewhere else now.</p>
-                    <p className="vision-emphasis">And you had no way to follow them.</p>
-                    <p>The customer loses. The professional loses their regulars and has to rebuild from scratch. The new venue loses institutional knowledge. Everyone loses except... well, nobody wins in the current system.</p>
+                    <h3>27 Years Behind the Bar</h3>
+                    <p>Twenty-seven years. That's how long I spent in hospitality—behind bars where ice never stops flowing, managing venues where every night is opening night, building teams that became families, serving thousands of guests who became regulars, training hundreds of professionals who became masters of their craft.</p>
+                    <p>I've made drinks until my hands cramped and my mind could freestyle recipes in my sleep. I've juggled six-tops during Saturday rush when the printer's down and everyone wants modifications. I've closed at 4 AM under neon signs and opened at 10 with coffee that tastes like hope. I've hired people with potential and watched them bloom. I've lost the best talent I ever trained because they found something better.</p>
+                    <p>And every single time, I watched them start over from zero.</p>
+                    <p className="vision-emphasis">Their regulars? Scattered to the wind. Their reputation? Reset to nothing. Their professional equity? Evaporated like smoke from a candle.</p>
+                    <p>I watched bartenders who could make 200 cocktails an hour—muscle memory and chemistry and conversation all at once—lose everything when they changed venues. Servers who remembered every regular's order, every dietary restriction, every personal milestone, forced to rebuild trust from scratch. Sommeliers with encyclopedic knowledge who could taste terroir in a blind pour, starting over as if they were fresh out of training.</p>
+                    <p>The industry calls this "turnover." I call it what it is: systematic professional erasure.</p>
                   </div>
 
                   <div className="vision-section">
-                    <h3>The Career That Made It Possible</h3>
-                    <p>After 27 years in hospitality, I transitioned into cybersecurity, IT, and tech. I learned to build systems, write code, and solve complex problems at scale. I earned my certifications, worked in the field, and gained the technical skills that the hospitality industry desperately needs but rarely gets.</p>
-                    <p>That combination—deep hospitality experience and technical expertise—is rare. And it is exactly what was needed to build OnTonight.</p>
-                    <p>I understand the bartender who can make 200 drinks in an hour without breaking a sweat. I understand the server juggling six tables while remembering dietary restrictions. I understand the sommelier who can pair wine with personality. And I have the technical skills to build the infrastructure they deserve.</p>
+                    <h3>The Pattern You Can't Unsee</h3>
+                    <p>Once you see it, you can't look away. Every industry has professional infrastructure except hospitality. The pattern becomes inescapable, undeniable, infuriating.</p>
+                    <p>Lawyers switch firms, but their bar membership follows them like a shadow. Their reputation is portable currency. Their client relationships can continue unbroken. Their LinkedIn profile preserves their professional identity across decades, a living résumé that compounds with every case won, every client served.</p>
+                    <p>Software engineers change companies like seasons. Their GitHub stays with them—proof of work, proof of skill, proof of growth. Their portfolio follows them. Their professional network is theirs to keep, nurture, leverage. Every line of code they've ever written exists somewhere, permanent.</p>
+                    <p>Real estate agents move brokerages all the time. Their client database goes with them—relationships preserved, trust maintained. Their professional credentials are portable. Their sphere of influence remains intact, growing with every transaction.</p>
+                    <p className="vision-emphasis">But a bartender changes venues and loses everything. Every. Single. Time.</p>
+                    <p>The regular who tipped $50 every Friday? Can't find you. The customer relationships built over years of remembered birthdays and preferred glassware and unspoken signals? Belong to your former employer, filed under "goodwill" on a balance sheet. The professional reputation you spent a decade building, one perfect Manhattan at a time? Starts at zero.</p>
+                    <p className="vision-highlight">This isn't the nature of the industry. This is the <em>absence</em> of professional infrastructure. And absence isn't destiny—it's a problem waiting for a solution.</p>
                   </div>
 
                   <div className="vision-section">
-                    <h3>Why This Matters</h3>
-                    <p>Hospitality professionals deserve the same career portability as lawyers, engineers, and executives. They deserve to own their customer relationships. They deserve to build equity in their careers instead of starting over every time they change employers.</p>
-                    <p className="vision-highlight">OnTonight is not just fixing a problem. We are professionalizing an entire industry.</p>
-                    <p>When a lawyer changes firms, their professional reputation follows them. When an engineer switches companies, their GitHub and LinkedIn go with them. When a bartender changes venues, they lose everything. That ends with OnTonight.</p>
+                    <h3>What $66.8 Billion in Turnover Actually Means</h3>
+                    <p>The hospitality industry loses $66.8 billion annually to turnover. That number is so large it stops meaning anything. Let me make it real.</p>
+                    <p>It's the talented professional who stays in a toxic workplace because leaving means financial devastation—the regulars won't follow, the tips reset, the rent is due in two weeks. It's the customer who stops frequenting a venue because "it's not the same" after their favorite server left, that ineffable magic replaced by competent service that lacks soul. It's the small business owner replacing the same position three times in one year, hemorrhaging money on training that walks out the door wearing company knowledge and customer loyalty like a coat.</p>
+                    <p>It's the single mother choosing between her principles and her rent because her tips depend on staying put, on not making waves, on accepting conditions she shouldn't have to accept. It's the career bartender who gives up and leaves the industry entirely after fifteen years because starting over one more time feels like dying a little. It's the sommelier with encyclopedic knowledge being treated like a rookie because the new venue doesn't know what they have, can't see the decade of refinement in every pour.</p>
+                    <p className="vision-emphasis">This is the human cost of missing infrastructure. These are the lives interrupted, the talent squandered, the relationships severed—millions of individual tragedies hiding inside one big number.</p>
                   </div>
 
                   <div className="vision-section">
-                    <h3>What We're Building</h3>
-                    <p className="vision-emphasis">This is not a discount app. This is not a social network. This is professional infrastructure.</p>
+                    <h3>Why I Could Build This</h3>
+                    <p>After 27 years in hospitality, I made a career change. I transitioned into cybersecurity, IT, and software development—a world of systems and logic, of problems that yield to analysis, of building things that scale beyond human limitation.</p>
+                    <p>I learned to build systems that think. Write code that solves problems at scale. Think in architectures and databases and user flows, in edge cases and error handling and elegant solutions. I earned certifications that proved I could speak the language of technology. I worked in the field where one good system can serve millions. I gained technical skills that most people in hospitality never get the chance to learn.</p>
+                    <p>And one day, standing at the intersection of these two worlds, I realized: I understand both sides of this problem.</p>
+                    <p>I understand the bartender making 200 drinks an hour during Saturday rush, tracking six tabs in their head while maintaining conversation with regulars, reading the room, defusing tension, creating atmosphere—all simultaneously, all while making it look effortless. I understand the server juggling dietary restrictions across multiple tables while reading the emotional temperature of the room, knowing who needs attention and who needs space. I understand the sommelier who pairs wine with personality, not just food, who can read a guest's night in the way they hold the glass.</p>
+                    <p>And I have the technical skills to build the infrastructure they deserve.</p>
+                    <p className="vision-statement">That combination—deep hospitality experience plus technical execution—is rare. It's exactly what this problem needed. It's why I could see what was missing. It's why I knew how to build it.</p>
+                  </div>
+
+                  <div className="vision-section">
+                    <h3>What OnTonight Actually Is</h3>
+                    <p>OnTonight is not a discount app. It's not a social network. It's not a reservation platform or a review site or another way to gamify going out.</p>
+                    <p className="vision-highlight">OnTonight is professional infrastructure—the kind that every other industry already has, the kind that hospitality professionals have deserved for decades, finally built.</p>
                     <ul className="vision-list">
-                      <li><strong>Verified skills through proprietary assessment technology.</strong> DAPA proves expertise across 6 dimensions. Industry-recognized certification that means something.</li>
-                      <li><strong>Portable professional identities that follow you from venue to venue.</strong> Your profile, your regulars, your reputation—all yours, forever.</li>
-                      <li><strong>Customer relationships that belong to YOU, not your employer.</strong> Patrons follow OnPros, not just venues. Your regulars are yours.</li>
-                      <li><strong>Analytics that prove your value to venues.</strong> Show employers the traffic you bring, the regulars you maintain, the revenue you generate.</li>
-                      <li><strong>A future where talent is recognized, relationships are portable, and regulars are made—not lost.</strong></li>
+                      <li><strong>For professionals:</strong> Your skills are verified through DAPA, a proprietary 6-axis assessment system that proves what you know across Technical mastery, Ethical judgment, Emotional intelligence, Velocity under pressure, Commercial awareness, and Leadership capacity. Your professional identity is portable—it follows you, grows with you, compounds over time. Your customer relationships belong to you, not your employer. When you change venues, you bring your value with you—provable, measurable, portable, permanent.</li>
+                      <li><strong>For customers:</strong> Your favorite bartender changes jobs? You get notified. Your server moves to a new restaurant? You can follow them there. The relationship doesn't end when the employment ends. You never lose touch with the people who made your nights special. The magic stays with the person who created it.</li>
+                      <li><strong>For venues:</strong> Recruit verified talent—not résumés and promises, but proven skill and measurable expertise. Showcase your team's abilities with data that speaks louder than adjectives. Compete on culture instead of wages alone, on environment instead of just compensation. Turn retention into a competitive advantage. Prove the value your staff brings with metrics that matter.</li>
                     </ul>
+                    <p>This is professional dignity in software form. This is career equity for people who serve. This is the infrastructure that should have existed decades ago, the missing piece that makes hospitality a real profession instead of a series of restarts.</p>
                   </div>
 
                   <div className="vision-section">
-                    <h3>The Path Forward</h3>
-                    <p>We're live now in Tampa Bay with pilot venues including Haiku Tampa, Ulele, and Beacon Rooftop Bar. From here, we're rapidly expanding to Miami, Nashville, Austin, and major hospitality markets nationwide.</p>
-                    <p>Our goal is simple: make OnTonight the professional standard for the entire hospitality industry. Every bartender with a verified DAPA profile. Every regular customer following their favorite OnPros. Every venue showcasing verified talent.</p>
-                    <p className="vision-emphasis">We're not building an app. We're building the future of hospitality careers.</p>
+                    <h3>The Future We're Building</h3>
+                    <p>Imagine hospitality where professionals own their careers. Where a talented bartender can leave a toxic workplace without losing their livelihood, where principle doesn't cost rent, where better opportunities don't mean starting over. Where customers maintain relationships with the people who make their nights special—where loyalty runs both directions, where connection survives job changes.</p>
+                    <p>Where small venues compete with corporate chains by showcasing culture and verified talent instead of just matching wages. Where the sommelier with encyclopedic knowledge carries proof of that knowledge, where expertise is visible, measurable, valuable.</p>
+                    <p>Imagine a young professional entering hospitality and seeing a real career path—one where their skills compound over time instead of resetting to zero every 18 months. Where their reputation is portable, their relationships have equity, their expertise is verified and recognized industry-wide. Where "career in hospitality" doesn't sound like an oxymoron.</p>
+                    <p className="vision-emphasis">That's not fantasy. That's infrastructure. That's what happens when you build the foundation that should have always existed.</p>
+                    <p>We're live now in Tampa Bay, working with premier hospitality venues across the region. From here, we're expanding to Miami, Nashville, Austin, and major hospitality markets nationwide—wherever great service happens, wherever professionals deserve infrastructure, wherever the industry is ready for change.</p>
+                    <p>Every bartender with a verified DAPA profile. Every regular customer able to follow their favorite professionals. Every venue able to showcase verified talent. The entire industry elevated through infrastructure.</p>
+                    <p>This isn't about fixing turnover statistics. This is about restoring professional dignity to an entire industry, one profile at a time, one verified skill at a time, one preserved relationship at a time.</p>
+                  </div>
+
+                  <div className="vision-section">
+                    <h3>Why This Will Work</h3>
+                    <p>This will work because the problem is structural, not cultural. It's not that hospitality professionals don't want stability—it's that the industry has no infrastructure to support it. You can't build a house without a foundation. You can't have career continuity without career infrastructure.</p>
+                    <p>Every other profession solved this problem. Lawyers have bar associations and professional networks that span firms. Doctors have portable credentials and hospital privileges that follow them anywhere medicine is practiced. Real estate agents have databases and professional networks that survive brokerage changes. Software engineers have GitHub and LinkedIn, permanent records of contribution and growth.</p>
+                    <p>Hospitality professionals deserve the same. Not as a favor. Not as charity. Not as something nice to have. As a <em>right</em>. As infrastructure. As the basic professional dignity that every skilled worker deserves.</p>
+                    <p className="vision-highlight">If you believe that the people who serve us deserve to own their careers, who create magic nightly deserve to keep that magic when they move—we're building it right now. Join us.</p>
                   </div>
 
                   <div className="vision-cta">
                     <h3>Join the Movement</h3>
-                    <p>If you believe hospitality professionals deserve better. If you're tired of losing touch with your favorite bartender. If you want to compete on culture instead of wages. Join us.</p>
-                    <a href="#waitlist" className="btn-primary">Join Waitlist</a>
+                    <p>This isn't a product launch. This is a correction—the professional infrastructure that should have existed all along, finally built, finally real, finally here.</p>
+                    <p>If you've ever watched a talented professional start over from scratch and felt the waste of it—you've seen the problem. If you've ever lost touch with someone who made your nights special and felt the absence—you've felt the gap. If you've ever tried to compete for talent on culture but lost to whoever paid $2 more per hour—you know the system is broken.</p>
+                    <p className="cta-emphasis">We're not just building software. We're building the future of hospitality careers. We're ending the cycle of professional erasure. We're making dignity portable.</p>
+                    <a href="#waitlist" className="btn-primary">Join the Waitlist</a>
+                    <p className="cta-note">First 2,000 signups get their first year free. Be part of the infrastructure. Be part of the change.</p>
                   </div>
                 </div>
               </div>
@@ -1430,9 +1462,11 @@ export default function LandingPage() {
         
         .vision-lead {
           text-align: center;
-          font-size: 20px;
+          font-size: 24px;
           color: #d4a373;
           margin-bottom: 100px;
+          font-weight: 500;
+          font-style: italic;
         }
         
         .vision-content {
@@ -1446,44 +1480,59 @@ export default function LandingPage() {
         
         .vision-section h3 {
           color: #d4a373;
-          margin-bottom: 24px;
-          font-size: 32px;
+          margin-bottom: 32px;
+          font-size: 34px;
         }
         
         .vision-section p {
-          margin-bottom: 20px;
-          font-size: 17px;
-          line-height: 1.7;
+          margin-bottom: 24px;
+          font-size: 18px;
+          line-height: 1.8;
         }
         
         .vision-emphasis {
           color: #f8fafc;
           font-weight: 500;
-          font-size: 19px;
+          font-size: 22px;
+          line-height: 1.6;
+          margin: 32px 0;
+          padding-left: 24px;
+          border-left: 3px solid #d4a373;
+        }
+        
+        .vision-statement {
+          font-size: 24px;
+          color: #d4a373;
+          font-weight: 600;
+          line-height: 1.6;
+          margin: 32px 0;
+          text-align: center;
         }
         
         .vision-highlight {
           color: #d4a373;
-          font-weight: 500;
-          padding: 24px;
+          font-weight: 600;
+          padding: 32px;
           border-left: 3px solid #d4a373;
           background: rgba(212,163,115,0.06);
           border-radius: 4px;
-          font-size: 18px;
+          font-size: 20px;
+          line-height: 1.7;
+          margin: 32px 0;
         }
         
         .vision-list {
           list-style: none;
-          margin-top: 28px;
+          margin: 32px 0;
         }
         
         .vision-list li {
-          font-size: 16px;
-          line-height: 1.8;
-          color: rgba(248,250,252,0.75);
-          padding-left: 28px;
+          font-size: 17px;
+          line-height: 1.9;
+          color: rgba(248,250,252,0.8);
+          padding-left: 32px;
           position: relative;
-          margin-bottom: 20px;
+          margin-bottom: 24px;
         }
         
         .vision-list li::before {
@@ -1491,7 +1540,7 @@ export default function LandingPage() {
           position: absolute;
           left: 0;
           color: #d4a373;
-          font-size: 18px;
+          font-size: 20px;
         }
         
         .vision-list li strong {
@@ -1501,20 +1550,34 @@ export default function LandingPage() {
         
         .vision-cta {
           text-align: center;
-          padding: 60px 48px;
-          border: 1px solid rgba(212,163,115,0.25);
-          background: rgba(212,163,115,0.04);
-          margin-top: 80px;
+          padding: 72px 56px;
+          border: 1px solid rgba(212,163,115,0.3);
+          background: rgba(212,163,115,0.05);
+          margin-top: 100px;
           border-radius: 12px;
         }
         
         .vision-cta h3 {
-          margin-bottom: 20px;
+          margin-bottom: 24px;
+          font-size: 36px;
         }
         
         .vision-cta p {
-          margin-bottom: 32px;
-          font-size: 17px;
+          margin-bottom: 16px;
+          font-size: 18px;
+        }
+        
+        .cta-emphasis {
+          color: #d4a373;
+          font-weight: 600;
+          font-size: 20px;
+          margin: 32px 0 40px 0;
+        }
+        
+        .cta-note {
+          font-size: 15px;
+          color: rgba(248,250,252,0.6);
+          margin-top: 24px;
         }
         
         /* WAITLIST */
