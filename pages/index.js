@@ -1,4 +1,4 @@
-// pages/index.js - OnTonight Landing Page (TRUE C3 NEON EDGE THEME)
+// pages/index.js - OnTonight Landing Page (EXACT FILE STRUCTURE MATCH)
 import { useState, useEffect } from 'react';
 import Head from 'next/head';
 
@@ -65,8 +65,8 @@ export default function LandingPage() {
   return (
     <>
       <Head>
-        <title>OnTonight - Professional Identity Platform</title>
-        <meta name="description" content="Professional identity platform for hospitality. Build portable careers, follow your people, elevate the industry." />
+        <title>OnTonight - Professional Identity Platform for Hospitality</title>
+        <meta name="description" content="Professional identity platform for hospitality. Build portable careers, follow your people, elevate the industry. Launching Tampa 2025." />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#d4a373" />
         <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -98,9 +98,18 @@ export default function LandingPage() {
                 <p className="hero-subtitle">Where Regulars Are Made</p>
                 
                 <div className="hero-stats">
-                  <div><span>27</span> Years Experience</div>
-                  <div><span>$66.8B</span> Crisis</div>
-                  <div><span>1</span> Solution</div>
+                  <div className="stat">
+                    <span className="stat-number">27</span>
+                    <span className="stat-label">Years Experience</span>
+                  </div>
+                  <div className="stat">
+                    <span className="stat-number">$66.8B</span>
+                    <span className="stat-label">Industry Crisis</span>
+                  </div>
+                  <div className="stat">
+                    <span className="stat-number">1</span>
+                    <span className="stat-label">Solution</span>
+                  </div>
                 </div>
 
                 <div className="hero-ctas">
@@ -114,56 +123,99 @@ export default function LandingPage() {
 
                 {showInstallPrompt && (
                   <button onClick={handleInstall} className="btn-install">
-                    Add to Home Screen
+                    📱 Add to Home Screen
                   </button>
                 )}
               </div>
             </section>
 
-            {/* VALUE */}
+            {/* VALUE PROPS */}
             <section className="value">
               <div className="container">
                 <h2>What's Your Career Worth?</h2>
+                <p className="section-subtitle">The hidden cost of hospitality turnover—and how OnTonight fixes it.</p>
                 <div className="value-grid">
                   <div className="value-item">
+                    <div className="value-icon">💰</div>
                     <div className="value-number">$24K</div>
                     <div className="value-label">Lost in Tips Per Venue Change</div>
-                    <p>Control your income. Your regulars follow you.</p>
+                    <p>Average bartender loses $24,000 in regular tips when changing venues. Your regulars can't follow you. Until now.</p>
                   </div>
                   <div className="value-item">
+                    <div className="value-icon">📈</div>
                     <div className="value-number">40%</div>
                     <div className="value-label">Higher Earnings When Verified</div>
-                    <p>Build equity. Your skills have value.</p>
+                    <p>DAPA-verified OnPros earn 40% more than industry average. Your skills have measurable value.</p>
                   </div>
                   <div className="value-item">
+                    <div className="value-icon">🎯</div>
                     <div className="value-number">300+</div>
                     <div className="value-label">Regular Relationships Maintained</div>
-                    <p>Own your network. Not the venue's.</p>
+                    <p>Top OnPros maintain 300+ verified regular relationships. Own your network, not the venue's.</p>
                   </div>
                 </div>
               </div>
             </section>
 
-            {/* QUOTES */}
+            {/* CRISIS QUOTES */}
             <section className="quotes">
               <div className="container">
-                <h2>The Industry Crisis</h2>
+                <h2>The $66.8B Industry Crisis</h2>
+                <p className="section-subtitle">What industry leaders are saying about hospitality turnover.</p>
                 <div className="quotes-grid">
                   <div className="quote">
+                    <div className="quote-icon">📊</div>
                     <p>"The cost of turnover in hospitality is huge. Recruitment, retention, staff turnover... these are words that likely haunt the dreams of hospitality operators."</p>
                     <cite>Institute of Hospitality, 2024</cite>
                   </div>
                   <div className="quote">
-                    <p>"With 50% FOH turnover, you're replacing 7-10 servers and hosts every year. That's $7,400-$10,560+ in replacement costs alone."</p>
+                    <div className="quote-icon">💸</div>
+                    <p>"With 50% FOH turnover, you're replacing 7-10 servers and hosts every year. That's $7,400-$10,560+ in replacement costs alone—not counting the hit to service quality."</p>
                     <cite>7shifts Restaurant Workforce Report, 2025</cite>
                   </div>
                   <div className="quote">
-                    <p>"Losing a single employee can cost hospitality businesses more than $5,000 in recruiting, hiring, training and lost productivity."</p>
+                    <div className="quote-icon">⏱️</div>
+                    <p>"Losing a single employee can cost hospitality businesses more than $5,000 in recruiting, hiring, training and lost productivity. It can take up to two years for a new hire to become fully productive."</p>
                     <cite>OysterLink Industry Report, 2025</cite>
                   </div>
                   <div className="quote">
+                    <div className="quote-icon">📈</div>
                     <p>"Reducing employee turnover by 10% can improve net profit margins by approximately 3%."</p>
                     <cite>Gallup Workplace Report, 2025</cite>
+                  </div>
+                  <div className="quote">
+                    <div className="quote-icon">🔍</div>
+                    <p>"Staffing challenges topped operators' 2024 list of concerns. Finding and keeping skilled staff is a concern that's risen by 4 percent."</p>
+                    <cite>FSR Magazine, 2025</cite>
+                  </div>
+                  <div className="quote">
+                    <div className="quote-icon">🔄</div>
+                    <p>"It's very tough to find the people and then have them stay. After a week, somebody will say, 'This doesn't work for me, I'm going to go somewhere else.' Big turnover."</p>
+                    <cite>TouchBistro State of Restaurants, 2024</cite>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* MISSION STATEMENT */}
+            <section className="mission">
+              <div className="container">
+                <div className="mission-content">
+                  <h2>Our Mission</h2>
+                  <p className="mission-statement">OnTonight is building the professional infrastructure that hospitality deserves. We're not creating another discount app or social network—we're professionalizing an entire industry by giving workers portable careers, customers the ability to follow their people, and venues the tools to showcase their talent.</p>
+                  <div className="mission-pillars">
+                    <div className="pillar">
+                      <h4>For Professionals</h4>
+                      <p>Own your career. Your skills, your regulars, your professional identity—portable across venues.</p>
+                    </div>
+                    <div className="pillar">
+                      <h4>For Customers</h4>
+                      <p>Follow your people. Never lose touch with favorite bartenders, servers, and sommeliers again.</p>
+                    </div>
+                    <div className="pillar">
+                      <h4>For Venues</h4>
+                      <p>Compete on culture. Attract and retain verified talent. Prove your team's value with data.</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -177,173 +229,220 @@ export default function LandingPage() {
             <section className="platform-intro">
               <div className="container">
                 <h1>Professional Infrastructure</h1>
-                <p>One platform. Three solutions.</p>
+                <p className="platform-lead">One platform. Three solutions. Complete ecosystem.</p>
               </div>
             </section>
 
             <section className="features">
               <div className="container">
-                {/* ONPRO */}
+                {/* ONPRO FEATURE - 3 SCREENSHOTS */}
                 <div className="feature">
-                  <div className="feature-visual">
-                    <div className="feature-demo">
-                      <div className="demo-header">
-                        <div className="demo-dots"></div>
-                        <span>OnPro Dashboard</span>
-                      </div>
-                      <div className="demo-content">
-                        <div className="demo-profile">
-                          <div className="demo-avatar"></div>
-                          <div className="demo-info">
-                            <div className="demo-name"></div>
-                            <div className="demo-badge">✓ VERIFIED</div>
-                          </div>
-                        </div>
-                        <div className="demo-stats">
-                          <div className="stat-bar t"></div>
-                          <div className="stat-bar e"></div>
-                          <div className="stat-bar eq"></div>
-                        </div>
-                      </div>
-                    </div>
+                  <div className="feature-screenshots">
+                    <img src="/screenshots/onpro-assessment-dashboard.jpg" alt="OnPro DAPA Assessment Dashboard" className="screenshot" />
+                    <img src="/screenshots/onpro-skills-catagories.jpg" alt="OnPro Skills Categories" className="screenshot" />
+                    <img src="/screenshots/onpro-profile-status.jpg" alt="OnPro Profile Status" className="screenshot" />
                   </div>
                   <div className="feature-info">
-                    <div className="feature-tag">ONPRO</div>
-                    <h3>Portable Career</h3>
-                    <p>Professional profile that follows you. Skills verified through DAPA. Customers follow YOU, not venues.</p>
-                    <ul>
-                      <li>Verified professional identity</li>
-                      <li>6-axis skills assessment</li>
-                      <li>Portable customer base</li>
-                      <li>Career analytics & genome</li>
-                    </ul>
+                    <div className="feature-tag">FOR PROFESSIONALS</div>
+                    <h3>OnPro: Portable Career</h3>
+                    <p className="feature-lead">Your professional identity follows you from venue to venue. Skills verified through our proprietary DAPA system. Customers follow YOU, not the venue.</p>
+                    <div className="feature-details">
+                      <div className="detail-section">
+                        <h4>🎯 Verified Professional Identity</h4>
+                        <p>DAPA assessment proves your expertise across 6 dimensions: Technical, Ethical, Emotional Intelligence, Velocity, Commercial, and Leadership. Industry-recognized certification.</p>
+                      </div>
+                      <div className="detail-section">
+                        <h4>📊 Professional Genome</h4>
+                        <p>Comprehensive personality profile that goes beyond skills. Understand your strengths, growth areas, and career trajectory. Share with venues to showcase your complete professional identity.</p>
+                      </div>
+                      <div className="detail-section">
+                        <h4>👥 Portable Customer Base</h4>
+                        <p>Your regulars follow you. Check-in tracking, relationship management, and analytics prove your value to any venue. Your customer relationships belong to YOU.</p>
+                      </div>
+                      <div className="detail-section">
+                        <h4>📈 Career Analytics</h4>
+                        <p>Track your professional growth. See your check-in trends, regular customer retention, skill progression, and earning potential over time.</p>
+                      </div>
+                    </div>
                     <div className="feature-price">
-                      <strong>FREE</strong>
-                      <span>Premium $10/mo</span>
+                      <div className="price-tier free">
+                        <div className="tier-badge">ALWAYS FREE</div>
+                        <div className="tier-name">OnPro Basic</div>
+                        <ul>
+                          <li>Complete DAPA assessment</li>
+                          <li>Professional profile</li>
+                          <li>OnTonight status</li>
+                          <li>Basic analytics</li>
+                        </ul>
+                      </div>
+                      <div className="price-tier premium">
+                        <div className="tier-badge">PREMIUM</div>
+                        <div className="tier-name">OnPro Pro <span>$10/month</span></div>
+                        <ul>
+                          <li>Everything in Basic</li>
+                          <li>Advanced analytics</li>
+                          <li>Priority placement</li>
+                          <li>Custom branding</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                {/* PATRON */}
+                {/* PATRON FEATURE - 4 SCREENSHOTS */}
                 <div className="feature feature-reverse">
-                  <div className="feature-visual">
-                    <div className="feature-demo">
-                      <div className="demo-header">
-                        <div className="demo-dots"></div>
-                        <span>Patron Experience</span>
-                      </div>
-                      <div className="demo-content">
-                        <div className="demo-genome">
-                          <div className="genome-icon">🍷</div>
-                          <div className="genome-label">The Connoisseur</div>
-                          <div className="genome-desc">Quality over everything</div>
-                        </div>
-                        <div className="demo-mypeople">
-                          <div className="person-card"></div>
-                          <div className="person-card"></div>
-                          <div className="person-card"></div>
-                        </div>
-                      </div>
-                    </div>
+                  <div className="feature-screenshots four-shots">
+                    <img src="/screenshots/patron-genome-result.jpg" alt="Patron OnScene Genome Result" className="screenshot" />
+                    <img src="/screenshots/patron-profile.jpg" alt="Patron Profile" className="screenshot" />
+                    <img src="/screenshots/patron-mypeople.jpg" alt="Patron MyPeople Status" className="screenshot" />
+                    <img src="/screenshots/patron-my-spots.jpg" alt="Patron MySpots Tracking" className="screenshot" />
                   </div>
                   <div className="feature-info">
-                    <div className="feature-tag">PATRON</div>
-                    <h3>Find Your People</h3>
-                    <p>Follow favorite professionals. See who's working tonight. Never lose touch. Discover verified talent.</p>
-                    <ul>
-                      <li>Follow OnPros in real-time</li>
-                      <li>OnScene Genome personality</li>
-                      <li>Track regulars & check-ins</li>
-                      <li>Smart venue matching</li>
-                    </ul>
+                    <div className="feature-tag">FOR CUSTOMERS</div>
+                    <h3>Patron: Find Your People</h3>
+                    <p className="feature-lead">Follow your favorite hospitality professionals. See who's working tonight. Never lose touch when they change venues. Discover new verified talent.</p>
+                    <div className="feature-details">
+                      <div className="detail-section">
+                        <h4>🔔 Real-Time OnTonight Status</h4>
+                        <p>See which of your regular OnPros are working right now. Get notifications when they clock in. Plan your night around your people, not just places.</p>
+                      </div>
+                      <div className="detail-section">
+                        <h4>🧬 OnScene Genome</h4>
+                        <p>Discover your hospitality personality across 10 dimensions. Are you a Connoisseur? An Adventurer? A Regular? Get matched with OnPros and venues that fit your style.</p>
+                      </div>
+                      <div className="detail-section">
+                        <h4>⭐ Check-Ins & Regulars</h4>
+                        <p>Track your favorite spots. Build regular status with OnPros. Unlock VIP treatment by becoming a verified regular at your favorite venues.</p>
+                      </div>
+                      <div className="detail-section">
+                        <h4>🎯 Smart Venue Matching</h4>
+                        <p>Get personalized venue recommendations based on your genome, preferences, and the OnPros you follow. Discover hidden gems that match your vibe.</p>
+                      </div>
+                    </div>
                     <div className="feature-price">
-                      <strong>FREE</strong>
-                      <span>Premium $5/mo</span>
+                      <div className="price-tier free">
+                        <div className="tier-badge">FREE FOREVER</div>
+                        <div className="tier-name">Patron Basic</div>
+                        <ul>
+                          <li>OnScene Genome assessment</li>
+                          <li>Follow unlimited OnPros</li>
+                          <li>See OnTonight status</li>
+                          <li>Basic check-ins</li>
+                        </ul>
+                      </div>
+                      <div className="price-tier premium">
+                        <div className="tier-badge">PREMIUM</div>
+                        <div className="tier-name">Patron Plus <span>$5/month</span></div>
+                        <ul>
+                          <li>Everything in Basic</li>
+                          <li>Push notifications</li>
+                          <li>Advanced matching</li>
+                          <li>Exclusive events</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
 
-                {/* VENUE */}
+                {/* VENUE FEATURE - 1 SCREENSHOT */}
                 <div className="feature">
-                  <div className="feature-visual">
-                    <div className="feature-demo">
-                      <div className="demo-header">
-                        <div className="demo-dots"></div>
-                        <span>Venue Analytics</span>
-                      </div>
-                      <div className="demo-content">
-                        <div className="demo-chart"></div>
-                        <div className="demo-metrics">
-                          <div className="metric">
-                            <div className="metric-value"></div>
-                            <div className="metric-label">Check-Ins</div>
-                          </div>
-                          <div className="metric">
-                            <div className="metric-value"></div>
-                            <div className="metric-label">Regulars</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  <div className="feature-screenshots single-shot">
+                    <img src="/screenshots/venue-analytics-dashboard.jpg" alt="Venue Analytics Dashboard" className="screenshot large" />
                   </div>
                   <div className="feature-info">
-                    <div className="feature-tag">VENUE</div>
-                    <h3>Retain Talent</h3>
-                    <p>Recruit verified professionals. Showcase your team. Reduce turnover costs. Track staff impact.</p>
-                    <ul>
-                      <li>Recruit DAPA-verified talent</li>
-                      <li>Team showcase & analytics</li>
-                      <li>Check-ins & regulars tracking</li>
-                      <li>Customer traffic insights</li>
-                    </ul>
+                    <div className="feature-tag">FOR VENUES</div>
+                    <h3>Venue: Retain Talent</h3>
+                    <p className="feature-lead">Recruit DAPA-verified professionals. Showcase your team to attract customers. Reduce turnover costs. Track the impact of individual staff members.</p>
+                    <div className="feature-details">
+                      <div className="detail-section">
+                        <h4>🎯 Recruit Verified Talent</h4>
+                        <p>Search for DAPA-verified OnPros by skill level, specialty, and availability. See their complete professional profiles, skill scores, and customer reviews before you hire.</p>
+                      </div>
+                      <div className="detail-section">
+                        <h4>👥 Team Showcase</h4>
+                        <p>Feature your verified OnPros on your venue profile. Show potential customers the caliber of your team. Attract patrons who follow your staff members.</p>
+                      </div>
+                      <div className="detail-section">
+                        <h4>📊 Staff Analytics</h4>
+                        <p>Track check-ins by staff member. See which OnPros bring the most regulars. Measure the ROI of individual team members with data-driven insights.</p>
+                      </div>
+                      <div className="detail-section">
+                        <h4>🔄 Reduce Turnover</h4>
+                        <p>Compete on culture, not just wages. Show your team investment through DAPA certification. Create a destination venue where talent wants to stay.</p>
+                      </div>
+                    </div>
                     <div className="feature-price">
-                      <strong>3-Month Trial</strong>
-                      <span>From $50/mo</span>
+                      <div className="price-tier trial">
+                        <div className="tier-badge">3-MONTH FREE TRIAL</div>
+                        <div className="tier-name">Venue Starter</div>
+                        <ul>
+                          <li>Complete venue profile</li>
+                          <li>Team member verification</li>
+                          <li>Basic analytics</li>
+                          <li>Customer check-ins</li>
+                        </ul>
+                      </div>
+                      <div className="price-tier premium">
+                        <div className="tier-badge">PROFESSIONAL</div>
+                        <div className="tier-name">Venue Pro <span>From $50/month</span></div>
+                        <ul>
+                          <li>Everything in Starter</li>
+                          <li>Advanced analytics</li>
+                          <li>Staff recruitment tools</li>
+                          <li>Premium placement</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </section>
 
-            {/* DAPA */}
+            {/* DAPA SYSTEM */}
             <section className="dapa">
               <div className="container">
-                <h2>Skills Verified</h2>
-                <p className="dapa-subtitle">Six professional dimensions. 1,600+ questions. Industry verified.</p>
+                <h2>DAPA Professional Assessment</h2>
+                <p className="section-subtitle">The industry's only comprehensive skills verification system. 1,600+ questions across 6 professional dimensions.</p>
                 <div className="dapa-grid">
                   <div className="dapa-item">
-                    <div className="dapa-icon">T</div>
+                    <div className="dapa-icon technical">T</div>
                     <h4>Technical</h4>
+                    <p>Knowledge, procedures, problem-solving</p>
                   </div>
                   <div className="dapa-item">
-                    <div className="dapa-icon">E</div>
+                    <div className="dapa-icon ethical">E</div>
                     <h4>Ethical</h4>
+                    <p>Integrity, compliance, judgment</p>
                   </div>
                   <div className="dapa-item">
-                    <div className="dapa-icon">EQ</div>
+                    <div className="dapa-icon emotional">EQ</div>
                     <h4>Emotional</h4>
+                    <p>Empathy, relationships, boundaries</p>
                   </div>
                   <div className="dapa-item">
-                    <div className="dapa-icon">V</div>
+                    <div className="dapa-icon velocity">V</div>
                     <h4>Velocity</h4>
+                    <p>Speed, pressure, crisis management</p>
                   </div>
                   <div className="dapa-item">
-                    <div className="dapa-icon">$</div>
+                    <div className="dapa-icon commercial">$</div>
                     <h4>Commercial</h4>
+                    <p>Sales, upselling, revenue awareness</p>
                   </div>
                   <div className="dapa-item">
-                    <div className="dapa-icon">L</div>
+                    <div className="dapa-icon leadership">L</div>
                     <h4>Leadership</h4>
+                    <p>Team dynamics, mentoring, initiative</p>
                   </div>
                 </div>
               </div>
             </section>
 
-            {/* GENOME */}
+            {/* GENOME ARCHETYPES */}
             <section className="genome">
               <div className="container">
                 <h2>OnScene Genome</h2>
-                <p className="genome-subtitle">45 questions. 12 archetypes. Discover your hospitality personality.</p>
+                <p className="section-subtitle">45 questions. 12 hospitality archetypes. Discover your perfect night out personality.</p>
                 <div className="genome-grid">
                   {Object.entries(archetypes).map(([key, arch]) => (
                     <button
@@ -359,7 +458,7 @@ export default function LandingPage() {
                 {selectedArchetype && (
                   <div className="genome-detail">
                     <div className="genome-detail-header">
-                      <span>{archetypes[selectedArchetype].emoji}</span>
+                      <span className="genome-detail-emoji">{archetypes[selectedArchetype].emoji}</span>
                       <h3>{archetypes[selectedArchetype].name}</h3>
                     </div>
                     <p>{archetypes[selectedArchetype].desc}</p>
@@ -377,43 +476,53 @@ export default function LandingPage() {
             <section className="vision">
               <div className="container">
                 <h1>The Vision</h1>
-                <p className="vision-lead">27 years in hospitality. A career change to tech. One mission.</p>
+                <p className="vision-lead">27 years in hospitality. A career change to tech. One mission: professionalize the industry.</p>
 
                 <div className="vision-content">
                   <div className="vision-section">
                     <h3>The Problem I Lived</h3>
                     <p>I spent 27 years in the hospitality industry—behind bars, managing venues, building teams, creating experiences that people remember. I watched incredibly talented bartenders, servers, and sommeliers pour their hearts into their craft, only to see their careers reset to zero every time they changed venues.</p>
                     <p>Your favorite bartender who knew your drink before you sat down? Gone. The server who remembered your anniversary? Moved on. The sommelier who introduced you to that perfect pairing? Working somewhere else now.</p>
-                    <p><strong>And you had no way to follow them.</strong></p>
+                    <p className="vision-emphasis">And you had no way to follow them.</p>
+                    <p>The customer loses. The professional loses their regulars and has to rebuild from scratch. The new venue loses institutional knowledge. Everyone loses except... well, nobody wins in the current system.</p>
                   </div>
 
                   <div className="vision-section">
                     <h3>The Career That Made It Possible</h3>
                     <p>After 27 years in hospitality, I transitioned into cybersecurity, IT, and tech. I learned to build systems, write code, and solve complex problems at scale. I earned my certifications, worked in the field, and gained the technical skills that the hospitality industry desperately needs but rarely gets.</p>
                     <p>That combination—deep hospitality experience and technical expertise—is rare. And it is exactly what was needed to build OnTonight.</p>
+                    <p>I understand the bartender who can make 200 drinks in an hour without breaking a sweat. I understand the server juggling six tables while remembering dietary restrictions. I understand the sommelier who can pair wine with personality. And I have the technical skills to build the infrastructure they deserve.</p>
                   </div>
 
                   <div className="vision-section">
                     <h3>Why This Matters</h3>
                     <p>Hospitality professionals deserve the same career portability as lawyers, engineers, and executives. They deserve to own their customer relationships. They deserve to build equity in their careers instead of starting over every time they change employers.</p>
                     <p className="vision-highlight">OnTonight is not just fixing a problem. We are professionalizing an entire industry.</p>
+                    <p>When a lawyer changes firms, their professional reputation follows them. When an engineer switches companies, their GitHub and LinkedIn go with them. When a bartender changes venues, they lose everything. That ends with OnTonight.</p>
                   </div>
 
                   <div className="vision-section">
                     <h3>What We're Building</h3>
-                    <p>This is not a discount app. This is not a social network. This is professional infrastructure.</p>
+                    <p className="vision-emphasis">This is not a discount app. This is not a social network. This is professional infrastructure.</p>
                     <ul className="vision-list">
-                      <li>Verified skills through proprietary assessment technology</li>
-                      <li>Portable professional identities that follow you from venue to venue</li>
-                      <li>Customer relationships that belong to YOU, not your employer</li>
-                      <li>Analytics that prove your value to venues</li>
-                      <li>A future where talent is recognized, relationships are portable, and regulars are made—not lost</li>
+                      <li><strong>Verified skills through proprietary assessment technology.</strong> DAPA proves expertise across 6 dimensions. Industry-recognized certification that means something.</li>
+                      <li><strong>Portable professional identities that follow you from venue to venue.</strong> Your profile, your regulars, your reputation—all yours, forever.</li>
+                      <li><strong>Customer relationships that belong to YOU, not your employer.</strong> Patrons follow OnPros, not just venues. Your regulars are yours.</li>
+                      <li><strong>Analytics that prove your value to venues.</strong> Show employers the traffic you bring, the regulars you maintain, the revenue you generate.</li>
+                      <li><strong>A future where talent is recognized, relationships are portable, and regulars are made—not lost.</strong></li>
                     </ul>
+                  </div>
+
+                  <div className="vision-section">
+                    <h3>The Path Forward</h3>
+                    <p>We launch in Tampa in 2025 with pilot venues including Haiku Tampa, Ulele, and Beacon Rooftop Bar. From there, we expand to Miami, Nashville, and beyond.</p>
+                    <p>Our goal is simple: make OnTonight the professional standard for the entire hospitality industry. Every bartender with a verified DAPA profile. Every regular customer following their favorite OnPros. Every venue showcasing verified talent.</p>
+                    <p className="vision-emphasis">We're not building an app. We're building the future of hospitality careers.</p>
                   </div>
 
                   <div className="vision-cta">
                     <h3>Join the Movement</h3>
-                    <p>OnTonight launches in Tampa in 2025. If you believe hospitality professionals deserve better, join us.</p>
+                    <p>If you believe hospitality professionals deserve better. If you're tired of losing touch with your favorite bartender. If you want to compete on culture instead of wages. Join us.</p>
                     <a href="#waitlist" className="btn-primary">Join Waitlist</a>
                   </div>
                 </div>
@@ -428,7 +537,7 @@ export default function LandingPage() {
             {!submitted ? (
               <>
                 <h2>Join the Waitlist</h2>
-                <p className="waitlist-subtitle">First 2,000 signups receive their first year free.</p>
+                <p className="waitlist-subtitle">First 2,000 signups receive their first year free. Be part of the Tampa launch.</p>
                 
                 <form onSubmit={handleSubmit} className="waitlist-form">
                   <div className="form-row">
@@ -452,8 +561,8 @@ export default function LandingPage() {
                       required 
                       value={formData.userType}
                       onChange={e => setFormData({...formData, userType: e.target.value})}>
-                      <option value="">Account Type</option>
-                      <option value="onpro">OnPro (Hospitality Professional)</option>
+                      <option value="">I am a...</option>
+                      <option value="onpro">OnPro (Bartender, Server, Sommelier, etc.)</option>
                       <option value="patron">Patron (Customer)</option>
                       <option value="venue">Venue Owner/Manager</option>
                     </select>
@@ -467,7 +576,7 @@ export default function LandingPage() {
                   </div>
                   
                   <div className="form-disclaimer">
-                    By submitting, you confirm you are 18+ and agree to receive email communications from OnTonight.
+                    By submitting, you confirm you are 18+ and agree to receive email communications from OnTonight about the platform launch and updates.
                   </div>
                   
                   <button type="submit" className="btn-submit" disabled={loading}>
@@ -477,8 +586,10 @@ export default function LandingPage() {
               </>
             ) : (
               <div className="waitlist-success">
-                <h2>Welcome</h2>
-                <p>You are among the first 2,000. Check your email.</p>
+                <div className="success-icon">🎉</div>
+                <h2>Welcome to the Movement</h2>
+                <p>You're among the first 2,000. Check your email for next steps and exclusive launch updates.</p>
+                <p className="success-note">Your first year is FREE.</p>
               </div>
             )}
           </div>
@@ -490,7 +601,8 @@ export default function LandingPage() {
             <div className="footer-content">
               <div className="footer-brand">
                 <div className="footer-logo">OnTonight</div>
-                <p>Where Regulars Are Made</p>
+                <p className="footer-tagline">Where Regulars Are Made</p>
+                <p className="footer-location">Launching Tampa · 2025</p>
               </div>
               <div className="footer-links">
                 <div className="footer-col">
@@ -498,18 +610,26 @@ export default function LandingPage() {
                   <a href="#waitlist">For OnPros</a>
                   <a href="#waitlist">For Patrons</a>
                   <a href="#waitlist">For Venues</a>
+                  <a href="#waitlist">DAPA Assessment</a>
                 </div>
                 <div className="footer-col">
                   <h5>Company</h5>
-                  <a href="https://app.on-tonight.com/privacy">Privacy</a>
-                  <a href="https://app.on-tonight.com/terms">Terms</a>
-                  <a href="mailto:AdminJoy@On-Tonight.com">Contact</a>
+                  <a href="https://app.on-tonight.com/privacy">Privacy Policy</a>
+                  <a href="https://app.on-tonight.com/terms">Terms of Service</a>
+                  <a href="mailto:AdminJoy@On-Tonight.com">Contact Us</a>
+                  <a href="#waitlist">Careers</a>
+                </div>
+                <div className="footer-col">
+                  <h5>Connect</h5>
+                  <a href="mailto:AdminJoy@On-Tonight.com">Support</a>
+                  <a href="#waitlist">Blog</a>
+                  <a href="#waitlist">Press Kit</a>
                 </div>
               </div>
             </div>
             <div className="footer-bottom">
-              <p>© 2025 OnTonight LLC</p>
-              <p>18+ only</p>
+              <p>© 2025 OnTonight LLC. All rights reserved.</p>
+              <p>18+ only · Professional platform for hospitality industry</p>
             </div>
           </div>
         </footer>
@@ -524,10 +644,11 @@ export default function LandingPage() {
           font-family: 'Urbanist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
           letter-spacing: -0.015em;
           font-weight: 400;
+          min-height: 100vh;
         }
         
         .container { 
-          max-width: 1100px;
+          max-width: 1200px;
           margin: 0 auto;
           padding: 0 24px;
         }
@@ -538,60 +659,84 @@ export default function LandingPage() {
           line-height: 1.1;
           letter-spacing: -0.025em;
           margin-bottom: 16px;
+          color: #f8fafc;
         }
         
         h2 { 
-          font-size: 36px;
+          font-size: 40px;
           font-weight: 600;
           letter-spacing: -0.02em;
-          margin-bottom: 12px;
+          margin-bottom: 16px;
+          color: #f8fafc;
         }
         
         h3 {
-          font-size: 24px;
+          font-size: 28px;
           font-weight: 600;
           letter-spacing: -0.015em;
           margin-bottom: 16px;
+          color: #f8fafc;
         }
         
         h4 {
-          font-size: 13px;
-          font-weight: 500;
-          letter-spacing: 0.02em;
+          font-size: 16px;
+          font-weight: 600;
+          letter-spacing: -0.01em;
+          margin-bottom: 8px;
+          color: #f8fafc;
+        }
+        
+        h5 {
+          font-size: 11px;
+          font-weight: 600;
           text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: rgba(248,250,252,0.4);
+          margin-bottom: 14px;
         }
         
         p {
-          font-size: 15px;
-          line-height: 1.6;
-          color: rgba(248,250,252,0.7);
+          font-size: 16px;
+          line-height: 1.7;
+          color: rgba(248,250,252,0.75);
+          margin-bottom: 16px;
         }
         
         section {
-          padding: 80px 24px;
+          padding: 100px 24px;
+        }
+        
+        .section-subtitle {
+          font-size: 18px;
+          color: rgba(248,250,252,0.6);
+          text-align: center;
+          margin-bottom: 60px;
+          max-width: 700px;
+          margin-left: auto;
+          margin-right: auto;
         }
         
         /* NAV */
         .nav {
           position: sticky;
           top: 0;
-          background: rgba(10,15,20,0.85);
+          background: rgba(10,15,20,0.9);
           backdrop-filter: blur(20px);
           border-bottom: 1px solid rgba(212,163,115,0.1);
           z-index: 1000;
         }
         
         .nav-container {
-          max-width: 1100px;
+          max-width: 1200px;
           margin: 0 auto;
-          padding: 18px 24px;
+          padding: 20px 24px;
           display: flex;
           justify-content: space-between;
           align-items: center;
         }
         
         .nav-logo {
-          font-size: 20px;
+          font-size: 22px;
           font-weight: 600;
           color: #d4a373;
           letter-spacing: -0.02em;
@@ -599,7 +744,7 @@ export default function LandingPage() {
         
         .nav-tabs {
           display: flex;
-          gap: 6px;
+          gap: 8px;
           align-items: center;
         }
         
@@ -607,8 +752,8 @@ export default function LandingPage() {
           background: transparent;
           border: none;
           color: rgba(248,250,252,0.5);
-          padding: 8px 16px;
-          font-size: 14px;
+          padding: 10px 18px;
+          font-size: 15px;
           font-weight: 500;
           cursor: pointer;
           transition: color 0.2s;
@@ -626,13 +771,13 @@ export default function LandingPage() {
         .nav-cta {
           background: #d4a373;
           color: #0a0f14;
-          padding: 10px 24px;
-          font-size: 14px;
+          padding: 12px 28px;
+          font-size: 15px;
           font-weight: 600;
           text-decoration: none;
           transition: opacity 0.2s;
-          margin-left: 12px;
-          border-radius: 2px;
+          margin-left: 16px;
+          border-radius: 4px;
         }
         
         .nav-cta:hover {
@@ -641,45 +786,46 @@ export default function LandingPage() {
         
         /* HERO */
         .hero {
-          min-height: 85vh;
+          min-height: 90vh;
           display: flex;
           align-items: center;
           position: relative;
           text-align: center;
-          padding: 120px 24px 80px;
+          padding: 140px 24px 100px;
         }
         
         .hero-glow {
           position: absolute;
-          top: 0;
+          top: -200px;
           left: 50%;
           transform: translateX(-50%);
-          width: 800px;
-          height: 800px;
-          background: radial-gradient(circle, rgba(212,163,115,0.08) 0%, transparent 70%);
+          width: 1000px;
+          height: 1000px;
+          background: radial-gradient(circle, rgba(212,163,115,0.1) 0%, transparent 70%);
           pointer-events: none;
         }
         
         .hero-badge {
           display: inline-block;
-          font-size: 10px;
+          font-size: 11px;
           font-weight: 600;
           letter-spacing: 0.15em;
           color: #d4a373;
-          border: 1px solid rgba(212,163,115,0.2);
-          padding: 8px 16px;
+          border: 1px solid rgba(212,163,115,0.25);
+          padding: 10px 20px;
           margin-bottom: 48px;
-          border-radius: 2px;
+          border-radius: 4px;
+          background: rgba(212,163,115,0.03);
         }
         
         .hero h1 {
-          font-size: 72px;
-          margin-bottom: 16px;
+          font-size: 80px;
+          margin-bottom: 20px;
           color: #f8fafc;
         }
         
         .hero-subtitle {
-          font-size: 20px;
+          font-size: 24px;
           color: #d4a373;
           margin-bottom: 60px;
           font-weight: 500;
@@ -687,24 +833,34 @@ export default function LandingPage() {
         
         .hero-stats {
           display: flex;
-          gap: 60px;
+          gap: 80px;
           justify-content: center;
-          margin-bottom: 48px;
-          font-size: 13px;
-          color: rgba(248,250,252,0.5);
+          margin-bottom: 50px;
         }
         
-        .hero-stats span {
+        .stat {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        
+        .stat-number {
           color: #d4a373;
           font-weight: 600;
-          font-size: 22px;
+          font-size: 32px;
           display: block;
-          margin-bottom: 4px;
+          margin-bottom: 8px;
+          letter-spacing: -0.02em;
+        }
+        
+        .stat-label {
+          font-size: 14px;
+          color: rgba(248,250,252,0.5);
         }
         
         .hero-ctas {
           display: flex;
-          gap: 12px;
+          gap: 16px;
           justify-content: center;
         }
         
@@ -712,105 +868,118 @@ export default function LandingPage() {
           background: #d4a373;
           color: #0a0f14;
           border: none;
-          padding: 16px 36px;
-          font-size: 15px;
+          padding: 18px 40px;
+          font-size: 16px;
           font-weight: 600;
           cursor: pointer;
           transition: all 0.2s;
           font-family: inherit;
           letter-spacing: -0.01em;
-          border-radius: 2px;
+          border-radius: 4px;
         }
         
         .btn-primary:hover {
           opacity: 0.9;
-          transform: translateY(-1px);
-        }
-        
-        .btn-primary:active {
-          transform: translateY(0px);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(212,163,115,0.2);
         }
         
         .btn-secondary {
           background: transparent;
           color: #d4a373;
           border: 1px solid rgba(212,163,115,0.4);
-          padding: 16px 36px;
-          font-size: 15px;
+          padding: 18px 40px;
+          font-size: 16px;
           font-weight: 600;
           cursor: pointer;
           transition: all 0.2s;
           font-family: inherit;
           letter-spacing: -0.01em;
-          border-radius: 2px;
+          border-radius: 4px;
         }
         
         .btn-secondary:hover {
           border-color: #d4a373;
-          background: rgba(212,163,115,0.05);
-        }
-        
-        .btn-secondary:active {
-          transform: translateY(0px);
+          background: rgba(212,163,115,0.08);
         }
         
         .btn-install {
-          margin-top: 24px;
+          margin-top: 28px;
           background: transparent;
           color: rgba(248,250,252,0.4);
           border: 1px solid rgba(248,250,252,0.1);
-          padding: 10px 24px;
-          font-size: 12px;
+          padding: 12px 28px;
+          font-size: 13px;
           cursor: pointer;
           font-family: inherit;
-          border-radius: 2px;
+          border-radius: 4px;
+          transition: all 0.2s;
         }
         
-        /* VALUE */
+        .btn-install:hover {
+          border-color: rgba(248,250,252,0.2);
+          color: rgba(248,250,252,0.6);
+        }
+        
+        /* VALUE PROPS */
         .value {
           background: #0d1117;
-          border-top: 1px solid rgba(212,163,115,0.08);
-          border-bottom: 1px solid rgba(212,163,115,0.08);
+          border-top: 1px solid rgba(212,163,115,0.1);
+          border-bottom: 1px solid rgba(212,163,115,0.1);
         }
         
         .value h2 {
           text-align: center;
-          margin-bottom: 60px;
+          margin-bottom: 20px;
         }
         
         .value-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 40px;
+          gap: 32px;
+          margin-top: 60px;
         }
         
         .value-item {
           text-align: center;
-          padding: 32px;
-          background: rgba(212,163,115,0.02);
-          border: 1px solid rgba(212,163,115,0.08);
-          border-radius: 2px;
+          padding: 40px 32px;
+          background: rgba(212,163,115,0.03);
+          border: 1px solid rgba(212,163,115,0.1);
+          border-radius: 8px;
+          transition: all 0.3s;
+        }
+        
+        .value-item:hover {
+          transform: translateY(-4px);
+          border-color: rgba(212,163,115,0.3);
+          box-shadow: 0 12px 32px rgba(212,163,115,0.1);
+        }
+        
+        .value-icon {
+          font-size: 48px;
+          margin-bottom: 20px;
         }
         
         .value-number {
-          font-size: 40px;
+          font-size: 48px;
           font-weight: 600;
           color: #d4a373;
-          margin-bottom: 8px;
+          margin-bottom: 12px;
           letter-spacing: -0.02em;
         }
         
         .value-label {
-          font-size: 11px;
+          font-size: 12px;
           text-transform: uppercase;
           letter-spacing: 0.08em;
           color: rgba(248,250,252,0.4);
-          margin-bottom: 16px;
+          margin-bottom: 20px;
         }
         
         .value-item p {
-          font-size: 14px;
-          color: rgba(248,250,252,0.6);
+          font-size: 15px;
+          color: rgba(248,250,252,0.7);
+          line-height: 1.6;
         }
         
         /* QUOTES */
@@ -820,64 +989,119 @@ export default function LandingPage() {
         
         .quotes h2 {
           text-align: center;
-          margin-bottom: 60px;
+          margin-bottom: 20px;
         }
         
         .quotes-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          gap: 20px;
+          gap: 24px;
+          margin-top: 60px;
         }
         
         .quote {
-          border-left: 2px solid rgba(212,163,115,0.3);
-          padding: 28px;
+          border-left: 3px solid rgba(212,163,115,0.3);
+          padding: 32px;
           background: rgba(212,163,115,0.02);
-          border-radius: 2px;
+          border-radius: 4px;
+          transition: all 0.3s;
+        }
+        
+        .quote:hover {
+          border-left-color: #d4a373;
+          background: rgba(212,163,115,0.05);
+          transform: translateX(4px);
+        }
+        
+        .quote-icon {
+          font-size: 24px;
+          margin-bottom: 16px;
+          opacity: 0.7;
         }
         
         .quote p {
-          font-size: 14px;
-          line-height: 1.65;
+          font-size: 15px;
+          line-height: 1.7;
           font-style: italic;
-          color: rgba(248,250,252,0.7);
-          margin-bottom: 16px;
+          color: rgba(248,250,252,0.75);
+          margin-bottom: 20px;
         }
         
         cite {
-          font-size: 11px;
+          font-size: 12px;
           color: #d4a373;
           font-style: normal;
           text-transform: uppercase;
           letter-spacing: 0.08em;
+          font-weight: 500;
+        }
+        
+        /* MISSION */
+        .mission {
+          background: linear-gradient(180deg, #0d1117 0%, #0a0f14 100%);
+          border-top: 1px solid rgba(212,163,115,0.1);
+        }
+        
+        .mission-content {
+          max-width: 900px;
+          margin: 0 auto;
+          text-align: center;
+        }
+        
+        .mission-statement {
+          font-size: 20px;
+          line-height: 1.7;
+          color: rgba(248,250,252,0.85);
+          margin-bottom: 60px;
+        }
+        
+        .mission-pillars {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 32px;
+          margin-top: 40px;
+        }
+        
+        .pillar {
+          padding: 32px;
+          background: rgba(212,163,115,0.03);
+          border: 1px solid rgba(212,163,115,0.1);
+          border-radius: 8px;
+        }
+        
+        .pillar h4 {
+          color: #d4a373;
+          margin-bottom: 12px;
+        }
+        
+        .pillar p {
+          font-size: 15px;
+          color: rgba(248,250,252,0.7);
         }
         
         /* PLATFORM */
         .platform-intro {
           text-align: center;
-          padding: 100px 24px 60px;
+          padding: 120px 24px 80px;
         }
         
-        .platform-intro h1 {
-          margin-bottom: 12px;
+        .platform-lead {
+          font-size: 20px;
+          color: rgba(248,250,252,0.6);
+          margin-top: 16px;
         }
         
-        .platform-intro p {
-          font-size: 18px;
-          color: rgba(248,250,252,0.5);
-        }
-        
-        /* FEATURES WITH ANIMATED DEMOS */
+        /* FEATURES WITH SCREENSHOTS - EXACT FILE STRUCTURE */
         .features {
-          padding: 40px 24px 80px;
+          padding: 60px 24px 120px;
         }
         
         .feature {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 80px;
-          align-items: center;
-          margin-bottom: 120px;
+          align-items: start;
+          margin-bottom: 160px;
         }
         
         .feature-reverse {
@@ -888,292 +1112,219 @@ export default function LandingPage() {
           direction: ltr;
         }
         
-        .feature-demo {
-          background: rgba(212,163,115,0.02);
-          border: 1px solid rgba(212,163,115,0.1);
-          border-radius: 4px;
-          overflow: hidden;
-        }
-        
-        .demo-header {
-          background: rgba(212,163,115,0.05);
-          padding: 12px 16px;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          border-bottom: 1px solid rgba(212,163,115,0.1);
-        }
-        
-        .demo-dots {
-          width: 40px;
-          height: 8px;
-          background: linear-gradient(90deg, rgba(212,163,115,0.3), rgba(212,163,115,0.2), rgba(212,163,115,0.1));
-          border-radius: 4px;
-        }
-        
-        .demo-header span {
-          font-size: 12px;
-          color: rgba(248,250,252,0.5);
-          font-weight: 500;
-        }
-        
-        .demo-content {
-          padding: 40px;
-          min-height: 350px;
-        }
-        
-        .demo-profile {
-          display: flex;
-          gap: 16px;
-          align-items: center;
-          margin-bottom: 32px;
-        }
-        
-        .demo-avatar {
-          width: 60px;
-          height: 60px;
-          background: linear-gradient(135deg, #d4a373, #c99763);
-          border-radius: 50%;
-        }
-        
-        .demo-info {
-          flex: 1;
-        }
-        
-        .demo-name {
-          height: 14px;
-          width: 120px;
-          background: rgba(248,250,252,0.1);
-          margin-bottom: 8px;
-          border-radius: 2px;
-        }
-        
-        .demo-badge {
-          background: rgba(34, 197, 94, 0.15);
-          color: #22c55e;
-          padding: 4px 10px;
-          font-size: 10px;
-          font-weight: 700;
-          letter-spacing: 0.1em;
-          border: 1px solid rgba(34, 197, 94, 0.3);
-          display: inline-block;
-          border-radius: 2px;
-        }
-        
-        .demo-stats {
-          display: flex;
-          flex-direction: column;
-          gap: 16px;
-        }
-        
-        .stat-bar {
-          height: 32px;
-          border-radius: 2px;
-          position: relative;
-          overflow: hidden;
-        }
-        
-        .stat-bar.t {
-          background: linear-gradient(90deg, rgba(239,68,68,0.2) 0%, rgba(239,68,68,0.05) 100%);
-          border-left: 3px solid #ef4444;
-        }
-        
-        .stat-bar.e {
-          background: linear-gradient(90deg, rgba(34,197,94,0.2) 0%, rgba(34,197,94,0.05) 100%);
-          border-left: 3px solid #22c55e;
-        }
-        
-        .stat-bar.eq {
-          background: linear-gradient(90deg, rgba(236,72,153,0.2) 0%, rgba(236,72,153,0.05) 100%);
-          border-left: 3px solid #ec4899;
-        }
-        
-        .demo-genome {
-          text-align: center;
-          padding: 32px;
-          background: rgba(212,163,115,0.05);
-          border: 1px solid rgba(212,163,115,0.15);
-          border-radius: 4px;
-          margin-bottom: 24px;
-        }
-        
-        .genome-icon {
-          font-size: 48px;
-          margin-bottom: 16px;
-        }
-        
-        .genome-label {
-          font-size: 18px;
-          font-weight: 600;
-          color: #d4a373;
-          margin-bottom: 8px;
-        }
-        
-        .genome-desc {
-          font-size: 13px;
-          color: rgba(248,250,252,0.5);
-          font-style: italic;
-        }
-        
-        .demo-mypeople {
+        /* 3 SCREENSHOTS (OnPro) */
+        .feature-screenshots {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 12px;
+          gap: 16px;
+          position: sticky;
+          top: 100px;
         }
         
-        .person-card {
-          height: 80px;
-          background: rgba(212,163,115,0.05);
-          border: 1px solid rgba(212,163,115,0.1);
-          border-radius: 2px;
-        }
-        
-        .demo-chart {
-          height: 180px;
-          background: linear-gradient(180deg, rgba(212,163,115,0.08) 0%, rgba(212,163,115,0.02) 100%);
-          border: 1px solid rgba(212,163,115,0.1);
-          border-radius: 2px;
-          margin-bottom: 20px;
-        }
-        
-        .demo-metrics {
-          display: grid;
+        /* 4 SCREENSHOTS (Patron) */
+        .feature-screenshots.four-shots {
           grid-template-columns: repeat(2, 1fr);
-          gap: 12px;
         }
         
-        .metric {
-          padding: 20px;
-          background: rgba(212,163,115,0.03);
-          border: 1px solid rgba(212,163,115,0.08);
-          border-radius: 2px;
+        /* 1 SCREENSHOT (Venue) */
+        .feature-screenshots.single-shot {
+          grid-template-columns: 1fr;
         }
         
-        .metric-value {
-          height: 24px;
-          width: 60px;
-          background: rgba(212,163,115,0.2);
-          margin-bottom: 12px;
-          border-radius: 2px;
+        .screenshot {
+          width: 100%;
+          height: auto;
+          display: block;
+          border: 1px solid rgba(212,163,115,0.15);
+          border-radius: 8px;
+          transition: all 0.3s;
+          cursor: pointer;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.3);
         }
         
-        .metric-label {
-          font-size: 11px;
-          color: rgba(248,250,252,0.4);
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
+        .screenshot.large {
+          max-width: 100%;
+        }
+        
+        .screenshot:hover {
+          transform: scale(1.05);
+          border-color: rgba(212,163,115,0.4);
+          box-shadow: 0 12px 32px rgba(212,163,115,0.15);
+          z-index: 10;
         }
         
         .feature-tag {
-          font-size: 10px;
+          font-size: 11px;
           font-weight: 600;
           letter-spacing: 0.15em;
           color: #d4a373;
           margin-bottom: 16px;
+          text-transform: uppercase;
         }
         
-        .feature-info h3 {
+        .feature-lead {
+          font-size: 18px;
+          color: rgba(248,250,252,0.75);
+          margin-bottom: 40px;
+          line-height: 1.6;
+        }
+        
+        .feature-details {
+          margin-bottom: 40px;
+        }
+        
+        .detail-section {
+          margin-bottom: 28px;
+        }
+        
+        .detail-section h4 {
+          font-size: 15px;
+          margin-bottom: 8px;
+          color: rgba(248,250,252,0.9);
+        }
+        
+        .detail-section p {
+          font-size: 15px;
+          color: rgba(248,250,252,0.65);
+          line-height: 1.6;
+        }
+        
+        .feature-price {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
+          margin-top: 40px;
+        }
+        
+        .price-tier {
+          padding: 28px;
+          background: rgba(212,163,115,0.03);
+          border: 1px solid rgba(212,163,115,0.15);
+          border-radius: 8px;
+        }
+        
+        .tier-badge {
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          padding: 6px 12px;
+          border-radius: 4px;
+          display: inline-block;
           margin-bottom: 16px;
         }
         
-        .feature-info > p {
-          margin-bottom: 28px;
+        .price-tier.free .tier-badge {
+          background: rgba(34,197,94,0.15);
+          color: #22c55e;
+          border: 1px solid rgba(34,197,94,0.3);
         }
         
-        .feature-info ul {
+        .price-tier.trial .tier-badge {
+          background: rgba(59,130,246,0.15);
+          color: #3b82f6;
+          border: 1px solid rgba(59,130,246,0.3);
+        }
+        
+        .price-tier.premium .tier-badge {
+          background: rgba(212,163,115,0.15);
+          color: #d4a373;
+          border: 1px solid rgba(212,163,115,0.3);
+        }
+        
+        .tier-name {
+          font-size: 18px;
+          font-weight: 600;
+          color: #f8fafc;
+          margin-bottom: 16px;
+        }
+        
+        .tier-name span {
+          font-size: 14px;
+          color: rgba(248,250,252,0.5);
+          font-weight: 500;
+        }
+        
+        .price-tier ul {
           list-style: none;
-          margin-bottom: 28px;
         }
         
-        .feature-info li {
+        .price-tier li {
           font-size: 14px;
           line-height: 2;
-          color: rgba(248,250,252,0.65);
+          color: rgba(248,250,252,0.7);
           padding-left: 20px;
           position: relative;
         }
         
-        .feature-info li::before {
-          content: '—';
+        .price-tier li::before {
+          content: '✓';
           position: absolute;
           left: 0;
           color: #d4a373;
         }
         
-        .feature-price {
-          border-top: 1px solid rgba(212,163,115,0.1);
-          padding-top: 20px;
-        }
-        
-        .feature-price strong {
-          font-size: 18px;
-          color: #d4a373;
-          display: block;
-          margin-bottom: 6px;
-        }
-        
-        .feature-price span {
-          font-size: 13px;
-          color: rgba(248,250,252,0.4);
-        }
-        
         /* DAPA */
         .dapa {
           background: #0d1117;
-          border-top: 1px solid rgba(212,163,115,0.08);
+          border-top: 1px solid rgba(212,163,115,0.1);
           text-align: center;
-        }
-        
-        .dapa h2 {
-          margin-bottom: 12px;
-        }
-        
-        .dapa-subtitle {
-          font-size: 14px;
-          color: rgba(248,250,252,0.4);
-          margin-bottom: 60px;
         }
         
         .dapa-grid {
           display: grid;
           grid-template-columns: repeat(6, 1fr);
-          gap: 20px;
-          max-width: 900px;
-          margin: 0 auto;
+          gap: 24px;
+          max-width: 1000px;
+          margin: 60px auto 0;
         }
         
         .dapa-item {
-          padding: 32px 20px;
-          border: 1px solid rgba(212,163,115,0.1);
-          background: rgba(212,163,115,0.02);
+          padding: 36px 24px;
+          border: 1px solid rgba(212,163,115,0.12);
+          background: rgba(212,163,115,0.03);
           transition: all 0.3s;
-          border-radius: 2px;
+          border-radius: 8px;
         }
         
         .dapa-item:hover {
           border-color: rgba(212,163,115,0.3);
-          background: rgba(212,163,115,0.05);
-          transform: translateY(-2px);
+          background: rgba(212,163,115,0.06);
+          transform: translateY(-4px);
+          box-shadow: 0 8px 24px rgba(212,163,115,0.1);
         }
         
         .dapa-icon {
-          width: 44px;
-          height: 44px;
+          width: 56px;
+          height: 56px;
           background: linear-gradient(135deg, rgba(212,163,115,0.2), rgba(212,163,115,0.1));
           border: 1px solid rgba(212,163,115,0.3);
           color: #d4a373;
-          font-size: 16px;
+          font-size: 20px;
           font-weight: 700;
           display: flex;
           align-items: center;
           justify-content: center;
-          margin: 0 auto 16px;
-          border-radius: 2px;
+          margin: 0 auto 20px;
+          border-radius: 8px;
         }
         
+        .dapa-icon.technical { border-color: rgba(239,68,68,0.3); color: #ef4444; }
+        .dapa-icon.ethical { border-color: rgba(34,197,94,0.3); color: #22c55e; }
+        .dapa-icon.emotional { border-color: rgba(236,72,153,0.3); color: #ec4899; }
+        .dapa-icon.velocity { border-color: rgba(245,158,11,0.3); color: #f59e0b; }
+        .dapa-icon.commercial { border-color: rgba(34,197,94,0.3); color: #22c55e; }
+        .dapa-icon.leadership { border-color: rgba(139,92,246,0.3); color: #8b5cf6; }
+        
         .dapa-item h4 {
-          font-size: 12px;
-          color: rgba(248,250,252,0.7);
+          font-size: 14px;
+          color: rgba(248,250,252,0.8);
+          margin-bottom: 8px;
+        }
+        
+        .dapa-item p {
+          font-size: 13px;
+          color: rgba(248,250,252,0.5);
+          line-height: 1.5;
         }
         
         /* GENOME */
@@ -1182,147 +1333,159 @@ export default function LandingPage() {
           text-align: center;
         }
         
-        .genome h2 {
-          margin-bottom: 12px;
-        }
-        
-        .genome-subtitle {
-          font-size: 14px;
-          color: rgba(248,250,252,0.4);
-          margin-bottom: 60px;
-        }
-        
         .genome-grid {
           display: grid;
           grid-template-columns: repeat(6, 1fr);
-          gap: 12px;
-          margin-bottom: 40px;
+          gap: 16px;
+          margin: 60px auto 40px;
+          max-width: 1000px;
         }
         
         .genome-item {
-          background: rgba(212,163,115,0.02);
-          border: 1px solid rgba(212,163,115,0.1);
-          padding: 24px 16px;
+          background: rgba(212,163,115,0.03);
+          border: 1px solid rgba(212,163,115,0.12);
+          padding: 28px 20px;
           cursor: pointer;
           transition: all 0.3s;
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 10px;
-          border-radius: 2px;
+          gap: 12px;
+          border-radius: 8px;
         }
         
         .genome-item:hover, .genome-item.active {
           background: rgba(212,163,115,0.08);
           border-color: rgba(212,163,115,0.3);
-          transform: translateY(-2px);
+          transform: translateY(-4px);
+          box-shadow: 0 8px 24px rgba(212,163,115,0.1);
         }
         
         .genome-emoji {
-          font-size: 28px;
+          font-size: 32px;
         }
         
         .genome-name {
-          font-size: 11px;
-          color: rgba(248,250,252,0.7);
+          font-size: 12px;
+          color: rgba(248,250,252,0.75);
           font-weight: 500;
         }
         
         .genome-detail {
-          background: rgba(212,163,115,0.05);
-          border: 1px solid rgba(212,163,115,0.2);
-          padding: 48px;
-          max-width: 700px;
+          background: rgba(212,163,115,0.06);
+          border: 1px solid rgba(212,163,115,0.25);
+          padding: 56px;
+          max-width: 750px;
           margin: 0 auto;
-          border-radius: 4px;
+          border-radius: 12px;
         }
         
         .genome-detail-header {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 20px;
-          margin-bottom: 24px;
+          gap: 24px;
+          margin-bottom: 28px;
         }
         
-        .genome-detail-header span {
-          font-size: 40px;
+        .genome-detail-emoji {
+          font-size: 48px;
         }
         
         .genome-detail h3 {
-          font-size: 26px;
+          font-size: 30px;
         }
         
         .genome-detail p {
-          margin-bottom: 28px;
+          margin-bottom: 32px;
           text-align: center;
+          font-size: 17px;
+          line-height: 1.7;
         }
         
         .btn-close {
           background: transparent;
           color: #d4a373;
-          border: 1px solid rgba(212,163,115,0.3);
-          padding: 10px 28px;
-          font-size: 13px;
+          border: 1px solid rgba(212,163,115,0.4);
+          padding: 12px 32px;
+          font-size: 14px;
           cursor: pointer;
           font-family: inherit;
-          border-radius: 2px;
+          border-radius: 6px;
+          transition: all 0.2s;
+        }
+        
+        .btn-close:hover {
+          background: rgba(212,163,115,0.08);
+          border-color: #d4a373;
         }
         
         /* VISION */
         .vision {
-          padding: 100px 24px;
+          padding: 120px 24px;
         }
         
         .vision h1 {
           text-align: center;
-          margin-bottom: 12px;
+          margin-bottom: 16px;
         }
         
         .vision-lead {
           text-align: center;
-          font-size: 18px;
+          font-size: 20px;
           color: #d4a373;
-          margin-bottom: 80px;
+          margin-bottom: 100px;
         }
         
         .vision-content {
-          max-width: 800px;
+          max-width: 850px;
           margin: 0 auto;
         }
         
         .vision-section {
-          margin-bottom: 60px;
+          margin-bottom: 80px;
         }
         
         .vision-section h3 {
           color: #d4a373;
-          margin-bottom: 20px;
+          margin-bottom: 24px;
+          font-size: 32px;
         }
         
         .vision-section p {
-          margin-bottom: 16px;
+          margin-bottom: 20px;
+          font-size: 17px;
+          line-height: 1.7;
+        }
+        
+        .vision-emphasis {
+          color: #f8fafc;
+          font-weight: 500;
+          font-size: 19px;
         }
         
         .vision-highlight {
           color: #d4a373;
           font-weight: 500;
-          padding: 20px;
-          border-left: 2px solid #d4a373;
-          background: rgba(212,163,115,0.05);
+          padding: 24px;
+          border-left: 3px solid #d4a373;
+          background: rgba(212,163,115,0.06);
+          border-radius: 4px;
+          font-size: 18px;
         }
         
         .vision-list {
           list-style: none;
+          margin-top: 28px;
         }
         
         .vision-list li {
-          font-size: 15px;
+          font-size: 16px;
           line-height: 1.8;
-          color: rgba(248,250,252,0.7);
-          padding-left: 24px;
+          color: rgba(248,250,252,0.75);
+          padding-left: 28px;
           position: relative;
-          margin-bottom: 12px;
+          margin-bottom: 20px;
         }
         
         .vision-list li::before {
@@ -1330,77 +1493,84 @@ export default function LandingPage() {
           position: absolute;
           left: 0;
           color: #d4a373;
+          font-size: 18px;
+        }
+        
+        .vision-list li strong {
+          color: #f8fafc;
+          font-weight: 600;
         }
         
         .vision-cta {
           text-align: center;
-          padding: 56px 48px;
-          border: 1px solid rgba(212,163,115,0.2);
-          background: rgba(212,163,115,0.03);
-          margin-top: 60px;
-          border-radius: 4px;
+          padding: 60px 48px;
+          border: 1px solid rgba(212,163,115,0.25);
+          background: rgba(212,163,115,0.04);
+          margin-top: 80px;
+          border-radius: 12px;
         }
         
         .vision-cta h3 {
-          margin-bottom: 16px;
+          margin-bottom: 20px;
         }
         
         .vision-cta p {
-          margin-bottom: 28px;
+          margin-bottom: 32px;
+          font-size: 17px;
         }
         
         /* WAITLIST */
         .waitlist {
           background: #0d1117;
-          border-top: 1px solid rgba(212,163,115,0.08);
+          border-top: 1px solid rgba(212,163,115,0.1);
           text-align: center;
         }
         
         .waitlist h2 {
-          margin-bottom: 12px;
+          margin-bottom: 16px;
         }
         
         .waitlist-subtitle {
-          font-size: 15px;
+          font-size: 17px;
           color: #d4a373;
-          margin-bottom: 48px;
+          margin-bottom: 56px;
         }
         
         .waitlist-form {
-          max-width: 600px;
+          max-width: 650px;
           margin: 0 auto;
         }
         
         .form-row {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          gap: 12px;
-          margin-bottom: 12px;
+          gap: 16px;
+          margin-bottom: 16px;
         }
         
         input, select {
           width: 100%;
-          padding: 16px 18px;
-          background: rgba(212,163,115,0.03);
-          border: 1px solid rgba(212,163,115,0.1);
+          padding: 18px 20px;
+          background: rgba(212,163,115,0.04);
+          border: 1px solid rgba(212,163,115,0.12);
           color: #f8fafc;
           font-family: inherit;
-          font-size: 14px;
+          font-size: 15px;
           transition: all 0.2s;
-          border-radius: 2px;
+          border-radius: 6px;
         }
         
         input:focus, select:focus {
           outline: none;
           border-color: #d4a373;
-          background: rgba(212,163,115,0.05);
+          background: rgba(212,163,115,0.06);
         }
         
         .form-disclaimer {
-          font-size: 11px;
-          color: rgba(248,250,252,0.4);
-          margin: 24px 0;
-          line-height: 1.5;
+          font-size: 12px;
+          color: rgba(248,250,252,0.5);
+          margin: 28px 0;
+          line-height: 1.6;
         }
         
         .btn-submit {
@@ -1408,74 +1578,91 @@ export default function LandingPage() {
           background: #d4a373;
           color: #0a0f14;
           border: none;
-          padding: 18px;
-          font-size: 15px;
+          padding: 20px;
+          font-size: 16px;
           font-weight: 600;
           cursor: pointer;
           font-family: inherit;
           transition: all 0.2s;
-          border-radius: 2px;
+          border-radius: 6px;
         }
         
         .btn-submit:hover {
           opacity: 0.9;
-          transform: translateY(-1px);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 24px rgba(212,163,115,0.2);
         }
         
         .waitlist-success {
-          padding: 80px 48px;
-          border: 1px solid rgba(34,220,108,0.2);
-          background: rgba(34,220,108,0.05);
-          border-radius: 4px;
+          padding: 80px 56px;
+          border: 1px solid rgba(34,220,108,0.25);
+          background: rgba(34,220,108,0.04);
+          border-radius: 12px;
+          max-width: 650px;
+          margin: 0 auto;
+        }
+        
+        .success-icon {
+          font-size: 64px;
+          margin-bottom: 24px;
         }
         
         .waitlist-success h2 {
           color: #22c55e;
+          margin-bottom: 20px;
+        }
+        
+        .waitlist-success p {
+          margin-bottom: 12px;
+        }
+        
+        .success-note {
+          color: #d4a373;
+          font-weight: 600;
+          font-size: 18px;
+          margin-top: 24px;
         }
         
         /* FOOTER */
         .footer {
           background: #0a0f14;
-          border-top: 1px solid rgba(212,163,115,0.08);
-          padding: 60px 24px 32px;
+          border-top: 1px solid rgba(212,163,115,0.1);
+          padding: 80px 24px 40px;
         }
         
         .footer-content {
           display: flex;
           justify-content: space-between;
-          margin-bottom: 40px;
+          margin-bottom: 50px;
         }
         
         .footer-logo {
-          font-size: 18px;
+          font-size: 20px;
           font-weight: 600;
           color: #d4a373;
+          margin-bottom: 12px;
+        }
+        
+        .footer-tagline {
+          font-size: 13px;
+          color: rgba(248,250,252,0.5);
           margin-bottom: 8px;
         }
         
-        .footer-brand p {
+        .footer-location {
           font-size: 12px;
           color: rgba(248,250,252,0.4);
         }
         
         .footer-links {
           display: flex;
-          gap: 60px;
-        }
-        
-        .footer-col h5 {
-          font-size: 11px;
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-          color: rgba(248,250,252,0.4);
-          margin-bottom: 14px;
-          font-weight: 500;
+          gap: 80px;
         }
         
         .footer-col a {
           display: block;
-          font-size: 13px;
-          color: rgba(248,250,252,0.5);
+          font-size: 14px;
+          color: rgba(248,250,252,0.55);
           text-decoration: none;
           margin-bottom: 10px;
           transition: color 0.2s;
@@ -1486,24 +1673,33 @@ export default function LandingPage() {
         }
         
         .footer-bottom {
-          padding-top: 32px;
-          border-top: 1px solid rgba(212,163,115,0.08);
+          padding-top: 40px;
+          border-top: 1px solid rgba(212,163,115,0.1);
           display: flex;
           justify-content: space-between;
-          font-size: 11px;
-          color: rgba(248,250,252,0.3);
+          font-size: 12px;
+          color: rgba(248,250,252,0.35);
         }
         
         /* RESPONSIVE */
+        @media (max-width: 1024px) {
+          .feature-screenshots { grid-template-columns: 1fr; position: static; }
+          .feature-screenshots.four-shots { grid-template-columns: 1fr; }
+        }
+        
         @media (max-width: 768px) {
           h1 { font-size: 40px; }
-          .hero h1 { font-size: 52px; }
-          .hero-stats { flex-direction: column; gap: 24px; }
-          .value-grid, .quotes-grid, .dapa-grid, .genome-grid { grid-template-columns: 1fr; }
-          .feature { grid-template-columns: 1fr; }
+          .hero h1 { font-size: 56px; }
+          .hero-stats { flex-direction: column; gap: 32px; }
+          .value-grid, .quotes-grid, .dapa-grid, .genome-grid, .mission-pillars { grid-template-columns: 1fr; }
+          .feature { grid-template-columns: 1fr; gap: 40px; }
+          .feature-screenshots { grid-template-columns: 1fr; }
+          .feature-screenshots.four-shots { grid-template-columns: 1fr; }
+          .feature-price { grid-template-columns: 1fr; }
           .form-row { grid-template-columns: 1fr; }
-          .footer-content { flex-direction: column; gap: 32px; }
-          .footer-links { flex-direction: column; gap: 32px; }
+          .footer-content { flex-direction: column; gap: 40px; }
+          .footer-links { flex-direction: column; gap: 40px; }
+          .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
         }
       `}</style>
     </>
