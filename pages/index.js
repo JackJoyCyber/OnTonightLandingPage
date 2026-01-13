@@ -1,10 +1,10 @@
-// pages/index.js - OnTonight Landing Page (Professional Redesign)
+// pages/index.js - OnTonight Landing Page (Mission-Focused Redesign)
 import { useState } from 'react';
 import Head from 'next/head';
 
 export default function LandingPage() {
   const [formData, setFormData] = useState({
-    name: '', email: '', userType: '', city: '', role: ''
+    name: '', email: '', userType: '', city: ''
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -35,56 +35,93 @@ export default function LandingPage() {
       <div className="page">
         {/* HERO */}
         <section className="hero">
+          <div className="hero-glow"></div>
           <div className="container">
-            <h1>Your Night. Your People.<br />Your Business.</h1>
+            <h1>Your Night. Your People.</h1>
             <p className="tagline">Where Regulars Are Made.</p>
             <p className="subtitle">
               Hospitality professionals build portable careers.<br />
               Customers follow the people they love.<br />
-              Venues attract and retain top talent.
+              Venues attract and retain verified talent.
             </p>
             
             <div className="ctas">
-              <a href="https://app.on-tonight.com/?type=onpro" className="cta cta-onpro">
-                <div className="cta-label">ONPRO</div>
-                <strong>Build Career</strong>
+              <a href="#waitlist" className="cta cta-onpro">
+                <div className="cta-shimmer"></div>
+                <div className="cta-content">
+                  <div className="cta-label">ONPRO</div>
+                  <strong>Build Career</strong>
+                  <div className="cta-sparkle">✨</div>
+                </div>
               </a>
-              <a href="https://app.on-tonight.com/?type=patron" className="cta cta-patron">
-                <div className="cta-label">PATRON</div>
-                <strong>Find People</strong>
+              <a href="#waitlist" className="cta cta-patron">
+                <div className="cta-shimmer"></div>
+                <div className="cta-content">
+                  <div className="cta-label">PATRON</div>
+                  <strong>Find People</strong>
+                  <div className="cta-sparkle">✨</div>
+                </div>
               </a>
-              <a href="https://app.on-tonight.com/?type=venue" className="cta cta-venue">
-                <div className="cta-label">VENUE</div>
-                <strong>Grow Team</strong>
+              <a href="#waitlist" className="cta cta-venue">
+                <div className="cta-shimmer"></div>
+                <div className="cta-content">
+                  <div className="cta-label">VENUE</div>
+                  <strong>Grow Team</strong>
+                  <div className="cta-sparkle">✨</div>
+                </div>
               </a>
             </div>
             
-            <div className="promo">First 2,000 signups get their FIRST YEAR FREE</div>
+            <div className="promo">🎉 First 2,000 signups get their FIRST YEAR FREE 🎉</div>
+          </div>
+        </section>
+
+        {/* MISSION */}
+        <section className="mission">
+          <div className="container">
+            <h2>Elevating Hospitality. Building Careers. Creating Connections.</h2>
+            <div className="mission-content">
+              <p className="mission-lead">
+                The hospitality industry loses $66.8 billion annually to turnover. When talented professionals change venues, they lose everything they've built—their customer relationships, their reputation, their momentum.
+              </p>
+              <p className="mission-text">
+                <strong>We're changing that.</strong>
+              </p>
+              <p className="mission-text">
+                OnTonight is building the professional infrastructure the hospitality industry deserves. We believe bartenders, servers, and sommeliers should have the same career portability as lawyers, engineers, and executives. We believe customers should be able to follow the people who make their nights special. We believe venues should compete on culture and opportunity, not just wages.
+              </p>
+              <p className="mission-text">
+                This isn't just an app. It's a movement to professionalize hospitality, to honor the skill and artistry of the people who create unforgettable experiences, and to build a future where talent is recognized, relationships are portable, and regulars are made—not lost.
+              </p>
+              <p className="mission-cta">
+                <strong>Join us in raising the bar for an entire industry.</strong>
+              </p>
+            </div>
           </div>
         </section>
 
         {/* PROBLEM */}
         <section className="problem">
           <div className="container">
-            <h2>The Hospitality Industry's $66.8B Turnover Crisis</h2>
+            <h2>The Crisis</h2>
             <div className="stats">
               <div className="stat">
                 <div className="stat-num">73%</div>
                 <div className="stat-label">Annual Turnover Rate</div>
                 <div className="stat-source">National Restaurant Association, 2024</div>
-                <p>When hospitality workers change venues, they lose their customer relationships.</p>
+                <p>When hospitality workers change venues, they lose their customer relationships. Every. Single. Time.</p>
               </div>
               <div className="stat">
                 <div className="stat-num">$5,864</div>
                 <div className="stat-label">Cost Per New Hire</div>
                 <div className="stat-source">Cornell University</div>
-                <p>Recruiting, training, and productivity loss. Multiply by 73% turnover.</p>
+                <p>Recruiting, training, and productivity loss. Multiply by 73% turnover. The math is devastating.</p>
               </div>
               <div className="stat">
                 <div className="stat-num">"Where?"</div>
                 <div className="stat-label">Customer Experience</div>
                 <div className="stat-source">Industry Survey, 2024</div>
-                <p>Your favorite bartender left. No way to follow. Connection gone.</p>
+                <p>Your favorite bartender left. No forwarding address. No way to follow. The connection is gone.</p>
               </div>
             </div>
             <p className="solution">OnTonight solves this for everyone.</p>
@@ -94,9 +131,14 @@ export default function LandingPage() {
         {/* HOW IT WORKS */}
         <section className="how">
           <div className="container">
-            <h2>One Platform. Three Benefits.</h2>
+            <h2>One Platform. Three Solutions.</h2>
             <div className="benefits">
-              <div className="benefit">
+              <div className="benefit benefit-celebration">
+                <div className="benefit-confetti">
+                  <span className="confetti">🎊</span>
+                  <span className="confetti">✨</span>
+                  <span className="confetti">🌟</span>
+                </div>
                 <div className="benefit-screenshot">
                   <div className="screenshot-frame">
                     <div className="screenshot-placeholder onpro-screen">
@@ -124,14 +166,23 @@ export default function LandingPage() {
                   <li>Customers follow YOU, not venues</li>
                   <li>Build reputation once, keep forever</li>
                 </ul>
-                <div className="price">
-                  <strong>$10</strong><span>/month</span>
-                  <small>First month FREE</small>
+                <div className="price price-free">
+                  <div className="price-badge">ALWAYS FREE</div>
+                  <strong>Free Account</strong>
+                  <p>Basic profile · 1 DAPA assessment · Unlimited followers</p>
+                  <div className="price-premium">
+                    <small>Premium $10/month: Unlimited assessments, analytics, priority placement</small>
+                  </div>
                 </div>
-                <a href="https://app.on-tonight.com/?type=onpro" className="btn btn-primary">Get Started</a>
+                <a href="#waitlist" className="btn btn-primary">Join Waitlist</a>
               </div>
               
-              <div className="benefit">
+              <div className="benefit benefit-celebration">
+                <div className="benefit-confetti">
+                  <span className="confetti">🎊</span>
+                  <span className="confetti">✨</span>
+                  <span className="confetti">🌟</span>
+                </div>
                 <div className="benefit-screenshot">
                   <div className="screenshot-frame">
                     <div className="screenshot-placeholder patron-screen">
@@ -149,17 +200,25 @@ export default function LandingPage() {
                 <ul>
                   <li>Follow favorite bartenders & servers</li>
                   <li>See who's working tonight</li>
-                  <li>Never lose touch</li>
+                  <li>Never lose touch when they move</li>
                   <li>Discover verified professionals</li>
                 </ul>
                 <div className="price">
                   <strong>FREE</strong>
-                  <small>Premium: $5/month</small>
+                  <p>Follow OnPros · See schedules · Basic genome</p>
+                  <div className="price-premium">
+                    <small>Premium $5/month: Full OnScene Genome, advanced matching</small>
+                  </div>
                 </div>
-                <a href="https://app.on-tonight.com/?type=patron" className="btn btn-primary">Discover OnPros</a>
+                <a href="#waitlist" className="btn btn-primary">Join Waitlist</a>
               </div>
               
-              <div className="benefit">
+              <div className="benefit benefit-celebration">
+                <div className="benefit-confetti">
+                  <span className="confetti">🎊</span>
+                  <span className="confetti">✨</span>
+                  <span className="confetti">🌟</span>
+                </div>
                 <div className="benefit-screenshot">
                   <div className="screenshot-frame">
                     <div className="screenshot-placeholder venue-screen">
@@ -180,15 +239,18 @@ export default function LandingPage() {
                 <h4>Attract & Retain Talent</h4>
                 <ul>
                   <li>Recruit DAPA-verified professionals</li>
-                  <li>Showcase your team</li>
-                  <li>Reduce turnover</li>
-                  <li>Track staff impact</li>
+                  <li>Showcase your team to customers</li>
+                  <li>Reduce costly turnover</li>
+                  <li>Analytics: Which staff drive traffic?</li>
                 </ul>
                 <div className="price">
-                  <strong>$50</strong><span>/month</span>
-                  <small>3-month FREE trial</small>
+                  <strong>From $50</strong><span>/month</span>
+                  <p>Staff showcase · Recruiting · Analytics</p>
+                  <div className="price-premium">
+                    <small>3-month FREE trial · No credit card required</small>
+                  </div>
                 </div>
-                <a href="https://app.on-tonight.com/?type=venue" className="btn btn-primary">Try Free</a>
+                <a href="#waitlist" className="btn btn-primary">Join Waitlist</a>
               </div>
             </div>
           </div>
@@ -241,18 +303,18 @@ export default function LandingPage() {
             <h2>Discover Your Hospitality Personality</h2>
             <p className="sub">45 questions reveal your OnScene Genome™ from 12 unique archetypes.</p>
             <div className="archetypes">
-              <div className="archetype">The Connector</div>
-              <div className="archetype">The Regular</div>
-              <div className="archetype">The Adventurer</div>
-              <div className="archetype">The Host</div>
-              <div className="archetype">The Connoisseur</div>
-              <div className="archetype">The Explorer</div>
-              <div className="archetype">The Celebrator</div>
-              <div className="archetype">The Relaxer</div>
-              <div className="archetype">The Supporter</div>
-              <div className="archetype">The Critic</div>
-              <div className="archetype">The Storyteller</div>
-              <div className="archetype">The Student</div>
+              <div className="archetype">🌐 The Connector</div>
+              <div className="archetype">🏠 The Regular</div>
+              <div className="archetype">🗺️ The Adventurer</div>
+              <div className="archetype">🎉 The Host</div>
+              <div className="archetype">🍷 The Connoisseur</div>
+              <div className="archetype">🔍 The Explorer</div>
+              <div className="archetype">🎊 The Celebrator</div>
+              <div className="archetype">😌 The Relaxer</div>
+              <div className="archetype">💪 The Supporter</div>
+              <div className="archetype">🧐 The Critic</div>
+              <div className="archetype">📖 The Storyteller</div>
+              <div className="archetype">📚 The Student</div>
             </div>
           </div>
         </section>
@@ -261,118 +323,83 @@ export default function LandingPage() {
         <section className="testimonials">
           <div className="container">
             <h2>The Cost of Constant Turnover</h2>
-            <p className="sub">Real quotes from hospitality professionals</p>
+            <p className="sub">Real voices from the hospitality industry</p>
             <div className="quotes">
               <div className="quote">
-                <p>"We spend $60,000 a year just replacing bartenders. By the time they're really good, they leave."</p>
+                <p>"We spend $60,000 a year just replacing bartenders. By the time they're really good, they leave. And when they go, their regulars stop coming."</p>
                 <cite>Anonymous GM · Cornell Hospitality Quarterly 2023</cite>
               </div>
               <div className="quote">
-                <p>"I've changed venues three times in five years. Every time, I lose my entire customer base."</p>
+                <p>"I've changed venues three times in five years. Every time, I lose my entire customer base and start over. There has to be a better way."</p>
                 <cite>Survey Response · National Bartenders Association 2024</cite>
               </div>
             </div>
           </div>
         </section>
 
-        {/* PRICING */}
-        <section className="pricing">
+        {/* SIGNUP */}
+        <section className="signup" id="waitlist">
           <div className="container">
-            <h2>Transparent Pricing</h2>
-            <p className="pricing-promo">First 2,000 signups get their FIRST YEAR FREE</p>
-            <div className="plans">
-              <div className="plan">
-                <div className="plan-header">
-                  <h3>OnPro</h3>
-                </div>
-                <div className="plan-tiers">
-                  <div className="tier">
-                    <strong>Free</strong>
-                    <p>Basic profile · 1 assessment</p>
+            {!submitted ? (
+              <>
+                <h2>Join the Movement</h2>
+                <p>Be first to know when OnTonight launches in your city.</p>
+                <p className="early-access-note">🎉 First 2,000 signups get their FIRST YEAR FREE 🎉</p>
+                
+                <form onSubmit={handleSubmit}>
+                  <div className="form-row">
+                    <input 
+                      type="text" 
+                      placeholder="Full Name" 
+                      required 
+                      value={formData.name}
+                      onChange={e => setFormData({...formData, name: e.target.value})} 
+                    />
+                    <input 
+                      type="email" 
+                      placeholder="Email Address" 
+                      required 
+                      value={formData.email}
+                      onChange={e => setFormData({...formData, email: e.target.value})} 
+                    />
                   </div>
-                  <div className="tier tier-featured">
-                    <strong>$10/mo</strong>
-                    <p>Unlimited assessments · Analytics · Priority</p>
+                  <div className="form-row">
+                    <select 
+                      required 
+                      value={formData.userType}
+                      onChange={e => setFormData({...formData, userType: e.target.value})}>
+                      <option value="">I am a...</option>
+                      <option value="onpro">OnPro (Hospitality Professional)</option>
+                      <option value="patron">Patron (Customer)</option>
+                      <option value="venue">Venue Owner/Manager</option>
+                    </select>
+                    <input 
+                      type="text" 
+                      placeholder="City" 
+                      required
+                      value={formData.city}
+                      onChange={e => setFormData({...formData, city: e.target.value})} 
+                    />
                   </div>
-                </div>
-                <a href="https://app.on-tonight.com/?type=onpro" className="btn btn-outline">Start Free</a>
+                  
+                  <div className="age-disclaimer">
+                    By signing up, you confirm that you are at least 18 years of age and agree to receive email communications from OnTonight.
+                  </div>
+                  
+                  <button type="submit" className="btn btn-primary btn-large" disabled={loading}>
+                    {loading ? 'Joining Waitlist...' : 'Get Early Access'}
+                  </button>
+                </form>
+              </>
+            ) : (
+              <div className="success-message">
+                <h2>🎉 You're on the list! 🎉</h2>
+                <p>Check your email for next steps.</p>
+                <p className="success-note">First 2,000 signups get their first year FREE!</p>
               </div>
-              <div className="plan">
-                <div className="plan-header">
-                  <h3>Patron</h3>
-                </div>
-                <div className="plan-tiers">
-                  <div className="tier">
-                    <strong>Free</strong>
-                    <p>Follow OnPros · See schedules</p>
-                  </div>
-                  <div className="tier">
-                    <strong>$5/mo</strong>
-                    <p>Full genome · Advanced matching</p>
-                  </div>
-                </div>
-                <a href="https://app.on-tonight.com/?type=patron" className="btn btn-outline">Join Free</a>
-              </div>
-              <div className="plan">
-                <div className="plan-header">
-                  <h3>Venue</h3>
-                </div>
-                <div className="plan-tiers">
-                  <div className="tier">
-                    <strong>$50/mo</strong>
-                    <p>Up to 10 staff · Analytics</p>
-                  </div>
-                  <div className="tier tier-featured">
-                    <strong>$100/mo</strong>
-                    <p>Up to 25 staff · Recruiting · Priority</p>
-                  </div>
-                </div>
-                <a href="https://app.on-tonight.com/?type=venue" className="btn btn-outline">Try Free (3 months)</a>
-              </div>
-            </div>
+            )}
           </div>
         </section>
-
-        {/* SIGNUP */}
-        {!submitted ? (
-          <section className="signup">
-            <div className="container">
-              <h2>Join the Waitlist</h2>
-              <p>Be first to know when OnTonight launches in your city.</p>
-              <form onSubmit={handleSubmit}>
-                <div className="form-row">
-                  <input type="text" placeholder="Name" required value={formData.name}
-                    onChange={e => setFormData({...formData, name: e.target.value})} />
-                  <input type="email" placeholder="Email" required value={formData.email}
-                    onChange={e => setFormData({...formData, email: e.target.value})} />
-                </div>
-                <div className="form-row">
-                  <select required value={formData.userType}
-                    onChange={e => setFormData({...formData, userType: e.target.value})}>
-                    <option value="">I am a...</option>
-                    <option value="onpro">OnPro (Hospitality Professional)</option>
-                    <option value="patron">Patron (Customer)</option>
-                    <option value="venue">Venue Owner/Manager</option>
-                  </select>
-                  <input type="text" placeholder="City" value={formData.city}
-                    onChange={e => setFormData({...formData, city: e.target.value})} />
-                </div>
-                <button type="submit" className="btn btn-primary btn-large" disabled={loading}>
-                  {loading ? 'Submitting...' : 'Get Early Access'}
-                </button>
-              </form>
-            </div>
-          </section>
-        ) : (
-          <section className="signup">
-            <div className="container">
-              <div className="success-message">
-                <h2>You're on the list!</h2>
-                <p>Check your email for next steps. First 2,000 get first year FREE!</p>
-              </div>
-            </div>
-          </section>
-        )}
 
         {/* FOOTER */}
         <footer>
@@ -385,18 +412,21 @@ export default function LandingPage() {
               <div className="footer-links">
                 <div className="footer-col">
                   <h5>Product</h5>
-                  <a href="https://app.on-tonight.com/?type=onpro">For OnPros</a>
-                  <a href="https://app.on-tonight.com/?type=patron">For Patrons</a>
-                  <a href="https://app.on-tonight.com/?type=venue">For Venues</a>
+                  <a href="#waitlist">For OnPros</a>
+                  <a href="#waitlist">For Patrons</a>
+                  <a href="#waitlist">For Venues</a>
                 </div>
                 <div className="footer-col">
                   <h5>Company</h5>
                   <a href="mailto:AdminJoy@On-Tonight.com">Contact</a>
+                  <a href="/privacy">Privacy Policy</a>
+                  <a href="/terms">Terms & Conditions</a>
                 </div>
               </div>
             </div>
             <div className="footer-bottom">
               <p>© 2025 OnTonight LLC. All rights reserved.</p>
+              <p className="footer-age">You must be 18 or older to use OnTonight.</p>
             </div>
           </div>
         </footer>
@@ -450,6 +480,19 @@ export default function LandingPage() {
           align-items: center; 
           background: linear-gradient(180deg, #0a0f14 0%, #0d1420 50%, #0a0f14 100%);
           padding: 80px 24px;
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .hero-glow {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 800px;
+          height: 800px;
+          background: radial-gradient(circle, rgba(212,163,115,0.15) 0%, transparent 70%);
+          pointer-events: none;
         }
         
         .tagline { 
@@ -480,37 +523,42 @@ export default function LandingPage() {
           background: rgba(255,255,255,0.02); 
           border: 1px solid rgba(255,255,255,0.08); 
           padding: 32px 24px; 
-          text-align: center; 
           text-decoration: none; 
           color: inherit; 
-          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-          display: flex; 
-          flex-direction: column; 
-          gap: 12px;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           position: relative;
           overflow: hidden;
         }
         
-        .cta::before {
-          content: '';
+        .cta-shimmer {
           position: absolute;
           top: 0;
-          left: 0;
-          right: 0;
-          height: 2px;
-          background: linear-gradient(90deg, transparent, #d4a373, transparent);
-          transform: translateX(-100%);
-          transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(212,163,115,0.2), transparent);
+          animation: shimmer 3s infinite;
         }
         
-        .cta:hover::before {
-          transform: translateX(100%);
+        @keyframes shimmer {
+          0% { left: -100%; }
+          100% { left: 100%; }
+        }
+        
+        .cta-content {
+          position: relative;
+          z-index: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 12px;
         }
         
         .cta:hover { 
           background: rgba(255,255,255,0.04); 
-          border-color: rgba(212,163,115,0.3);
-          transform: translateY(-2px);
+          border-color: rgba(212,163,115,0.4);
+          transform: translateY(-4px);
+          box-shadow: 0 8px 32px rgba(212,163,115,0.2);
         }
         
         .cta-label {
@@ -527,20 +575,69 @@ export default function LandingPage() {
           letter-spacing: -0.01em;
         }
         
+        .cta-sparkle {
+          font-size: 20px;
+          animation: sparkle 2s infinite;
+        }
+        
+        @keyframes sparkle {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        
         .promo { 
-          background: rgba(212,163,115,0.08); 
-          border: 1px solid rgba(212,163,115,0.2); 
+          background: linear-gradient(135deg, rgba(212,163,115,0.15) 0%, rgba(212,163,115,0.05) 100%); 
+          border: 1px solid rgba(212,163,115,0.3); 
           padding: 16px 32px; 
           display: inline-block; 
           color: #d4a373; 
           font-weight: 600;
           font-size: 15px;
           letter-spacing: -0.01em;
+          box-shadow: 0 4px 16px rgba(212,163,115,0.2);
+        }
+        
+        /* MISSION */
+        .mission {
+          background: #0d1420;
+        }
+        
+        .mission-content {
+          max-width: 900px;
+          margin: 0 auto;
+          text-align: center;
+        }
+        
+        .mission-lead {
+          font-size: 24px;
+          line-height: 1.6;
+          color: rgba(255,255,255,0.8);
+          margin-bottom: 32px;
+          font-weight: 500;
+        }
+        
+        .mission-text {
+          font-size: 18px;
+          line-height: 1.8;
+          color: rgba(255,255,255,0.7);
+          margin-bottom: 24px;
+        }
+        
+        .mission-text strong {
+          color: #d4a373;
+          font-weight: 700;
+        }
+        
+        .mission-cta {
+          font-size: 20px;
+          color: #d4a373;
+          font-weight: 700;
+          margin-top: 48px;
         }
         
         /* PROBLEM */
         .problem { 
-          background: #0d1420; 
+          background: #0a0f14; 
         }
         
         .stats { 
@@ -597,7 +694,7 @@ export default function LandingPage() {
         
         /* HOW IT WORKS */
         .how { 
-          background: #0a0f14; 
+          background: #0d1420; 
         }
         
         .sub { 
@@ -620,6 +717,64 @@ export default function LandingPage() {
           padding: 32px; 
           display: flex;
           flex-direction: column;
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .benefit-celebration {
+          border-color: rgba(212,163,115,0.2);
+        }
+        
+        .benefit-confetti {
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          pointer-events: none;
+          overflow: hidden;
+        }
+        
+        .confetti {
+          position: absolute;
+          font-size: 24px;
+          animation: float 4s infinite ease-in-out;
+          opacity: 0.6;
+        }
+        
+        .confetti:nth-child(1) {
+          left: 10%;
+          top: -20px;
+          animation-delay: 0s;
+        }
+        
+        .confetti:nth-child(2) {
+          right: 10%;
+          top: -20px;
+          animation-delay: 1s;
+        }
+        
+        .confetti:nth-child(3) {
+          left: 50%;
+          top: -20px;
+          animation-delay: 2s;
+        }
+        
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 0;
+          }
+          10% {
+            opacity: 0.6;
+          }
+          90% {
+            opacity: 0.6;
+          }
+          100% {
+            transform: translateY(400px) rotate(360deg);
+            opacity: 0;
+          }
         }
         
         .benefit-screenshot {
@@ -789,11 +944,27 @@ export default function LandingPage() {
         }
         
         .price { 
-          background: rgba(212,163,115,0.05); 
           border: 1px solid rgba(212,163,115,0.15);
-          padding: 16px; 
+          padding: 20px; 
           margin-bottom: 24px;
           text-align: center;
+          background: rgba(212,163,115,0.03);
+        }
+        
+        .price-free {
+          background: linear-gradient(135deg, rgba(61,220,108,0.1) 0%, rgba(212,163,115,0.05) 100%);
+          border-color: rgba(61,220,108,0.3);
+        }
+        
+        .price-badge {
+          display: inline-block;
+          background: #3ddc6c;
+          color: #0a0f14;
+          padding: 4px 12px;
+          font-size: 10px;
+          font-weight: 700;
+          letter-spacing: 0.1em;
+          margin-bottom: 12px;
         }
         
         .price strong { 
@@ -801,6 +972,8 @@ export default function LandingPage() {
           color: #d4a373;
           font-weight: 700;
           letter-spacing: -0.02em;
+          display: block;
+          margin-bottom: 8px;
         }
         
         .price span {
@@ -809,11 +982,21 @@ export default function LandingPage() {
           font-weight: 400;
         }
         
-        .price small {
-          display: block;
-          margin-top: 8px;
+        .price p {
+          font-size: 13px;
+          color: rgba(255,255,255,0.6);
+          margin-bottom: 12px;
+        }
+        
+        .price-premium {
+          padding-top: 12px;
+          border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        
+        .price-premium small {
           font-size: 12px;
           color: rgba(255,255,255,0.5);
+          line-height: 1.4;
         }
         
         .btn { 
@@ -827,6 +1010,7 @@ export default function LandingPage() {
           font-size: 14px;
           letter-spacing: 0.01em;
           text-align: center;
+          width: 100%;
         }
         
         .btn-primary { 
@@ -837,18 +1021,7 @@ export default function LandingPage() {
         
         .btn-primary:hover { 
           transform: translateY(-1px);
-          box-shadow: 0 4px 12px rgba(212,163,115,0.3);
-        }
-        
-        .btn-outline {
-          background: transparent;
-          color: #d4a373;
-          border: 1px solid rgba(212,163,115,0.3);
-        }
-        
-        .btn-outline:hover {
-          background: rgba(212,163,115,0.1);
-          border-color: #d4a373;
+          box-shadow: 0 4px 12px rgba(212,163,115,0.4);
         }
         
         .btn-large {
@@ -858,7 +1031,7 @@ export default function LandingPage() {
         
         /* DAPA */
         .dapa { 
-          background: #0d1420; 
+          background: #0a0f14; 
         }
         
         .axes { 
@@ -919,7 +1092,7 @@ export default function LandingPage() {
         
         /* GENOME */
         .genome { 
-          background: #0a0f14; 
+          background: #0d1420; 
         }
         
         .archetypes { 
@@ -943,11 +1116,12 @@ export default function LandingPage() {
           background: rgba(255,255,255,0.04);
           border-color: rgba(212,163,115,0.2);
           color: #d4a373;
+          transform: scale(1.05);
         }
         
         /* TESTIMONIALS */
         .testimonials { 
-          background: #0d1420; 
+          background: #0a0f14; 
         }
         
         .quotes { 
@@ -978,73 +1152,6 @@ export default function LandingPage() {
           letter-spacing: 0.02em;
         }
         
-        /* PRICING */
-        .pricing { 
-          background: #0a0f14; 
-        }
-        
-        .pricing-promo { 
-          text-align: center; 
-          margin-bottom: 64px;
-          font-size: 16px;
-          font-weight: 600;
-          color: #d4a373;
-        }
-        
-        .plans { 
-          display: grid; 
-          grid-template-columns: repeat(3, 1fr); 
-          gap: 24px; 
-        }
-        
-        .plan { 
-          background: rgba(255,255,255,0.02); 
-          border: 1px solid rgba(255,255,255,0.08); 
-          padding: 32px; 
-          display: flex;
-          flex-direction: column;
-        }
-        
-        .plan-header h3 { 
-          font-size: 12px; 
-          text-transform: uppercase; 
-          letter-spacing: 0.1em; 
-          color: rgba(255,255,255,0.5); 
-          margin-bottom: 32px;
-          font-weight: 700;
-        }
-        
-        .plan-tiers {
-          flex: 1;
-          margin-bottom: 32px;
-        }
-        
-        .tier { 
-          background: rgba(255,255,255,0.02);
-          border: 1px solid rgba(255,255,255,0.06);
-          padding: 20px; 
-          margin-bottom: 12px; 
-        }
-        
-        .tier-featured {
-          background: rgba(212,163,115,0.05);
-          border-color: rgba(212,163,115,0.2);
-        }
-        
-        .tier strong { 
-          font-size: 20px; 
-          display: block; 
-          margin-bottom: 8px;
-          font-weight: 700;
-          letter-spacing: -0.01em;
-        }
-        
-        .tier p { 
-          font-size: 13px; 
-          color: rgba(255,255,255,0.6);
-          line-height: 1.5;
-        }
-        
         /* SIGNUP */
         .signup { 
           background: #0d1420; 
@@ -1053,8 +1160,15 @@ export default function LandingPage() {
         
         .signup p { 
           color: rgba(255,255,255,0.6); 
-          margin-bottom: 48px;
+          margin-bottom: 24px;
           font-size: 16px;
+        }
+        
+        .early-access-note {
+          color: #d4a373;
+          font-weight: 600;
+          font-size: 18px;
+          margin-bottom: 48px;
         }
         
         form { 
@@ -1086,16 +1200,28 @@ export default function LandingPage() {
           background: rgba(255,255,255,0.05);
         }
         
+        .age-disclaimer {
+          font-size: 12px;
+          color: rgba(255,255,255,0.5);
+          margin: 24px 0;
+          line-height: 1.6;
+        }
+        
         .success-message {
           max-width: 600px;
           margin: 0 auto;
           padding: 64px 32px;
-          background: rgba(61,220,108,0.05);
+          background: linear-gradient(135deg, rgba(61,220,108,0.1) 0%, rgba(212,163,115,0.05) 100%);
           border: 1px solid rgba(61,220,108,0.2);
         }
         
         .success-message h2 {
           color: #3ddc6c;
+        }
+        
+        .success-note {
+          color: #d4a373;
+          font-weight: 600;
         }
         
         /* FOOTER */
@@ -1153,12 +1279,18 @@ export default function LandingPage() {
         .footer-bottom {
           padding-top: 32px;
           border-top: 1px solid rgba(255,255,255,0.06);
+          text-align: center;
         }
         
         .footer-bottom p { 
-          text-align: center; 
           color: rgba(255,255,255,0.4); 
-          font-size: 13px; 
+          font-size: 13px;
+          margin-bottom: 8px;
+        }
+        
+        .footer-age {
+          font-size: 12px;
+          color: rgba(255,255,255,0.3);
         }
         
         /* RESPONSIVE */
@@ -1166,7 +1298,7 @@ export default function LandingPage() {
           h1 { font-size: 40px; }
           h2 { font-size: 32px; }
           section { padding: 80px 20px; }
-          .ctas, .stats, .benefits, .quotes, .plans { grid-template-columns: 1fr; }
+          .ctas, .stats, .benefits, .quotes { grid-template-columns: 1fr; }
           .archetypes { grid-template-columns: repeat(2, 1fr); }
           .axes { grid-template-columns: repeat(2, 1fr); }
           .form-row { grid-template-columns: 1fr; }
