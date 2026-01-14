@@ -330,11 +330,10 @@ export default function LandingPage() {
                 </div>
                 
                 {/* DAPA SKILLS ASSESSMENT - FOR ONPROS */}
-                <section className="dapa">
-                  <div className="container">
-                    <h2>DAPA Professional Assessment</h2>
-                    <p className="section-subtitle">The industry's only comprehensive skills verification system. 1,600+ questions across 6 professional dimensions.</p>
-                    <div className="dapa-grid">
+                <section className="dapa" style={{padding: '80px 24px'}}>
+                  <h2>DAPA Professional Assessment</h2>
+                  <p className="section-subtitle">The industry's only comprehensive skills verification system. 1,600+ questions across 6 professional dimensions.</p>
+                  <div className="dapa-grid">
                       <div className="dapa-item">
                         <div className="dapa-icon technical">🎯</div>
                         <h4>Technical</h4>
@@ -395,8 +394,7 @@ export default function LandingPage() {
                         </div>
                       )}
                     </div>
-                  </div>
-                </section>
+                  </section>
                 )}
 
                 {/* PATRON FEATURE */}
