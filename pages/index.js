@@ -276,6 +276,7 @@ export default function LandingPage() {
               <div className="container">
                 {/* ONPRO FEATURE */}
                 {platformTab === 'onpro' && (
+                <>
                 <div className="feature">
                   <div className="feature-screenshots">
                     <img src="/screenshots/onpro-assessment-dashboard.jpg" alt="OnPro DAPA Assessment Dashboard" className="screenshot" onClick={() => setLightboxImage('/screenshots/onpro-assessment-dashboard.jpg')} />
@@ -395,10 +396,12 @@ export default function LandingPage() {
                       )}
                     </div>
                   </section>
+                </>
                 )}
 
                 {/* PATRON FEATURE */}
                 {platformTab === 'patron' && (
+                <>
                 <div className="feature feature-reverse">
                   <div className="feature-screenshots four-shots">
                     <img src="/screenshots/patron-genome-result.jpg" alt="Patron OnScene Genome Result" className="screenshot" onClick={() => setLightboxImage('/screenshots/patron-genome-result.jpg')} />
@@ -485,10 +488,12 @@ export default function LandingPage() {
                     )}
                   </div>
                 </section>
+                </>
                 )}
 
                 {/* VENUE FEATURE */}
                 {platformTab === 'venue' && (
+                <>
                 <div className="feature">
                   <div className="feature-screenshots single-shot">
                     <img src="/screenshots/venue-analytics-dashboard.jpg" alt="Venue Analytics Dashboard" className="screenshot large" onClick={() => setLightboxImage('/screenshots/venue-analytics-dashboard.jpg')} />
@@ -600,6 +605,7 @@ export default function LandingPage() {
                     </div>
                   </div>
                 </div>
+                </>
                 )}
               </div>
             </section>
