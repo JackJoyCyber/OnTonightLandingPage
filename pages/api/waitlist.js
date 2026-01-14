@@ -40,7 +40,8 @@ export default async function handler(req, res) {
     // STEP 1: Create Firebase account (or get existing)
     try {
       // Generate a secure temporary password (user will set their own via email link)
-      const tempPassword = `Temp${Math.random().toString(36).slice(-8)}${Date.now().toString(36)}!`;
+      // Max 20 chars per Firebase policy: Tempxy12ab! = 12 chars
+      const tempPassword = `Temp${Math.random().toString(36).slice(-6)}${Date.now().toString(36).slice(-6)}!`;
       
       firebaseUser = await admin.auth().createUser({
         email: email.toLowerCase().trim(),
