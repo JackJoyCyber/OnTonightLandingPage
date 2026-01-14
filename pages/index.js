@@ -969,27 +969,27 @@ export default function LandingPage() {
                 <p className="footer-location">Live Now · Tampa Bay → Miami · Nashville · Austin</p>
               </div>
               <div className="footer-links">
-                <div className="footer-col">
-                  <h5>Platform</h5>
-                  <a href="#waitlist">For OnPros</a>
-                  <a href="#waitlist">For Patrons</a>
-                  <a href="#waitlist">For Venues</a>
-                  <a href="#waitlist">DAPA Assessment</a>
-                </div>
-                <div className="footer-col">
-                  <h5>Company</h5>
-                  <a href="https://app.on-tonight.com/privacy">Privacy Policy</a>
-                  <a href="https://app.on-tonight.com/terms">Terms of Service</a>
-                  <a href="mailto:AdminJoy@On-Tonight.com">Contact Us</a>
-                  <a href="/careers">Careers</a>
-                </div>
-                <div className="footer-col">
-                  <h5>Connect</h5>
-                  <a href="mailto:AdminJoy@On-Tonight.com">Support</a>
-                  <a href="mailto:AdminJoy@On-Tonight.com">Media Inquiries</a>
-                  <a href="#waitlist">Partner With Us</a>
-                </div>
-              </div>
+  <div className="footer-col">
+    <h5>Platform</h5>
+    <a href="#waitlist">For OnPros</a>
+    <a href="#waitlist">For Patrons</a>
+    <a href="#waitlist">For Venues</a>
+    <a href="#waitlist">DAPA Assessment</a>
+  </div>
+  <div className="footer-col">
+    <h5>Company</h5>
+    <a href="https://app.on-tonight.com/privacy">Privacy Policy</a>
+    <a href="https://app.on-tonight.com/terms">Terms of Service</a>
+    <a href="/contact">Contact Us</a>
+    <a href="/careers">Careers</a>
+  </div>
+  <div className="footer-col">
+    <h5>Connect</h5>
+    <a href="/support">Support</a>
+    <a href="/media">Media Inquiries</a>
+    <a href="/partner">Partner With Us</a>
+  </div>
+</div>
             </div>
             <div className="footer-bottom">
               <p>© 2025 OnTonight LLC. All rights reserved.</p>
