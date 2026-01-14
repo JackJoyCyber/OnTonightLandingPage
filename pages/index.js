@@ -12,6 +12,8 @@ export default function LandingPage() {
   const [loading, setLoading] = useState(false);
   const [showInstallPrompt, setShowInstallPrompt] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [lightboxImage, setLightboxImage] = useState(null);
+  const [platformTab, setPlatformTab] = useState('onpro');
 
   useEffect(() => {
     const handler = (e) => {
@@ -32,18 +34,33 @@ export default function LandingPage() {
   };
 
   const archetypes = {
-    connector: { emoji: '🌐', name: 'The Connector', desc: 'You thrive on building relationships and creating networks. Every interaction is an opportunity to connect people, ideas, and experiences.' },
-    regular: { emoji: '🏠', name: 'The Regular', desc: 'Loyalty and consistency define you. You value deep, lasting relationships with your favorite places and people.' },
-    adventurer: { emoji: '🗺️', name: 'The Adventurer', desc: 'Always seeking the next great experience. You explore new venues, try new drinks, and chase novelty.' },
-    host: { emoji: '🎉', name: 'The Host', desc: 'You bring people together. Every outing is an event, and you are the one making it happen.' },
-    connoisseur: { emoji: '🍷', name: 'The Connoisseur', desc: 'Quality over quantity. You appreciate craft, expertise, and the finer details that others miss.' },
-    explorer: { emoji: '🔍', name: 'The Explorer', desc: 'Curious and discerning, you seek hidden gems and authentic experiences off the beaten path.' },
-    celebrator: { emoji: '🎊', name: 'The Celebrator', desc: 'Life is full of moments worth celebrating, and you make sure every one counts.' },
-    relaxer: { emoji: '😌', name: 'The Relaxer', desc: 'Your nights out are about unwinding, decompressing, and finding peace in good company.' },
-    supporter: { emoji: '💪', name: 'The Supporter', desc: 'You champion the people and places you believe in, becoming their biggest advocate.' },
-    critic: { emoji: '🧐', name: 'The Critic', desc: 'Your high standards push the industry forward. You know what excellence looks like.' },
-    storyteller: { emoji: '📖', name: 'The Storyteller', desc: 'Every night out becomes a story. You remember the details and share the experiences.' },
-    student: { emoji: '📚', name: 'The Student', desc: 'Always learning, always asking questions. You want to understand the craft behind the experience.' }
+    // PATRON ARCHETYPES
+    connector: { emoji: '🌐', name: 'The Connector', desc: 'You thrive on building relationships and creating networks. Every interaction is an opportunity to connect people, ideas, and experiences.', type: 'patron' },
+    regular: { emoji: '🏠', name: 'The Regular', desc: 'Loyalty and consistency define you. You value deep, lasting relationships with your favorite places and people.', type: 'patron' },
+    adventurer: { emoji: '🗺️', name: 'The Adventurer', desc: 'Always seeking the next great experience. You explore new venues, try new drinks, and chase novelty.', type: 'patron' },
+    host: { emoji: '🎉', name: 'The Host', desc: 'You bring people together. Every outing is an event, and you are the one making it happen.', type: 'patron' },
+    connoisseur: { emoji: '🍷', name: 'The Connoisseur', desc: 'Quality over quantity. You appreciate craft, expertise, and the finer details that others miss.', type: 'patron' },
+    explorer: { emoji: '🔍', name: 'The Explorer', desc: 'Curious and discerning, you seek hidden gems and authentic experiences off the beaten path.', type: 'patron' },
+    celebrator: { emoji: '🎊', name: 'The Celebrator', desc: 'Life is full of moments worth celebrating, and you make sure every one counts.', type: 'patron' },
+    relaxer: { emoji: '😌', name: 'The Relaxer', desc: 'Your nights out are about unwinding, decompressing, and finding peace in good company.', type: 'patron' },
+    supporter: { emoji: '💪', name: 'The Supporter', desc: 'You champion the people and places you believe in, becoming their biggest advocate.', type: 'patron' },
+    critic: { emoji: '🧐', name: 'The Critic', desc: 'Your high standards push the industry forward. You know what excellence looks like.', type: 'patron' },
+    storyteller: { emoji: '📖', name: 'The Storyteller', desc: 'Every night out becomes a story. You remember the details and share the experiences.', type: 'patron' },
+    student: { emoji: '📚', name: 'The Student', desc: 'Always learning, always asking questions. You want to understand the craft behind the experience.', type: 'patron' },
+    
+    // ONPRO ARCHETYPES
+    craftsman: { emoji: '🎨', name: 'The Craftsman', desc: 'Precision and technique define your service. Every drink, every plate is executed to perfection. You take pride in the fundamentals.', type: 'onpro' },
+    closer: { emoji: '💼', name: 'The Closer', desc: 'You read the room and know exactly when to suggest that perfect pairing or upsell. Sales is an art, and you are the artist.', type: 'onpro' },
+    mentor: { emoji: '🎓', name: 'The Mentor', desc: 'You build people, not just drinks. Training the next generation and sharing knowledge is your calling.', type: 'onpro' },
+    hustler: { emoji: '⚡', name: 'The Hustler', desc: 'Speed and efficiency are your superpowers. You thrive in the rush, never missing a beat even when slammed.', type: 'onpro' },
+    therapist: { emoji: '🫂', name: 'The Therapist', desc: 'People open up to you. You create safe space, remember stories, and genuinely care about your regulars lives.', type: 'onpro' },
+    showman: { emoji: '🎭', name: 'The Showman', desc: 'Every shift is a performance. You entertain, engage, and create memorable experiences that guests talk about for days.', type: 'onpro' },
+    professional: { emoji: '👔', name: 'The Professional', desc: 'Consistency, reliability, excellence. You show up on time, execute flawlessly, and maintain standards no matter what.', type: 'onpro' },
+    innovator: { emoji: '🔬', name: 'The Innovator', desc: 'You push boundaries and create new classics. Always experimenting, always evolving the craft forward.', type: 'onpro' },
+    guardian: { emoji: '🛡️', name: 'The Guardian', desc: 'Safety and ethics are non-negotiable. You protect guests, support your team, and uphold industry integrity.', type: 'onpro' },
+    diplomat: { emoji: '🤝', name: 'The Diplomat', desc: 'Conflict resolution and team harmony are your strengths. You navigate difficult situations with grace and keep the crew cohesive.', type: 'onpro' },
+    entrepreneur: { emoji: '🚀', name: 'The Entrepreneur', desc: 'You think like an owner. Understanding P&L, maximizing revenue, and building sustainable success drives you.', type: 'onpro' },
+    caregiver: { emoji: '❤️', name: 'The Caregiver', desc: 'Hospitality in its truest form. You anticipate needs, create comfort, and make everyone feel welcomed and valued.', type: 'onpro' }
   };
 
   const handleSubmit = async (e) => {
@@ -78,9 +95,9 @@ export default function LandingPage() {
           <div className="nav-container">
             <div className="nav-logo">OnTonight</div>
             <div className="nav-tabs">
-              <button className={activeTab === 'home' ? 'nav-tab active' : 'nav-tab'} onClick={() => setActiveTab('home')}>Home</button>
+              <button className={activeTab === 'home' ? 'nav-tab active' : 'nav-tab'} onClick={() => setActiveTab('home')}>The Problem</button>
               <button className={activeTab === 'platform' ? 'nav-tab active' : 'nav-tab'} onClick={() => setActiveTab('platform')}>Platform</button>
-              <button className={activeTab === 'founder' ? 'nav-tab active' : 'nav-tab'} onClick={() => setActiveTab('founder')}>Vision</button>
+              <button className={activeTab === 'founder' ? 'nav-tab active' : 'nav-tab'} onClick={() => setActiveTab('founder')}>The Solution</button>
               <a href="#waitlist" className="nav-cta">Join Waitlist</a>
             </div>
           </div>
@@ -144,8 +161,8 @@ export default function LandingPage() {
                   <div className="value-item">
                     <div className="value-icon">📈</div>
                     <div className="value-number">40%</div>
-                    <div className="value-label">Higher Earnings When Verified</div>
-                    <p>DAPA-verified OnPros earn 40% more than industry average. Your skills have measurable value.</p>
+                    <div className="value-label">Potential Higher Earnings When DAPA-Certified</div>
+                    <p>DAPA-Certified OnPros have the potential to earn 40% more than industry average. Your verified skills have measurable value.</p>
                   </div>
                   <div className="value-item">
                     <div className="value-icon">🎯</div>
@@ -164,32 +181,26 @@ export default function LandingPage() {
                 <p className="section-subtitle">What industry leaders are saying about hospitality turnover.</p>
                 <div className="quotes-grid">
                   <div className="quote">
-                    <div className="quote-icon">📊</div>
                     <p>"The cost of turnover in hospitality is huge. Recruitment, retention, staff turnover... these are words that likely haunt the dreams of hospitality operators."</p>
                     <cite>Institute of Hospitality, 2024</cite>
                   </div>
                   <div className="quote">
-                    <div className="quote-icon">💸</div>
                     <p>"With 50% FOH turnover, you're replacing 7-10 servers and hosts every year. That's $7,400-$10,560+ in replacement costs alone—not counting the hit to service quality."</p>
                     <cite>7shifts Restaurant Workforce Report, 2025</cite>
                   </div>
                   <div className="quote">
-                    <div className="quote-icon">⏱️</div>
                     <p>"Losing a single employee can cost hospitality businesses more than $5,000 in recruiting, hiring, training and lost productivity. It can take up to two years for a new hire to become fully productive."</p>
                     <cite>OysterLink Industry Report, 2025</cite>
                   </div>
                   <div className="quote">
-                    <div className="quote-icon">📈</div>
                     <p>"Reducing employee turnover by 10% can improve net profit margins by approximately 3%."</p>
                     <cite>Gallup Workplace Report, 2025</cite>
                   </div>
                   <div className="quote">
-                    <div className="quote-icon">🔍</div>
                     <p>"Staffing challenges topped operators' 2024 list of concerns. Finding and keeping skilled staff is a concern that's risen by 4 percent."</p>
                     <cite>FSR Magazine, 2025</cite>
                   </div>
                   <div className="quote">
-                    <div className="quote-icon">🔄</div>
                     <p>"It's very tough to find the people and then have them stay. After a week, somebody will say, 'This doesn't work for me, I'm going to go somewhere else.' Big turnover."</p>
                     <cite>TouchBistro State of Restaurants, 2024</cite>
                   </div>
@@ -230,17 +241,46 @@ export default function LandingPage() {
               <div className="container">
                 <h1>Professional Infrastructure</h1>
                 <p className="platform-lead">One platform. Three solutions. Complete ecosystem.</p>
+                
+                {/* PLATFORM SUB-TABS */}
+                <div className="platform-tabs">
+                  <button 
+                    className={`platform-tab ${platformTab === 'onpro' ? 'active' : ''}`}
+                    onClick={() => setPlatformTab('onpro')}
+                  >
+                    For OnPros
+                  </button>
+                  <button 
+                    className={`platform-tab ${platformTab === 'patron' ? 'active' : ''}`}
+                    onClick={() => setPlatformTab('patron')}
+                  >
+                    For Patrons
+                  </button>
+                  <button 
+                    className={`platform-tab ${platformTab === 'venue' ? 'active' : ''}`}
+                    onClick={() => setPlatformTab('venue')}
+                  >
+                    For Venues
+                  </button>
+                  <button 
+                    className={`platform-tab ${platformTab === 'science' ? 'active' : ''}`}
+                    onClick={() => setPlatformTab('science')}
+                  >
+                    The Science
+                  </button>
+                </div>
               </div>
             </section>
 
             <section className="features">
               <div className="container">
-                {/* ONPRO FEATURE - 3 SCREENSHOTS */}
+                {/* ONPRO FEATURE */}
+                {platformTab === 'onpro' && (
                 <div className="feature">
                   <div className="feature-screenshots">
-                    <img src="/screenshots/onpro-assessment-dashboard.jpg" alt="OnPro DAPA Assessment Dashboard" className="screenshot" />
-                    <img src="/screenshots/onpro-skills-catagories.jpg" alt="OnPro Skills Categories" className="screenshot" />
-                    <img src="/screenshots/onpro-profile-status.jpg" alt="OnPro Profile Status" className="screenshot" />
+                    <img src="/screenshots/onpro-assessment-dashboard.jpg" alt="OnPro DAPA Assessment Dashboard" className="screenshot" onClick={() => setLightboxImage('/screenshots/onpro-assessment-dashboard.jpg')} />
+                    <img src="/screenshots/onpro-skills-catagories.jpg" alt="OnPro Skills Categories" className="screenshot" onClick={() => setLightboxImage('/screenshots/onpro-skills-catagories.jpg')} />
+                    <img src="/screenshots/onpro-profile-status.jpg" alt="OnPro Profile Status" className="screenshot" onClick={() => setLightboxImage('/screenshots/onpro-profile-status.jpg')} />
                   </div>
                   <div className="feature-info">
                     <div className="feature-tag">FOR PROFESSIONALS</div>
@@ -288,14 +328,85 @@ export default function LandingPage() {
                     </div>
                   </div>
                 </div>
+                
+                {/* DAPA SKILLS ASSESSMENT - FOR ONPROS */}
+                <section className="dapa">
+                  <div className="container">
+                    <h2>DAPA Professional Assessment</h2>
+                    <p className="section-subtitle">The industry's only comprehensive skills verification system. 1,600+ questions across 6 professional dimensions.</p>
+                    <div className="dapa-grid">
+                      <div className="dapa-item">
+                        <div className="dapa-icon technical">🎯</div>
+                        <h4>Technical</h4>
+                        <p>Knowledge, procedures, problem-solving</p>
+                      </div>
+                      <div className="dapa-item">
+                        <div className="dapa-icon ethical">⚖️</div>
+                        <h4>Ethical</h4>
+                        <p>Integrity, compliance, judgment</p>
+                      </div>
+                      <div className="dapa-item">
+                        <div className="dapa-icon emotional">💚</div>
+                        <h4>Emotional</h4>
+                        <p>Empathy, relationships, boundaries</p>
+                      </div>
+                      <div className="dapa-item">
+                        <div className="dapa-icon velocity">⚡</div>
+                        <h4>Velocity</h4>
+                        <p>Speed, pressure, crisis management</p>
+                      </div>
+                      <div className="dapa-item">
+                        <div className="dapa-icon commercial">💰</div>
+                        <h4>Commercial</h4>
+                        <p>Sales, upselling, revenue awareness</p>
+                      </div>
+                      <div className="dapa-item">
+                        <div className="dapa-icon leadership">👑</div>
+                        <h4>Leadership</h4>
+                        <p>Team dynamics, mentoring, initiative</p>
+                      </div>
+                    </div>
+                    
+                    {/* ONPRO ARCHETYPES */}
+                    <div style={{marginTop: '80px'}}>
+                      <h2>Professional Archetypes</h2>
+                      <p className="section-subtitle">12 professional personality profiles discovered through DAPA assessment.</p>
+                      <p className="click-instruction">Click any archetype to learn more →</p>
+                      <div className="genome-grid">
+                        {Object.entries(archetypes).filter(([key, arch]) => arch.type === 'onpro').map(([key, arch]) => (
+                          <button
+                            key={key}
+                            className={`genome-item ${selectedArchetype === key ? 'active' : ''} ${arch.type}`}
+                            onClick={() => setSelectedArchetype(selectedArchetype === key ? null : key)}
+                          >
+                            <span className="genome-emoji">{arch.emoji}</span>
+                            <span className="genome-name">{arch.name}</span>
+                          </button>
+                        ))}
+                      </div>
+                      {selectedArchetype && archetypes[selectedArchetype]?.type === 'onpro' && (
+                        <div className="genome-detail">
+                          <div className="genome-detail-header">
+                            <span className="genome-detail-emoji">{archetypes[selectedArchetype].emoji}</span>
+                            <h3>{archetypes[selectedArchetype].name}</h3>
+                          </div>
+                          <p>{archetypes[selectedArchetype].desc}</p>
+                          <button onClick={() => setSelectedArchetype(null)} className="btn-close">Close</button>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </section>
+                )}
 
-                {/* PATRON FEATURE - 4 SCREENSHOTS */}
+                {/* PATRON FEATURE */}
+                {platformTab === 'patron' && (
                 <div className="feature feature-reverse">
                   <div className="feature-screenshots four-shots">
-                    <img src="/screenshots/patron-genome-result.jpg" alt="Patron OnScene Genome Result" className="screenshot" />
-                    <img src="/screenshots/patron-profile.jpg" alt="Patron Profile" className="screenshot" />
-                    <img src="/screenshots/patron-mypeople.jpg" alt="Patron MyPeople Status" className="screenshot" />
-                    <img src="/screenshots/patron-my-spots.jpg" alt="Patron MySpots Tracking" className="screenshot" />
+                    <img src="/screenshots/patron-genome-result.jpg" alt="Patron OnScene Genome Result" className="screenshot" onClick={() => setLightboxImage('/screenshots/patron-genome-result.jpg')} />
+                    <img src="/screenshots/patron-profile.jpg" alt="Patron Profile" className="screenshot" onClick={() => setLightboxImage('/screenshots/patron-profile.jpg')} />
+                    <img src="/screenshots/patron-mypeople.jpg" alt="Patron MyPeople Status" className="screenshot" onClick={() => setLightboxImage('/screenshots/patron-mypeople.jpg')} />
+                    <img src="/screenshots/patron-my-spots.jpg" alt="Patron MySpots Tracking" className="screenshot" onClick={() => setLightboxImage('/screenshots/patron-my-spots.jpg')} />
                   </div>
                   <div className="feature-info">
                     <div className="feature-tag">FOR CUSTOMERS</div>
@@ -324,9 +435,10 @@ export default function LandingPage() {
                         <div className="tier-badge">FREE FOREVER</div>
                         <div className="tier-name">Patron Basic</div>
                         <ul>
-                          <li>OnScene Genome assessment</li>
                           <li>Follow unlimited OnPros</li>
-                          <li>See OnTonight status</li>
+                          <li>See real-time OnTonight status</li>
+                          <li>Search venues & professionals</li>
+                          <li>Track your visit history</li>
                           <li>Basic check-ins</li>
                         </ul>
                       </div>
@@ -335,19 +447,53 @@ export default function LandingPage() {
                         <div className="tier-name">Patron Plus <span>$5/month</span></div>
                         <ul>
                           <li>Everything in Basic</li>
-                          <li>Push notifications</li>
-                          <li>Advanced matching</li>
-                          <li>Exclusive events</li>
+                          <li>OnScene Genome assessment</li>
+                          <li>Push notifications when OnPros go live</li>
+                          <li>Advanced venue matching</li>
+                          <li>Exclusive events & experiences</li>
                         </ul>
                       </div>
                     </div>
                   </div>
                 </div>
+                
+                {/* PATRON ARCHETYPES */}
+                <section className="genome" style={{padding: '80px 24px'}}>
+                  <div className="container">
+                    <h2>OnScene Genome Archetypes</h2>
+                    <p className="section-subtitle">12 social profiles that define your hospitality personality. Discover yours through the OnScene Genome assessment.</p>
+                    <p className="click-instruction">Click any archetype to learn more →</p>
+                    <div className="genome-grid">
+                      {Object.entries(archetypes).filter(([key, arch]) => arch.type === 'patron').map(([key, arch]) => (
+                        <button
+                          key={key}
+                          className={`genome-item ${selectedArchetype === key ? 'active' : ''} ${arch.type}`}
+                          onClick={() => setSelectedArchetype(selectedArchetype === key ? null : key)}
+                        >
+                          <span className="genome-emoji">{arch.emoji}</span>
+                          <span className="genome-name">{arch.name}</span>
+                        </button>
+                      ))}
+                    </div>
+                    {selectedArchetype && archetypes[selectedArchetype]?.type === 'patron' && (
+                      <div className="genome-detail">
+                        <div className="genome-detail-header">
+                          <span className="genome-detail-emoji">{archetypes[selectedArchetype].emoji}</span>
+                          <h3>{archetypes[selectedArchetype].name}</h3>
+                        </div>
+                        <p>{archetypes[selectedArchetype].desc}</p>
+                        <button onClick={() => setSelectedArchetype(null)} className="btn-close">Close</button>
+                      </div>
+                    )}
+                  </div>
+                </section>
+                )}
 
-                {/* VENUE FEATURE - 1 SCREENSHOT */}
+                {/* VENUE FEATURE */}
+                {platformTab === 'venue' && (
                 <div className="feature">
                   <div className="feature-screenshots single-shot">
-                    <img src="/screenshots/venue-analytics-dashboard.jpg" alt="Venue Analytics Dashboard" className="screenshot large" />
+                    <img src="/screenshots/venue-analytics-dashboard.jpg" alt="Venue Analytics Dashboard" className="screenshot large" onClick={() => setLightboxImage('/screenshots/venue-analytics-dashboard.jpg')} />
                   </div>
                   <div className="feature-info">
                     <div className="feature-tag">FOR VENUES</div>
@@ -395,15 +541,113 @@ export default function LandingPage() {
                     </div>
                   </div>
                 </div>
+                
+                {/* VENUE BENEFITS SECTION */}
+                <div style={{marginTop: '80px'}}>
+                  <h2 style={{textAlign: 'center', marginBottom: '48px'}}>Why Venues Partner With OnTonight</h2>
+                  <div className="venue-benefits-grid">
+                    <div className="venue-benefit">
+                      <h4>🎯 Recruit With Confidence</h4>
+                      <p>Stop guessing on résumés. Access a pool of DAPA-certified professionals with verified skills across 6 dimensions. See technical mastery, ethical judgment, and leadership capacity before the interview.</p>
+                    </div>
+                    <div className="venue-benefit">
+                      <h4>📊 Understand Your Team</h4>
+                      <p>Real-time analytics show which staff members drive customer traffic, maintain regulars, and generate return visits. Make staffing decisions based on data, not gut feeling.</p>
+                    </div>
+                    <div className="venue-benefit">
+                      <h4>🌟 Attract Better Customers</h4>
+                      <p>Patrons follow OnPros, not just venues. When customers can track their favorite bartenders and servers, your verified talent becomes a customer acquisition engine.</p>
+                    </div>
+                    <div className="venue-benefit">
+                      <h4>💼 Compete on Culture</h4>
+                      <p>Showcase your team's expertise and work environment. Win talent wars by proving your venue develops careers, not just fills shifts.</p>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* ANALYTICS PREVIEW */}
+                <div style={{marginTop: '80px', padding: '48px', background: 'rgba(212,163,115,0.03)', borderRadius: '12px', border: '1px solid rgba(212,163,115,0.15)'}}>
+                  <h3 style={{marginBottom: '24px', color: '#d4a373'}}>Venue Analytics Dashboard</h3>
+                  <p style={{marginBottom: '32px', fontSize: '16px', lineHeight: '1.7', color: 'rgba(248,250,252,0.75)'}}>
+                    Track the metrics that matter. See which OnPros drive the most customer visits, who maintains the highest regular retention rates, and where your team excels across DAPA dimensions.
+                  </p>
+                  <div className="analytics-list">
+                    <div className="analytics-item">
+                      <span className="analytics-icon">📈</span>
+                      <div>
+                        <strong>Staff Performance Metrics</strong>
+                        <p>DAPA scores, customer ratings, and skill progression over time</p>
+                      </div>
+                    </div>
+                    <div className="analytics-item">
+                      <span className="analytics-icon">👥</span>
+                      <div>
+                        <strong>Customer Attribution</strong>
+                        <p>See which OnPros bring customers back and drive new traffic</p>
+                      </div>
+                    </div>
+                    <div className="analytics-item">
+                      <span className="analytics-icon">🔄</span>
+                      <div>
+                        <strong>Retention Insights</strong>
+                        <p>Early warning indicators for flight risk and engagement trends</p>
+                      </div>
+                    </div>
+                    <div className="analytics-item">
+                      <span className="analytics-icon">⚡</span>
+                      <div>
+                        <strong>Peak Performance Hours</strong>
+                        <p>Optimize scheduling based on when each staff member performs best</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                )}
               </div>
             </section>
 
-            {/* DAPA SYSTEM */}
-            <section className="dapa">
+            {/* THE SCIENCE TAB */}
+            {platformTab === 'science' && (
+            <section className="science-section" style={{padding: '100px 24px'}}>
               <div className="container">
-                <h2>DAPA Professional Assessment</h2>
-                <p className="section-subtitle">The industry's only comprehensive skills verification system. 1,600+ questions across 6 professional dimensions.</p>
-                <div className="dapa-grid">
+                <h2 style={{textAlign: 'center', marginBottom: '24px', fontSize: '48px'}}>The Science Behind Identity</h2>
+                <p style={{textAlign: 'center', maxWidth: '800px', margin: '0 auto 100px', fontSize: '20px', color: 'rgba(248,250,252,0.7)', lineHeight: '1.7'}}>
+                  Two assessment systems. One goal: accurate, actionable identity profiles for everyone in hospitality.
+                </p>
+                
+                {/* DAPA DEEP DIVE */}
+                <div style={{marginTop: '80px', padding: '56px', background: 'rgba(34,197,94,0.03)', borderRadius: '12px', border: '1px solid rgba(34,197,94,0.15)'}}>
+                  <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px', flexWrap: 'wrap', gap: '16px'}}>
+                    <h3 style={{fontSize: '36px', margin: 0}}>DAPA: Professional Certification</h3>
+                    <span style={{fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '6px 16px', borderRadius: '4px', background: 'rgba(34,197,94,0.15)', color: 'rgba(34,197,94,1)', border: '1px solid rgba(34,197,94,0.3)'}}>For OnPros</span>
+                  </div>
+                  <p style={{fontSize: '17px', lineHeight: '1.8', color: 'rgba(248,250,252,0.75)', marginBottom: '48px'}}>
+                    DAPA (Dynamic Adaptive Proficiency Assessment) is the hospitality industry's first comprehensive professional certification system. Unlike traditional skills tests, DAPA measures both technical competence and moral judgment across six critical dimensions.
+                  </p>
+                  
+                  <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '32px', marginBottom: '60px'}}>
+                    <div>
+                      <h4 style={{fontSize: '18px', marginBottom: '12px', color: '#d4a373'}}>📐 Adaptive Algorithm</h4>
+                      <p style={{fontSize: '15px', lineHeight: '1.7', color: 'rgba(248,250,252,0.7)'}}>Questions adjust in real-time based on your answers. High performers face increasingly complex scenarios, while the system identifies knowledge gaps and probes deeper. Tests terminate early when confidence thresholds are met—some professionals answer 30 questions, others need 200+.</p>
+                    </div>
+                    <div>
+                      <h4 style={{fontSize: '18px', marginBottom: '12px', color: '#d4a373'}}>⚖️ Moral Gradient Scoring</h4>
+                      <p style={{fontSize: '15px', lineHeight: '1.7', color: 'rgba(248,250,252,0.7)'}}>Every question has multiple "correct" answers—but they're not equal. We measure not just what you know, but how you think. Choosing the legal answer scores differently than choosing the ethical answer. Your moral sophistication becomes part of your professional profile.</p>
+                    </div>
+                    <div>
+                      <h4 style={{fontSize: '18px', marginBottom: '12px', color: '#d4a373'}}>🎯 Six-Axis Measurement</h4>
+                      <p style={{fontSize: '15px', lineHeight: '1.7', color: 'rgba(248,250,252,0.7)'}}>Technical mastery is just one dimension. We also measure Ethical judgment, Emotional intelligence, Velocity under pressure, Commercial awareness, and Leadership capacity. The result: a complete professional genome, not just a test score.</p>
+                    </div>
+                    <div>
+                      <h4 style={{fontSize: '18px', marginBottom: '12px', color: '#d4a373'}}>🔬 Continuous Validation</h4>
+                      <p style={{fontSize: '15px', lineHeight: '1.7', color: 'rgba(248,250,252,0.7)'}}>1,600+ questions across 9 hospitality categories, each validated against real-world performance data. Questions that don't predict success are removed. The system learns and improves with every assessment.</p>
+                    </div>
+                  </div>
+                  
+                  {/* 6-AXIS GRID */}
+                  <div>
+                    <h4 style={{fontSize: '24px', marginBottom: '32px', textAlign: 'center'}}>The Six Professional Dimensions</h4>
+                    <div className="dapa-grid">
                   <div className="dapa-item">
                     <div className="dapa-icon technical">🎯</div>
                     <h4>Technical</h4>
@@ -435,38 +679,127 @@ export default function LandingPage() {
                     <p>Team dynamics, mentoring, initiative</p>
                   </div>
                 </div>
-              </div>
-            </section>
-
-            {/* GENOME ARCHETYPES */}
-            <section className="genome">
-              <div className="container">
-                <h2>OnScene Genome</h2>
-                <p className="section-subtitle">45 questions. 12 hospitality archetypes. Discover your perfect night out personality.</p>
-                <div className="genome-grid">
-                  {Object.entries(archetypes).map(([key, arch]) => (
-                    <button
-                      key={key}
-                      className={`genome-item ${selectedArchetype === key ? 'active' : ''}`}
-                      onClick={() => setSelectedArchetype(selectedArchetype === key ? null : key)}
-                    >
-                      <span className="genome-emoji">{arch.emoji}</span>
-                      <span className="genome-name">{arch.name}</span>
-                    </button>
-                  ))}
-                </div>
-                {selectedArchetype && (
-                  <div className="genome-detail">
-                    <div className="genome-detail-header">
-                      <span className="genome-detail-emoji">{archetypes[selectedArchetype].emoji}</span>
-                      <h3>{archetypes[selectedArchetype].name}</h3>
-                    </div>
-                    <p>{archetypes[selectedArchetype].desc}</p>
-                    <button onClick={() => setSelectedArchetype(null)} className="btn-close">Close</button>
                   </div>
-                )}
+                  
+                  {/* ONPRO ARCHETYPES IN SCIENCE TAB */}
+                  <div style={{marginTop: '60px', padding: '48px', background: 'rgba(212,163,115,0.03)', borderRadius: '12px', border: '1px solid rgba(212,163,115,0.15)'}}>
+                    <h4 style={{fontSize: '28px', marginBottom: '16px', textAlign: 'center'}}>12 Professional Archetypes</h4>
+                    <p style={{textAlign: 'center', fontSize: '16px', lineHeight: '1.7', color: 'rgba(248,250,252,0.7)', maxWidth: '800px', margin: '0 auto 32px'}}>
+                      Based on your DAPA results, we identify your professional archetype—from The Craftsman (precision and technique) to The Entrepreneur (business-minded execution). These aren't personality types; they're work style profiles derived from measurable performance patterns.
+                    </p>
+                    <p className="click-instruction">Click any archetype to learn more →</p>
+                    <div className="genome-grid" style={{marginTop: '32px'}}>
+                      {Object.entries(archetypes).filter(([key, arch]) => arch.type === 'onpro').map(([key, arch]) => (
+                        <button
+                          key={key}
+                          className={`genome-item ${selectedArchetype === key ? 'active' : ''} ${arch.type}`}
+                          onClick={() => setSelectedArchetype(selectedArchetype === key ? null : key)}
+                        >
+                          <span className="genome-emoji">{arch.emoji}</span>
+                          <span className="genome-name">{arch.name}</span>
+                        </button>
+                      ))}
+                    </div>
+                    {selectedArchetype && archetypes[selectedArchetype]?.type === 'onpro' && (
+                      <div className="genome-detail">
+                        <div className="genome-detail-header">
+                          <span className="genome-detail-emoji">{archetypes[selectedArchetype].emoji}</span>
+                          <h3>{archetypes[selectedArchetype].name}</h3>
+                        </div>
+                        <p>{archetypes[selectedArchetype].desc}</p>
+                        <button onClick={() => setSelectedArchetype(null)} className="btn-close">Close</button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                
+                {/* ONSCENE GENOME DEEP DIVE */}
+                <div style={{marginTop: '100px', padding: '56px', background: 'rgba(139,92,246,0.03)', borderRadius: '12px', border: '1px solid rgba(139,92,246,0.15)'}}>
+                  <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px', flexWrap: 'wrap', gap: '16px'}}>
+                    <h3 style={{fontSize: '36px', margin: 0}}>OnScene Genome: Social Identity</h3>
+                    <span style={{fontSize: '11px', fontWeight: 700, letterSpacing: '0.1em', textTransform: 'uppercase', padding: '6px 16px', borderRadius: '4px', background: 'rgba(139,92,246,0.15)', color: 'rgba(139,92,246,1)', border: '1px solid rgba(139,92,246,0.3)'}}>For Patrons</span>
+                  </div>
+                  <p style={{fontSize: '17px', lineHeight: '1.8', color: 'rgba(248,250,252,0.75)', marginBottom: '48px'}}>
+                    OnScene Genome maps your hospitality personality across 10 behavioral dimensions. It's not about demographics or preferences—it's about how you experience and create social moments.
+                  </p>
+                  
+                  <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '32px', marginBottom: '60px'}}>
+                    <div>
+                      <h4 style={{fontSize: '18px', marginBottom: '12px', color: '#d4a373'}}>🧬 45 Behavioral Questions</h4>
+                      <p style={{fontSize: '15px', lineHeight: '1.7', color: 'rgba(248,250,252,0.7)'}}>Not "What do you like?" but "How do you behave?" Questions measure decision-making patterns, social preferences, risk tolerance, and relationship dynamics. We're mapping behavior, not opinion.</p>
+                    </div>
+                    <div>
+                      <h4 style={{fontSize: '18px', marginBottom: '12px', color: '#d4a373'}}>📊 10 Social Dimensions</h4>
+                      <p style={{fontSize: '15px', lineHeight: '1.7', color: 'rgba(248,250,252,0.7)'}}>Adventure vs. Familiarity. Solo vs. Social. Discerning vs. Exploratory. Quality vs. Experience. We measure where you fall on ten behavioral spectrums that predict hospitality preferences.</p>
+                    </div>
+                    <div>
+                      <h4 style={{fontSize: '18px', marginBottom: '12px', color: '#d4a373'}}>🎯 Archetype Matching</h4>
+                      <p style={{fontSize: '15px', lineHeight: '1.7', color: 'rgba(248,250,252,0.7)'}}>Your responses map to one of 12 distinct social archetypes. Each archetype has unique venue preferences, OnPro compatibility patterns, and social behaviors. The system matches you to experiences that fit your actual personality.</p>
+                    </div>
+                    <div>
+                      <h4 style={{fontSize: '18px', marginBottom: '12px', color: '#d4a373'}}>🔄 Pattern Recognition</h4>
+                      <p style={{fontSize: '15px', lineHeight: '1.7', color: 'rgba(248,250,252,0.7)'}}>As you use OnTonight, the system learns. Check-ins, favorites, and interaction patterns refine your profile. Your genome evolves as your preferences do.</p>
+                    </div>
+                  </div>
+                  
+                  {/* PATRON ARCHETYPES IN SCIENCE TAB */}
+                  <div style={{marginTop: '60px', padding: '48px', background: 'rgba(212,163,115,0.03)', borderRadius: '12px', border: '1px solid rgba(212,163,115,0.15)'}}>
+                    <h4 style={{fontSize: '28px', marginBottom: '16px', textAlign: 'center'}}>12 Social Archetypes</h4>
+                    <p style={{textAlign: 'center', fontSize: '16px', lineHeight: '1.7', color: 'rgba(248,250,252,0.7)', maxWidth: '800px', margin: '0 auto 32px'}}>
+                      From The Connector (network builder) to The Connoisseur (quality-focused), each archetype represents a distinct way of experiencing hospitality. Understanding your archetype helps you find venues, OnPros, and experiences that match your natural style.
+                    </p>
+                    <p className="click-instruction">Click any archetype to learn more →</p>
+                    <div className="genome-grid" style={{marginTop: '32px'}}>
+                      {Object.entries(archetypes).filter(([key, arch]) => arch.type === 'patron').map(([key, arch]) => (
+                        <button
+                          key={key}
+                          className={`genome-item ${selectedArchetype === key ? 'active' : ''} ${arch.type}`}
+                          onClick={() => setSelectedArchetype(selectedArchetype === key ? null : key)}
+                        >
+                          <span className="genome-emoji">{arch.emoji}</span>
+                          <span className="genome-name">{arch.name}</span>
+                        </button>
+                      ))}
+                    </div>
+                    {selectedArchetype && archetypes[selectedArchetype]?.type === 'patron' && (
+                      <div className="genome-detail">
+                        <div className="genome-detail-header">
+                          <span className="genome-detail-emoji">{archetypes[selectedArchetype].emoji}</span>
+                          <h3>{archetypes[selectedArchetype].name}</h3>
+                        </div>
+                        <p>{archetypes[selectedArchetype].desc}</p>
+                        <button onClick={() => setSelectedArchetype(null)} className="btn-close">Close</button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                
+                {/* WHY BOTH MATTER */}
+                <div style={{marginTop: '100px', padding: '56px', background: 'rgba(212,163,115,0.05)', borderRadius: '12px', border: '1px solid rgba(212,163,115,0.2)'}}>
+                  <h3 style={{textAlign: 'center', marginBottom: '32px', color: '#d4a373', fontSize: '32px'}}>Two Systems, One Platform</h3>
+                  <div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px'}}>
+                    <div>
+                      <h4 style={{color: 'rgba(34,197,94,1)', marginBottom: '16px', fontSize: '20px'}}>DAPA (OnPro)</h4>
+                      <p style={{fontSize: '15px', lineHeight: '1.7', color: 'rgba(248,250,252,0.75)'}}>
+                        Measures professional capability and work style. Verifies skills. Creates portable professional identity. Helps venues hire better and OnPros prove their worth.
+                      </p>
+                    </div>
+                    <div>
+                      <h4 style={{color: 'rgba(139,92,246,1)', marginBottom: '16px', fontSize: '20px'}}>OnScene Genome (Patron)</h4>
+                      <p style={{fontSize: '15px', lineHeight: '1.7', color: 'rgba(248,250,252,0.75)'}}>
+                        Measures social behavior and hospitality preferences. Matches people to experiences. Creates personalized recommendations. Helps Patrons find their people and places.
+                      </p>
+                    </div>
+                  </div>
+                  <p style={{marginTop: '40px', textAlign: 'center', fontSize: '16px', color: 'rgba(248,250,252,0.8)', lineHeight: '1.8', maxWidth: '900px', margin: '40px auto 0'}}>
+                    Together, they create a complete hospitality identity ecosystem. OnPros prove their professional value. Patrons discover authentic experiences. Venues showcase verified talent. Everyone benefits from accurate, actionable identity data.
+                  </p>
+                </div>
               </div>
             </section>
+            )}
+
+            {/* REMOVED STATIC GENOME SECTION - NOW IN TABS */}
           </div>
         )}
 
@@ -476,67 +809,81 @@ export default function LandingPage() {
             <section className="vision">
               <div className="container">
                 <h1>The Vision</h1>
-                <p className="vision-lead">This isn't about technology. It's about dignity.</p>
+                <p className="vision-lead">This is about an industry that deserves infrastructure. And the people who make it real.</p>
 
                 <div className="vision-content">
                   <div className="vision-section">
-                    <h3>The Pattern You Can't Unsee</h3>
-                    <p>Every industry has professional infrastructure except hospitality.</p>
-                    <p>When lawyers switch firms, their bar membership follows them. Their LinkedIn preserves their professional identity. Their client relationships can continue. When software engineers change companies, their GitHub stays with them—proof of work, proof of growth. When real estate agents move brokerages, their client database goes with them.</p>
-                    <p className="vision-emphasis">But when a bartender changes venues, everything resets to zero.</p>
-                    <p>The regular who tipped $50 every Friday? Can't find you. The customer relationships built over years? Belong to your former employer, filed under "goodwill" on a balance sheet. The professional reputation you spent a decade building? Starts over.</p>
+                    <h3>27 Years Behind the Bar</h3>
+                    <p>Twenty-seven years in hospitality—behind bars where ice never stops flowing, managing venues where every night is opening night, building teams that became families, training hundreds of professionals who became masters of their craft.</p>
+                    <p>I've made drinks until my hands cramped and my mind could freestyle recipes in my sleep. I've closed at 4 AM under neon signs and opened at 10 with coffee that tastes like hope. I've watched the best talent I ever trained walk out the door because they found something better.</p>
+                    <p>And every single time, I watched them start over from zero.</p>
+                    <p className="vision-emphasis">Their regulars? Scattered to the wind. Their reputation? Reset to nothing. Their professional equity? Evaporated like smoke from a candle.</p>
+                    <p>I watched bartenders who could make 200 cocktails an hour—muscle memory and chemistry and conversation all at once—lose everything when they changed venues. Sommeliers with encyclopedic knowledge who could taste terroir in a blind pour, starting over as if they were fresh out of training.</p>
                     <p>The industry calls this "turnover." I call it what it is: systematic professional erasure.</p>
                   </div>
 
                   <div className="vision-section">
-                    <h3>What $66.8 Billion Actually Costs</h3>
-                    <p>The hospitality industry loses $66.8 billion annually to turnover. That number is so large it stops meaning anything. Let me make it real.</p>
-                    <p>It's the talented professional who stays in a toxic workplace because leaving means financial devastation. It's the customer who stops going out because "it's not the same" after their favorite server left. It's the small business owner replacing the same position three times in one year, watching training dollars walk out the door.</p>
-                    <p>It's the career bartender who gives up after fifteen years because starting over one more time feels impossible. It's the sommelier with encyclopedic knowledge being treated like a rookie because the new venue doesn't know what they have.</p>
-                    <p className="vision-emphasis">These are lives interrupted, talent squandered, relationships severed—millions of individual tragedies hiding inside one big number.</p>
+                    <h3>The Pattern You Can't Unsee</h3>
+                    <p>Once you see it, you can't look away. Every industry has professional infrastructure except hospitality.</p>
+                    <p>Lawyers switch firms, but their bar membership follows them like a shadow. Their LinkedIn profile preserves their professional identity across decades, a living résumé that compounds with every case won.</p>
+                    <p>Software engineers change companies like seasons. Their GitHub stays with them—proof of work, proof of skill, proof of growth. Every line of code they've ever written exists somewhere, permanent.</p>
+                    <p>Real estate agents move brokerages all the time. Their client database goes with them—relationships preserved, trust maintained.</p>
+                    <p className="vision-emphasis">But a bartender changes venues and loses everything. Every. Single. Time.</p>
+                    <p>The regular who tipped $50 every Friday? Can't find you. The customer relationships built over years of remembered birthdays and preferred glassware? Belong to your former employer, filed under "goodwill" on a balance sheet. The professional reputation you spent a decade building, one perfect Manhattan at a time? Starts at zero.</p>
+                    <p className="vision-highlight">This isn't the nature of the industry. This is the <em>absence</em> of professional infrastructure. And absence isn't destiny—it's a problem waiting for a solution.</p>
                   </div>
 
                   <div className="vision-section">
-                    <h3>The Missing Infrastructure</h3>
-                    <p>Hospitality professionals deserve the same career portability as lawyers, engineers, and executives. They deserve to own their customer relationships. They deserve to build equity in their careers instead of starting over every time they change employers.</p>
-                    <p className="vision-highlight">This isn't the nature of the industry. This is the absence of professional infrastructure. And absence isn't destiny—it's a problem waiting for a solution.</p>
-                    <p>I spent 27 years in hospitality before transitioning into cybersecurity and software development. That combination—deep hospitality experience plus technical execution—is rare. It's exactly what this problem needed.</p>
+                    <h3>What $66.8 Billion Actually Means</h3>
+                    <p>The hospitality industry loses $66.8 billion annually to turnover. That number is so large it stops meaning anything. Let me make it real.</p>
+                    <p>It's the talented professional who stays in a toxic workplace because leaving means financial devastation—the regulars won't follow, the tips reset, the rent is due in two weeks. It's the customer who stops frequenting a venue because "it's not the same" after their favorite server left, that ineffable magic replaced by competent service that lacks soul.</p>
+                    <p>It's the career bartender who gives up and leaves the industry entirely after fifteen years because starting over one more time feels like dying a little. It's the sommelier with encyclopedic knowledge being treated like a rookie because the new venue doesn't know what they have, can't see the decade of refinement in every pour.</p>
+                    <p className="vision-emphasis">These are the lives interrupted, the talent squandered, the relationships severed—millions of individual tragedies hiding inside one big number.</p>
+                  </div>
+
+                  <div className="vision-section">
+                    <h3>Why I Could Build This</h3>
+                    <p>After 27 years in hospitality, I transitioned into cybersecurity and software development—a world of systems and logic, of problems that yield to analysis, of building things that scale beyond human limitation.</p>
+                    <p>Standing at the intersection of these two worlds, I realized: I understand both sides of this problem.</p>
+                    <p>I understand the bartender making 200 drinks an hour during Saturday rush, tracking six tabs in their head while maintaining conversation with regulars, reading the room, defusing tension, creating atmosphere—all simultaneously, all while making it look effortless. I understand the sommelier who pairs wine with personality, not just food, who can read a guest's night in the way they hold the glass.</p>
+                    <p className="vision-statement">That combination—deep hospitality experience plus technical execution—is rare. It's exactly what this problem needed.</p>
                   </div>
 
                   <div className="vision-section">
                     <h3>What OnTonight Actually Is</h3>
-                    <p className="vision-statement">OnTonight is professional infrastructure—the kind every other industry already has, finally built for hospitality.</p>
+                    <p className="vision-highlight">OnTonight is professional infrastructure—the kind that every other industry already has, the kind that hospitality professionals have deserved for decades, finally built.</p>
                     <ul className="vision-list">
-                      <li><strong>For professionals:</strong> Your skills are verified through DAPA, our proprietary 6-axis assessment. Your professional identity is portable—it follows you, grows with you, compounds over time. Your customer relationships belong to you. When you change venues, you bring your value with you.</li>
-                      <li><strong>For customers:</strong> Your favorite bartender changes jobs? You get notified. Your server moves to a new restaurant? You can follow them. The relationship doesn't end when the employment ends. The magic stays with the person who created it.</li>
-                      <li><strong>For venues:</strong> Recruit verified talent. Showcase your team's expertise. Compete on culture instead of wages alone. Turn retention into a competitive advantage.</li>
+                      <li><strong>For professionals:</strong> Your skills are verified through DAPA, a proprietary 6-axis assessment system. Your professional identity is portable—it follows you, grows with you, compounds over time. Your customer relationships belong to you, not your employer. When you change venues, you bring your value with you—provable, measurable, portable.</li>
+                      <li><strong>For customers:</strong> Your favorite bartender changes jobs? You get notified. Your server moves to a new restaurant? You can follow them there. The relationship doesn't end when the employment ends. The magic stays with the person who created it.</li>
+                      <li><strong>For venues:</strong> Recruit verified talent—not résumés and promises, but proven skill and measurable expertise. Compete on culture instead of wages alone. Turn retention into a competitive advantage.</li>
                     </ul>
-                    <p>This is professional dignity in software form. This is career equity for people who serve.</p>
+                    <p>This is professional dignity in software form. This is career equity for people who serve. This is the infrastructure that should have existed decades ago.</p>
                   </div>
 
                   <div className="vision-section">
                     <h3>The Future We're Building</h3>
-                    <p>Imagine hospitality where professionals own their careers. Where a talented bartender can leave a toxic workplace without losing their livelihood. Where customers never lose touch with the people who make their nights special. Where small venues compete with corporate chains by showcasing culture and verified talent.</p>
-                    <p>Where a young professional entering hospitality sees a real career path—one where their skills compound over time instead of resetting to zero every 18 months.</p>
-                    <p className="vision-emphasis">That's not fantasy. That's infrastructure.</p>
-                    <p>We're live now in Tampa Bay. From here, we're expanding to Miami, Nashville, Austin, and major hospitality markets nationwide. Every bartender with a verified DAPA profile. Every customer able to follow their favorite professionals. Every venue able to showcase verified talent.</p>
-                    <p>This isn't about fixing turnover statistics. This is about restoring professional dignity to an entire industry.</p>
+                    <p>Imagine hospitality where professionals own their careers. Where a talented bartender can leave a toxic workplace without losing their livelihood, where principle doesn't cost rent, where better opportunities don't mean starting over.</p>
+                    <p>Where small venues compete with corporate chains by showcasing culture and verified talent instead of just matching wages. Where a young professional entering hospitality sees a real career path—one where their skills compound over time instead of resetting to zero every 18 months.</p>
+                    <p className="vision-emphasis">That's not fantasy. That's infrastructure. That's what happens when you build the foundation that should have always existed.</p>
+                    <p>We're live now in Tampa Bay, working with premier hospitality venues across the region. From here, we're expanding to Miami, Nashville, Austin, and major hospitality markets nationwide—wherever great service happens, wherever professionals deserve infrastructure.</p>
+                    <p>This isn't about fixing turnover statistics. This is about restoring professional dignity to an entire industry, one profile at a time, one verified skill at a time, one preserved relationship at a time.</p>
                   </div>
 
                   <div className="vision-section">
                     <h3>Why This Will Work</h3>
+                    <p>This will work because the problem is structural, not cultural. It's not that hospitality professionals don't want stability—it's that the industry has no infrastructure to support it. You can't build a house without a foundation.</p>
                     <p>Every other profession solved this problem. Lawyers have bar associations. Doctors have portable credentials. Real estate agents have client databases. Software engineers have GitHub and LinkedIn.</p>
-                    <p>Hospitality professionals deserve the same. Not as a favor. Not as charity. As a <em>right</em>.</p>
-                    <p className="vision-highlight">If you believe that the people who serve us deserve to own their careers—we're building it right now.</p>
+                    <p>Hospitality professionals deserve the same. Not as a favor. Not as charity. As a <em>right</em>. As the basic professional dignity that every skilled worker deserves.</p>
+                    <p className="vision-highlight">If you believe that the people who serve us deserve to own their careers, who create magic nightly deserve to keep that magic when they move—we're building it right now. Join us.</p>
                   </div>
 
                   <div className="vision-cta">
                     <h3>Join the Movement</h3>
-                    <p>This isn't a product launch. This is the professional infrastructure that should have existed all along.</p>
-                    <p>If you've ever watched a talented professional start over from scratch—you've seen the problem. If you've ever lost touch with someone who made your nights special—you've felt the gap.</p>
-                    <p className="cta-emphasis">We're not just building software. We're building the future of hospitality careers.</p>
+                    <p>This isn't a product launch. This is a correction—the professional infrastructure that should have existed all along, finally built, finally real, finally here.</p>
+                    <p>If you've ever watched a talented professional start over from scratch and felt the waste of it—you've seen the problem. If you've ever lost touch with someone who made your nights special—you've felt the gap.</p>
+                    <p className="cta-emphasis">We're not just building software. We're building the future of hospitality careers. We're ending professional erasure. We're making dignity portable.</p>
                     <a href="#waitlist" className="btn-primary">Join the Waitlist</a>
-                    <p className="cta-note">First 2,000 signups get their first year free. Be part of the infrastructure.</p>
+                    <p className="cta-note">First 2,000 signups get their first year free. Be part of the infrastructure. Be part of the change.</p>
                   </div>
                 </div>
               </div>
@@ -630,7 +977,7 @@ export default function LandingPage() {
                   <a href="https://app.on-tonight.com/privacy">Privacy Policy</a>
                   <a href="https://app.on-tonight.com/terms">Terms of Service</a>
                   <a href="mailto:AdminJoy@On-Tonight.com">Contact Us</a>
-                  <a href="#waitlist">Careers</a>
+                  <a href="/careers">Careers</a>
                 </div>
                 <div className="footer-col">
                   <h5>Connect</h5>
@@ -646,6 +993,16 @@ export default function LandingPage() {
             </div>
           </div>
         </footer>
+
+        {/* LIGHTBOX MODAL */}
+        {lightboxImage && (
+          <div className="lightbox" onClick={() => setLightboxImage(null)}>
+            <div className="lightbox-content">
+              <button className="lightbox-close" onClick={() => setLightboxImage(null)}>✕</button>
+              <img src={lightboxImage} alt="Screenshot enlarged" className="lightbox-image" />
+            </div>
+          </div>
+        )}
       </div>
 
       <style jsx>{`
@@ -723,10 +1080,18 @@ export default function LandingPage() {
           font-size: 18px;
           color: rgba(248,250,252,0.6);
           text-align: center;
-          margin-bottom: 60px;
+          margin-bottom: 16px;
           max-width: 700px;
           margin-left: auto;
           margin-right: auto;
+        }
+        
+        .click-instruction {
+          font-size: 14px;
+          color: #d4a373;
+          text-align: center;
+          margin-bottom: 48px;
+          font-weight: 500;
         }
         
         /* NAV */
@@ -808,7 +1173,7 @@ export default function LandingPage() {
         }
         
         .hero-glow {
-          position: absolute;
+          position: fixed;
           top: -200px;
           left: 50%;
           transform: translateX(-50%);
@@ -816,6 +1181,7 @@ export default function LandingPage() {
           height: 1000px;
           background: radial-gradient(circle, rgba(212,163,115,0.1) 0%, transparent 70%);
           pointer-events: none;
+          z-index: 0;
         }
         
         .hero-badge {
@@ -1026,12 +1392,6 @@ export default function LandingPage() {
           transform: translateX(4px);
         }
         
-        .quote-icon {
-          font-size: 24px;
-          margin-bottom: 16px;
-          opacity: 0.7;
-        }
-        
         .quote p {
           font-size: 15px;
           line-height: 1.7;
@@ -1102,46 +1462,74 @@ export default function LandingPage() {
           font-size: 20px;
           color: rgba(248,250,252,0.6);
           margin-top: 16px;
+          margin-bottom: 48px;
         }
         
-        /* FEATURES WITH SCREENSHOTS - EXACT FILE STRUCTURE */
+        .platform-tabs {
+          display: flex;
+          justify-content: center;
+          gap: 12px;
+          flex-wrap: wrap;
+          margin-top: 56px;
+        }
+        
+        .platform-tab {
+          background: rgba(212,163,115,0.05);
+          border: 1px solid rgba(212,163,115,0.2);
+          color: rgba(248,250,252,0.7);
+          padding: 12px 28px;
+          font-size: 14px;
+          font-weight: 600;
+          cursor: pointer;
+          border-radius: 6px;
+          font-family: inherit;
+          transition: all 0.2s;
+          letter-spacing: 0.01em;
+        }
+        
+        .platform-tab:hover {
+          background: rgba(212,163,115,0.1);
+          border-color: rgba(212,163,115,0.4);
+          color: #f8fafc;
+        }
+        
+        .platform-tab.active {
+          background: rgba(212,163,115,0.15);
+          border-color: #d4a373;
+          color: #d4a373;
+        }
+        
+        /* FEATURES WITH SCREENSHOTS - MOBILE FIRST */
         .features {
           padding: 60px 24px 120px;
         }
         
         .feature {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 80px;
-          align-items: start;
-          margin-bottom: 160px;
+          margin-bottom: 100px;
         }
         
-        .feature-reverse {
-          direction: rtl;
+        /* MOBILE: Text first, thumbnails below */
+        .feature-info {
+          margin-bottom: 32px;
         }
         
-        .feature-reverse > * {
-          direction: ltr;
-        }
-        
-        /* 3 SCREENSHOTS (OnPro) */
+        /* FLEXIBLE GRID - adapts to screenshot count */
         .feature-screenshots {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 16px;
-          position: sticky;
-          top: 100px;
+          grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+          gap: 12px;
+          margin-top: 24px;
         }
         
-        /* 4 SCREENSHOTS (Patron) */
+        /* 4 screenshots = 2x2 grid */
         .feature-screenshots.four-shots {
           grid-template-columns: repeat(2, 1fr);
         }
         
-        /* 1 SCREENSHOT (Venue) */
+        /* 1 screenshot = centered single */
         .feature-screenshots.single-shot {
           grid-template-columns: 1fr;
+          max-width: 400px;
         }
         
         .screenshot {
@@ -1149,10 +1537,10 @@ export default function LandingPage() {
           height: auto;
           display: block;
           border: 1px solid rgba(212,163,115,0.15);
-          border-radius: 8px;
+          border-radius: 6px;
           transition: all 0.3s;
           cursor: pointer;
-          box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+          box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
         
         .screenshot.large {
@@ -1160,10 +1548,68 @@ export default function LandingPage() {
         }
         
         .screenshot:hover {
-          transform: scale(1.05);
+          transform: scale(1.02);
           border-color: rgba(212,163,115,0.4);
-          box-shadow: 0 12px 32px rgba(212,163,115,0.15);
+          box-shadow: 0 6px 16px rgba(212,163,115,0.15);
           z-index: 10;
+        }
+        
+        /* TABLET: Maintain flexibility */
+        @media (min-width: 768px) {
+          .feature-screenshots {
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+          }
+          
+          .feature-screenshots.four-shots {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          
+          .feature-screenshots.single-shot {
+            max-width: 500px;
+          }
+        }
+        
+        /* DESKTOP: Side-by-side with proper sizing */
+        @media (min-width: 1024px) {
+          .feature {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+            margin-bottom: 160px;
+          }
+          
+          .feature-reverse {
+            direction: rtl;
+          }
+          
+          .feature-reverse > * {
+            direction: ltr;
+          }
+          
+          .feature-info {
+            margin-bottom: 0;
+          }
+          
+          .feature-screenshots {
+            position: sticky;
+            top: 100px;
+            margin-top: 0;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+          }
+          
+          /* Force 4 screenshots into 2x2 */
+          .feature-screenshots.four-shots {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          
+          /* Single screenshot stays single column */
+          .feature-screenshots.single-shot {
+            grid-template-columns: 1fr;
+            max-width: 100%;
+          }
         }
         
         .feature-tag {
@@ -1363,13 +1809,55 @@ export default function LandingPage() {
           align-items: center;
           gap: 12px;
           border-radius: 8px;
+          position: relative;
+        }
+        
+        /* Different border colors for Patron vs OnPro */
+        .genome-item.patron {
+          border-color: rgba(139,92,246,0.15);
+        }
+        
+        .genome-item.onpro {
+          border-color: rgba(34,197,94,0.15);
         }
         
         .genome-item:hover, .genome-item.active {
           background: rgba(212,163,115,0.08);
-          border-color: rgba(212,163,115,0.3);
           transform: translateY(-4px);
           box-shadow: 0 8px 24px rgba(212,163,115,0.1);
+        }
+        
+        .genome-item.patron:hover, .genome-item.patron.active {
+          border-color: rgba(139,92,246,0.4);
+          background: rgba(139,92,246,0.05);
+        }
+        
+        .genome-item.onpro:hover, .genome-item.onpro.active {
+          border-color: rgba(34,197,94,0.4);
+          background: rgba(34,197,94,0.05);
+        }
+        
+        .genome-type-badge {
+          position: absolute;
+          top: 8px;
+          right: 8px;
+          font-size: 9px;
+          font-weight: 700;
+          letter-spacing: 0.08em;
+          text-transform: uppercase;
+          padding: 3px 8px;
+          border-radius: 3px;
+          opacity: 0.6;
+        }
+        
+        .genome-item.patron .genome-type-badge {
+          background: rgba(139,92,246,0.2);
+          color: rgba(139,92,246,1);
+        }
+        
+        .genome-item.onpro .genome-type-badge {
+          background: rgba(34,197,94,0.2);
+          color: rgba(34,197,94,1);
         }
         
         .genome-emoji {
@@ -1724,24 +2212,67 @@ export default function LandingPage() {
         }
         
         /* RESPONSIVE */
-        @media (max-width: 1024px) {
-          .feature-screenshots { grid-template-columns: 1fr; position: static; }
-          .feature-screenshots.four-shots { grid-template-columns: 1fr; }
-        }
-        
         @media (max-width: 768px) {
           h1 { font-size: 40px; }
           .hero h1 { font-size: 56px; }
           .hero-stats { flex-direction: column; gap: 32px; }
           .value-grid, .quotes-grid, .dapa-grid, .genome-grid, .mission-pillars { grid-template-columns: 1fr; }
-          .feature { grid-template-columns: 1fr; gap: 40px; }
-          .feature-screenshots { grid-template-columns: 1fr; }
-          .feature-screenshots.four-shots { grid-template-columns: 1fr; }
           .feature-price { grid-template-columns: 1fr; }
           .form-row { grid-template-columns: 1fr; }
           .footer-content { flex-direction: column; gap: 40px; }
           .footer-links { flex-direction: column; gap: 40px; }
           .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+        }
+        
+        /* LIGHTBOX MODAL */
+        .lightbox {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(10,15,20,0.95);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          z-index: 10000;
+          padding: 20px;
+          cursor: pointer;
+        }
+        
+        .lightbox-content {
+          position: relative;
+          max-width: 90%;
+          max-height: 90%;
+          cursor: default;
+        }
+        
+        .lightbox-image {
+          max-width: 100%;
+          max-height: 90vh;
+          width: auto;
+          height: auto;
+          border-radius: 8px;
+          box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+          border: 1px solid rgba(212,163,115,0.3);
+        }
+        
+        .lightbox-close {
+          position: absolute;
+          top: -40px;
+          right: 0;
+          background: transparent;
+          border: none;
+          color: #f8fafc;
+          font-size: 32px;
+          cursor: pointer;
+          padding: 8px;
+          line-height: 1;
+          transition: color 0.2s;
+        }
+        
+        .lightbox-close:hover {
+          color: #d4a373;
         }
       `}</style>
     </>
