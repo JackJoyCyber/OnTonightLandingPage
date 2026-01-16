@@ -807,7 +807,7 @@ export default function LandingPage() {
           </div>
         )}
 
-        {/* FOUNDER TAB */}
+      {/* FOUNDER TAB - UPDATED VISION SECTION (1,050 WORDS) */}
         {activeTab === 'founder' && (
           <div className="tab-content">
             <section className="vision">
@@ -816,43 +816,53 @@ export default function LandingPage() {
                 <p className="vision-lead">This is about an industry that deserves infrastructure. And the people who make it real.</p>
 
                 <div className="vision-content">
-                  <div className="vision-section">
-                    <h3>27 Years Behind the Bar</h3>
-                    <p>Twenty-seven years in hospitality—behind bars where ice never stops flowing, managing venues where every night is opening night, building teams that became families, training hundreds of professionals who became masters of their craft.</p>
-                    <p>I've made drinks until my hands cramped and my mind could freestyle recipes in my sleep. I've closed at 4 AM under neon signs and opened at 10 with coffee that tastes like hope. I've watched the best talent I ever trained walk out the door because they found something better.</p>
-                    <p>And every single time, I watched them start over from zero.</p>
-                    <p className="vision-emphasis">Their regulars? Scattered to the wind. Their reputation? Reset to nothing. Their professional equity? Evaporated like smoke from a candle.</p>
-                    <p>I watched bartenders who could make 200 cocktails an hour—muscle memory and chemistry and conversation all at once—lose everything when they changed venues. Sommeliers with encyclopedic knowledge who could taste terroir in a blind pour, starting over as if they were fresh out of training.</p>
-                    <p>The industry calls this "turnover." I call it what it is: systematic professional erasure.</p>
+                  {/* FOUNDER INTRODUCTION */}
+                  <div className="founder-intro">
+                    <div className="founder-photo-placeholder">
+                      {/* TODO: Replace with <img src="/images/jack-photo.jpg" alt="Jack Joy" /> when you have photo */}
+                      <div className="photo-placeholder-box">
+                        <span style={{fontSize: '48px'}}>👤</span>
+                        <p style={{marginTop: '12px', fontSize: '13px', color: 'rgba(212,163,115,0.7)'}}>Photo Coming Soon</p>
+                      </div>
+                    </div>
+                    <div className="founder-text">
+                      <h2>Hi, I'm Jack Joy, Founder of OnTonight.</h2>
+                      <p className="founder-tagline">27 years behind bars. One mission: end professional erasure in hospitality.</p>
+                    </div>
                   </div>
 
+                  {/* SECTION 1: THE PERSONAL STORY - EXPANDED */}
+                  <div className="vision-section">
+                    <h3>27 Years Behind the Bar</h3>
+                    <p>Twenty-seven years in hospitality. Not watching from an office—<em>living it</em>. Behind the stick where ice never stops flowing and the POS screen glows like a beacon through double shifts. Managing venues where every night is opening night. Training hundreds of professionals who became masters of their craft. But before all that—building drinks with my hands, reading regulars like sheet music, learning that hospitality isn't a job, it's a language.</p>
+                    <p>I've made drinks until my hands cramped and my mind could freestyle recipes in my sleep. I've worked stations where you pour four cocktails simultaneously while maintaining three separate conversations, each guest believing they have your full attention—because in that moment, they do. I've closed at 4 AM under neon signs that hum like prayers and opened at 10 AM with coffee that tastes like hope and feels like punishment.</p>
+                    <p>I know what it means to be <em>good</em> at this work. The muscle memory that lets you build a perfect Manhattan in 37 seconds while defusing an argument two seats down. The emotional intelligence to spot a proposal about to happen or a breakup already unfolding. The technical precision of a 200-drink rush hour where every ticket is perfect and every guest feels seen.</p>
+                    <p>And I've watched the best people I ever trained—the ones who could do all of this—walk out the door because they found something better.</p>
+                    <p className="vision-emphasis">Every single time, they started over from zero. Their regulars scattered to the wind. Their reputation reset to nothing. Their professional equity evaporated like smoke from an extinguished candle.</p>
+                    <p>I watched bartenders who could make 200 cocktails an hour—muscle memory and chemistry and conversation all at once—lose everything when they changed venues. Sommeliers with encyclopedic knowledge who could taste terroir in a blind pour, starting over as if they'd never held a corkscrew.</p>
+                    <p>The industry calls this "turnover." I call it what it is: <strong>systematic professional erasure</strong>.</p>
+                  </div>
+
+                  {/* SECTION 2: THE INFRASTRUCTURE GAP */}
                   <div className="vision-section">
                     <h3>The Pattern You Can't Unsee</h3>
                     <p>Once you see it, you can't look away. Every industry has professional infrastructure except hospitality.</p>
-                    <p>Lawyers switch firms, but their bar membership follows them like a shadow. Their LinkedIn profile preserves their professional identity across decades, a living résumé that compounds with every case won.</p>
-                    <p>Software engineers change companies like seasons. Their GitHub stays with them—proof of work, proof of skill, proof of growth. Every line of code they've ever written exists somewhere, permanent.</p>
-                    <p>Real estate agents move brokerages all the time. Their client database goes with them—relationships preserved, trust maintained.</p>
+                    <p>Lawyers switch firms, but their bar membership follows them like a shadow. Software engineers change companies like seasons—their GitHub stays with them, permanent proof of skill. Real estate agents move brokerages and take their client databases with them, relationships preserved.</p>
                     <p className="vision-emphasis">But a bartender changes venues and loses everything. Every. Single. Time.</p>
                     <p>The regular who tipped $50 every Friday? Can't find you. The customer relationships built over years of remembered birthdays and preferred glassware? Belong to your former employer, filed under "goodwill" on a balance sheet. The professional reputation you spent a decade building, one perfect Manhattan at a time? Starts at zero.</p>
                     <p className="vision-highlight">This isn't the nature of the industry. This is the <em>absence</em> of professional infrastructure. And absence isn't destiny—it's a problem waiting for a solution.</p>
                   </div>
 
-                  <div className="vision-section">
-                    <h3>What $66.8 Billion Actually Means</h3>
-                    <p>The hospitality industry loses $66.8 billion annually to turnover. That number is so large it stops meaning anything. Let me make it real.</p>
-                    <p>It's the talented professional who stays in a toxic workplace because leaving means financial devastation—the regulars won't follow, the tips reset, the rent is due in two weeks. It's the customer who stops frequenting a venue because "it's not the same" after their favorite server left, that ineffable magic replaced by competent service that lacks soul.</p>
-                    <p>It's the career bartender who gives up and leaves the industry entirely after fifteen years because starting over one more time feels like dying a little. It's the sommelier with encyclopedic knowledge being treated like a rookie because the new venue doesn't know what they have, can't see the decade of refinement in every pour.</p>
-                    <p className="vision-emphasis">These are the lives interrupted, the talent squandered, the relationships severed—millions of individual tragedies hiding inside one big number.</p>
-                  </div>
-
+                  {/* SECTION 3: WHY I COULD BUILD THIS */}
                   <div className="vision-section">
                     <h3>Why I Could Build This</h3>
                     <p>After 27 years in hospitality, I transitioned into cybersecurity and software development—a world of systems and logic, of problems that yield to analysis, of building things that scale beyond human limitation.</p>
                     <p>Standing at the intersection of these two worlds, I realized: I understand both sides of this problem.</p>
-                    <p>I understand the bartender making 200 drinks an hour during Saturday rush, tracking six tabs in their head while maintaining conversation with regulars, reading the room, defusing tension, creating atmosphere—all simultaneously, all while making it look effortless. I understand the sommelier who pairs wine with personality, not just food, who can read a guest's night in the way they hold the glass.</p>
-                    <p className="vision-statement">That combination—deep hospitality experience plus technical execution—is rare. It's exactly what this problem needed.</p>
+                    <p>I understand the bartender making 200 drinks an hour during Saturday rush, tracking six tabs in their head while maintaining conversation with regulars, reading the room, defusing tension, creating atmosphere—all simultaneously, all while making it look effortless. I've <em>been</em> that bartender. I understand the sommelier who pairs wine with personality, not just food, who can read a guest's night in the way they hold the glass.</p>
+                    <p className="vision-statement">Deep hospitality experience plus technical execution—that combination is rare. It's exactly what this problem needed.</p>
                   </div>
 
+                  {/* SECTION 4: WHAT ONTONIGHT IS */}
                   <div className="vision-section">
                     <h3>What OnTonight Actually Is</h3>
                     <p className="vision-highlight">OnTonight is professional infrastructure—the kind that every other industry already has, the kind that hospitality professionals have deserved for decades, finally built.</p>
@@ -864,23 +874,17 @@ export default function LandingPage() {
                     <p>This is professional dignity in software form. This is career equity for people who serve. This is the infrastructure that should have existed decades ago.</p>
                   </div>
 
+                  {/* SECTION 5: THE FUTURE */}
                   <div className="vision-section">
                     <h3>The Future We're Building</h3>
-                    <p>Imagine hospitality where professionals own their careers. Where a talented bartender can leave a toxic workplace without losing their livelihood, where principle doesn't cost rent, where better opportunities don't mean starting over.</p>
+                    <p>Imagine hospitality where professionals own their careers. Where a talented bartender can leave a toxic workplace without losing their livelihood, where principle doesn't cost rent, where better opportunities don't mean starting over from scratch.</p>
                     <p>Where small venues compete with corporate chains by showcasing culture and verified talent instead of just matching wages. Where a young professional entering hospitality sees a real career path—one where their skills compound over time instead of resetting to zero every 18 months.</p>
                     <p className="vision-emphasis">That's not fantasy. That's infrastructure. That's what happens when you build the foundation that should have always existed.</p>
                     <p>We're live now in Tampa Bay, working with premier hospitality venues across the region. From here, we're expanding to Miami, Nashville, Austin, and major hospitality markets nationwide—wherever great service happens, wherever professionals deserve infrastructure.</p>
                     <p>This isn't about fixing turnover statistics. This is about restoring professional dignity to an entire industry, one profile at a time, one verified skill at a time, one preserved relationship at a time.</p>
                   </div>
 
-                  <div className="vision-section">
-                    <h3>Why This Will Work</h3>
-                    <p>This will work because the problem is structural, not cultural. It's not that hospitality professionals don't want stability—it's that the industry has no infrastructure to support it. You can't build a house without a foundation.</p>
-                    <p>Every other profession solved this problem. Lawyers have bar associations. Doctors have portable credentials. Real estate agents have client databases. Software engineers have GitHub and LinkedIn.</p>
-                    <p>Hospitality professionals deserve the same. Not as a favor. Not as charity. As a <em>right</em>. As the basic professional dignity that every skilled worker deserves.</p>
-                    <p className="vision-highlight">If you believe that the people who serve us deserve to own their careers, who create magic nightly deserve to keep that magic when they move—we're building it right now. Join us.</p>
-                  </div>
-
+                  {/* CTA */}
                   <div className="vision-cta">
                     <h3>Join the Movement</h3>
                     <p>This isn't a product launch. This is a correction—the professional infrastructure that should have existed all along, finally built, finally real, finally here.</p>
@@ -894,6 +898,7 @@ export default function LandingPage() {
             </section>
           </div>
         )}
+
 
         {/* WAITLIST */}
         <section className="waitlist" id="waitlist">
