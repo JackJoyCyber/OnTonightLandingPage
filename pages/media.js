@@ -221,12 +221,11 @@ export default function Media() {
             <h2>OnTonight in the News</h2>
             <p className="section-subtitle">Building the professional infrastructure hospitality deserves</p>
             
-            <div className="highlights-grid">
-              <div className="highlight-card">
-                <div className="highlight-icon">🚀</div>
-                <h4>Tampa Launch</h4>
-                <p>OnTonight launches in Tampa Bay with three premier hospitality venues, bringing portable careers to hospitality professionals.</p>
-              </div>
+            <div className="highlight-card">
+  <div className="highlight-icon">🚀</div>
+  <h4>Tampa Launch</h4>
+  <p>OnTonight launches in Tampa Bay, partnering with local hospitality venues to bring portable careers to hospitality professionals.</p>
+</div>
               <div className="highlight-card">
                 <div className="highlight-icon">💡</div>
                 <h4>Industry Innovation</h4>
