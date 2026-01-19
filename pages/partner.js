@@ -344,26 +344,26 @@ export default function Partner() {
         </section>
 
         <section className="testimonials">
-          <div className="container">
-            <h2>Tampa Pilot Venues</h2>
-            <p className="section-subtitle">Leading hospitality venues already partnering with OnTonight</p>
-            
-            <div className="venues-grid">
-              <div className="venue-card">
-                <h4>Haiku Tampa</h4>
-                <p>Japanese-inspired cocktail lounge</p>
-              </div>
-              <div className="venue-card">
-                <h4>Ulele</h4>
-                <p>Native-inspired waterfront dining</p>
-              </div>
-              <div className="venue-card">
-                <h4>Beacon Rooftop Bar</h4>
-                <p>Premier rooftop experience</p>
-              </div>
-            </div>
-          </div>
-        </section>
+  <div className="container">
+    <h2>Partnering with Local Venues</h2>
+    <p className="section-subtitle">Join Tampa Bay's leading hospitality establishments on OnTonight</p>
+    
+    <div className="venues-grid">
+      <div className="venue-card">
+        <h4>Cocktail Lounges</h4>
+        <p>Craft cocktails & modern nightlife</p>
+      </div>
+      <div className="venue-card">
+        <h4>Fine Dining</h4>
+        <p>Elevated waterfront experiences</p>
+      </div>
+      <div className="venue-card">
+        <h4>Rooftop Bars</h4>
+        <p>Skyline views & sunset vibes</p>
+      </div>
+    </div>
+  </div>
+</section>
 
         <footer className="footer">
           <div className="container">
