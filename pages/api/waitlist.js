@@ -1,4 +1,10 @@
 // pages/api/waitlist.js
+// ============================================================================
+// WAITLIST & SIGNUP API - WITH ASSESSMENT ACCESS CODE
+// ============================================================================
+// Creates Firebase account, sends welcome email WITH access code
+// ============================================================================
+
 import admin from 'firebase-admin';
 import sgMail from '@sendgrid/mail';
 
@@ -14,6 +20,12 @@ if (!admin.apps.length) {
 }
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+// ============================================================================
+// ACCESS CODE FOR NEW SIGNUPS
+// ============================================================================
+const SIGNUP_ACCESS_CODE = 'ONTONIGHT2026';
+const SIGNUP_CREDITS = 2;
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -39,8 +51,6 @@ export default async function handler(req, res) {
   try {
     // STEP 1: Create Firebase account (or get existing)
     try {
-      // Generate a secure temporary password (user will set their own via email link)
-      // Max 20 chars per Firebase policy: Tempxy12ab! = 12 chars
       const tempPassword = `Temp${Math.random().toString(36).slice(-6)}${Date.now().toString(36).slice(-6)}!`;
       
       firebaseUser = await admin.auth().createUser({
@@ -53,12 +63,11 @@ export default async function handler(req, res) {
       console.log(`✅ Created Firebase account for ${email}`);
       
     } catch (createError) {
-      // If account already exists, that's OK - get the existing user
       if (createError.code === 'auth/email-already-exists') {
         firebaseUser = await admin.auth().getUserByEmail(email.toLowerCase().trim());
         console.log(`ℹ️ Account already exists for ${email}, using existing account`);
       } else {
-        throw createError; // Re-throw if it's a different error
+        throw createError;
       }
     }
 
@@ -74,7 +83,7 @@ export default async function handler(req, res) {
       createdAt: admin.firestore.FieldValue.serverTimestamp(),
       lastLogin: admin.firestore.FieldValue.serverTimestamp(),
       source: 'landing_page_waitlist',
-      accountStatus: 'active', // Account is ACTIVE immediately, no pending state
+      accountStatus: 'active',
     };
 
     // For venues, add additional fields
@@ -86,43 +95,37 @@ export default async function handler(req, res) {
     await admin.firestore()
       .collection('users')
       .doc(firebaseUser.uid)
-      .set(userDoc, { merge: true }); // Merge in case profile already exists
+      .set(userDoc, { merge: true });
 
     console.log(`✅ Created/updated Firestore profile for ${email}`);
 
-    // STEP 3: Generate password reset link (for user to set their own password)
+    // STEP 3: Generate password reset link
     let passwordSetupLink = null;
     try {
       passwordSetupLink = await admin.auth().generatePasswordResetLink(
         email.toLowerCase().trim(),
-        {
-          url: 'https://app.on-tonight.com/login', // Redirect after password setup
-        }
+        { url: 'https://app.on-tonight.com/login' }
       );
       console.log(`✅ Generated password setup link for ${email}`);
     } catch (linkError) {
       console.error('⚠️ Failed to generate password link:', linkError);
-      // Non-critical: User can request password reset from login page
     }
 
     // STEP 4: Send appropriate welcome email based on user type
     try {
       if (normalizedUserType === 'venue') {
-        // VENUE: Send info email, notify admin for personal follow-up
         await sendVenueWelcomeEmail(email, name);
         await sendVenueNotificationToAdmin(name, email, city, req.body);
       } else {
-        // ONPRO/PATRON: Send full onboarding email with setup link
+        // OnPro/Patron: Include access code in welcome email
         await sendUserWelcomeEmail(email, name, normalizedUserType, passwordSetupLink, wasCreated);
         await sendUserNotificationToAdmin(name, email, normalizedUserType, city);
       }
       console.log(`✅ Sent welcome emails for ${email}`);
     } catch (emailError) {
       console.error('⚠️ Failed to send emails:', emailError);
-      // Non-critical: User account still works, they can log in directly
     }
 
-    // Success response
     return res.status(200).json({
       success: true,
       message: wasCreated 
@@ -134,10 +137,6 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('❌ Waitlist Error:', error);
-    
-    // If we created a Firebase user but something else failed, that's OK
-    // The user can still log in to app.on-tonight.com
-    
     return res.status(500).json({
       error: 'Failed to complete signup. Please try again or go directly to app.on-tonight.com',
       details: process.env.NODE_ENV === 'development' ? error.message : undefined,
@@ -145,13 +144,15 @@ export default async function handler(req, res) {
   }
 }
 
-// EMAIL HELPER FUNCTIONS
+// ============================================================================
+// EMAIL HELPERS
+// ============================================================================
 
 async function sendUserWelcomeEmail(email, name, userType, setupLink, isNew) {
   const userTypeLabel = userType === 'onpro' ? 'OnPro' : 'Patron';
   const nextSteps = userType === 'onpro' 
-    ? 'Take the DAPA assessment to verify your skills and build your professional profile.'
-    : 'Complete your OnScene Genome to discover your hospitality personality and get matched with the perfect venues.';
+    ? 'Take the DAPA Skills Assessment to verify your expertise and build your professional genome.'
+    : 'Complete your profile and discover the best hospitality professionals in your area.';
 
   const msg = {
     to: email,
@@ -160,100 +161,65 @@ async function sendUserWelcomeEmail(email, name, userType, setupLink, isNew) {
       name: 'OnTonight'
     },
     replyTo: 'jackjoy@on-tonight.com',
-    subject: isNew ? '🎉 Welcome to OnTonight!' : '👋 Welcome back to OnTonight!',
+    subject: isNew ? '🎉 Welcome to OnTonight + Your Access Code!' : '👋 Welcome back to OnTonight!',
     html: `
       <!DOCTYPE html>
       <html>
-      <body style="font-family: -apple-system, sans-serif; line-height: 1.6; color: #1a1a1a; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-        <div style="text-align: center; margin-bottom: 40px;">
-          <h1 style="color: #d4a373; font-size: 36px; margin: 0;">OnTonight</h1>
-          <p style="color: #666; margin: 10px 0;">Your Night. Your People. Where Regulars Are Made.</p>
+      <body style="font-family: -apple-system, sans-serif; line-height: 1.6; color: #1a1a1a; max-width: 600px; margin: 0 auto; padding: 40px 20px; background: #f8fafc;">
+        <div style="background: #ffffff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+          
+          <!-- Header -->
+          <div style="background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%); padding: 40px 32px; text-align: center;">
+            <h1 style="color: #d4a373; font-size: 36px; margin: 0;">OnTonight</h1>
+            <p style="color: rgba(255,255,255,0.7); margin: 10px 0 0;">Your Night. Your People. Where Regulars Are Made.</p>
+          </div>
+
+          <!-- Content -->
+          <div style="padding: 40px 32px;">
+            <h2 style="color: #1a1a1a; margin: 0 0 16px;">Welcome${isNew ? ' to the Movement' : ' Back'}, ${name}!</h2>
+            
+            <p style="color: #475569; margin: 0 0 24px;">${isNew ? "You're one of the first to join OnTonight — your first year is FREE! 🎉" : "Great to see you again!"}</p>
+
+            <!-- ACCESS CODE BOX -->
+            <div style="background: linear-gradient(135deg, #d4a373 0%, #c49362 100%); border-radius: 12px; padding: 24px; margin: 24px 0; text-align: center;">
+              <p style="color: rgba(0,0,0,0.6); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 8px;">Your Exclusive Access Code</p>
+              <p style="color: #0a0a0f; font-size: 28px; font-weight: 800; letter-spacing: 3px; margin: 0; font-family: monospace;">${SIGNUP_ACCESS_CODE}</p>
+              <p style="color: rgba(0,0,0,0.6); font-size: 13px; margin: 12px 0 0;">Unlocks ${SIGNUP_CREDITS} Skills Assessments</p>
+            </div>
+
+            <div style="background: #f8fafc; border-radius: 8px; padding: 20px; margin: 24px 0;">
+              <h3 style="color: #1a1a1a; font-size: 16px; margin: 0 0 12px;">🎯 How to Use Your Code:</h3>
+              <ol style="color: #475569; margin: 0; padding-left: 20px;">
+                <li style="margin-bottom: 8px;">Log in at <a href="https://app.on-tonight.com" style="color: #d4a373;">app.on-tonight.com</a></li>
+                <li style="margin-bottom: 8px;">Go to Skills Assessment</li>
+                <li style="margin-bottom: 8px;">Enter your access code: <strong>${SIGNUP_ACCESS_CODE}</strong></li>
+                <li>Choose 2 categories to unlock and prove your expertise!</li>
+              </ol>
+            </div>
+
+            ${setupLink ? `
+            <div style="text-align: center; margin: 32px 0;">
+              <a href="${setupLink}" style="display: inline-block; background: linear-gradient(135deg, #d4a373 0%, #c49362 100%); color: #0a0a0f; text-decoration: none; padding: 16px 32px; border-radius: 8px; font-weight: 700; font-size: 16px;">Set Your Password →</a>
+            </div>
+            ` : ''}
+
+            <p style="color: #475569; margin: 24px 0 0; font-size: 14px;">
+              <strong>What's Next?</strong><br>
+              ${nextSteps}
+            </p>
+          </div>
+
+          <!-- Footer -->
+          <div style="background: #f8fafc; padding: 24px 32px; text-align: center; border-top: 1px solid #e2e8f0;">
+            <p style="color: #64748b; font-size: 13px; margin: 0;">
+              Questions? Reply to this email or reach out at <a href="mailto:support@on-tonight.com" style="color: #d4a373;">support@on-tonight.com</a>
+            </p>
+            <p style="color: #94a3b8; font-size: 12px; margin: 16px 0 0;">
+              OnTonight | Tampa, FL | <a href="https://on-tonight.com" style="color: #94a3b8;">on-tonight.com</a>
+            </p>
+          </div>
+
         </div>
-
-        <h2 style="color: #1a1a1a;">Welcome${isNew ? ' to the Movement' : ' Back'}, ${name}!</h2>
-        
-        <p>${isNew ? "You're one of the first 2,000 signups - your first year is FREE! 🎉" : "Great to see you again!"}</p>
-
-        ${setupLink ? `
-        <div style="background: linear-gradient(135deg, #d4a373 0%, #f4d3a3 100%); padding: 24px; border-radius: 8px; text-align: center; margin: 32px 0;">
-          <h3 style="margin: 0 0 16px 0; color: #0a0a0f;">Complete Your Setup</h3>
-          <a href="${setupLink}" style="display: inline-block; background: #0a0a0f; color: #d4a373; padding: 14px 32px; text-decoration: none; border-radius: 6px; font-weight: 600;">Set Your Password</a>
-          <p style="margin: 16px 0 0 0; font-size: 13px; color: rgba(10,10,15,0.7);">This link expires in 1 hour</p>
-        </div>
-        ` : ''}
-
-        <h3 style="color: #d4a373;">What Happens Next:</h3>
-        <ol style="color: #666; line-height: 1.8;">
-          <li><strong>Set your password</strong> using the button above</li>
-          <li><strong>Complete your profile</strong> at app.on-tonight.com</li>
-          <li><strong>${nextSteps}</strong></li>
-          <li><strong>Start connecting</strong> with Tampa's hospitality community</li>
-        </ol>
-
-        <div style="background: #f8f9fa; padding: 20px; border-radius: 6px; border-left: 4px solid #d4a373; margin: 32px 0;">
-          <p style="margin: 0; font-weight: 600; color: #1a1a1a;">Can't wait? Log in now:</p>
-          <p style="margin: 8px 0 0 0;"><a href="https://app.on-tonight.com/login" style="color: #d4a373;">app.on-tonight.com</a></p>
-          <p style="margin: 8px 0 0 0; font-size: 13px; color: #666;">Use the password setup link above first, or request a password reset</p>
-        </div>
-
-        <p style="margin-top: 32px;">Questions? Just reply to this email.</p>
-        
-        <p style="color: #666;">
-          Welcome to the infrastructure,<br>
-          <strong>The OnTonight Team</strong>
-        </p>
-
-        <div style="margin-top: 40px; padding-top: 24px; border-top: 1px solid #e0e0e0; text-align: center;">
-          <p style="font-size: 13px; color: #999;">
-            OnTonight LLC | Tampa, Florida<br>
-            <a href="https://on-tonight.com" style="color: #d4a373;">on-tonight.com</a>
-          </p>
-        </div>
-      </body>
-      </html>
-    `
-  };
-
-  return sgMail.send(msg);
-}
-
-async function sendVenueWelcomeEmail(email, name) {
-  const msg = {
-    to: email,
-    from: {
-      email: 'partner@on-tonight.com',
-      name: 'OnTonight Partnerships'
-    },
-    replyTo: 'jackjoy@on-tonight.com',
-    subject: 'Partnership Inquiry Received - Jack Will Contact You',
-    html: `
-      <!DOCTYPE html>
-      <html>
-      <body style="font-family: -apple-system, sans-serif; line-height: 1.6; color: #1a1a1a; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-        <h2 style="color: #d4a373;">Thanks for Your Interest, ${name}!</h2>
-        
-        <p>I'm Jack Joy, founder of OnTonight. I personally onboard every venue partner to ensure we're a great fit for your team.</p>
-
-        <h3 style="color: #1a1a1a;">What Happens Next:</h3>
-        <ul style="color: #666; line-height: 1.8;">
-          <li><strong>Within 24 hours:</strong> I'll reach out to schedule a personalized demo</li>
-          <li><strong>30-minute call:</strong> We'll discuss your specific staffing challenges</li>
-          <li><strong>Custom setup:</strong> If it's a fit, we'll build your venue profile together</li>
-          <li><strong>3-month trial:</strong> Experience OnTonight risk-free</li>
-        </ul>
-
-        <div style="background: #f8f9fa; padding: 20px; border-radius: 6px; margin: 32px 0;">
-          <h4 style="margin: 0 0 12px 0; color: #d4a373;">In The Meantime:</h4>
-          <p style="margin: 0;"><a href="https://on-tonight.com" style="color: #d4a373;">Explore the platform</a></p>
-          <p style="margin: 8px 0 0 0;"><a href="https://on-tonight.com/#platform" style="color: #d4a373;">See how DAPA works</a></p>
-        </div>
-
-        <p style="margin-top: 32px;">
-          Looking forward to connecting,<br>
-          <strong>Jack Joy</strong><br>
-          Founder & CEO, OnTonight<br>
-          <a href="mailto:jackjoy@on-tonight.com" style="color: #d4a373;">jackjoy@on-tonight.com</a>
-        </p>
       </body>
       </html>
     `
@@ -275,8 +241,48 @@ async function sendUserNotificationToAdmin(name, email, userType, city) {
         <p><strong>Type:</strong> ${userType.toUpperCase()}</p>
         <p><strong>City:</strong> ${city || 'Not provided'}</p>
         <p><strong>Time:</strong> ${new Date().toLocaleString('en-US', { timeZone: 'America/New_York' })} EST</p>
+        <p><strong>Access Code Sent:</strong> ${SIGNUP_ACCESS_CODE}</p>
         <p><strong>Source:</strong> Landing Page Waitlist</p>
       </div>
+    `
+  };
+
+  return sgMail.send(msg);
+}
+
+async function sendVenueWelcomeEmail(email, name) {
+  const msg = {
+    to: email,
+    from: {
+      email: 'partner@on-tonight.com',
+      name: 'OnTonight Partnerships'
+    },
+    replyTo: 'jackjoy@on-tonight.com',
+    subject: '🏢 Welcome to OnTonight - Partnership Inquiry Received',
+    html: `
+      <!DOCTYPE html>
+      <html>
+      <body style="font-family: -apple-system, sans-serif; line-height: 1.6; color: #1a1a1a; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+        <div style="text-align: center; margin-bottom: 40px;">
+          <h1 style="color: #d4a373; font-size: 36px; margin: 0;">OnTonight</h1>
+          <p style="color: #666; margin: 10px 0;">Your Night. Your People. Where Regulars Are Made.</p>
+        </div>
+
+        <h2 style="color: #1a1a1a;">Thank you for your interest, ${name}!</h2>
+        
+        <p>We're excited to learn more about your venue and how OnTonight can help you connect with the best hospitality talent.</p>
+
+        <div style="background: #fff3cd; border-left: 4px solid #d4a373; padding: 16px; margin: 24px 0;">
+          <p style="margin: 0; color: #856404;"><strong>What happens next?</strong></p>
+          <p style="margin: 8px 0 0; color: #856404;">A member of our partnerships team will reach out within 24-48 hours to schedule a personalized demo and discuss how OnTonight can benefit your venue.</p>
+        </div>
+
+        <p style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e0e0e0; color: #666; font-size: 13px;">
+          OnTonight | Venue Partnerships<br>
+          <a href="mailto:partner@on-tonight.com" style="color: #d4a373;">partner@on-tonight.com</a>
+        </p>
+      </body>
+      </html>
     `
   };
 
