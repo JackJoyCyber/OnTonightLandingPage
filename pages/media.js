@@ -1,3 +1,4 @@
+// pages/media.js - OnTonight Media & Press Page
 import { useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -51,6 +52,7 @@ export default function Media() {
       <Head>
         <title>Media Inquiries | OnTonight</title>
         <meta name="description" content="Press and media inquiries for OnTonight. Connect with our team for interviews, press releases, and media partnerships." />
+        <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
 
       <div className="media-page">
@@ -209,37 +211,40 @@ export default function Media() {
 
                 <div className="info-card">
                   <h3>🎤 Available for Interview</h3>
-                  <p><strong>Jack Joy, Founder & CEO</strong><br/>27 years hospitality experience + software engineering. Expert in industry turnover, professional development, and hospitality technology.</p>
+                  <p><strong>Jack Joy, Founder & CEO</strong><br/>27 years hospitality experience + software engineering. Available for print, digital, podcast, and broadcast interviews.</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
+        {/* Press Highlights Section */}
         <section className="press-highlights">
           <div className="container">
-            <h2>OnTonight in the News</h2>
-            <p className="section-subtitle">Building the professional infrastructure hospitality deserves</p>
+            <h2>Key Highlights</h2>
+            <p className="section-subtitle">What makes OnTonight newsworthy</p>
             
-            <div className="highlight-card">
-  <div className="highlight-icon">🚀</div>
-  <h4>Tampa Launch</h4>
-  <p>OnTonight launches in Tampa Bay, partnering with local hospitality venues to bring portable careers to hospitality professionals.</p>
-</div>
+            <div className="highlights-grid">
               <div className="highlight-card">
-                <div className="highlight-icon">💡</div>
-                <h4>Industry Innovation</h4>
-                <p>First comprehensive professional certification system (DAPA) for hospitality workers across 6 professional dimensions.</p>
+                <div className="highlight-icon">🎯</div>
+                <h4>First-Mover Advantage</h4>
+                <p>The first professional identity platform specifically built for hospitality workers.</p>
               </div>
               <div className="highlight-card">
-                <div className="highlight-icon">📈</div>
-                <h4>Market Opportunity</h4>
-                <p>Addressing $66.8B annual turnover crisis affecting 15.6 million workers across the hospitality industry.</p>
+                <div className="highlight-icon">💰</div>
+                <h4>Massive Market</h4>
+                <p>$12.8B TAM addressing an industry that affects 15.6 million American workers.</p>
+              </div>
+              <div className="highlight-card">
+                <div className="highlight-icon">🧬</div>
+                <h4>Proprietary Technology</h4>
+                <p>DAPA assessment system with 1,600+ questions measuring 6 professional dimensions.</p>
               </div>
             </div>
           </div>
         </section>
 
+        {/* Footer */}
         <footer className="footer">
           <div className="container">
             <div className="footer-content">
@@ -267,6 +272,7 @@ export default function Media() {
           min-height: 100vh;
           background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
           color: #f8fafc;
+          font-family: 'Urbanist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
         }
 
         .header {
@@ -457,6 +463,7 @@ export default function Media() {
           font-size: 14px;
           color: rgba(248, 250, 252, 0.8);
           line-height: 1.6;
+          margin: 0;
         }
 
         .info-card ul {
@@ -497,6 +504,8 @@ export default function Media() {
         .press-highlights h2 {
           text-align: center;
           margin-bottom: 16px;
+          font-size: 40px;
+          color: #f8fafc;
         }
 
         .section-subtitle {
@@ -545,6 +554,7 @@ export default function Media() {
           font-size: 15px;
           color: rgba(248, 250, 252, 0.7);
           line-height: 1.6;
+          margin: 0;
         }
 
         .footer {
@@ -596,6 +606,7 @@ export default function Media() {
         .footer-bottom p {
           font-size: 13px;
           color: rgba(248, 250, 252, 0.5);
+          margin: 0;
         }
 
         @media (max-width: 968px) {
