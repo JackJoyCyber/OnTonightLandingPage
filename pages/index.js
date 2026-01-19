@@ -1,6 +1,6 @@
-// pages/index.js - OnTonight Landing Page PLATINUM EDITION
+// pages/index.js - OnTonight Landing Page PLATINUM v2
+// EXACT VISION: Emotional Hook → 2-Step Capture → Identity Cards → Accordion Deep Content
 // "Your Night. Your People. Where Regulars Are Made."
-// Emotional Hook → Instant Conversion → Deep Content (Progressive Disclosure)
 
 import { useState, useEffect, useRef } from 'react';
 import Head from 'next/head';
@@ -15,15 +15,15 @@ export default function LandingPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   
-  // Navigation state
-  const [showStickyBar, setShowStickyBar] = useState(false);
-  const [expandedSection, setExpandedSection] = useState(null);
-  const [selectedIdentity, setSelectedIdentity] = useState(null);
+  // Navigation & UI state
+  const [showStickyNav, setShowStickyNav] = useState(false);
+  const [expandedAccordion, setExpandedAccordion] = useState(null);
+  const [expandedIdentity, setExpandedIdentity] = useState(null);
   const [selectedArchetype, setSelectedArchetype] = useState(null);
   const [platformTab, setPlatformTab] = useState('onpro');
   const [lightboxImage, setLightboxImage] = useState(null);
   
-  // PWA install
+  // PWA
   const [showInstallPrompt, setShowInstallPrompt] = useState(false);
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   
@@ -31,10 +31,10 @@ export default function LandingPage() {
   const formRef = useRef(null);
   const deepContentRef = useRef(null);
 
-  // Scroll tracking for sticky bar
+  // Scroll tracking for sticky nav
   useEffect(() => {
     const handleScroll = () => {
-      setShowStickyBar(window.scrollY > window.innerHeight * 0.7);
+      setShowStickyNav(window.scrollY > window.innerHeight * 0.8);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -59,18 +59,17 @@ export default function LandingPage() {
     setShowInstallPrompt(false);
   };
 
-  // Scroll to form
+  // Scroll helpers
   const scrollToForm = () => {
     formRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
-  // Scroll to deep content
   const scrollToDeepContent = () => {
     deepContentRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // Email step 1 handler
-  const handleEmailStep1 = (e) => {
+  // Email step 1
+  const handleEmailSubmit = (e) => {
     e.preventDefault();
     if (email && email.includes('@')) {
       setFormData({ ...formData, email });
@@ -79,7 +78,7 @@ export default function LandingPage() {
   };
 
   // Full form submit
-  const handleSubmit = async (e) => {
+  const handleFullSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
@@ -95,9 +94,9 @@ export default function LandingPage() {
     setLoading(false);
   };
 
-  // ALL ARCHETYPES (preserved from production)
+  // ALL 24 ARCHETYPES
   const archetypes = {
-    // PATRON ARCHETYPES
+    // PATRON ARCHETYPES (12)
     connector: { emoji: '🌐', name: 'The Connector', desc: 'You thrive on building relationships and creating networks. Every interaction is an opportunity to connect people, ideas, and experiences.', type: 'patron' },
     regular: { emoji: '🏠', name: 'The Regular', desc: 'Loyalty and consistency define you. You value deep, lasting relationships with your favorite places and people.', type: 'patron' },
     adventurer: { emoji: '🗺️', name: 'The Adventurer', desc: 'Always seeking the next great experience. You explore new venues, try new drinks, and chase novelty.', type: 'patron' },
@@ -110,8 +109,7 @@ export default function LandingPage() {
     critic: { emoji: '🧐', name: 'The Critic', desc: 'Your high standards push the industry forward. You know what excellence looks like.', type: 'patron' },
     storyteller: { emoji: '📖', name: 'The Storyteller', desc: 'Every night out becomes a story. You remember the details and share the experiences.', type: 'patron' },
     student: { emoji: '📚', name: 'The Student', desc: 'Always learning, always asking questions. You want to understand the craft behind the experience.', type: 'patron' },
-    
-    // ONPRO ARCHETYPES
+    // ONPRO ARCHETYPES (12)
     craftsman: { emoji: '🎨', name: 'The Craftsman', desc: 'Precision and technique define your service. Every drink, every plate is executed to perfection. You take pride in the fundamentals.', type: 'onpro' },
     closer: { emoji: '💼', name: 'The Closer', desc: 'You read the room and know exactly when to suggest that perfect pairing or upsell. Sales is an art, and you are the artist.', type: 'onpro' },
     mentor: { emoji: '🎓', name: 'The Mentor', desc: 'You build people, not just drinks. Training the next generation and sharing knowledge is your calling.', type: 'onpro' },
@@ -127,47 +125,50 @@ export default function LandingPage() {
   };
 
   // Identity card data
-  const identityCards = {
-    onpro: {
+  const identityCards = [
+    {
+      id: 'onpro',
       emoji: '🍸',
-      title: 'I\'m a Hospitality Professional',
+      title: "I'm a Hospitality Professional",
       subtitle: 'Bartender, Server, Sommelier, Chef, DJ...',
+      color: '#22c55e',
       benefits: [
-        'Own your professional identity',
-        'Take your regulars with you',
-        'Get DAPA-certified',
-        'Build portable career equity'
+        'Own your professional identity—portable across venues',
+        'Take your regulars with you when you move',
+        'Get DAPA-certified and prove your expertise',
+        'Build career equity that compounds over time'
       ],
-      cta: 'Create OnPro Profile',
-      color: 'rgba(34, 197, 94, 1)'
+      cta: 'Create OnPro Profile'
     },
-    patron: {
+    {
+      id: 'patron',
       emoji: '🥂',
-      title: 'I\'m a Guest',
+      title: "I'm a Guest",
       subtitle: 'I follow great hospitality people',
+      color: '#8b5cf6',
       benefits: [
-        'Never lose your favorite bartender',
-        'Get notified when they work',
-        'Discover your OnScene Genome',
-        'Build regular status anywhere'
+        'Never lose your favorite bartender again',
+        'Get notified when your people are working',
+        'Discover your OnScene Genome personality',
+        'Build regular status at any venue'
       ],
-      cta: 'Join as Patron',
-      color: 'rgba(139, 92, 246, 1)'
+      cta: 'Join as Patron'
     },
-    venue: {
+    {
+      id: 'venue',
       emoji: '🏢',
       title: 'I Own/Manage a Venue',
       subtitle: 'Restaurant, Bar, Hotel, Club...',
+      color: '#3b82f6',
       benefits: [
-        'Recruit verified talent',
-        'Reduce turnover costs',
-        'Showcase your team',
-        'Track staff-driven traffic'
+        'Recruit verified, DAPA-certified talent',
+        'Reduce turnover and training costs',
+        'Showcase your team to attract customers',
+        'Track staff-driven traffic and loyalty'
       ],
-      cta: 'Partner With Us',
-      color: 'rgba(59, 130, 246, 1)'
+      cta: 'Partner With Us'
     }
-  };
+  ];
 
   return (
     <>
@@ -176,80 +177,66 @@ export default function LandingPage() {
         <meta name="description" content="Professional identity platform for hospitality. Build portable careers, follow your people, elevate the industry. Live now in Tampa Bay." />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#d4a373" />
-        <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;500;600;700&display=swap" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
       </Head>
 
       <div className="page">
-        {/* ============================================ */}
-        {/* STICKY NAV BAR - Appears on scroll */}
-        {/* ============================================ */}
-        <nav className={`sticky-nav ${showStickyBar ? 'visible' : ''}`}>
-          <div className="sticky-nav-content">
-            <div className="sticky-logo">OnTonight</div>
-            <div className="sticky-venues">LIVE NOW · Tampa Bay</div>
+        {/* ========== STICKY NAV (appears on scroll) ========== */}
+        <nav className={`sticky-nav ${showStickyNav ? 'visible' : ''}`}>
+          <div className="sticky-inner">
+            <span className="sticky-logo">OnTonight</span>
+            <span className="sticky-venues">TAMPA PILOT: Haiku · Ulele · Beacon</span>
             <button onClick={scrollToForm} className="sticky-cta">Join Free →</button>
           </div>
         </nav>
 
-        {/* ============================================ */}
-        {/* LAYER 1: THE HOOK (0-3 seconds) */}
-        {/* ============================================ */}
-        <section className="hero-hook">
-          <div className="hero-glow"></div>
+        {/* ========== SECTION 1: HERO HOOK (0-5 seconds) ========== */}
+        <section className="hero">
           <div className="hero-grain"></div>
+          <div className="hero-glow"></div>
           
-          <div className="hook-content">
-            <div className="hook-badge">LIVE NOW · TAMPA BAY</div>
+          <div className="hero-content">
+            <div className="hero-badge">
+              <span className="badge-dot"></span>
+              LIVE NOW · TAMPA BAY
+            </div>
             
-            <h1 className="hook-title">
+            <h1 className="hero-title">
               <span className="title-line">Your Night.</span>
               <span className="title-line">Your People.</span>
             </h1>
             
-            <p className="hook-tagline">WHERE REGULARS ARE MADE</p>
+            <p className="hero-tagline">WHERE REGULARS ARE MADE</p>
             
-            <div className="scroll-indicator">
-              <span>↓</span>
+            <div className="scroll-hint">
+              <span className="scroll-arrow">↓</span>
+              <span className="scroll-text">Scroll to discover</span>
             </div>
           </div>
         </section>
 
-        {/* ============================================ */}
-        {/* LAYER 2: EMOTIONAL CONNECTION (3-8 seconds) */}
-        {/* ============================================ */}
-        <section className="emotional-hook">
-          <div className="emotional-content">
-            <p className="emotional-line fade-in">
-              You know that bartender who remembers your name?
-            </p>
-            <p className="emotional-line fade-in delay-1">
-              The one who starts making your drink when you walk in?
-            </p>
-            <p className="emotional-line fade-in delay-2 emphasis">
-              They remember you too.
-            </p>
-            <p className="emotional-line fade-in delay-3">
-              That connection shouldn't have an expiration date.
-            </p>
-            <p className="emotional-resolution fade-in delay-4">
-              Now it doesn't.
-            </p>
+        {/* ========== SECTION 2: EMOTIONAL CONNECTION (5-12 seconds) ========== */}
+        <section className="emotional">
+          <div className="emotional-inner">
+            <p className="emo-line line-1">You know that bartender who remembers your name?</p>
+            <p className="emo-line line-2">The one who starts making your drink when you walk in?</p>
+            <p className="emo-line line-3 highlight">They remember you too.</p>
+            <p className="emo-line line-4">That connection shouldn't have an expiration date.</p>
+            <p className="emo-resolution">Now it doesn't.</p>
           </div>
         </section>
 
-        {/* ============================================ */}
-        {/* LAYER 3: INSTANT ACTION (8-15 seconds) */}
-        {/* ============================================ */}
-        <section className="instant-action" ref={formRef}>
-          <div className="action-container">
-            <h2 className="action-title">Join the Movement</h2>
-            <p className="action-subtitle">First 2,000 members get their first year FREE</p>
+        {/* ========== SECTION 3: SIGNUP CARD (12-15 seconds) ========== */}
+        <section className="signup-section" ref={formRef}>
+          <div className="signup-container">
+            <h2 className="signup-title">Join the Movement</h2>
+            <p className="signup-subtitle">First 2,000 members get their first year FREE</p>
             
             {!submitted ? (
               <div className="signup-card">
                 {!showFullForm ? (
-                  // STEP 1: Email only
-                  <form onSubmit={handleEmailStep1} className="email-step">
+                  /* STEP 1: Email only */
+                  <form onSubmit={handleEmailSubmit} className="email-form">
                     <input
                       type="email"
                       placeholder="Enter your email"
@@ -263,43 +250,42 @@ export default function LandingPage() {
                     </button>
                   </form>
                 ) : (
-                  // STEP 2: Full form
-                  <form onSubmit={handleSubmit} className="full-form">
+                  /* STEP 2: Full details */
+                  <form onSubmit={handleFullSubmit} className="full-form">
                     <div className="form-grid">
-                      <input 
-                        type="text" 
-                        placeholder="Full Name" 
-                        required 
+                      <input
+                        type="text"
+                        placeholder="Full Name"
+                        required
                         value={formData.name}
-                        onChange={e => setFormData({...formData, name: e.target.value})} 
+                        onChange={(e) => setFormData({...formData, name: e.target.value})}
                       />
-                      <input 
-                        type="email" 
-                        placeholder="Email Address" 
-                        required 
+                      <input
+                        type="email"
+                        placeholder="Email Address"
+                        required
                         value={formData.email}
-                        onChange={e => setFormData({...formData, email: e.target.value})} 
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
                       />
-                      <select 
-                        required 
+                      <select
+                        required
                         value={formData.userType}
-                        onChange={e => setFormData({...formData, userType: e.target.value})}>
+                        onChange={(e) => setFormData({...formData, userType: e.target.value})}
+                      >
                         <option value="">I am a...</option>
                         <option value="onpro">OnPro (Bartender, Server, etc.)</option>
                         <option value="patron">Patron (Guest)</option>
                         <option value="venue">Venue Owner/Manager</option>
                       </select>
-                      <input 
-                        type="text" 
-                        placeholder="City" 
+                      <input
+                        type="text"
+                        placeholder="City"
                         required
                         value={formData.city}
-                        onChange={e => setFormData({...formData, city: e.target.value})} 
+                        onChange={(e) => setFormData({...formData, city: e.target.value})}
                       />
                     </div>
-                    <p className="form-disclaimer">
-                      By submitting, you confirm you are 18+ and agree to receive email communications from OnTonight.
-                    </p>
+                    <p className="form-legal">By submitting, you confirm you are 18+ and agree to receive updates from OnTonight.</p>
                     <button type="submit" className="submit-btn" disabled={loading}>
                       {loading ? 'Joining...' : 'Complete Signup'}
                     </button>
@@ -308,246 +294,177 @@ export default function LandingPage() {
               </div>
             ) : (
               <div className="success-card">
-                <div className="success-icon">🎉</div>
+                <span className="success-icon">🎉</span>
                 <h3>Welcome to the Movement</h3>
                 <p>Check your email for next steps. Your first year is FREE.</p>
               </div>
             )}
             
-            <p className="action-note">No credit card required · Cancel anytime</p>
+            <p className="signup-note">No credit card required · Cancel anytime</p>
           </div>
         </section>
 
-        {/* ============================================ */}
-        {/* LAYER 4: IDENTITY CARDS (15-30 seconds) */}
-        {/* ============================================ */}
+        {/* ========== SECTION 4: IDENTITY CARDS (15-30 seconds) ========== */}
         <section className="identity-section">
           <div className="container">
-            <h2 className="identity-title">Which Are You?</h2>
-            <p className="identity-subtitle">OnTonight serves everyone in the hospitality ecosystem</p>
+            <h2 className="section-heading">Which Are You?</h2>
+            <p className="section-subhead">OnTonight serves everyone in the hospitality ecosystem</p>
             
-            <div className="identity-cards">
-              {Object.entries(identityCards).map(([key, card]) => (
-                <div 
-                  key={key}
-                  className={`identity-card ${selectedIdentity === key ? 'expanded' : ''}`}
-                  onClick={() => setSelectedIdentity(selectedIdentity === key ? null : key)}
-                  style={{ '--card-color': card.color }}
+            <div className="identity-grid">
+              {identityCards.map((card) => (
+                <div
+                  key={card.id}
+                  className={`identity-card ${expandedIdentity === card.id ? 'expanded' : ''}`}
+                  style={{'--card-accent': card.color}}
+                  onClick={() => setExpandedIdentity(expandedIdentity === card.id ? null : card.id)}
                 >
-                  <div className="card-header">
+                  <div className="card-top">
                     <span className="card-emoji">{card.emoji}</span>
                     <h3 className="card-title">{card.title}</h3>
                     <p className="card-subtitle">{card.subtitle}</p>
+                    <span className="card-toggle">{expandedIdentity === card.id ? '−' : '+'}</span>
                   </div>
                   
-                  {selectedIdentity === key && (
+                  {expandedIdentity === card.id && (
                     <div className="card-expanded">
                       <ul className="card-benefits">
-                        {card.benefits.map((benefit, i) => (
-                          <li key={i}>{benefit}</li>
+                        {card.benefits.map((b, i) => (
+                          <li key={i}><span className="benefit-arrow">→</span> {b}</li>
                         ))}
                       </ul>
-                      <button 
-                        onClick={(e) => { e.stopPropagation(); scrollToForm(); }}
+                      <button
                         className="card-cta"
+                        onClick={(e) => { e.stopPropagation(); scrollToForm(); }}
                       >
                         {card.cta}
                       </button>
                     </div>
                   )}
-                  
-                  <span className="card-expand-hint">
-                    {selectedIdentity === key ? '−' : '+'}
-                  </span>
                 </div>
               ))}
             </div>
             
-            <button onClick={scrollToDeepContent} className="learn-more-btn">
-              Learn More About The Platform ↓
+            <button onClick={scrollToDeepContent} className="explore-btn">
+              Explore the Platform ↓
             </button>
           </div>
         </section>
 
-        {/* ============================================ */}
-        {/* LAYER 5: HOW IT WORKS - Quick Overview */}
-        {/* ============================================ */}
-        <section className="how-section">
+        {/* ========== SECTION 5: DEEP CONTENT ACCORDIONS ========== */}
+        <section className="deep-section" ref={deepContentRef}>
           <div className="container">
-            <h2>How OnTonight Works</h2>
-            <p className="section-subtitle">Professional infrastructure for hospitality—finally.</p>
+            <h2 className="section-heading">Learn More</h2>
+            <p className="section-subhead">Everything you need to know about OnTonight</p>
             
-            <div className="how-grid">
-              <div className="how-item">
-                <div className="how-number">1</div>
-                <h4>Create Your Identity</h4>
-                <p>OnPros build verified professional profiles. Patrons discover their OnScene Genome. Venues showcase their teams.</p>
-              </div>
-              <div className="how-item">
-                <div className="how-number">2</div>
-                <h4>Connect & Follow</h4>
-                <p>Patrons follow their favorite bartenders, servers, and sommeliers. Get notified when they're working.</p>
-              </div>
-              <div className="how-item">
-                <div className="how-number">3</div>
-                <h4>Build Relationships</h4>
-                <p>Check-ins build regular status. OnPros maintain customer relationships across venues. Everyone wins.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ============================================ */}
-        {/* LAYER 6: DEEP CONTENT - Accordions */}
-        {/* ============================================ */}
-        <section className="deep-content" ref={deepContentRef}>
-          <div className="container">
-            <h2 className="deep-title">Explore The Platform</h2>
-            <p className="deep-subtitle">Everything you need to know about OnTonight</p>
-            
-            {/* ACCORDION: THE PROBLEM */}
-            <div className={`accordion ${expandedSection === 'problem' ? 'expanded' : ''}`}>
-              <button 
-                className="accordion-header"
-                onClick={() => setExpandedSection(expandedSection === 'problem' ? null : 'problem')}
-              >
-                <span className="accordion-icon">📉</span>
-                <span className="accordion-title">The $66.8B Industry Crisis</span>
-                <span className="accordion-arrow">{expandedSection === 'problem' ? '−' : '+'}</span>
+            {/* ACCORDION: The Problem */}
+            <div className={`accordion ${expandedAccordion === 'problem' ? 'open' : ''}`}>
+              <button className="accordion-header" onClick={() => setExpandedAccordion(expandedAccordion === 'problem' ? null : 'problem')}>
+                <span className="acc-icon">📉</span>
+                <span className="acc-title">The $66.8B Industry Crisis</span>
+                <span className="acc-arrow">{expandedAccordion === 'problem' ? '−' : '+'}</span>
               </button>
-              
-              {expandedSection === 'problem' && (
-                <div className="accordion-content">
-                  {/* VALUE PROPS */}
+              {expandedAccordion === 'problem' && (
+                <div className="accordion-body">
+                  {/* Value Props */}
                   <div className="value-grid">
-                    <div className="value-item">
-                      <div className="value-icon">💰</div>
-                      <div className="value-number">$24K</div>
-                      <div className="value-label">Lost in Tips Per Venue Change</div>
+                    <div className="value-card">
+                      <span className="value-emoji">💰</span>
+                      <span className="value-number">$24K</span>
+                      <span className="value-label">Lost in Tips Per Venue Change</span>
                       <p>Average bartender loses $24,000 in regular tips when changing venues. Your regulars can't follow you. Until now.</p>
                     </div>
-                    <div className="value-item">
-                      <div className="value-icon">📈</div>
-                      <div className="value-number">40%</div>
-                      <div className="value-label">Potential Higher Earnings When DAPA-Certified</div>
-                      <p>DAPA-Certified OnPros have the potential to earn 40% more than industry average. Your verified skills have measurable value.</p>
+                    <div className="value-card">
+                      <span className="value-emoji">📈</span>
+                      <span className="value-number">40%</span>
+                      <span className="value-label">Higher Earnings Potential</span>
+                      <p>DAPA-Certified OnPros have potential to earn 40% more than industry average. Verified skills have measurable value.</p>
                     </div>
-                    <div className="value-item">
-                      <div className="value-icon">🎯</div>
-                      <div className="value-number">300+</div>
-                      <div className="value-label">Regular Relationships Maintained</div>
+                    <div className="value-card">
+                      <span className="value-emoji">🎯</span>
+                      <span className="value-number">300+</span>
+                      <span className="value-label">Regular Relationships</span>
                       <p>Top OnPros maintain 300+ verified regular relationships. Own your network, not the venue's.</p>
                     </div>
                   </div>
                   
-                  {/* CRISIS QUOTES */}
-                  <h3 style={{marginTop: '60px', marginBottom: '32px'}}>What Industry Leaders Are Saying</h3>
+                  {/* Quotes */}
+                  <h4 className="quotes-heading">What Industry Leaders Are Saying</h4>
                   <div className="quotes-grid">
-                    <div className="quote">
+                    <blockquote className="quote-card">
                       <p>"The cost of turnover in hospitality is huge. Recruitment, retention, staff turnover... these are words that likely haunt the dreams of hospitality operators."</p>
-                      <cite>Institute of Hospitality, 2024</cite>
-                    </div>
-                    <div className="quote">
-                      <p>"With 50% FOH turnover, you're replacing 7-10 servers and hosts every year. That's $7,400-$10,560+ in replacement costs alone—not counting the hit to service quality."</p>
-                      <cite>7shifts Restaurant Workforce Report, 2025</cite>
-                    </div>
-                    <div className="quote">
+                      <cite>— Institute of Hospitality, 2024</cite>
+                    </blockquote>
+                    <blockquote className="quote-card">
+                      <p>"With 50% FOH turnover, you're replacing 7-10 servers and hosts every year. That's $7,400-$10,560+ in replacement costs alone."</p>
+                      <cite>— 7shifts Restaurant Workforce Report, 2025</cite>
+                    </blockquote>
+                    <blockquote className="quote-card">
                       <p>"Losing a single employee can cost hospitality businesses more than $5,000 in recruiting, hiring, training and lost productivity."</p>
-                      <cite>OysterLink Industry Report, 2025</cite>
-                    </div>
-                    <div className="quote">
+                      <cite>— OysterLink Industry Report, 2025</cite>
+                    </blockquote>
+                    <blockquote className="quote-card">
                       <p>"Reducing employee turnover by 10% can improve net profit margins by approximately 3%."</p>
-                      <cite>Gallup Workplace Report, 2025</cite>
-                    </div>
-                    <div className="quote">
-                      <p>"Staffing challenges topped operators' 2024 list of concerns. Finding and keeping skilled staff is a concern that's risen by 4 percent."</p>
-                      <cite>FSR Magazine, 2025</cite>
-                    </div>
-                    <div className="quote">
-                      <p>"It's very tough to find the people and then have them stay. After a week, somebody will say, 'This doesn't work for me, I'm going to go somewhere else.' Big turnover."</p>
-                      <cite>TouchBistro State of Restaurants, 2024</cite>
-                    </div>
+                      <cite>— Gallup Workplace Report, 2025</cite>
+                    </blockquote>
                   </div>
                 </div>
               )}
             </div>
 
-            {/* ACCORDION: PLATFORM */}
-            <div className={`accordion ${expandedSection === 'platform' ? 'expanded' : ''}`}>
-              <button 
-                className="accordion-header"
-                onClick={() => setExpandedSection(expandedSection === 'platform' ? null : 'platform')}
-              >
-                <span className="accordion-icon">🚀</span>
-                <span className="accordion-title">Platform Features</span>
-                <span className="accordion-arrow">{expandedSection === 'platform' ? '−' : '+'}</span>
+            {/* ACCORDION: Platform Features */}
+            <div className={`accordion ${expandedAccordion === 'platform' ? 'open' : ''}`}>
+              <button className="accordion-header" onClick={() => setExpandedAccordion(expandedAccordion === 'platform' ? null : 'platform')}>
+                <span className="acc-icon">🚀</span>
+                <span className="acc-title">Platform Features</span>
+                <span className="acc-arrow">{expandedAccordion === 'platform' ? '−' : '+'}</span>
               </button>
-              
-              {expandedSection === 'platform' && (
-                <div className="accordion-content">
-                  {/* PLATFORM SUB-TABS */}
+              {expandedAccordion === 'platform' && (
+                <div className="accordion-body">
+                  {/* Platform Sub-tabs */}
                   <div className="platform-tabs">
-                    <button 
-                      className={`platform-tab ${platformTab === 'onpro' ? 'active' : ''}`}
-                      onClick={() => setPlatformTab('onpro')}
-                    >
-                      For OnPros
-                    </button>
-                    <button 
-                      className={`platform-tab ${platformTab === 'patron' ? 'active' : ''}`}
-                      onClick={() => setPlatformTab('patron')}
-                    >
-                      For Patrons
-                    </button>
-                    <button 
-                      className={`platform-tab ${platformTab === 'venue' ? 'active' : ''}`}
-                      onClick={() => setPlatformTab('venue')}
-                    >
-                      For Venues
-                    </button>
-                    <button 
-                      className={`platform-tab ${platformTab === 'science' ? 'active' : ''}`}
-                      onClick={() => setPlatformTab('science')}
-                    >
-                      The Science
-                    </button>
+                    <button className={`ptab ${platformTab === 'onpro' ? 'active' : ''}`} onClick={() => setPlatformTab('onpro')}>For OnPros</button>
+                    <button className={`ptab ${platformTab === 'patron' ? 'active' : ''}`} onClick={() => setPlatformTab('patron')}>For Patrons</button>
+                    <button className={`ptab ${platformTab === 'venue' ? 'active' : ''}`} onClick={() => setPlatformTab('venue')}>For Venues</button>
+                    <button className={`ptab ${platformTab === 'science' ? 'active' : ''}`} onClick={() => setPlatformTab('science')}>The Science</button>
                   </div>
                   
-                  {/* ONPRO FEATURE */}
+                  {/* OnPro Content */}
                   {platformTab === 'onpro' && (
                     <div className="platform-content">
-                      <div className="feature">
+                      <div className="feature-block">
                         <div className="feature-screenshots">
-                          <img src="/screenshots/onpro-assessment-dashboard.jpg" alt="OnPro DAPA Assessment Dashboard" className="screenshot" onClick={() => setLightboxImage('/screenshots/onpro-assessment-dashboard.jpg')} />
-                          <img src="/screenshots/onpro-skills-catagories.jpg" alt="OnPro Skills Categories" className="screenshot" onClick={() => setLightboxImage('/screenshots/onpro-skills-catagories.jpg')} />
-                          <img src="/screenshots/onpro-profile-status.jpg" alt="OnPro Profile Status" className="screenshot" onClick={() => setLightboxImage('/screenshots/onpro-profile-status.jpg')} />
+                          <img src="/screenshots/onpro-assessment-dashboard.jpg" alt="DAPA Dashboard" className="screenshot" onClick={() => setLightboxImage('/screenshots/onpro-assessment-dashboard.jpg')} />
+                          <img src="/screenshots/onpro-skills-catagories.jpg" alt="Skills Categories" className="screenshot" onClick={() => setLightboxImage('/screenshots/onpro-skills-catagories.jpg')} />
+                          <img src="/screenshots/onpro-profile-status.jpg" alt="Profile Status" className="screenshot" onClick={() => setLightboxImage('/screenshots/onpro-profile-status.jpg')} />
                         </div>
                         <div className="feature-info">
-                          <div className="feature-tag">FOR PROFESSIONALS</div>
+                          <span className="feature-tag">FOR PROFESSIONALS</span>
                           <h3>OnPro: Portable Career</h3>
-                          <p className="feature-lead">Your professional identity follows you from venue to venue. Skills verified through our proprietary DAPA system. Customers follow YOU, not the venue.</p>
-                          <div className="feature-details">
-                            <div className="detail-section">
-                              <h4>🎯 Verified Professional Identity</h4>
-                              <p>DAPA assessment proves your expertise across 6 dimensions: Technical, Ethical, Emotional Intelligence, Velocity, Commercial, and Leadership.</p>
+                          <p>Your professional identity follows you from venue to venue. Skills verified through DAPA. Customers follow YOU, not the venue.</p>
+                          
+                          <div className="feature-list">
+                            <div className="feature-item">
+                              <strong>🎯 Verified Identity</strong>
+                              <p>DAPA assessment proves expertise across 6 dimensions: Technical, Ethical, Emotional, Velocity, Commercial, Leadership.</p>
                             </div>
-                            <div className="detail-section">
-                              <h4>📊 Professional Genome</h4>
-                              <p>Comprehensive personality profile that goes beyond skills. Share with venues to showcase your complete professional identity.</p>
+                            <div className="feature-item">
+                              <strong>📊 Professional Genome</strong>
+                              <p>Comprehensive personality profile that goes beyond skills. Share with venues to showcase your complete identity.</p>
                             </div>
-                            <div className="detail-section">
-                              <h4>👥 Portable Customer Base</h4>
-                              <p>Your regulars follow you. Check-in tracking and relationship management prove your value to any venue.</p>
+                            <div className="feature-item">
+                              <strong>👥 Portable Customer Base</strong>
+                              <p>Your regulars follow you. Check-in tracking proves your value to any venue.</p>
                             </div>
-                            <div className="detail-section">
-                              <h4>📈 Career Analytics</h4>
-                              <p>Track your professional growth. See your check-in trends, regular retention, and earning potential over time.</p>
+                            <div className="feature-item">
+                              <strong>📈 Career Analytics</strong>
+                              <p>Track professional growth, check-in trends, regular retention, and earning potential over time.</p>
                             </div>
                           </div>
-                          <div className="feature-price">
-                            <div className="price-tier free">
-                              <div className="tier-badge">ALWAYS FREE</div>
-                              <div className="tier-name">OnPro Basic</div>
+                          
+                          <div className="pricing-grid">
+                            <div className="price-card free">
+                              <span className="price-badge">ALWAYS FREE</span>
+                              <h4>OnPro Basic</h4>
                               <ul>
                                 <li>Complete DAPA assessment</li>
                                 <li>Professional profile</li>
@@ -555,9 +472,9 @@ export default function LandingPage() {
                                 <li>Basic analytics</li>
                               </ul>
                             </div>
-                            <div className="price-tier premium">
-                              <div className="tier-badge">PREMIUM</div>
-                              <div className="tier-name">OnPro Pro <span>$10/month</span></div>
+                            <div className="price-card premium">
+                              <span className="price-badge">PREMIUM</span>
+                              <h4>OnPro Pro <span>$10/mo</span></h4>
                               <ul>
                                 <li>Everything in Basic</li>
                                 <li>Advanced analytics</li>
@@ -569,210 +486,176 @@ export default function LandingPage() {
                         </div>
                       </div>
                       
-                      {/* DAPA SKILLS ASSESSMENT */}
+                      {/* DAPA Grid */}
                       <div className="dapa-section">
-                        <h3>DAPA Professional Assessment</h3>
-                        <p className="section-subtitle">The industry's only comprehensive skills verification system. 1,600+ questions across 6 professional dimensions.</p>
+                        <h4>DAPA Professional Assessment</h4>
+                        <p>1,600+ questions across 6 professional dimensions</p>
                         <div className="dapa-grid">
-                          <div className="dapa-item">
-                            <div className="dapa-icon technical">🎯</div>
-                            <h4>Technical</h4>
-                            <p>Knowledge, procedures, problem-solving</p>
-                          </div>
-                          <div className="dapa-item">
-                            <div className="dapa-icon ethical">⚖️</div>
-                            <h4>Ethical</h4>
-                            <p>Integrity, compliance, judgment</p>
-                          </div>
-                          <div className="dapa-item">
-                            <div className="dapa-icon emotional">💚</div>
-                            <h4>Emotional</h4>
-                            <p>Empathy, relationships, boundaries</p>
-                          </div>
-                          <div className="dapa-item">
-                            <div className="dapa-icon velocity">⚡</div>
-                            <h4>Velocity</h4>
-                            <p>Speed, pressure, crisis management</p>
-                          </div>
-                          <div className="dapa-item">
-                            <div className="dapa-icon commercial">💰</div>
-                            <h4>Commercial</h4>
-                            <p>Sales, upselling, revenue awareness</p>
-                          </div>
-                          <div className="dapa-item">
-                            <div className="dapa-icon leadership">👑</div>
-                            <h4>Leadership</h4>
-                            <p>Team dynamics, mentoring, initiative</p>
-                          </div>
+                          <div className="dapa-card"><span>🎯</span><strong>Technical</strong><small>Knowledge, procedures</small></div>
+                          <div className="dapa-card"><span>⚖️</span><strong>Ethical</strong><small>Integrity, judgment</small></div>
+                          <div className="dapa-card"><span>💚</span><strong>Emotional</strong><small>Empathy, boundaries</small></div>
+                          <div className="dapa-card"><span>⚡</span><strong>Velocity</strong><small>Speed, pressure</small></div>
+                          <div className="dapa-card"><span>💰</span><strong>Commercial</strong><small>Sales, revenue</small></div>
+                          <div className="dapa-card"><span>👑</span><strong>Leadership</strong><small>Team, mentoring</small></div>
                         </div>
                       </div>
                       
-                      {/* ONPRO ARCHETYPES */}
-                      <div className="archetypes-section">
-                        <h3>Professional Archetypes</h3>
-                        <p className="section-subtitle">12 professional personality profiles discovered through DAPA assessment.</p>
-                        <p className="click-instruction">Click any archetype to learn more →</p>
-                        <div className="genome-grid">
-                          {Object.entries(archetypes).filter(([key, arch]) => arch.type === 'onpro').map(([key, arch]) => (
-                            <button
-                              key={key}
-                              className={`genome-item ${selectedArchetype === key ? 'active' : ''} ${arch.type}`}
-                              onClick={() => setSelectedArchetype(selectedArchetype === key ? null : key)}
-                            >
-                              <span className="genome-emoji">{arch.emoji}</span>
-                              <span className="genome-name">{arch.name}</span>
+                      {/* OnPro Archetypes */}
+                      <div className="archetype-section">
+                        <h4>12 Professional Archetypes</h4>
+                        <p>Discovered through DAPA assessment</p>
+                        <div className="archetype-grid">
+                          {Object.entries(archetypes).filter(([,a]) => a.type === 'onpro').map(([key, arch]) => (
+                            <button key={key} className={`archetype-btn ${selectedArchetype === key ? 'active' : ''}`} onClick={() => setSelectedArchetype(selectedArchetype === key ? null : key)}>
+                              <span>{arch.emoji}</span>
+                              <small>{arch.name}</small>
                             </button>
                           ))}
                         </div>
                         {selectedArchetype && archetypes[selectedArchetype]?.type === 'onpro' && (
-                          <div className="genome-detail">
-                            <div className="genome-detail-header">
-                              <span className="genome-detail-emoji">{archetypes[selectedArchetype].emoji}</span>
-                              <h3>{archetypes[selectedArchetype].name}</h3>
-                            </div>
+                          <div className="archetype-detail">
+                            <span className="arch-emoji">{archetypes[selectedArchetype].emoji}</span>
+                            <h5>{archetypes[selectedArchetype].name}</h5>
                             <p>{archetypes[selectedArchetype].desc}</p>
-                            <button onClick={() => setSelectedArchetype(null)} className="btn-close">Close</button>
+                            <button onClick={() => setSelectedArchetype(null)}>Close</button>
                           </div>
                         )}
                       </div>
                     </div>
                   )}
 
-                  {/* PATRON FEATURE */}
+                  {/* Patron Content */}
                   {platformTab === 'patron' && (
                     <div className="platform-content">
-                      <div className="feature feature-reverse">
-                        <div className="feature-screenshots four-shots">
-                          <img src="/screenshots/patron-genome-result.jpg" alt="Patron OnScene Genome Result" className="screenshot" onClick={() => setLightboxImage('/screenshots/patron-genome-result.jpg')} />
+                      <div className="feature-block reverse">
+                        <div className="feature-screenshots grid-2x2">
+                          <img src="/screenshots/patron-genome-result.jpg" alt="Genome Result" className="screenshot" onClick={() => setLightboxImage('/screenshots/patron-genome-result.jpg')} />
                           <img src="/screenshots/patron-profile.jpg" alt="Patron Profile" className="screenshot" onClick={() => setLightboxImage('/screenshots/patron-profile.jpg')} />
-                          <img src="/screenshots/patron-mypeople.jpg" alt="Patron MyPeople Status" className="screenshot" onClick={() => setLightboxImage('/screenshots/patron-mypeople.jpg')} />
-                          <img src="/screenshots/patron-my-spots.jpg" alt="Patron MySpots Tracking" className="screenshot" onClick={() => setLightboxImage('/screenshots/patron-my-spots.jpg')} />
+                          <img src="/screenshots/patron-mypeople.jpg" alt="My People" className="screenshot" onClick={() => setLightboxImage('/screenshots/patron-mypeople.jpg')} />
+                          <img src="/screenshots/patron-my-spots.jpg" alt="My Spots" className="screenshot" onClick={() => setLightboxImage('/screenshots/patron-my-spots.jpg')} />
                         </div>
                         <div className="feature-info">
-                          <div className="feature-tag">FOR CUSTOMERS</div>
+                          <span className="feature-tag">FOR CUSTOMERS</span>
                           <h3>Patron: Find Your People</h3>
-                          <p className="feature-lead">Follow your favorite hospitality professionals. See who's working tonight. Never lose touch when they change venues.</p>
-                          <div className="feature-details">
-                            <div className="detail-section">
-                              <h4>🔔 Real-Time OnTonight Status</h4>
-                              <p>See which of your regular OnPros are working right now. Get notifications when they clock in.</p>
+                          <p>Follow your favorite hospitality professionals. See who's working tonight. Never lose touch when they change venues.</p>
+                          
+                          <div className="feature-list">
+                            <div className="feature-item">
+                              <strong>🔔 Real-Time Status</strong>
+                              <p>See which OnPros are working right now. Get notified when they clock in.</p>
                             </div>
-                            <div className="detail-section">
-                              <h4>🧬 OnScene Genome</h4>
-                              <p>Discover your hospitality personality across 10 dimensions. Get matched with OnPros and venues that fit your style.</p>
+                            <div className="feature-item">
+                              <strong>🧬 OnScene Genome</strong>
+                              <p>Discover your hospitality personality. Get matched with OnPros and venues that fit your style.</p>
                             </div>
-                            <div className="detail-section">
-                              <h4>⭐ Check-Ins & Regulars</h4>
-                              <p>Track your favorite spots. Build regular status with OnPros. Unlock VIP treatment.</p>
+                            <div className="feature-item">
+                              <strong>⭐ Check-Ins & Regulars</strong>
+                              <p>Track your favorites. Build regular status. Unlock VIP treatment.</p>
                             </div>
-                            <div className="detail-section">
-                              <h4>🎯 Smart Venue Matching</h4>
-                              <p>Get personalized venue recommendations based on your genome and the OnPros you follow.</p>
+                            <div className="feature-item">
+                              <strong>🎯 Smart Matching</strong>
+                              <p>Personalized recommendations based on your genome and the OnPros you follow.</p>
                             </div>
                           </div>
-                          <div className="feature-price">
-                            <div className="price-tier free">
-                              <div className="tier-badge">FREE FOREVER</div>
-                              <div className="tier-name">Patron Basic</div>
+                          
+                          <div className="pricing-grid">
+                            <div className="price-card free">
+                              <span className="price-badge">FREE FOREVER</span>
+                              <h4>Patron Basic</h4>
                               <ul>
                                 <li>Follow unlimited OnPros</li>
-                                <li>See real-time OnTonight status</li>
-                                <li>Search venues & professionals</li>
+                                <li>Real-time status</li>
+                                <li>Search venues</li>
                                 <li>Basic check-ins</li>
                               </ul>
                             </div>
-                            <div className="price-tier premium">
-                              <div className="tier-badge">PREMIUM</div>
-                              <div className="tier-name">Patron Plus <span>$5/month</span></div>
+                            <div className="price-card premium">
+                              <span className="price-badge">PREMIUM</span>
+                              <h4>Patron Plus <span>$5/mo</span></h4>
                               <ul>
                                 <li>Everything in Basic</li>
-                                <li>OnScene Genome assessment</li>
+                                <li>OnScene Genome</li>
                                 <li>Push notifications</li>
-                                <li>Advanced venue matching</li>
+                                <li>Advanced matching</li>
                               </ul>
                             </div>
                           </div>
                         </div>
                       </div>
                       
-                      {/* PATRON ARCHETYPES */}
-                      <div className="archetypes-section">
-                        <h3>OnScene Genome Archetypes</h3>
-                        <p className="section-subtitle">12 social profiles that define your hospitality personality.</p>
-                        <p className="click-instruction">Click any archetype to learn more →</p>
-                        <div className="genome-grid">
-                          {Object.entries(archetypes).filter(([key, arch]) => arch.type === 'patron').map(([key, arch]) => (
-                            <button
-                              key={key}
-                              className={`genome-item ${selectedArchetype === key ? 'active' : ''} ${arch.type}`}
-                              onClick={() => setSelectedArchetype(selectedArchetype === key ? null : key)}
-                            >
-                              <span className="genome-emoji">{arch.emoji}</span>
-                              <span className="genome-name">{arch.name}</span>
+                      {/* Patron Archetypes */}
+                      <div className="archetype-section">
+                        <h4>12 Social Archetypes</h4>
+                        <p>OnScene Genome personality profiles</p>
+                        <div className="archetype-grid">
+                          {Object.entries(archetypes).filter(([,a]) => a.type === 'patron').map(([key, arch]) => (
+                            <button key={key} className={`archetype-btn patron ${selectedArchetype === key ? 'active' : ''}`} onClick={() => setSelectedArchetype(selectedArchetype === key ? null : key)}>
+                              <span>{arch.emoji}</span>
+                              <small>{arch.name}</small>
                             </button>
                           ))}
                         </div>
                         {selectedArchetype && archetypes[selectedArchetype]?.type === 'patron' && (
-                          <div className="genome-detail">
-                            <div className="genome-detail-header">
-                              <span className="genome-detail-emoji">{archetypes[selectedArchetype].emoji}</span>
-                              <h3>{archetypes[selectedArchetype].name}</h3>
-                            </div>
+                          <div className="archetype-detail patron">
+                            <span className="arch-emoji">{archetypes[selectedArchetype].emoji}</span>
+                            <h5>{archetypes[selectedArchetype].name}</h5>
                             <p>{archetypes[selectedArchetype].desc}</p>
-                            <button onClick={() => setSelectedArchetype(null)} className="btn-close">Close</button>
+                            <button onClick={() => setSelectedArchetype(null)}>Close</button>
                           </div>
                         )}
                       </div>
                     </div>
                   )}
 
-                  {/* VENUE FEATURE */}
+                  {/* Venue Content */}
                   {platformTab === 'venue' && (
                     <div className="platform-content">
-                      <div className="feature">
-                        <div className="feature-screenshots single-shot">
-                          <img src="/screenshots/venue-analytics-dashboard.jpg" alt="Venue Analytics Dashboard" className="screenshot large" onClick={() => setLightboxImage('/screenshots/venue-analytics-dashboard.jpg')} />
+                      <div className="feature-block">
+                        <div className="feature-screenshots single">
+                          <img src="/screenshots/venue-analytics-dashboard.jpg" alt="Venue Dashboard" className="screenshot large" onClick={() => setLightboxImage('/screenshots/venue-analytics-dashboard.jpg')} />
                         </div>
                         <div className="feature-info">
-                          <div className="feature-tag">FOR VENUES</div>
+                          <span className="feature-tag">FOR VENUES</span>
                           <h3>Venue: Retain Talent</h3>
-                          <p className="feature-lead">Recruit DAPA-verified professionals. Showcase your team. Reduce turnover costs. Track staff impact.</p>
-                          <div className="feature-details">
-                            <div className="detail-section">
-                              <h4>🎯 Recruit Verified Talent</h4>
-                              <p>Search for DAPA-verified OnPros by skill level, specialty, and availability.</p>
+                          <p>Recruit DAPA-verified professionals. Showcase your team. Reduce turnover. Track staff impact.</p>
+                          
+                          <div className="feature-list">
+                            <div className="feature-item">
+                              <strong>🎯 Recruit Verified Talent</strong>
+                              <p>Search DAPA-verified OnPros by skill, specialty, and availability.</p>
                             </div>
-                            <div className="detail-section">
-                              <h4>👥 Team Showcase</h4>
-                              <p>Feature your verified OnPros on your venue profile. Attract patrons who follow your staff.</p>
+                            <div className="feature-item">
+                              <strong>👥 Team Showcase</strong>
+                              <p>Feature your OnPros on your profile. Attract patrons who follow your staff.</p>
                             </div>
-                            <div className="detail-section">
-                              <h4>📊 Staff Analytics</h4>
+                            <div className="feature-item">
+                              <strong>📊 Staff Analytics</strong>
                               <p>Track check-ins by staff member. See which OnPros bring the most regulars.</p>
                             </div>
-                            <div className="detail-section">
-                              <h4>🔄 Reduce Turnover</h4>
-                              <p>Compete on culture, not just wages. Create a destination venue where talent wants to stay.</p>
+                            <div className="feature-item">
+                              <strong>🔄 Reduce Turnover</strong>
+                              <p>Compete on culture. Create a destination where talent wants to stay.</p>
                             </div>
                           </div>
-                          <div className="feature-price">
-                            <div className="price-tier trial">
-                              <div className="tier-badge">3-MONTH FREE TRIAL</div>
-                              <div className="tier-name">Venue Starter</div>
+                          
+                          <div className="pricing-grid">
+                            <div className="price-card trial">
+                              <span className="price-badge">3-MONTH FREE</span>
+                              <h4>Venue Starter</h4>
                               <ul>
-                                <li>Complete venue profile</li>
-                                <li>Team member verification</li>
+                                <li>Complete profile</li>
+                                <li>Team verification</li>
                                 <li>Basic analytics</li>
                                 <li>Customer check-ins</li>
                               </ul>
                             </div>
-                            <div className="price-tier premium">
-                              <div className="tier-badge">PROFESSIONAL</div>
-                              <div className="tier-name">Venue Pro <span>From $50/month</span></div>
+                            <div className="price-card premium">
+                              <span className="price-badge">PROFESSIONAL</span>
+                              <h4>Venue Pro <span>From $50/mo</span></h4>
                               <ul>
                                 <li>Everything in Starter</li>
                                 <li>Advanced analytics</li>
-                                <li>Staff recruitment tools</li>
+                                <li>Recruitment tools</li>
                                 <li>Premium placement</li>
                               </ul>
                             </div>
@@ -780,113 +663,66 @@ export default function LandingPage() {
                         </div>
                       </div>
                       
-                      {/* VENUE BENEFITS */}
-                      <div className="venue-benefits">
-                        <h3>Why Venues Partner With OnTonight</h3>
-                        <div className="venue-benefits-grid">
-                          <div className="venue-benefit">
-                            <h4>🎯 Recruit With Confidence</h4>
-                            <p>Access a pool of DAPA-certified professionals with verified skills across 6 dimensions.</p>
-                          </div>
-                          <div className="venue-benefit">
-                            <h4>📊 Understand Your Team</h4>
-                            <p>Real-time analytics show which staff members drive customer traffic and maintain regulars.</p>
-                          </div>
-                          <div className="venue-benefit">
-                            <h4>🌟 Attract Better Customers</h4>
-                            <p>Patrons follow OnPros. Your verified talent becomes a customer acquisition engine.</p>
-                          </div>
-                          <div className="venue-benefit">
-                            <h4>💼 Compete on Culture</h4>
-                            <p>Showcase your team's expertise. Win talent wars by proving you develop careers.</p>
-                          </div>
+                      {/* Venue Benefits */}
+                      <div className="benefits-grid">
+                        <div className="benefit-card">
+                          <h5>🎯 Recruit With Confidence</h5>
+                          <p>Access DAPA-certified professionals with verified skills across 6 dimensions.</p>
+                        </div>
+                        <div className="benefit-card">
+                          <h5>📊 Understand Your Team</h5>
+                          <p>Real-time analytics show which staff drive traffic and maintain regulars.</p>
+                        </div>
+                        <div className="benefit-card">
+                          <h5>🌟 Attract Better Customers</h5>
+                          <p>Patrons follow OnPros. Your verified talent becomes a customer acquisition engine.</p>
+                        </div>
+                        <div className="benefit-card">
+                          <h5>💼 Compete on Culture</h5>
+                          <p>Showcase expertise. Win talent wars by proving you develop careers.</p>
                         </div>
                       </div>
                     </div>
                   )}
 
-                  {/* THE SCIENCE */}
+                  {/* Science Content */}
                   {platformTab === 'science' && (
                     <div className="platform-content">
-                      {/* DAPA DEEP DIVE */}
-                      <div className="science-block dapa-block">
+                      <div className="science-block dapa">
                         <div className="science-header">
-                          <h3>DAPA: Professional Certification</h3>
+                          <h4>DAPA: Professional Certification</h4>
                           <span className="science-badge onpro">For OnPros</span>
                         </div>
-                        <p className="science-lead">DAPA (Dynamic Adaptive Proficiency Assessment) is the hospitality industry's first comprehensive professional certification system. Unlike traditional skills tests, DAPA measures both technical competence and moral judgment across six critical dimensions.</p>
-                        
+                        <p>DAPA (Dynamic Adaptive Proficiency Assessment) is hospitality's first comprehensive professional certification. Measures technical competence AND moral judgment across 6 dimensions.</p>
                         <div className="science-features">
-                          <div className="science-feature">
-                            <h4>📐 Adaptive Algorithm</h4>
-                            <p>Questions adjust in real-time based on your answers. High performers face increasingly complex scenarios.</p>
-                          </div>
-                          <div className="science-feature">
-                            <h4>⚖️ Moral Gradient Scoring</h4>
-                            <p>Every question has multiple "correct" answers—but they're not equal. We measure how you think, not just what you know.</p>
-                          </div>
-                          <div className="science-feature">
-                            <h4>🎯 Six-Axis Measurement</h4>
-                            <p>Technical, Ethical, Emotional, Velocity, Commercial, and Leadership. A complete professional genome.</p>
-                          </div>
-                          <div className="science-feature">
-                            <h4>🔬 Continuous Validation</h4>
-                            <p>1,600+ questions validated against real-world performance data. The system learns and improves.</p>
-                          </div>
-                        </div>
-                        
-                        <div className="dapa-grid">
-                          <div className="dapa-item"><div className="dapa-icon technical">🎯</div><h4>Technical</h4><p>Knowledge, procedures</p></div>
-                          <div className="dapa-item"><div className="dapa-icon ethical">⚖️</div><h4>Ethical</h4><p>Integrity, judgment</p></div>
-                          <div className="dapa-item"><div className="dapa-icon emotional">💚</div><h4>Emotional</h4><p>Empathy, boundaries</p></div>
-                          <div className="dapa-item"><div className="dapa-icon velocity">⚡</div><h4>Velocity</h4><p>Speed, pressure</p></div>
-                          <div className="dapa-item"><div className="dapa-icon commercial">💰</div><h4>Commercial</h4><p>Sales, revenue</p></div>
-                          <div className="dapa-item"><div className="dapa-icon leadership">👑</div><h4>Leadership</h4><p>Team, mentoring</p></div>
+                          <div><strong>📐 Adaptive Algorithm</strong><p>Questions adjust in real-time. High performers face complex scenarios.</p></div>
+                          <div><strong>⚖️ Moral Gradient</strong><p>Multiple "correct" answers scored differently. We measure how you think.</p></div>
+                          <div><strong>🎯 Six-Axis</strong><p>Technical, Ethical, Emotional, Velocity, Commercial, Leadership.</p></div>
+                          <div><strong>🔬 Validated</strong><p>1,600+ questions validated against real-world performance data.</p></div>
                         </div>
                       </div>
                       
-                      {/* ONSCENE GENOME DEEP DIVE */}
-                      <div className="science-block genome-block">
+                      <div className="science-block genome">
                         <div className="science-header">
-                          <h3>OnScene Genome: Social Identity</h3>
+                          <h4>OnScene Genome: Social Identity</h4>
                           <span className="science-badge patron">For Patrons</span>
                         </div>
-                        <p className="science-lead">OnScene Genome maps your hospitality personality across 10 behavioral dimensions. It's not about demographics—it's about how you experience and create social moments.</p>
-                        
+                        <p>Maps your hospitality personality across 10 behavioral dimensions. Not demographics—how you experience and create social moments.</p>
                         <div className="science-features">
-                          <div className="science-feature">
-                            <h4>🧬 45 Behavioral Questions</h4>
-                            <p>Not "What do you like?" but "How do you behave?" We map decision-making patterns.</p>
-                          </div>
-                          <div className="science-feature">
-                            <h4>📊 10 Social Dimensions</h4>
-                            <p>Adventure vs. Familiarity. Solo vs. Social. Discerning vs. Exploratory. Ten behavioral spectrums.</p>
-                          </div>
-                          <div className="science-feature">
-                            <h4>🎯 Archetype Matching</h4>
-                            <p>12 distinct social archetypes with unique venue preferences and OnPro compatibility patterns.</p>
-                          </div>
-                          <div className="science-feature">
-                            <h4>🔄 Pattern Recognition</h4>
-                            <p>As you use OnTonight, check-ins and interactions refine your profile. Your genome evolves.</p>
-                          </div>
+                          <div><strong>🧬 45 Questions</strong><p>"How do you behave?" not "What do you like?" We map decision patterns.</p></div>
+                          <div><strong>📊 10 Dimensions</strong><p>Adventure vs. Familiarity. Solo vs. Social. Ten behavioral spectrums.</p></div>
+                          <div><strong>🎯 12 Archetypes</strong><p>Distinct profiles with venue preferences and OnPro compatibility.</p></div>
+                          <div><strong>🔄 Evolving</strong><p>Check-ins and interactions refine your profile over time.</p></div>
                         </div>
                       </div>
                       
-                      {/* WHY BOTH MATTER */}
-                      <div className="science-block combined-block">
-                        <h3>Two Systems, One Platform</h3>
+                      <div className="science-combined">
+                        <h4>Two Systems, One Platform</h4>
                         <div className="combined-grid">
-                          <div className="combined-item">
-                            <h4 style={{color: 'rgba(34,197,94,1)'}}>DAPA (OnPro)</h4>
-                            <p>Measures professional capability and work style. Verifies skills. Creates portable professional identity.</p>
-                          </div>
-                          <div className="combined-item">
-                            <h4 style={{color: 'rgba(139,92,246,1)'}}>OnScene Genome (Patron)</h4>
-                            <p>Measures social behavior and hospitality preferences. Matches people to experiences.</p>
-                          </div>
+                          <div><strong style={{color:'#22c55e'}}>DAPA (OnPro)</strong><p>Measures professional capability. Verifies skills. Creates portable identity.</p></div>
+                          <div><strong style={{color:'#8b5cf6'}}>OnScene Genome (Patron)</strong><p>Measures social behavior. Matches people to experiences.</p></div>
                         </div>
-                        <p className="combined-conclusion">Together, they create a complete hospitality identity ecosystem. Everyone benefits from accurate, actionable identity data.</p>
+                        <p className="combined-note">Together, they create a complete hospitality identity ecosystem.</p>
                       </div>
                     </div>
                   )}
@@ -894,99 +730,85 @@ export default function LandingPage() {
               )}
             </div>
 
-            {/* ACCORDION: THE VISION */}
-            <div className={`accordion ${expandedSection === 'vision' ? 'expanded' : ''}`}>
-              <button 
-                className="accordion-header"
-                onClick={() => setExpandedSection(expandedSection === 'vision' ? null : 'vision')}
-              >
-                <span className="accordion-icon">💡</span>
-                <span className="accordion-title">The Vision & Founder Story</span>
-                <span className="accordion-arrow">{expandedSection === 'vision' ? '−' : '+'}</span>
+            {/* ACCORDION: The Vision */}
+            <div className={`accordion ${expandedAccordion === 'vision' ? 'open' : ''}`}>
+              <button className="accordion-header" onClick={() => setExpandedAccordion(expandedAccordion === 'vision' ? null : 'vision')}>
+                <span className="acc-icon">💡</span>
+                <span className="acc-title">The Vision & Founder Story</span>
+                <span className="acc-arrow">{expandedAccordion === 'vision' ? '−' : '+'}</span>
               </button>
-              
-              {expandedSection === 'vision' && (
-                <div className="accordion-content">
-                  <div className="vision-content">
-                    {/* FOUNDER INTRODUCTION */}
-                    <div className="founder-intro">
-                      <div className="founder-photo-placeholder">
-                        <span style={{fontSize: '48px'}}>👤</span>
-                        <p style={{marginTop: '12px', fontSize: '13px', color: 'rgba(212,163,115,0.7)'}}>Photo Coming Soon</p>
-                      </div>
-                      <div className="founder-text">
-                        <h2>Hi, I'm Jack Joy, Founder of OnTonight.</h2>
-                        <p className="founder-tagline">27 years behind bars. One mission: end professional erasure in hospitality.</p>
-                      </div>
+              {expandedAccordion === 'vision' && (
+                <div className="accordion-body">
+                  <div className="founder-intro">
+                    <div className="founder-photo">
+                      <span>👤</span>
+                      <small>Photo Coming</small>
                     </div>
-
-                    <div className="vision-section">
-                      <h3>27 Years Behind the Bar</h3>
-                      <p>Twenty-seven years in hospitality. Not watching from an office—<em>living it</em>. Behind the stick where ice never stops flowing and the POS screen glows like a beacon through double shifts. Managing venues where every night is opening night. Training hundreds of professionals who became masters of their craft.</p>
-                      <p>I know what it means to be <em>good</em> at this work. The muscle memory that lets you build a perfect Manhattan in 37 seconds while defusing an argument two seats down. The emotional intelligence to spot a proposal about to happen or a breakup already unfolding.</p>
-                      <p className="vision-emphasis">And I've watched the best people I ever trained walk out the door—starting over from zero every time. Their regulars scattered. Their reputation reset. Their professional equity evaporated.</p>
-                      <p>The industry calls this "turnover." I call it what it is: <strong>systematic professional erasure</strong>.</p>
+                    <div className="founder-text">
+                      <h4>Hi, I'm Jack Joy, Founder of OnTonight.</h4>
+                      <p className="founder-tagline">27 years behind bars. One mission: end professional erasure in hospitality.</p>
                     </div>
-
-                    <div className="vision-section">
-                      <h3>The Pattern You Can't Unsee</h3>
-                      <p>Once you see it, you can't look away. Every industry has professional infrastructure except hospitality.</p>
-                      <p>Lawyers switch firms, but their bar membership follows them. Software engineers change companies—their GitHub stays with them. Real estate agents move brokerages and take their client databases.</p>
-                      <p className="vision-highlight">But a bartender changes venues and loses everything. Every. Single. Time.</p>
-                      <p>This isn't the nature of the industry. This is the <em>absence</em> of professional infrastructure. And absence isn't destiny—it's a problem waiting for a solution.</p>
-                    </div>
-
-                    <div className="vision-section">
-                      <h3>What OnTonight Actually Is</h3>
-                      <p className="vision-highlight">OnTonight is professional infrastructure—the kind that every other industry already has, finally built for hospitality.</p>
-                      <ul className="vision-list">
-                        <li><strong>For professionals:</strong> Your skills are verified through DAPA. Your identity is portable. Your customer relationships belong to YOU.</li>
-                        <li><strong>For customers:</strong> Your favorite bartender changes jobs? You get notified. The relationship doesn't end when the employment ends.</li>
-                        <li><strong>For venues:</strong> Recruit verified talent—not résumés and promises. Compete on culture instead of wages alone.</li>
-                      </ul>
-                      <p>This is professional dignity in software form. This is the infrastructure that should have existed decades ago.</p>
-                    </div>
-
-                    <div className="vision-cta">
-                      <h3>Join the Movement</h3>
-                      <p>We're live now in Tampa Bay, expanding to Miami, Nashville, Austin, and major hospitality markets nationwide.</p>
-                      <p className="cta-emphasis">We're not just building software. We're building the future of hospitality careers.</p>
-                      <button onClick={scrollToForm} className="btn-primary">Join the Waitlist</button>
-                      <p className="cta-note">First 2,000 signups get their first year free.</p>
-                    </div>
+                  </div>
+                  
+                  <div className="vision-block">
+                    <h4>27 Years Behind the Bar</h4>
+                    <p>Twenty-seven years in hospitality. Not watching from an office—<em>living it</em>. Behind the stick where ice never stops flowing. Managing venues where every night is opening night. Training hundreds of professionals.</p>
+                    <p>I know what it means to be <em>good</em> at this work. The muscle memory that builds a perfect Manhattan in 37 seconds while defusing an argument two seats down. The emotional intelligence to spot a proposal about to happen.</p>
+                    <p className="vision-emphasis">And I've watched the best people I ever trained walk out the door—starting over from zero every time. Their regulars scattered. Their reputation reset.</p>
+                    <p>The industry calls this "turnover." I call it what it is: <strong>systematic professional erasure</strong>.</p>
+                  </div>
+                  
+                  <div className="vision-block">
+                    <h4>The Pattern You Can't Unsee</h4>
+                    <p>Every industry has professional infrastructure except hospitality.</p>
+                    <p>Lawyers switch firms, but their bar membership follows. Software engineers change companies—their GitHub stays. Real estate agents take their client databases.</p>
+                    <p className="vision-highlight">But a bartender changes venues and loses everything. Every. Single. Time.</p>
+                    <p>This isn't the nature of the industry. This is the <em>absence</em> of professional infrastructure.</p>
+                  </div>
+                  
+                  <div className="vision-block">
+                    <h4>What OnTonight Actually Is</h4>
+                    <p className="vision-highlight">Professional infrastructure—the kind every other industry has, finally built for hospitality.</p>
+                    <ul className="vision-list">
+                      <li><strong>For professionals:</strong> Skills verified through DAPA. Identity portable. Customer relationships belong to YOU.</li>
+                      <li><strong>For customers:</strong> Favorite bartender changes jobs? You get notified. The relationship continues.</li>
+                      <li><strong>For venues:</strong> Recruit verified talent. Compete on culture instead of wages alone.</li>
+                    </ul>
+                  </div>
+                  
+                  <div className="vision-cta-block">
+                    <h4>Join the Movement</h4>
+                    <p>We're live in Tampa Bay, expanding to Miami, Nashville, Austin.</p>
+                    <p className="vision-cta-emphasis">We're not just building software. We're building the future of hospitality careers.</p>
+                    <button onClick={scrollToForm} className="vision-cta-btn">Join the Waitlist</button>
+                    <small>First 2,000 get their first year free.</small>
                   </div>
                 </div>
               )}
             </div>
 
-            {/* ACCORDION: MISSION */}
-            <div className={`accordion ${expandedSection === 'mission' ? 'expanded' : ''}`}>
-              <button 
-                className="accordion-header"
-                onClick={() => setExpandedSection(expandedSection === 'mission' ? null : 'mission')}
-              >
-                <span className="accordion-icon">🎯</span>
-                <span className="accordion-title">Our Mission</span>
-                <span className="accordion-arrow">{expandedSection === 'mission' ? '−' : '+'}</span>
+            {/* ACCORDION: Our Mission */}
+            <div className={`accordion ${expandedAccordion === 'mission' ? 'open' : ''}`}>
+              <button className="accordion-header" onClick={() => setExpandedAccordion(expandedAccordion === 'mission' ? null : 'mission')}>
+                <span className="acc-icon">🎯</span>
+                <span className="acc-title">Our Mission</span>
+                <span className="acc-arrow">{expandedAccordion === 'mission' ? '−' : '+'}</span>
               </button>
-              
-              {expandedSection === 'mission' && (
-                <div className="accordion-content">
-                  <div className="mission-content">
-                    <p className="mission-statement">OnTonight is building the professional infrastructure that hospitality deserves. We're not creating another discount app or social network—we're professionalizing an entire industry by giving workers portable careers, customers the ability to follow their people, and venues the tools to showcase their talent.</p>
-                    <div className="mission-pillars">
-                      <div className="pillar">
-                        <h4>For Professionals</h4>
-                        <p>Own your career. Your skills, your regulars, your professional identity—portable across venues.</p>
-                      </div>
-                      <div className="pillar">
-                        <h4>For Customers</h4>
-                        <p>Follow your people. Never lose touch with favorite bartenders, servers, and sommeliers again.</p>
-                      </div>
-                      <div className="pillar">
-                        <h4>For Venues</h4>
-                        <p>Compete on culture. Attract and retain verified talent. Prove your team's value with data.</p>
-                      </div>
+              {expandedAccordion === 'mission' && (
+                <div className="accordion-body">
+                  <p className="mission-statement">OnTonight is building professional infrastructure for hospitality. We're professionalizing an entire industry by giving workers portable careers, customers the ability to follow their people, and venues tools to showcase talent.</p>
+                  <div className="mission-pillars">
+                    <div className="pillar">
+                      <h5>For Professionals</h5>
+                      <p>Own your career. Skills, regulars, identity—portable across venues.</p>
+                    </div>
+                    <div className="pillar">
+                      <h5>For Customers</h5>
+                      <p>Follow your people. Never lose touch with favorite bartenders again.</p>
+                    </div>
+                    <div className="pillar">
+                      <h5>For Venues</h5>
+                      <p>Compete on culture. Attract verified talent. Prove your team's value.</p>
                     </div>
                   </div>
                 </div>
@@ -995,193 +817,142 @@ export default function LandingPage() {
           </div>
         </section>
 
-        {/* ============================================ */}
-        {/* LAYER 7: FINAL CTA */}
-        {/* ============================================ */}
+        {/* ========== SECTION 6: FINAL CTA ========== */}
         <section className="final-cta">
           <div className="container">
             <h2>Ready to Join?</h2>
-            <p>First 2,000 members get their first year FREE. Be part of the Tampa launch.</p>
-            <button onClick={scrollToForm} className="btn-primary large">
-              Join the Movement →
-            </button>
-            
+            <p>First 2,000 members get their first year FREE</p>
+            <button onClick={scrollToForm} className="final-btn">Join the Movement →</button>
             {showInstallPrompt && (
-              <button onClick={handleInstall} className="btn-install">
-                📱 Add to Home Screen
-              </button>
+              <button onClick={handleInstall} className="install-btn">📱 Add to Home Screen</button>
             )}
           </div>
         </section>
 
-        {/* FOOTER */}
+        {/* ========== FOOTER ========== */}
         <footer className="footer">
           <div className="container">
-            <div className="footer-content">
+            <div className="footer-top">
               <div className="footer-brand">
-                <div className="footer-logo">OnTonight</div>
-                <p className="footer-tagline">Where Regulars Are Made</p>
-                <p className="footer-location">Live Now · Tampa Bay → Miami · Nashville · Austin</p>
+                <span className="footer-logo">OnTonight</span>
+                <p>Where Regulars Are Made</p>
+                <small>Live Now · Tampa Bay → Miami · Nashville · Austin</small>
               </div>
               <div className="footer-links">
-                <div className="footer-col">
-                  <h5>Platform</h5>
+                <div className="link-col">
+                  <h6>Platform</h6>
                   <a href="#" onClick={(e) => { e.preventDefault(); scrollToForm(); }}>For OnPros</a>
                   <a href="#" onClick={(e) => { e.preventDefault(); scrollToForm(); }}>For Patrons</a>
                   <a href="#" onClick={(e) => { e.preventDefault(); scrollToForm(); }}>For Venues</a>
-                  <a href="#" onClick={(e) => { e.preventDefault(); setExpandedSection('platform'); scrollToDeepContent(); }}>DAPA Assessment</a>
                 </div>
-                <div className="footer-col">
-                  <h5>Company</h5>
-                  <a href="https://app.on-tonight.com/privacy">Privacy Policy</a>
-                  <a href="https://app.on-tonight.com/terms">Terms of Service</a>
-                  <a href="/contact">Contact Us</a>
-                  <a href="/careers">Careers</a>
+                <div className="link-col">
+                  <h6>Company</h6>
+                  <a href="https://app.on-tonight.com/privacy">Privacy</a>
+                  <a href="https://app.on-tonight.com/terms">Terms</a>
+                  <a href="/contact">Contact</a>
                 </div>
-                <div className="footer-col">
-                  <h5>Connect</h5>
+                <div className="link-col">
+                  <h6>Connect</h6>
                   <a href="/support">Support</a>
-                  <a href="/media">Media Inquiries</a>
-                  <a href="/partner">Partner With Us</a>
+                  <a href="/media">Media</a>
+                  <a href="/partner">Partner</a>
                 </div>
               </div>
             </div>
             <div className="footer-bottom">
-              <p>© 2025 OnTonight LLC. All rights reserved.</p>
-              <p>18+ only · Professional platform for hospitality industry</p>
+              <p>© 2025 OnTonight LLC. All rights reserved. 18+ only.</p>
             </div>
           </div>
         </footer>
 
-        {/* LIGHTBOX MODAL */}
+        {/* ========== LIGHTBOX ========== */}
         {lightboxImage && (
           <div className="lightbox" onClick={() => setLightboxImage(null)}>
-            <div className="lightbox-content">
-              <button className="lightbox-close" onClick={() => setLightboxImage(null)}>✕</button>
-              <img src={lightboxImage} alt="Screenshot enlarged" className="lightbox-image" />
-            </div>
+            <button className="lightbox-close">✕</button>
+            <img src={lightboxImage} alt="Screenshot" />
           </div>
         )}
       </div>
 
       <style jsx>{`
-        /* ============================================ */
-        /* BASE STYLES */
-        /* ============================================ */
+        /* ===== BASE ===== */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
-        .page { 
-          background: #0d1117;
+        .page {
+          background: #000;
           color: #f8fafc;
-          font-family: 'Urbanist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-          letter-spacing: -0.015em;
-          font-weight: 400;
+          font-family: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
           min-height: 100vh;
+          overflow-x: hidden;
         }
         
-        .container { 
+        .container {
           max-width: 1200px;
           margin: 0 auto;
           padding: 0 24px;
         }
-        
-        h1 { font-size: 56px; font-weight: 600; line-height: 1.1; letter-spacing: -0.025em; color: #f8fafc; }
-        h2 { font-size: 40px; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 16px; color: #f8fafc; }
-        h3 { font-size: 28px; font-weight: 600; letter-spacing: -0.015em; margin-bottom: 16px; color: #f8fafc; }
-        h4 { font-size: 16px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 8px; color: #f8fafc; }
-        h5 { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(248,250,252,0.4); margin-bottom: 14px; }
-        p { font-size: 16px; line-height: 1.7; color: rgba(248,250,252,0.75); margin-bottom: 16px; }
-        
-        .section-subtitle {
-          font-size: 18px;
-          color: rgba(248,250,252,0.6);
-          text-align: center;
-          margin-bottom: 48px;
-          max-width: 700px;
-          margin-left: auto;
-          margin-right: auto;
-        }
-        
-        .click-instruction {
-          font-size: 14px;
-          color: #d4a373;
-          text-align: center;
-          margin-bottom: 32px;
-          font-weight: 500;
-        }
 
-        /* ============================================ */
-        /* STICKY NAV BAR */
-        /* ============================================ */
+        /* ===== STICKY NAV ===== */
         .sticky-nav {
           position: fixed;
           top: 0;
           left: 0;
           right: 0;
-          background: rgba(13,17,23,0.95);
+          z-index: 1000;
+          background: rgba(0,0,0,0.85);
           backdrop-filter: blur(20px);
           border-bottom: 1px solid rgba(212,163,115,0.15);
-          z-index: 1000;
           transform: translateY(-100%);
           transition: transform 0.3s ease;
         }
-        
-        .sticky-nav.visible {
-          transform: translateY(0);
-        }
-        
-        .sticky-nav-content {
+        .sticky-nav.visible { transform: translateY(0); }
+        .sticky-inner {
           max-width: 1200px;
           margin: 0 auto;
           padding: 16px 24px;
           display: flex;
-          justify-content: space-between;
           align-items: center;
+          justify-content: space-between;
         }
-        
         .sticky-logo {
           font-size: 20px;
-          font-weight: 600;
+          font-weight: 700;
           color: #d4a373;
         }
-        
         .sticky-venues {
           font-size: 12px;
           color: rgba(248,250,252,0.5);
           letter-spacing: 0.05em;
         }
-        
         .sticky-cta {
           background: #d4a373;
-          color: #0d1117;
+          color: #000;
           border: none;
           padding: 10px 24px;
           font-size: 14px;
           font-weight: 600;
           cursor: pointer;
-          border-radius: 4px;
-          font-family: inherit;
+          border-radius: 6px;
           transition: all 0.2s;
         }
-        
-        .sticky-cta:hover {
-          opacity: 0.9;
-          transform: translateY(-1px);
-        }
+        .sticky-cta:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(212,163,115,0.3); }
 
-        /* ============================================ */
-        /* LAYER 1: HERO HOOK */
-        /* ============================================ */
-        .hero-hook {
+        /* ===== HERO ===== */
+        .hero {
           min-height: 100vh;
           display: flex;
           align-items: center;
           justify-content: center;
           position: relative;
           overflow: hidden;
-          background: #000;
         }
-        
+        .hero-grain {
+          position: absolute;
+          inset: 0;
+          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+          opacity: 0.03;
+          pointer-events: none;
+        }
         .hero-glow {
           position: absolute;
           top: 50%;
@@ -1190,389 +961,331 @@ export default function LandingPage() {
           width: 800px;
           height: 800px;
           background: radial-gradient(circle, rgba(212,163,115,0.08) 0%, transparent 70%);
-          pointer-events: none;
+          animation: pulse 4s ease-in-out infinite;
         }
-        
-        .hero-grain {
-          position: absolute;
-          inset: 0;
-          background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-          opacity: 0.03;
-          pointer-events: none;
+        @keyframes pulse {
+          0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+          50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
         }
-        
-        .hook-content {
+        .hero-content {
           text-align: center;
           z-index: 1;
+          padding: 24px;
         }
-        
-        .hook-badge {
-          display: inline-block;
-          font-size: 11px;
+        .hero-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 12px;
           font-weight: 600;
           letter-spacing: 0.15em;
           color: #d4a373;
-          border: 1px solid rgba(212,163,115,0.25);
-          padding: 10px 24px;
+          border: 1px solid rgba(212,163,115,0.3);
+          padding: 10px 20px;
+          border-radius: 100px;
           margin-bottom: 48px;
-          border-radius: 4px;
-          background: rgba(212,163,115,0.03);
         }
-        
-        .hook-title {
-          font-size: 72px;
-          font-weight: 600;
+        .badge-dot {
+          width: 8px;
+          height: 8px;
+          background: #22c55e;
+          border-radius: 50%;
+          animation: blink 2s infinite;
+        }
+        @keyframes blink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.3; }
+        }
+        .hero-title {
+          font-size: clamp(48px, 10vw, 80px);
+          font-weight: 700;
           line-height: 1.1;
           margin-bottom: 24px;
         }
-        
-        .title-line {
-          display: block;
-        }
-        
-        .hook-tagline {
-          font-size: 18px;
+        .title-line { display: block; }
+        .hero-tagline {
+          font-size: clamp(14px, 3vw, 20px);
           font-weight: 600;
-          letter-spacing: 0.2em;
-          color: #d4a373;
+          letter-spacing: 0.25em;
+          background: linear-gradient(90deg, #d4a373, #f4d3a3, #d4a373);
+          background-size: 200% auto;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          animation: shimmer 3s linear infinite;
           margin-bottom: 80px;
         }
-        
-        .scroll-indicator {
+        @keyframes shimmer {
+          to { background-position: 200% center; }
+        }
+        .scroll-hint {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
           animation: bounce 2s infinite;
         }
-        
-        .scroll-indicator span {
-          font-size: 32px;
-          color: rgba(212,163,115,0.5);
+        .scroll-arrow {
+          font-size: 28px;
+          color: rgba(212,163,115,0.6);
         }
-        
+        .scroll-text {
+          font-size: 12px;
+          color: rgba(248,250,252,0.4);
+          letter-spacing: 0.1em;
+        }
         @keyframes bounce {
           0%, 100% { transform: translateY(0); }
           50% { transform: translateY(10px); }
         }
 
-        /* ============================================ */
-        /* LAYER 2: EMOTIONAL HOOK */
-        /* ============================================ */
-        .emotional-hook {
+        /* ===== EMOTIONAL ===== */
+        .emotional {
           padding: 120px 24px;
-          background: linear-gradient(180deg, #000 0%, #0d1117 100%);
+          background: linear-gradient(180deg, #000 0%, #0a0a0f 100%);
         }
-        
-        .emotional-content {
+        .emotional-inner {
           max-width: 800px;
           margin: 0 auto;
           text-align: center;
         }
-        
-        .emotional-line {
-          font-size: 24px;
+        .emo-line {
+          font-size: clamp(18px, 4vw, 26px);
+          font-weight: 300;
           color: rgba(248,250,252,0.7);
-          margin-bottom: 32px;
           line-height: 1.6;
+          margin-bottom: 32px;
+          opacity: 0;
+          animation: fadeUp 0.8s ease forwards;
         }
-        
-        .emotional-line.emphasis {
+        .line-1 { animation-delay: 0.2s; }
+        .line-2 { animation-delay: 0.5s; }
+        .line-3 { animation-delay: 0.8s; }
+        .line-4 { animation-delay: 1.1s; }
+        .emo-line.highlight {
           color: #f8fafc;
           font-weight: 500;
-          font-size: 28px;
+          font-size: clamp(22px, 5vw, 32px);
         }
-        
-        .emotional-resolution {
-          font-size: 36px;
-          font-weight: 600;
+        .emo-resolution {
+          font-size: clamp(28px, 6vw, 42px);
+          font-weight: 700;
           color: #d4a373;
           margin-top: 48px;
+          opacity: 0;
+          animation: fadeUp 0.8s ease forwards;
+          animation-delay: 1.4s;
         }
-        
-        .fade-in { animation: fadeIn 0.8s ease forwards; opacity: 0; }
-        .delay-1 { animation-delay: 0.3s; }
-        .delay-2 { animation-delay: 0.6s; }
-        .delay-3 { animation-delay: 0.9s; }
-        .delay-4 { animation-delay: 1.2s; }
-        
-        @keyframes fadeIn {
-          to { opacity: 1; }
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ============================================ */
-        /* LAYER 3: INSTANT ACTION */
-        /* ============================================ */
-        .instant-action {
+        /* ===== SIGNUP ===== */
+        .signup-section {
           padding: 100px 24px;
-          background: #0d1117;
+          background: #0a0a0f;
         }
-        
-        .action-container {
+        .signup-container {
           max-width: 600px;
           margin: 0 auto;
           text-align: center;
         }
-        
-        .action-title {
+        .signup-title {
+          font-size: 40px;
+          font-weight: 700;
           margin-bottom: 12px;
         }
-        
-        .action-subtitle {
+        .signup-subtitle {
           font-size: 18px;
           color: #d4a373;
-          margin-bottom: 48px;
+          margin-bottom: 40px;
         }
-        
         .signup-card {
           background: rgba(212,163,115,0.03);
           border: 1px solid rgba(212,163,115,0.15);
+          backdrop-filter: blur(20px);
           padding: 48px;
-          border-radius: 12px;
+          border-radius: 16px;
+          box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
-        
-        .email-step {
+        .email-form {
           display: flex;
           gap: 12px;
         }
-        
         .email-input {
           flex: 1;
           padding: 18px 20px;
-          background: rgba(212,163,115,0.04);
+          background: rgba(255,255,255,0.05);
           border: 1px solid rgba(212,163,115,0.2);
+          border-radius: 8px;
           color: #f8fafc;
-          font-family: inherit;
           font-size: 16px;
-          border-radius: 6px;
-          transition: all 0.2s;
+          font-family: inherit;
         }
-        
         .email-input:focus {
           outline: none;
           border-color: #d4a373;
+          box-shadow: 0 0 0 3px rgba(212,163,115,0.1);
         }
-        
         .email-btn {
           background: #d4a373;
-          color: #0d1117;
+          color: #000;
           border: none;
           padding: 18px 32px;
           font-size: 16px;
           font-weight: 600;
           cursor: pointer;
-          border-radius: 6px;
-          font-family: inherit;
+          border-radius: 8px;
           white-space: nowrap;
           transition: all 0.2s;
+          animation: glow 2s infinite;
         }
-        
+        @keyframes glow {
+          0%, 100% { box-shadow: 0 0 20px rgba(212,163,115,0.3); }
+          50% { box-shadow: 0 0 30px rgba(212,163,115,0.5); }
+        }
         .email-btn:hover {
-          opacity: 0.9;
           transform: translateY(-2px);
         }
-        
-        .full-form {
-          text-align: left;
-        }
-        
+        .full-form { text-align: left; }
         .form-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
           gap: 16px;
-          margin-bottom: 24px;
+          margin-bottom: 20px;
         }
-        
-        .form-grid input,
-        .form-grid select {
+        .form-grid input, .form-grid select {
           width: 100%;
-          padding: 16px 18px;
-          background: rgba(212,163,115,0.04);
+          padding: 16px;
+          background: rgba(255,255,255,0.05);
           border: 1px solid rgba(212,163,115,0.15);
+          border-radius: 8px;
           color: #f8fafc;
-          font-family: inherit;
           font-size: 15px;
-          border-radius: 6px;
-          transition: all 0.2s;
+          font-family: inherit;
         }
-        
-        .form-grid input:focus,
-        .form-grid select:focus {
+        .form-grid input:focus, .form-grid select:focus {
           outline: none;
           border-color: #d4a373;
         }
-        
-        .form-disclaimer {
+        .form-legal {
           font-size: 12px;
           color: rgba(248,250,252,0.5);
-          margin-bottom: 24px;
           text-align: center;
+          margin-bottom: 20px;
         }
-        
         .submit-btn {
           width: 100%;
           background: #d4a373;
-          color: #0d1117;
+          color: #000;
           border: none;
           padding: 18px;
           font-size: 16px;
           font-weight: 600;
           cursor: pointer;
-          border-radius: 6px;
-          font-family: inherit;
+          border-radius: 8px;
           transition: all 0.2s;
         }
-        
-        .submit-btn:hover {
-          opacity: 0.9;
-        }
-        
-        .submit-btn:disabled {
-          opacity: 0.6;
-          cursor: not-allowed;
-        }
-        
+        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
         .success-card {
           padding: 48px;
           background: rgba(34,197,94,0.05);
           border: 1px solid rgba(34,197,94,0.2);
-          border-radius: 12px;
+          border-radius: 16px;
         }
-        
-        .success-icon {
-          font-size: 56px;
-          margin-bottom: 20px;
-        }
-        
-        .success-card h3 {
-          color: #22c55e;
-          margin-bottom: 12px;
-        }
-        
-        .action-note {
+        .success-icon { font-size: 56px; margin-bottom: 16px; }
+        .success-card h3 { color: #22c55e; margin-bottom: 8px; }
+        .signup-note {
           font-size: 14px;
           color: rgba(248,250,252,0.4);
           margin-top: 24px;
         }
 
-        /* ============================================ */
-        /* LAYER 4: IDENTITY CARDS */
-        /* ============================================ */
+        /* ===== IDENTITY CARDS ===== */
         .identity-section {
           padding: 100px 24px;
-          background: #161b22;
-          border-top: 1px solid rgba(212,163,115,0.1);
+          background: linear-gradient(180deg, #0a0a0f 0%, #0d1117 100%);
         }
-        
-        .identity-title {
+        .section-heading {
           text-align: center;
+          font-size: 40px;
+          font-weight: 700;
           margin-bottom: 12px;
         }
-        
-        .identity-subtitle {
+        .section-subhead {
           text-align: center;
+          font-size: 18px;
           color: rgba(248,250,252,0.6);
           margin-bottom: 56px;
         }
-        
-        .identity-cards {
+        .identity-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 24px;
-          margin-bottom: 56px;
+          margin-bottom: 48px;
         }
-        
         .identity-card {
-          background: rgba(212,163,115,0.03);
-          border: 1px solid rgba(212,163,115,0.12);
-          padding: 40px 32px;
-          border-radius: 12px;
+          background: rgba(255,255,255,0.02);
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 16px;
+          padding: 32px;
           cursor: pointer;
           transition: all 0.3s;
           position: relative;
         }
-        
         .identity-card:hover {
-          border-color: var(--card-color, rgba(212,163,115,0.4));
-          transform: translateY(-4px);
-          box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+          transform: translateY(-8px);
+          border-color: var(--card-accent);
+          box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
-        
         .identity-card.expanded {
-          border-color: var(--card-color, #d4a373);
-          background: rgba(212,163,115,0.06);
+          border-color: var(--card-accent);
+          background: rgba(255,255,255,0.04);
         }
-        
-        .card-header {
-          text-align: center;
+        .card-top { text-align: center; }
+        .card-emoji { font-size: 48px; display: block; margin-bottom: 16px; }
+        .card-title { font-size: 18px; font-weight: 600; margin-bottom: 8px; }
+        .card-subtitle { font-size: 14px; color: rgba(248,250,252,0.5); }
+        .card-toggle {
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          font-size: 24px;
+          color: rgba(248,250,252,0.3);
         }
-        
-        .card-emoji {
-          font-size: 48px;
-          display: block;
-          margin-bottom: 20px;
-        }
-        
-        .card-title {
-          font-size: 20px;
-          margin-bottom: 8px;
-        }
-        
-        .card-subtitle {
-          font-size: 14px;
-          color: rgba(248,250,252,0.5);
-        }
-        
         .card-expanded {
-          margin-top: 32px;
-          padding-top: 32px;
-          border-top: 1px solid rgba(212,163,115,0.15);
+          margin-top: 24px;
+          padding-top: 24px;
+          border-top: 1px solid rgba(255,255,255,0.08);
         }
-        
         .card-benefits {
           list-style: none;
           text-align: left;
-          margin-bottom: 24px;
+          margin-bottom: 20px;
         }
-        
         .card-benefits li {
           font-size: 14px;
           color: rgba(248,250,252,0.75);
           padding: 8px 0;
-          padding-left: 24px;
-          position: relative;
+          display: flex;
+          gap: 8px;
         }
-        
-        .card-benefits li::before {
-          content: '✓';
-          position: absolute;
-          left: 0;
-          color: var(--card-color, #d4a373);
-        }
-        
+        .benefit-arrow { color: var(--card-accent); }
         .card-cta {
           width: 100%;
-          background: var(--card-color, #d4a373);
-          color: #0d1117;
+          background: var(--card-accent);
+          color: #000;
           border: none;
           padding: 14px;
           font-size: 14px;
           font-weight: 600;
           cursor: pointer;
-          border-radius: 6px;
-          font-family: inherit;
+          border-radius: 8px;
           transition: all 0.2s;
         }
-        
-        .card-cta:hover {
-          opacity: 0.9;
-        }
-        
-        .card-expand-hint {
-          position: absolute;
-          top: 20px;
-          right: 20px;
-          font-size: 24px;
-          color: rgba(248,250,252,0.3);
-        }
-        
-        .learn-more-btn {
+        .card-cta:hover { opacity: 0.9; }
+        .explore-btn {
           display: block;
           margin: 0 auto;
           background: transparent;
@@ -1581,590 +1294,273 @@ export default function LandingPage() {
           padding: 16px 32px;
           font-size: 15px;
           cursor: pointer;
-          border-radius: 6px;
-          font-family: inherit;
+          border-radius: 8px;
           transition: all 0.2s;
         }
-        
-        .learn-more-btn:hover {
-          color: #d4a373;
-          border-color: rgba(212,163,115,0.4);
-        }
+        .explore-btn:hover { color: #d4a373; border-color: rgba(212,163,115,0.4); }
 
-        /* ============================================ */
-        /* LAYER 5: HOW IT WORKS */
-        /* ============================================ */
-        .how-section {
+        /* ===== DEEP CONTENT / ACCORDIONS ===== */
+        .deep-section {
           padding: 100px 24px;
           background: #0d1117;
-          text-align: center;
         }
-        
-        .how-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 48px;
-          margin-top: 56px;
-        }
-        
-        .how-item {
-          text-align: center;
-        }
-        
-        .how-number {
-          width: 56px;
-          height: 56px;
-          background: rgba(212,163,115,0.1);
-          border: 1px solid rgba(212,163,115,0.3);
-          border-radius: 50%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 24px;
-          font-weight: 600;
-          color: #d4a373;
-          margin: 0 auto 24px;
-        }
-        
-        .how-item h4 {
-          margin-bottom: 12px;
-        }
-        
-        .how-item p {
-          font-size: 15px;
-          color: rgba(248,250,252,0.65);
-        }
-
-        /* ============================================ */
-        /* LAYER 6: DEEP CONTENT - ACCORDIONS */
-        /* ============================================ */
-        .deep-content {
-          padding: 100px 24px;
-          background: #161b22;
-          border-top: 1px solid rgba(212,163,115,0.1);
-        }
-        
-        .deep-title {
-          text-align: center;
-          margin-bottom: 12px;
-        }
-        
-        .deep-subtitle {
-          text-align: center;
-          color: rgba(248,250,252,0.6);
-          margin-bottom: 56px;
-        }
-        
         .accordion {
-          background: rgba(212,163,115,0.02);
-          border: 1px solid rgba(212,163,115,0.1);
+          background: rgba(255,255,255,0.02);
+          border: 1px solid rgba(255,255,255,0.08);
           border-radius: 12px;
           margin-bottom: 16px;
           overflow: hidden;
-          transition: all 0.3s;
         }
-        
-        .accordion.expanded {
-          border-color: rgba(212,163,115,0.25);
-        }
-        
+        .accordion.open { border-color: rgba(212,163,115,0.25); }
         .accordion-header {
           width: 100%;
           background: transparent;
           border: none;
-          padding: 28px 32px;
+          padding: 24px;
           display: flex;
           align-items: center;
           gap: 16px;
           cursor: pointer;
-          font-family: inherit;
           text-align: left;
         }
-        
-        .accordion-icon {
-          font-size: 24px;
+        .acc-icon { font-size: 24px; }
+        .acc-title { flex: 1; font-size: 18px; font-weight: 600; color: #f8fafc; }
+        .acc-arrow { font-size: 24px; color: #d4a373; }
+        .accordion-body {
+          padding: 0 24px 24px;
+          animation: slideDown 0.3s ease;
         }
-        
-        .accordion-title {
-          flex: 1;
-          font-size: 18px;
-          font-weight: 600;
-          color: #f8fafc;
-        }
-        
-        .accordion-arrow {
-          font-size: 24px;
-          color: #d4a373;
-        }
-        
-        .accordion-content {
-          padding: 0 32px 32px;
+        @keyframes slideDown {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
         }
 
-        /* ============================================ */
-        /* VALUE PROPS (in accordion) */
-        /* ============================================ */
+        /* Value Grid */
         .value-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 24px;
+          gap: 20px;
+          margin-bottom: 48px;
         }
-        
-        .value-item {
-          text-align: center;
-          padding: 32px 24px;
+        .value-card {
           background: rgba(212,163,115,0.03);
           border: 1px solid rgba(212,163,115,0.1);
-          border-radius: 8px;
+          border-radius: 12px;
+          padding: 28px;
+          text-align: center;
         }
-        
-        .value-icon { font-size: 40px; margin-bottom: 16px; }
-        .value-number { font-size: 40px; font-weight: 600; color: #d4a373; margin-bottom: 8px; }
-        .value-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(248,250,252,0.4); margin-bottom: 16px; }
-        .value-item p { font-size: 14px; color: rgba(248,250,252,0.65); }
+        .value-emoji { font-size: 40px; display: block; margin-bottom: 12px; }
+        .value-number { font-size: 40px; font-weight: 700; color: #d4a373; display: block; }
+        .value-label { font-size: 12px; color: rgba(248,250,252,0.5); text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 12px; }
+        .value-card p { font-size: 14px; color: rgba(248,250,252,0.65); line-height: 1.6; }
 
-        /* ============================================ */
-        /* QUOTES (in accordion) */
-        /* ============================================ */
+        /* Quotes */
+        .quotes-heading { font-size: 20px; margin-bottom: 24px; }
         .quotes-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
-          gap: 20px;
+          gap: 16px;
         }
-        
-        .quote {
+        .quote-card {
           border-left: 3px solid rgba(212,163,115,0.3);
-          padding: 24px;
+          padding: 20px;
           background: rgba(212,163,115,0.02);
-          border-radius: 4px;
+          border-radius: 0 8px 8px 0;
         }
-        
-        .quote p {
-          font-size: 14px;
-          font-style: italic;
-          color: rgba(248,250,252,0.7);
-          margin-bottom: 16px;
-        }
-        
-        cite {
-          font-size: 11px;
-          color: #d4a373;
-          font-style: normal;
-          text-transform: uppercase;
-          letter-spacing: 0.08em;
-        }
+        .quote-card p { font-size: 14px; font-style: italic; color: rgba(248,250,252,0.7); line-height: 1.6; margin-bottom: 12px; }
+        .quote-card cite { font-size: 12px; color: #d4a373; font-style: normal; }
 
-        /* ============================================ */
-        /* PLATFORM TABS (in accordion) */
-        /* ============================================ */
+        /* Platform Tabs */
         .platform-tabs {
           display: flex;
-          gap: 12px;
-          margin-bottom: 40px;
+          gap: 8px;
+          margin-bottom: 32px;
           flex-wrap: wrap;
         }
-        
-        .platform-tab {
+        .ptab {
           background: rgba(212,163,115,0.05);
-          border: 1px solid rgba(212,163,115,0.2);
+          border: 1px solid rgba(212,163,115,0.15);
           color: rgba(248,250,252,0.7);
           padding: 12px 24px;
           font-size: 14px;
           font-weight: 600;
           cursor: pointer;
-          border-radius: 6px;
-          font-family: inherit;
+          border-radius: 8px;
           transition: all 0.2s;
         }
-        
-        .platform-tab:hover {
-          background: rgba(212,163,115,0.1);
-          color: #f8fafc;
-        }
-        
-        .platform-tab.active {
-          background: rgba(212,163,115,0.15);
-          border-color: #d4a373;
-          color: #d4a373;
-        }
-        
-        .platform-content {
-          margin-top: 32px;
-        }
+        .ptab:hover { background: rgba(212,163,115,0.1); }
+        .ptab.active { background: rgba(212,163,115,0.15); border-color: #d4a373; color: #d4a373; }
 
-        /* ============================================ */
-        /* FEATURES (in platform tabs) */
-        /* ============================================ */
-        .feature {
+        /* Feature Block */
+        .feature-block {
           display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 56px;
-          align-items: start;
-          margin-bottom: 56px;
+          grid-template-columns: 1fr 1.2fr;
+          gap: 48px;
+          margin-bottom: 48px;
         }
-        
-        .feature-reverse {
-          direction: rtl;
-        }
-        
-        .feature-reverse > * {
-          direction: ltr;
-        }
-        
+        .feature-block.reverse { direction: rtl; }
+        .feature-block.reverse > * { direction: ltr; }
         .feature-screenshots {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+          grid-template-columns: repeat(3, 1fr);
           gap: 12px;
         }
-        
-        .feature-screenshots.four-shots {
-          grid-template-columns: repeat(2, 1fr);
-        }
-        
-        .feature-screenshots.single-shot {
-          grid-template-columns: 1fr;
-        }
-        
+        .feature-screenshots.grid-2x2 { grid-template-columns: repeat(2, 1fr); }
+        .feature-screenshots.single { grid-template-columns: 1fr; }
         .screenshot {
           width: 100%;
-          height: auto;
           border: 1px solid rgba(212,163,115,0.15);
-          border-radius: 6px;
+          border-radius: 8px;
           cursor: pointer;
           transition: all 0.3s;
         }
-        
-        .screenshot:hover {
-          transform: scale(1.02);
-          border-color: rgba(212,163,115,0.4);
-        }
-        
-        .feature-tag {
-          font-size: 11px;
-          font-weight: 600;
-          letter-spacing: 0.15em;
-          color: #d4a373;
-          margin-bottom: 12px;
-        }
-        
-        .feature-lead {
-          font-size: 16px;
-          color: rgba(248,250,252,0.75);
-          margin-bottom: 32px;
-        }
-        
-        .feature-details { margin-bottom: 32px; }
-        .detail-section { margin-bottom: 20px; }
-        .detail-section h4 { font-size: 14px; margin-bottom: 6px; }
-        .detail-section p { font-size: 14px; color: rgba(248,250,252,0.6); margin-bottom: 0; }
-        
-        .feature-price {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 16px;
-        }
-        
-        .price-tier {
+        .screenshot:hover { transform: scale(1.03); border-color: rgba(212,163,115,0.4); }
+        .screenshot.large { max-width: 500px; }
+        .feature-tag { font-size: 11px; font-weight: 600; letter-spacing: 0.15em; color: #d4a373; margin-bottom: 8px; }
+        .feature-info h3 { font-size: 28px; margin-bottom: 12px; }
+        .feature-info > p { font-size: 16px; color: rgba(248,250,252,0.7); margin-bottom: 24px; }
+        .feature-list { margin-bottom: 24px; }
+        .feature-item { margin-bottom: 16px; }
+        .feature-item strong { font-size: 14px; display: block; margin-bottom: 4px; }
+        .feature-item p { font-size: 14px; color: rgba(248,250,252,0.6); line-height: 1.5; }
+
+        /* Pricing */
+        .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .price-card {
+          background: rgba(255,255,255,0.02);
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 12px;
           padding: 24px;
-          background: rgba(212,163,115,0.03);
-          border: 1px solid rgba(212,163,115,0.1);
-          border-radius: 8px;
         }
-        
-        .tier-badge {
+        .price-badge {
+          display: inline-block;
           font-size: 10px;
           font-weight: 700;
           letter-spacing: 0.1em;
-          padding: 5px 10px;
+          padding: 6px 12px;
           border-radius: 4px;
-          display: inline-block;
           margin-bottom: 12px;
         }
-        
-        .price-tier.free .tier-badge { background: rgba(34,197,94,0.15); color: #22c55e; }
-        .price-tier.trial .tier-badge { background: rgba(59,130,246,0.15); color: #3b82f6; }
-        .price-tier.premium .tier-badge { background: rgba(212,163,115,0.15); color: #d4a373; }
-        
-        .tier-name { font-size: 16px; font-weight: 600; margin-bottom: 12px; }
-        .tier-name span { font-size: 13px; color: rgba(248,250,252,0.5); font-weight: 500; }
-        
-        .price-tier ul { list-style: none; }
-        .price-tier li { font-size: 13px; line-height: 1.8; color: rgba(248,250,252,0.65); padding-left: 18px; position: relative; }
-        .price-tier li::before { content: '✓'; position: absolute; left: 0; color: #d4a373; }
+        .price-card.free .price-badge { background: rgba(34,197,94,0.15); color: #22c55e; }
+        .price-card.trial .price-badge { background: rgba(59,130,246,0.15); color: #3b82f6; }
+        .price-card.premium .price-badge { background: rgba(212,163,115,0.15); color: #d4a373; }
+        .price-card h4 { font-size: 18px; margin-bottom: 12px; }
+        .price-card h4 span { font-size: 14px; font-weight: 400; color: rgba(248,250,252,0.5); }
+        .price-card ul { list-style: none; }
+        .price-card li { font-size: 14px; color: rgba(248,250,252,0.65); padding: 6px 0; padding-left: 20px; position: relative; }
+        .price-card li::before { content: '✓'; position: absolute; left: 0; color: #d4a373; }
 
-        /* ============================================ */
-        /* DAPA SECTION (in platform tabs) */
-        /* ============================================ */
-        .dapa-section {
-          margin-top: 56px;
-          padding-top: 56px;
-          border-top: 1px solid rgba(212,163,115,0.1);
-          text-align: center;
-        }
-        
-        .dapa-grid {
-          display: grid;
-          grid-template-columns: repeat(6, 1fr);
-          gap: 16px;
-          margin-top: 40px;
-        }
-        
-        .dapa-item {
-          padding: 28px 16px;
-          border: 1px solid rgba(212,163,115,0.1);
-          background: rgba(212,163,115,0.02);
-          border-radius: 8px;
-          transition: all 0.3s;
-        }
-        
-        .dapa-item:hover {
-          border-color: rgba(212,163,115,0.3);
-          transform: translateY(-2px);
-        }
-        
-        .dapa-icon {
-          width: 48px;
-          height: 48px;
-          background: rgba(212,163,115,0.1);
-          border: 1px solid rgba(212,163,115,0.2);
-          font-size: 24px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 0 auto 16px;
-          border-radius: 8px;
-        }
-        
-        .dapa-item h4 { font-size: 13px; margin-bottom: 6px; }
-        .dapa-item p { font-size: 12px; color: rgba(248,250,252,0.5); margin-bottom: 0; }
-
-        /* ============================================ */
-        /* GENOME GRID (archetypes) */
-        /* ============================================ */
-        .archetypes-section {
-          margin-top: 56px;
-          padding-top: 56px;
-          border-top: 1px solid rgba(212,163,115,0.1);
-          text-align: center;
-        }
-        
-        .genome-grid {
-          display: grid;
-          grid-template-columns: repeat(6, 1fr);
-          gap: 12px;
-          margin-bottom: 32px;
-        }
-        
-        .genome-item {
-          background: rgba(212,163,115,0.02);
-          border: 1px solid rgba(212,163,115,0.1);
-          padding: 20px 12px;
-          cursor: pointer;
-          transition: all 0.3s;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 8px;
-          border-radius: 8px;
-        }
-        
-        .genome-item.patron { border-color: rgba(139,92,246,0.15); }
-        .genome-item.onpro { border-color: rgba(34,197,94,0.15); }
-        
-        .genome-item:hover, .genome-item.active {
-          transform: translateY(-3px);
-        }
-        
-        .genome-item.patron:hover, .genome-item.patron.active {
-          border-color: rgba(139,92,246,0.4);
-          background: rgba(139,92,246,0.05);
-        }
-        
-        .genome-item.onpro:hover, .genome-item.onpro.active {
-          border-color: rgba(34,197,94,0.4);
-          background: rgba(34,197,94,0.05);
-        }
-        
-        .genome-emoji { font-size: 28px; }
-        .genome-name { font-size: 11px; color: rgba(248,250,252,0.7); text-align: center; }
-        
-        .genome-detail {
-          background: rgba(212,163,115,0.05);
-          border: 1px solid rgba(212,163,115,0.2);
-          padding: 40px;
-          border-radius: 12px;
-          text-align: center;
-        }
-        
-        .genome-detail-header {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 16px;
-          margin-bottom: 20px;
-        }
-        
-        .genome-detail-emoji { font-size: 40px; }
-        .genome-detail h3 { font-size: 24px; margin-bottom: 0; }
-        .genome-detail p { margin-bottom: 24px; }
-        
-        .btn-close {
-          background: transparent;
-          color: #d4a373;
-          border: 1px solid rgba(212,163,115,0.4);
-          padding: 10px 24px;
-          font-size: 13px;
-          cursor: pointer;
-          font-family: inherit;
-          border-radius: 6px;
-          transition: all 0.2s;
-        }
-        
-        .btn-close:hover {
-          background: rgba(212,163,115,0.08);
-        }
-
-        /* ============================================ */
-        /* VENUE BENEFITS */
-        /* ============================================ */
-        .venue-benefits {
-          margin-top: 56px;
-          padding-top: 56px;
-          border-top: 1px solid rgba(212,163,115,0.1);
-        }
-        
-        .venue-benefits h3 {
-          text-align: center;
-          margin-bottom: 40px;
-        }
-        
-        .venue-benefits-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 24px;
-        }
-        
-        .venue-benefit {
-          padding: 28px;
+        /* DAPA Section */
+        .dapa-section { margin-top: 48px; text-align: center; padding-top: 48px; border-top: 1px solid rgba(255,255,255,0.08); }
+        .dapa-section h4 { font-size: 24px; margin-bottom: 8px; }
+        .dapa-section > p { font-size: 16px; color: rgba(248,250,252,0.6); margin-bottom: 32px; }
+        .dapa-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+        .dapa-card {
           background: rgba(212,163,115,0.03);
           border: 1px solid rgba(212,163,115,0.1);
-          border-radius: 8px;
-        }
-        
-        .venue-benefit h4 { margin-bottom: 12px; }
-        .venue-benefit p { font-size: 14px; color: rgba(248,250,252,0.65); margin-bottom: 0; }
-
-        /* ============================================ */
-        /* SCIENCE BLOCKS */
-        /* ============================================ */
-        .science-block {
-          padding: 40px;
           border-radius: 12px;
-          margin-bottom: 32px;
+          padding: 20px 12px;
+          text-align: center;
         }
-        
-        .dapa-block {
+        .dapa-card span { font-size: 28px; display: block; margin-bottom: 8px; }
+        .dapa-card strong { font-size: 13px; display: block; margin-bottom: 4px; }
+        .dapa-card small { font-size: 11px; color: rgba(248,250,252,0.5); }
+
+        /* Archetype Section */
+        .archetype-section { margin-top: 48px; text-align: center; padding-top: 48px; border-top: 1px solid rgba(255,255,255,0.08); }
+        .archetype-section h4 { font-size: 24px; margin-bottom: 8px; }
+        .archetype-section > p { font-size: 16px; color: rgba(248,250,252,0.6); margin-bottom: 24px; }
+        .archetype-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-bottom: 24px; }
+        .archetype-btn {
           background: rgba(34,197,94,0.03);
           border: 1px solid rgba(34,197,94,0.15);
-        }
-        
-        .genome-block {
-          background: rgba(139,92,246,0.03);
-          border: 1px solid rgba(139,92,246,0.15);
-        }
-        
-        .combined-block {
-          background: rgba(212,163,115,0.05);
-          border: 1px solid rgba(212,163,115,0.2);
+          border-radius: 12px;
+          padding: 16px 8px;
+          cursor: pointer;
+          transition: all 0.3s;
           text-align: center;
         }
-        
-        .science-header {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-bottom: 20px;
-          flex-wrap: wrap;
-          gap: 12px;
+        .archetype-btn.patron { background: rgba(139,92,246,0.03); border-color: rgba(139,92,246,0.15); }
+        .archetype-btn:hover, .archetype-btn.active { transform: translateY(-4px); }
+        .archetype-btn:hover, .archetype-btn.active { border-color: rgba(34,197,94,0.4); background: rgba(34,197,94,0.08); }
+        .archetype-btn.patron:hover, .archetype-btn.patron.active { border-color: rgba(139,92,246,0.4); background: rgba(139,92,246,0.08); }
+        .archetype-btn span { font-size: 28px; display: block; margin-bottom: 6px; }
+        .archetype-btn small { font-size: 11px; color: rgba(248,250,252,0.7); }
+        .archetype-detail {
+          background: rgba(34,197,94,0.05);
+          border: 1px solid rgba(34,197,94,0.2);
+          border-radius: 16px;
+          padding: 32px;
+          text-align: center;
         }
-        
-        .science-header h3 { margin-bottom: 0; }
-        
-        .science-badge {
-          font-size: 10px;
-          font-weight: 700;
-          letter-spacing: 0.1em;
-          padding: 6px 14px;
-          border-radius: 4px;
-        }
-        
-        .science-badge.onpro {
-          background: rgba(34,197,94,0.15);
-          color: #22c55e;
-        }
-        
-        .science-badge.patron {
-          background: rgba(139,92,246,0.15);
-          color: #8b5cf6;
-        }
-        
-        .science-lead {
-          font-size: 16px;
-          line-height: 1.7;
-          color: rgba(248,250,252,0.75);
-          margin-bottom: 32px;
-        }
-        
-        .science-features {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 24px;
-          margin-bottom: 32px;
-        }
-        
-        .science-feature h4 { margin-bottom: 8px; color: #d4a373; }
-        .science-feature p { font-size: 14px; color: rgba(248,250,252,0.65); margin-bottom: 0; }
-        
-        .combined-grid {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 32px;
-          margin: 32px 0;
-          text-align: left;
-        }
-        
-        .combined-item h4 { margin-bottom: 12px; }
-        .combined-item p { font-size: 15px; color: rgba(248,250,252,0.7); }
-        
-        .combined-conclusion {
-          font-size: 16px;
-          color: rgba(248,250,252,0.8);
-          max-width: 800px;
-          margin: 0 auto;
+        .archetype-detail.patron { background: rgba(139,92,246,0.05); border-color: rgba(139,92,246,0.2); }
+        .arch-emoji { font-size: 48px; display: block; margin-bottom: 12px; }
+        .archetype-detail h5 { font-size: 24px; margin-bottom: 12px; }
+        .archetype-detail p { font-size: 16px; color: rgba(248,250,252,0.75); margin-bottom: 20px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        .archetype-detail button {
+          background: transparent;
+          border: 1px solid rgba(255,255,255,0.2);
+          color: rgba(248,250,252,0.7);
+          padding: 10px 24px;
+          cursor: pointer;
+          border-radius: 6px;
         }
 
-        /* ============================================ */
-        /* VISION CONTENT (in accordion) */
-        /* ============================================ */
-        .vision-content {
-          max-width: 850px;
-          margin: 0 auto;
+        /* Benefits Grid */
+        .benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-top: 48px; }
+        .benefit-card {
+          background: rgba(212,163,115,0.03);
+          border: 1px solid rgba(212,163,115,0.1);
+          border-radius: 12px;
+          padding: 24px;
         }
-        
+        .benefit-card h5 { font-size: 16px; margin-bottom: 8px; }
+        .benefit-card p { font-size: 14px; color: rgba(248,250,252,0.65); }
+
+        /* Science Blocks */
+        .science-block {
+          padding: 32px;
+          border-radius: 12px;
+          margin-bottom: 24px;
+        }
+        .science-block.dapa { background: rgba(34,197,94,0.03); border: 1px solid rgba(34,197,94,0.15); }
+        .science-block.genome { background: rgba(139,92,246,0.03); border: 1px solid rgba(139,92,246,0.15); }
+        .science-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px; }
+        .science-header h4 { font-size: 24px; }
+        .science-badge { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 6px 12px; border-radius: 4px; }
+        .science-badge.onpro { background: rgba(34,197,94,0.15); color: #22c55e; }
+        .science-badge.patron { background: rgba(139,92,246,0.15); color: #8b5cf6; }
+        .science-block > p { font-size: 16px; color: rgba(248,250,252,0.7); margin-bottom: 24px; }
+        .science-features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .science-features div strong { font-size: 14px; display: block; margin-bottom: 4px; color: #d4a373; }
+        .science-features div p { font-size: 14px; color: rgba(248,250,252,0.6); }
+        .science-combined {
+          background: rgba(212,163,115,0.05);
+          border: 1px solid rgba(212,163,115,0.15);
+          border-radius: 12px;
+          padding: 32px;
+          text-align: center;
+        }
+        .science-combined h4 { font-size: 24px; margin-bottom: 24px; }
+        .combined-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; text-align: left; margin-bottom: 24px; }
+        .combined-grid strong { font-size: 16px; display: block; margin-bottom: 8px; }
+        .combined-grid p { font-size: 15px; color: rgba(248,250,252,0.7); }
+        .combined-note { font-size: 16px; color: rgba(248,250,252,0.8); }
+
+        /* Founder */
         .founder-intro {
           display: flex;
           align-items: center;
-          gap: 32px;
-          margin-bottom: 56px;
-          padding: 32px;
+          gap: 24px;
           background: rgba(212,163,115,0.03);
           border: 1px solid rgba(212,163,115,0.1);
-          border-radius: 12px;
+          border-radius: 16px;
+          padding: 32px;
+          margin-bottom: 48px;
         }
-        
-        .founder-photo-placeholder {
-          width: 120px;
-          height: 120px;
+        .founder-photo {
+          width: 100px;
+          height: 100px;
           background: rgba(212,163,115,0.1);
           border: 1px solid rgba(212,163,115,0.2);
           border-radius: 50%;
@@ -2174,250 +1570,183 @@ export default function LandingPage() {
           justify-content: center;
           flex-shrink: 0;
         }
-        
-        .founder-text h2 { font-size: 24px; margin-bottom: 8px; }
-        .founder-tagline { font-size: 16px; color: #d4a373; font-weight: 500; margin-bottom: 0; }
-        
-        .vision-section { margin-bottom: 48px; }
-        .vision-section h3 { color: #d4a373; margin-bottom: 20px; }
-        .vision-section p { font-size: 16px; line-height: 1.8; }
-        
+        .founder-photo span { font-size: 40px; }
+        .founder-photo small { font-size: 10px; color: rgba(212,163,115,0.7); }
+        .founder-text h4 { font-size: 22px; margin-bottom: 8px; }
+        .founder-tagline { font-size: 16px; color: #d4a373; font-weight: 500; }
+        .vision-block { margin-bottom: 40px; }
+        .vision-block h4 { font-size: 24px; color: #d4a373; margin-bottom: 16px; }
+        .vision-block p { font-size: 16px; color: rgba(248,250,252,0.75); line-height: 1.8; margin-bottom: 16px; }
         .vision-emphasis {
-          color: #f8fafc;
-          font-weight: 500;
           font-size: 18px;
+          font-weight: 500;
+          color: #f8fafc;
           padding-left: 20px;
           border-left: 3px solid #d4a373;
           margin: 24px 0;
         }
-        
         .vision-highlight {
+          background: rgba(212,163,115,0.05);
+          border-left: 3px solid #d4a373;
+          padding: 20px;
+          font-size: 18px;
           color: #d4a373;
           font-weight: 600;
-          padding: 24px;
-          border-left: 3px solid #d4a373;
-          background: rgba(212,163,115,0.05);
-          border-radius: 4px;
           margin: 24px 0;
+          border-radius: 0 8px 8px 0;
         }
-        
-        .vision-list { list-style: none; margin: 24px 0; }
-        .vision-list li { font-size: 15px; line-height: 1.8; color: rgba(248,250,252,0.8); padding-left: 24px; position: relative; margin-bottom: 16px; }
+        .vision-list { list-style: none; margin: 20px 0; }
+        .vision-list li { font-size: 15px; color: rgba(248,250,252,0.8); padding: 10px 0 10px 24px; position: relative; }
         .vision-list li::before { content: '→'; position: absolute; left: 0; color: #d4a373; }
-        .vision-list li strong { color: #f8fafc; }
-        
-        .vision-cta {
+        .vision-list strong { color: #f8fafc; }
+        .vision-cta-block {
           text-align: center;
-          padding: 48px;
-          border: 1px solid rgba(212,163,115,0.2);
+          padding: 40px;
           background: rgba(212,163,115,0.03);
-          border-radius: 12px;
+          border: 1px solid rgba(212,163,115,0.15);
+          border-radius: 16px;
           margin-top: 48px;
         }
-        
-        .vision-cta h3 { margin-bottom: 16px; }
-        .cta-emphasis { color: #d4a373; font-weight: 600; margin: 24px 0; }
-        .cta-note { font-size: 14px; color: rgba(248,250,252,0.5); margin-top: 16px; }
-
-        /* ============================================ */
-        /* MISSION CONTENT (in accordion) */
-        /* ============================================ */
-        .mission-content { max-width: 900px; margin: 0 auto; }
-        
-        .mission-statement {
-          font-size: 18px;
-          line-height: 1.8;
-          color: rgba(248,250,252,0.85);
-          text-align: center;
-          margin-bottom: 48px;
-        }
-        
-        .mission-pillars {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 24px;
-        }
-        
-        .pillar {
-          padding: 28px;
-          background: rgba(212,163,115,0.03);
-          border: 1px solid rgba(212,163,115,0.1);
-          border-radius: 8px;
-          text-align: center;
-        }
-        
-        .pillar h4 { color: #d4a373; margin-bottom: 12px; }
-        .pillar p { font-size: 14px; color: rgba(248,250,252,0.65); margin-bottom: 0; }
-
-        /* ============================================ */
-        /* LAYER 7: FINAL CTA */
-        /* ============================================ */
-        .final-cta {
-          padding: 100px 24px;
-          background: #0d1117;
-          text-align: center;
-          border-top: 1px solid rgba(212,163,115,0.1);
-        }
-        
-        .final-cta h2 { margin-bottom: 16px; }
-        .final-cta p { font-size: 18px; color: rgba(248,250,252,0.7); margin-bottom: 40px; }
-        
-        .btn-primary {
+        .vision-cta-block h4 { font-size: 28px; margin-bottom: 12px; }
+        .vision-cta-block p { font-size: 16px; color: rgba(248,250,252,0.7); }
+        .vision-cta-emphasis { color: #d4a373; font-weight: 600; margin: 20px 0; }
+        .vision-cta-btn {
           background: #d4a373;
-          color: #0d1117;
+          color: #000;
           border: none;
-          padding: 18px 40px;
+          padding: 16px 40px;
           font-size: 16px;
           font-weight: 600;
           cursor: pointer;
-          border-radius: 6px;
-          font-family: inherit;
-          transition: all 0.2s;
+          border-radius: 8px;
+          margin-bottom: 12px;
         }
-        
-        .btn-primary:hover {
-          opacity: 0.9;
-          transform: translateY(-2px);
-          box-shadow: 0 8px 24px rgba(212,163,115,0.2);
+        .vision-cta-block small { font-size: 14px; color: rgba(248,250,252,0.5); display: block; }
+
+        /* Mission */
+        .mission-statement {
+          font-size: 18px;
+          color: rgba(248,250,252,0.85);
+          text-align: center;
+          line-height: 1.8;
+          margin-bottom: 40px;
+          max-width: 800px;
+          margin-left: auto;
+          margin-right: auto;
         }
-        
-        .btn-primary.large {
+        .mission-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .pillar {
+          background: rgba(212,163,115,0.03);
+          border: 1px solid rgba(212,163,115,0.1);
+          border-radius: 12px;
+          padding: 28px;
+          text-align: center;
+        }
+        .pillar h5 { font-size: 16px; color: #d4a373; margin-bottom: 12px; }
+        .pillar p { font-size: 14px; color: rgba(248,250,252,0.65); }
+
+        /* ===== FINAL CTA ===== */
+        .final-cta {
+          padding: 100px 24px;
+          background: linear-gradient(180deg, #0d1117 0%, #000 100%);
+          text-align: center;
+        }
+        .final-cta h2 { font-size: 40px; margin-bottom: 12px; }
+        .final-cta p { font-size: 18px; color: rgba(248,250,252,0.7); margin-bottom: 32px; }
+        .final-btn {
+          background: #d4a373;
+          color: #000;
+          border: none;
           padding: 20px 48px;
           font-size: 18px;
+          font-weight: 600;
+          cursor: pointer;
+          border-radius: 8px;
+          transition: all 0.2s;
         }
-        
-        .btn-install {
+        .final-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(212,163,115,0.3); }
+        .install-btn {
           display: block;
           margin: 24px auto 0;
           background: transparent;
           color: rgba(248,250,252,0.4);
           border: 1px solid rgba(248,250,252,0.1);
-          padding: 12px 28px;
-          font-size: 13px;
+          padding: 12px 24px;
           cursor: pointer;
-          font-family: inherit;
-          border-radius: 4px;
-          transition: all 0.2s;
-        }
-        
-        .btn-install:hover {
-          border-color: rgba(248,250,252,0.2);
-          color: rgba(248,250,252,0.6);
+          border-radius: 6px;
         }
 
-        /* ============================================ */
-        /* FOOTER */
-        /* ============================================ */
+        /* ===== FOOTER ===== */
         .footer {
-          background: #161b22;
+          background: #000;
           border-top: 1px solid rgba(212,163,115,0.1);
-          padding: 80px 24px 40px;
+          padding: 60px 24px 24px;
         }
-        
-        .footer-content {
+        .footer-top {
           display: flex;
           justify-content: space-between;
-          margin-bottom: 48px;
+          margin-bottom: 40px;
         }
-        
-        .footer-logo { font-size: 20px; font-weight: 600; color: #d4a373; margin-bottom: 12px; }
-        .footer-tagline { font-size: 13px; color: rgba(248,250,252,0.5); margin-bottom: 8px; }
-        .footer-location { font-size: 12px; color: rgba(248,250,252,0.4); }
-        
-        .footer-links { display: flex; gap: 80px; }
-        .footer-col a { display: block; font-size: 14px; color: rgba(248,250,252,0.55); text-decoration: none; margin-bottom: 10px; transition: color 0.2s; }
-        .footer-col a:hover { color: #d4a373; }
-        
+        .footer-logo { font-size: 24px; font-weight: 700; color: #d4a373; }
+        .footer-brand p { font-size: 14px; color: rgba(248,250,252,0.6); margin: 8px 0 4px; }
+        .footer-brand small { font-size: 12px; color: rgba(248,250,252,0.4); }
+        .footer-links { display: flex; gap: 60px; }
+        .link-col h6 { font-size: 11px; color: rgba(248,250,252,0.4); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; }
+        .link-col a { display: block; font-size: 14px; color: rgba(248,250,252,0.6); text-decoration: none; margin-bottom: 10px; transition: color 0.2s; }
+        .link-col a:hover { color: #d4a373; }
         .footer-bottom {
-          padding-top: 32px;
-          border-top: 1px solid rgba(212,163,115,0.1);
-          display: flex;
-          justify-content: space-between;
-          font-size: 12px;
-          color: rgba(248,250,252,0.35);
+          text-align: center;
+          padding-top: 24px;
+          border-top: 1px solid rgba(255,255,255,0.05);
         }
+        .footer-bottom p { font-size: 12px; color: rgba(248,250,252,0.35); }
 
-        /* ============================================ */
-        /* LIGHTBOX */
-        /* ============================================ */
+        /* ===== LIGHTBOX ===== */
         .lightbox {
           position: fixed;
           inset: 0;
-          background: rgba(10,15,20,0.95);
+          background: rgba(0,0,0,0.95);
           display: flex;
           align-items: center;
           justify-content: center;
           z-index: 10000;
-          padding: 20px;
           cursor: pointer;
+          padding: 24px;
         }
-        
-        .lightbox-content {
-          position: relative;
-          max-width: 90%;
-          max-height: 90%;
-        }
-        
-        .lightbox-image {
-          max-width: 100%;
-          max-height: 90vh;
-          border-radius: 8px;
-          box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-          border: 1px solid rgba(212,163,115,0.3);
-        }
-        
         .lightbox-close {
           position: absolute;
-          top: -40px;
-          right: 0;
+          top: 24px;
+          right: 24px;
           background: transparent;
           border: none;
-          color: #f8fafc;
+          color: #fff;
           font-size: 32px;
           cursor: pointer;
-          padding: 8px;
         }
-        
-        .lightbox-close:hover { color: #d4a373; }
+        .lightbox img {
+          max-width: 90%;
+          max-height: 90vh;
+          border-radius: 12px;
+          border: 1px solid rgba(212,163,115,0.3);
+        }
 
-        /* ============================================ */
-        /* RESPONSIVE */
-        /* ============================================ */
+        /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
-          .feature { grid-template-columns: 1fr; gap: 32px; }
-          .feature-reverse { direction: ltr; }
-          .dapa-grid, .genome-grid { grid-template-columns: repeat(3, 1fr); }
+          .feature-block { grid-template-columns: 1fr; }
+          .feature-block.reverse { direction: ltr; }
+          .dapa-grid, .archetype-grid { grid-template-columns: repeat(3, 1fr); }
         }
-        
         @media (max-width: 768px) {
-          .hook-title { font-size: 48px; }
-          .hook-tagline { font-size: 14px; letter-spacing: 0.15em; }
-          
-          .emotional-line { font-size: 20px; }
-          .emotional-line.emphasis { font-size: 22px; }
-          .emotional-resolution { font-size: 28px; }
-          
-          .email-step { flex-direction: column; }
-          .form-grid { grid-template-columns: 1fr; }
-          
-          .identity-cards { grid-template-columns: 1fr; }
-          .how-grid { grid-template-columns: 1fr; gap: 32px; }
-          
-          .value-grid, .quotes-grid { grid-template-columns: 1fr; }
-          .dapa-grid, .genome-grid { grid-template-columns: repeat(2, 1fr); }
-          .feature-price { grid-template-columns: 1fr; }
-          .venue-benefits-grid { grid-template-columns: 1fr; }
-          .science-features { grid-template-columns: 1fr; }
-          .combined-grid { grid-template-columns: 1fr; }
-          .mission-pillars { grid-template-columns: 1fr; }
-          
-          .founder-intro { flex-direction: column; text-align: center; }
-          
-          .footer-content { flex-direction: column; gap: 40px; }
-          .footer-links { flex-direction: column; gap: 32px; }
-          .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-          
           .sticky-venues { display: none; }
+          .identity-grid { grid-template-columns: 1fr; }
+          .value-grid, .quotes-grid, .benefits-grid, .pricing-grid, .mission-pillars { grid-template-columns: 1fr; }
+          .dapa-grid, .archetype-grid { grid-template-columns: repeat(2, 1fr); }
+          .email-form { flex-direction: column; }
+          .form-grid { grid-template-columns: 1fr; }
+          .science-features, .combined-grid { grid-template-columns: 1fr; }
+          .founder-intro { flex-direction: column; text-align: center; }
+          .footer-top { flex-direction: column; gap: 40px; }
+          .footer-links { flex-direction: column; gap: 24px; }
         }
       `}</style>
     </>
