@@ -28,6 +28,7 @@ export default function LandingPage() {
   // Refs
   const formRef = useRef(null);
   const deepContentRef = useRef(null);
+  const emotionalRef = useRef(null);
 
   // Sticky nav on scroll
   useEffect(() => {
@@ -63,6 +64,10 @@ export default function LandingPage() {
 
   const scrollToDeepContent = () => {
     deepContentRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const scrollToEmotional = () => {
+    emotionalRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   // Step 1: Email only
@@ -170,6 +175,7 @@ export default function LandingPage() {
       <Head>
         <title>OnTonight - Where Regulars Are Made | Hospitality Professional Platform</title>
         <meta name="description" content="Professional identity platform for hospitality. Build portable careers, follow your people, elevate the industry. Live now in Tampa Bay. Expanding to Miami, Nashville & beyond." />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#d4a373" />
         <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
@@ -177,13 +183,19 @@ export default function LandingPage() {
 
       <div className="page">
         {/* ============================================
+            FIXED JOIN BUTTON (Always visible top-right)
+        ============================================ */}
+        <button className="fixed-join-btn" onClick={scrollToForm}>
+          Join the Movement
+        </button>
+
+        {/* ============================================
             NEW: STICKY NAV (appears on scroll)
         ============================================ */}
         <nav className={`sticky-nav ${showStickyNav ? 'visible' : ''}`}>
           <div className="sticky-inner">
             <span className="sticky-logo">OnTonight</span>
             <span className="sticky-venues">TAMPA PILOT · Haiku · Ulele · Beacon</span>
-            <button onClick={scrollToForm} className="sticky-cta">Join Free →</button>
           </div>
         </nav>
 
@@ -206,7 +218,7 @@ export default function LandingPage() {
             
             <p className="hero-tagline">WHERE REGULARS ARE MADE</p>
             
-            <div className="scroll-hint">
+            <div className="scroll-hint" onClick={scrollToEmotional}>
               <span className="scroll-arrow">↓</span>
             </div>
           </div>
@@ -214,15 +226,18 @@ export default function LandingPage() {
 
         {/* ============================================
             NEW: SECTION 2 - EMOTIONAL HOOK (5-12 sec)
-            The bartender story - pure emotion
+            The bartender story - tight, clean, platinum
         ============================================ */}
-        <section className="emotional">
+        <section className="emotional" ref={emotionalRef}>
           <div className="emotional-inner">
             <p className="emo-line">You know that bartender who remembers your name?</p>
             <p className="emo-line">The one who starts making your drink when you walk in?</p>
             <p className="emo-line highlight">They remember you too.</p>
             <p className="emo-line">That connection shouldn't have an expiration date.</p>
             <p className="emo-resolution">Now it doesn't.</p>
+            <div className="scroll-hint-small" onClick={scrollToForm}>
+              <span>↓</span>
+            </div>
           </div>
         </section>
 
@@ -1049,9 +1064,14 @@ export default function LandingPage() {
 
       <style jsx>{`
         /* =============================================
-           BASE STYLES (Original Production Colors)
+           BASE STYLES - VIEWPORT LOCKED
         ============================================= */
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        html, body {
+          overflow-x: hidden;
+          max-width: 100vw;
+        }
         
         .page { 
           background: #0d1117;
@@ -1060,12 +1080,15 @@ export default function LandingPage() {
           letter-spacing: -0.015em;
           font-weight: 400;
           min-height: 100vh;
+          overflow-x: hidden;
+          max-width: 100vw;
         }
         
         .container { 
           max-width: 1200px;
           margin: 0 auto;
           padding: 0 24px;
+          width: 100%;
         }
         
         h1 { 
@@ -1119,7 +1142,9 @@ export default function LandingPage() {
         }
         
         section {
-          padding: 100px 24px;
+          padding: 80px 24px;
+          width: 100%;
+          max-width: 100vw;
         }
         
         .section-subtitle {
@@ -1130,7 +1155,32 @@ export default function LandingPage() {
         }
 
         /* =============================================
-           NEW: STICKY NAV
+           FIXED JOIN BUTTON (Always visible)
+        ============================================= */
+        .fixed-join-btn {
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          z-index: 1001;
+          background: #d4a373;
+          color: #0d1117;
+          border: none;
+          padding: 12px 24px;
+          font-size: 14px;
+          font-weight: 600;
+          cursor: pointer;
+          border-radius: 6px;
+          font-family: inherit;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+          transition: all 0.2s;
+        }
+        .fixed-join-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 24px rgba(212,163,115,0.4);
+        }
+
+        /* =============================================
+           STICKY NAV (simplified)
         ============================================= */
         .sticky-nav {
           position: fixed;
@@ -1163,28 +1213,13 @@ export default function LandingPage() {
           color: rgba(248,250,252,0.4);
           letter-spacing: 0.05em;
         }
-        .sticky-cta {
-          background: #d4a373;
-          color: #0d1117;
-          border: none;
-          padding: 10px 24px;
-          font-size: 14px;
-          font-weight: 600;
-          cursor: pointer;
-          border-radius: 4px;
-          transition: all 0.2s;
-          font-family: inherit;
-        }
-        .sticky-cta:hover {
-          transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(212,163,115,0.3);
-        }
 
         /* =============================================
-           NEW: HERO HOOK (Full screen, pure emotion)
+           HERO HOOK (Full screen, pure emotion)
         ============================================= */
         .hero-hook {
           min-height: 100vh;
+          min-height: 100dvh;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -1243,14 +1278,20 @@ export default function LandingPage() {
           font-weight: 500;
           letter-spacing: 0.2em;
           color: #d4a373;
-          margin-bottom: 80px;
+          margin-bottom: 60px;
         }
         .scroll-hint {
           animation: bounce 2s infinite;
+          cursor: pointer;
+          padding: 20px;
         }
         .scroll-arrow {
           font-size: 32px;
-          color: rgba(212,163,115,0.5);
+          color: rgba(212,163,115,0.6);
+          transition: color 0.2s;
+        }
+        .scroll-hint:hover .scroll-arrow {
+          color: #d4a373;
         }
         @keyframes bounce {
           0%, 100% { transform: translateY(0); }
@@ -1258,41 +1299,56 @@ export default function LandingPage() {
         }
 
         /* =============================================
-           NEW: EMOTIONAL HOOK SECTION
+           EMOTIONAL HOOK - TIGHT & PLATINUM
         ============================================= */
         .emotional {
-          padding: 120px 24px;
+          padding: 60px 24px;
           background: linear-gradient(180deg, #0d1117 0%, #161b22 100%);
+          min-height: auto;
         }
         .emotional-inner {
-          max-width: 800px;
+          max-width: 700px;
           margin: 0 auto;
           text-align: center;
         }
         .emo-line {
-          font-size: clamp(18px, 4vw, 26px);
+          font-size: clamp(16px, 3.5vw, 22px);
           font-weight: 300;
-          color: rgba(248,250,252,0.7);
-          line-height: 1.6;
-          margin-bottom: 28px;
+          color: rgba(248,250,252,0.6);
+          line-height: 1.5;
+          margin-bottom: 12px;
         }
         .emo-line.highlight {
           color: #f8fafc;
           font-weight: 500;
-          font-size: clamp(22px, 5vw, 32px);
+          font-size: clamp(18px, 4vw, 26px);
+          margin: 20px 0;
         }
         .emo-resolution {
-          font-size: clamp(32px, 6vw, 48px);
+          font-size: clamp(28px, 5vw, 42px);
           font-weight: 600;
           color: #d4a373;
-          margin-top: 48px;
+          margin-top: 28px;
+          margin-bottom: 32px;
+        }
+        .scroll-hint-small {
+          cursor: pointer;
+          padding: 12px;
+          animation: bounce 2s infinite;
+        }
+        .scroll-hint-small span {
+          font-size: 24px;
+          color: rgba(212,163,115,0.5);
+        }
+        .scroll-hint-small:hover span {
+          color: #d4a373;
         }
 
         /* =============================================
-           NEW: SIGNUP SECTION (2-step form)
+           SIGNUP SECTION (2-step form)
         ============================================= */
         .signup-section {
-          padding: 100px 24px;
+          padding: 60px 24px;
           background: #161b22;
           border-top: 1px solid rgba(212,163,115,0.1);
           border-bottom: 1px solid rgba(212,163,115,0.1);
@@ -1404,10 +1460,10 @@ export default function LandingPage() {
         }
 
         /* =============================================
-           NEW: IDENTITY CARDS
+           IDENTITY CARDS
         ============================================= */
         .identity-section {
-          padding: 100px 24px;
+          padding: 60px 24px;
           background: #0d1117;
         }
         .identity-grid {
@@ -1489,10 +1545,10 @@ export default function LandingPage() {
         }
 
         /* =============================================
-           ACCORDION STYLES
+           ACCORDION STYLES - CONTAINED SCROLL
         ============================================= */
         .deep-section {
-          padding: 100px 24px;
+          padding: 80px 24px;
           background: #161b22;
         }
         .accordion {
@@ -1507,7 +1563,7 @@ export default function LandingPage() {
           width: 100%;
           background: transparent;
           border: none;
-          padding: 24px;
+          padding: 20px 24px;
           display: flex;
           align-items: center;
           gap: 16px;
@@ -1516,19 +1572,38 @@ export default function LandingPage() {
           font-family: inherit;
         }
         .acc-icon { font-size: 24px; }
-        .acc-title { flex: 1; font-size: 18px; font-weight: 600; color: #f8fafc; }
+        .acc-title { flex: 1; font-size: 16px; font-weight: 600; color: #f8fafc; }
         .acc-toggle { font-size: 24px; color: #d4a373; }
-        .accordion-body { padding: 0 24px 32px; }
+        .accordion-body { 
+          max-height: 60vh;
+          overflow-y: auto;
+          padding: 0 24px 24px;
+          scrollbar-width: thin;
+          scrollbar-color: rgba(212,163,115,0.3) transparent;
+        }
+        .accordion-body::-webkit-scrollbar {
+          width: 6px;
+        }
+        .accordion-body::-webkit-scrollbar-track {
+          background: transparent;
+        }
+        .accordion-body::-webkit-scrollbar-thumb {
+          background: rgba(212,163,115,0.3);
+          border-radius: 3px;
+        }
+        .accordion-body::-webkit-scrollbar-thumb:hover {
+          background: rgba(212,163,115,0.5);
+        }
         .acc-section-title {
-          font-size: 24px;
+          font-size: 22px;
           text-align: center;
           margin-bottom: 12px;
         }
         .acc-section-subtitle {
-          font-size: 16px;
+          font-size: 15px;
           color: rgba(248,250,252,0.6);
           text-align: center;
-          margin-bottom: 40px;
+          margin-bottom: 32px;
         }
 
         /* =============================================
@@ -2104,7 +2179,7 @@ export default function LandingPage() {
            FINAL CTA
         ============================================= */
         .final-cta {
-          padding: 100px 24px;
+          padding: 60px 24px 100px;
           background: linear-gradient(180deg, #161b22 0%, #0d1117 100%);
           text-align: center;
         }
@@ -2239,6 +2314,15 @@ export default function LandingPage() {
           .science-features, .two-systems { grid-template-columns: 1fr; }
         }
         @media (max-width: 768px) {
+          section { padding: 60px 20px; }
+          .fixed-join-btn {
+            top: auto;
+            bottom: 20px;
+            right: 20px;
+            padding: 14px 20px;
+            font-size: 13px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+          }
           .sticky-venues { display: none; }
           .identity-grid { grid-template-columns: 1fr; }
           .value-grid, .quotes-grid, .mission-pillars, .venue-benefits-grid { grid-template-columns: 1fr; }
@@ -2250,6 +2334,21 @@ export default function LandingPage() {
           .footer-content { flex-direction: column; gap: 40px; }
           .footer-links { flex-direction: column; gap: 32px; }
           .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+          .accordion-body { max-height: 50vh; }
+          .emotional { padding: 48px 20px; }
+          .emo-line { margin-bottom: 10px; }
+          .emo-resolution { margin-top: 20px; margin-bottom: 24px; }
+        }
+        @media (max-width: 480px) {
+          .fixed-join-btn {
+            left: 20px;
+            right: 20px;
+            text-align: center;
+          }
+          .dapa-grid, .genome-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+          .genome-item { padding: 16px 8px; }
+          .genome-emoji { font-size: 24px; }
+          .genome-name { font-size: 10px; }
         }
       `}</style>
     </>
