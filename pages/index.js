@@ -1,8 +1,8 @@
 // pages/index.js
 // ============================================================================
-// ONTONIGHT LANDING PAGE - REMARKABLE EDITION
+// ONTONIGHT LANDING PAGE - REMARKABLE EDITION v2
 // ============================================================================
-// Static Tagline + Secondary Typewriter + Expandable Sections + Scroll Magic
+// Static Tagline + Who Are You + Expandable Sections + Scroll Magic
 // "Your Night. Your People. Where Regulars Are Made."
 // ============================================================================
 
@@ -20,10 +20,16 @@ export default function LandingPage() {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [visibleSections, setVisibleSections] = useState({});
   
-  // Expandable sections state
+  // User type selection
+  const [selectedUserType, setSelectedUserType] = useState(null);
+  
+  // Expandable sections state - ALL CLOSED by default
   const [expandedProblem, setExpandedProblem] = useState(null);
-  const [expandedPlatform, setExpandedPlatform] = useState('onpro');
+  const [expandedPlatform, setExpandedPlatform] = useState(null);
   const [expandedVision, setExpandedVision] = useState(null);
+
+  // Refs for scroll targeting
+  const accordionRefs = useRef({});
 
   // PWA
   const [showInstallPrompt, setShowInstallPrompt] = useState(false);
@@ -37,7 +43,7 @@ export default function LandingPage() {
     "Follow your favorite bartender anywhere.",
     "Verified skills. Portable careers.",
     "The LinkedIn for hospitality.",
-    "End professional erasure forever."
+    "Your career finally follows you."
   ];
   const [descriptorIndex, setDescriptorIndex] = useState(0);
   const [typedText, setTypedText] = useState('');
@@ -83,7 +89,6 @@ export default function LandingPage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Intersection Observer for scroll-triggered animations
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -102,6 +107,59 @@ export default function LandingPage() {
 
     return () => observer.disconnect();
   }, []);
+
+  // ============================================================================
+  // ACCORDION HANDLER WITH SCROLL TO TOP OF NEW SECTION
+  // ============================================================================
+  const handlePlatformAccordion = (key) => {
+    if (expandedPlatform === key) {
+      setExpandedPlatform(null);
+    } else {
+      setExpandedPlatform(key);
+      // Scroll to the newly opened accordion after a brief delay for animation
+      setTimeout(() => {
+        const element = accordionRefs.current[key];
+        if (element) {
+          const navHeight = 70;
+          const elementTop = element.getBoundingClientRect().top + window.scrollY - navHeight;
+          window.scrollTo({ top: elementTop, behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  };
+
+  const handleVisionAccordion = (key) => {
+    if (expandedVision === key) {
+      setExpandedVision(null);
+    } else {
+      setExpandedVision(key);
+      setTimeout(() => {
+        const element = accordionRefs.current[`vision-${key}`];
+        if (element) {
+          const navHeight = 70;
+          const elementTop = element.getBoundingClientRect().top + window.scrollY - navHeight;
+          window.scrollTo({ top: elementTop, behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  };
+
+  // ============================================================================
+  // USER TYPE SELECTION - Navigate to relevant platform section
+  // ============================================================================
+  const handleUserTypeSelect = (type) => {
+    setSelectedUserType(type);
+    setExpandedPlatform(type);
+    
+    setTimeout(() => {
+      const element = document.getElementById('platform');
+      if (element) {
+        const navHeight = 70;
+        const elementTop = element.getBoundingClientRect().top + window.scrollY - navHeight;
+        window.scrollTo({ top: elementTop, behavior: 'smooth' });
+      }
+    }, 100);
+  };
 
   // ============================================================================
   // PWA INSTALL
@@ -184,8 +242,8 @@ export default function LandingPage() {
   const visionSections = [
     { 
       id: 'story', 
-      title: '27 Years Behind the Bar',
-      content: `Twenty-seven years in hospitality. Not watching from an office—living it. Behind the stick where ice never stops flowing and the POS screen glows like a beacon through double shifts.
+      title: 'Almost 30 Years Behind the Bar',
+      content: `Almost 30 years in hospitality. Not watching from an office—living it. Behind the stick where ice never stops flowing and the POS screen glows like a beacon through double shifts.
 
 I've made drinks until my hands cramped. I've worked stations where you pour four cocktails simultaneously while maintaining three separate conversations, each guest believing they have your full attention—because in that moment, they do.
 
@@ -228,7 +286,7 @@ We're live now in Tampa Bay. From here, we're expanding to Miami, Nashville, Aus
 
 This isn't a product launch. This is a correction—the professional infrastructure that should have existed all along.
 
-We're not just building software. We're building the future of hospitality careers. We're ending professional erasure. We're making dignity portable.`
+We're not just building software. We're building the future of hospitality careers.`
     }
   ];
 
@@ -302,7 +360,7 @@ We're not just building software. We're building the future of hospitality caree
         </nav>
 
         {/* ================================================================== */}
-        {/* HERO - STATIC TAGLINE, SECONDARY TYPEWRITER */}
+        {/* HERO - STATIC TAGLINE + WHO ARE YOU */}
         {/* ================================================================== */}
         <section className="hero">
           <div className="hero-glow" />
@@ -311,7 +369,7 @@ We're not just building software. We're building the future of hospitality caree
           <div className="container">
             <div className="hero-badge">
               <span className="badge-dot" />
-              LIVE NOW · TAMPA BAY PILOT
+              LIVE NOW · TAMPA BAY
             </div>
 
             {/* STATIC TAGLINE - THE STAR */}
@@ -320,18 +378,50 @@ We're not just building software. We're building the future of hospitality caree
               <span className="tagline-emphasis">Where Regulars Are Made.</span>
             </h1>
 
-            {/* SECONDARY TYPEWRITER - Supporting descriptor */}
+            {/* SECONDARY TYPEWRITER */}
             <div className="hero-descriptor">
               <span className="typed-text">{typedText}</span>
               <span className="cursor">|</span>
             </div>
 
-            <div className="hero-stats">
-              <div className="stat-item">
-                <span className="stat-number">27</span>
-                <span className="stat-label">Years Experience</span>
+            {/* WHO ARE YOU - User Type Selection */}
+            <div className="who-are-you">
+              <p className="who-label">I am a...</p>
+              <div className="who-options">
+                <button 
+                  className={`who-btn ${selectedUserType === 'onpro' ? 'selected' : ''}`}
+                  onClick={() => handleUserTypeSelect('onpro')}
+                >
+                  <span className="who-icon">🎯</span>
+                  <span className="who-text">
+                    <strong>Hospitality Pro</strong>
+                    <small>Bartender, Server, Sommelier</small>
+                  </span>
+                </button>
+                <button 
+                  className={`who-btn ${selectedUserType === 'patron' ? 'selected' : ''}`}
+                  onClick={() => handleUserTypeSelect('patron')}
+                >
+                  <span className="who-icon">💜</span>
+                  <span className="who-text">
+                    <strong>Customer</strong>
+                    <small>Looking for my people</small>
+                  </span>
+                </button>
+                <button 
+                  className={`who-btn ${selectedUserType === 'venue' ? 'selected' : ''}`}
+                  onClick={() => handleUserTypeSelect('venue')}
+                >
+                  <span className="who-icon">🏢</span>
+                  <span className="who-text">
+                    <strong>Venue Owner</strong>
+                    <small>Bar, Restaurant, Hotel</small>
+                  </span>
+                </button>
               </div>
-              <div className="stat-divider" />
+            </div>
+
+            <div className="hero-stats">
               <div className="stat-item">
                 <span className="stat-number">$66.8B</span>
                 <span className="stat-label">Industry Crisis</span>
@@ -341,11 +431,11 @@ We're not just building software. We're building the future of hospitality caree
                 <span className="stat-number">15.6M</span>
                 <span className="stat-label">Workers Affected</span>
               </div>
-            </div>
-
-            <div className="hero-ctas">
-              <a href="#platform" className="btn-primary">Explore Platform</a>
-              <a href="#vision" className="btn-secondary">Read the Vision</a>
+              <div className="stat-divider" />
+              <div className="stat-item">
+                <span className="stat-number">1</span>
+                <span className="stat-label">Solution</span>
+              </div>
             </div>
 
             {showInstallPrompt && (
@@ -408,7 +498,7 @@ We're not just building software. We're building the future of hospitality caree
         </section>
 
         {/* ================================================================== */}
-        {/* PLATFORM - EXPANDABLE TABS */}
+        {/* PLATFORM - EXPANDABLE TABS (ALL CLOSED BY DEFAULT) */}
         {/* ================================================================== */}
         <section id="platform" className="section-platform">
           <div className="container">
@@ -420,8 +510,11 @@ We're not just building software. We're building the future of hospitality caree
             {/* PLATFORM ACCORDION */}
             <div className="platform-accordion">
               {/* ONPRO */}
-              <div className={`accordion-item ${expandedPlatform === 'onpro' ? 'expanded' : ''}`}>
-                <button className="accordion-header" onClick={() => setExpandedPlatform(expandedPlatform === 'onpro' ? null : 'onpro')}>
+              <div 
+                ref={(el) => accordionRefs.current['onpro'] = el}
+                className={`accordion-item ${expandedPlatform === 'onpro' ? 'expanded' : ''}`}
+              >
+                <button className="accordion-header" onClick={() => handlePlatformAccordion('onpro')}>
                   <div className="accordion-title">
                     <span className="accordion-icon">🎯</span>
                     <div>
@@ -500,8 +593,11 @@ We're not just building software. We're building the future of hospitality caree
               </div>
 
               {/* PATRON */}
-              <div className={`accordion-item ${expandedPlatform === 'patron' ? 'expanded' : ''}`}>
-                <button className="accordion-header" onClick={() => setExpandedPlatform(expandedPlatform === 'patron' ? null : 'patron')}>
+              <div 
+                ref={(el) => accordionRefs.current['patron'] = el}
+                className={`accordion-item ${expandedPlatform === 'patron' ? 'expanded' : ''}`}
+              >
+                <button className="accordion-header" onClick={() => handlePlatformAccordion('patron')}>
                   <div className="accordion-title">
                     <span className="accordion-icon">💜</span>
                     <div>
@@ -544,9 +640,18 @@ We're not just building software. We're building the future of hospitality caree
                     </div>
 
                     <div className="platform-screenshots">
-                      <img src="/screenshots/patron-explore.jpg" alt="Explore" onClick={() => setLightboxImage('/screenshots/patron-explore.jpg')} />
-                      <img src="/screenshots/patron-genome.jpg" alt="Genome" onClick={() => setLightboxImage('/screenshots/patron-genome.jpg')} />
-                      <img src="/screenshots/patron-messaging.jpg" alt="Messaging" onClick={() => setLightboxImage('/screenshots/patron-messaging.jpg')} />
+                      <div className="screenshot-placeholder">
+                        <span>📱</span>
+                        <p>Explore Screen</p>
+                      </div>
+                      <div className="screenshot-placeholder">
+                        <span>🧬</span>
+                        <p>Your Genome</p>
+                      </div>
+                      <div className="screenshot-placeholder">
+                        <span>💬</span>
+                        <p>Messaging</p>
+                      </div>
                     </div>
                   </div>
 
@@ -570,8 +675,11 @@ We're not just building software. We're building the future of hospitality caree
               </div>
 
               {/* VENUE */}
-              <div className={`accordion-item ${expandedPlatform === 'venue' ? 'expanded' : ''}`}>
-                <button className="accordion-header" onClick={() => setExpandedPlatform(expandedPlatform === 'venue' ? null : 'venue')}>
+              <div 
+                ref={(el) => accordionRefs.current['venue'] = el}
+                className={`accordion-item ${expandedPlatform === 'venue' ? 'expanded' : ''}`}
+              >
+                <button className="accordion-header" onClick={() => handlePlatformAccordion('venue')}>
                   <div className="accordion-title">
                     <span className="accordion-icon">🏢</span>
                     <div>
@@ -601,7 +709,7 @@ We're not just building software. We're building the future of hospitality caree
 
                       <div className="pricing-row">
                         <div className="price-card trial">
-                          <span className="price-badge">PILOT</span>
+                          <span className="price-badge">FREE TO START</span>
                           <h4>Venue Basic</h4>
                           <ul>
                             <li>Staff verification</li>
@@ -624,15 +732,21 @@ We're not just building software. We're building the future of hospitality caree
                     </div>
 
                     <div className="platform-screenshots single">
-                      <img src="/screenshots/venue-portal.jpg" alt="Venue Portal" onClick={() => setLightboxImage('/screenshots/venue-portal.jpg')} />
+                      <div className="screenshot-placeholder large">
+                        <span>📊</span>
+                        <p>Venue Portal Dashboard</p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* THE SCIENCE */}
-              <div className={`accordion-item science ${expandedPlatform === 'science' ? 'expanded' : ''}`}>
-                <button className="accordion-header" onClick={() => setExpandedPlatform(expandedPlatform === 'science' ? null : 'science')}>
+              <div 
+                ref={(el) => accordionRefs.current['science'] = el}
+                className={`accordion-item science ${expandedPlatform === 'science' ? 'expanded' : ''}`}
+              >
+                <button className="accordion-header" onClick={() => handlePlatformAccordion('science')}>
                   <div className="accordion-title">
                     <span className="accordion-icon">🧬</span>
                     <div>
@@ -692,17 +806,18 @@ We're not just building software. We're building the future of hospitality caree
                   <p>Founder of OnTonight</p>
                 </div>
               </div>
-              <p className="founder-tagline">27 years behind bars. One mission: end professional erasure in hospitality.</p>
+              <p className="founder-tagline">Almost 30 years behind bars. One mission: build the career infrastructure hospitality deserves.</p>
             </div>
 
             <div className="vision-accordion">
               {visionSections.map((section) => (
                 <div
                   key={section.id}
+                  ref={(el) => accordionRefs.current[`vision-${section.id}`] = el}
                   className={`vision-item animate-on-scroll ${visibleSections[`vision-${section.id}`] ? 'visible' : ''} ${expandedVision === section.id ? 'expanded' : ''}`}
                   id={`vision-${section.id}`}
                 >
-                  <button className="vision-header" onClick={() => setExpandedVision(expandedVision === section.id ? null : section.id)}>
+                  <button className="vision-header" onClick={() => handleVisionAccordion(section.id)}>
                     <h3>{section.title}</h3>
                     <span className="vision-toggle">{expandedVision === section.id ? '−' : '+'}</span>
                   </button>
@@ -1029,14 +1144,14 @@ We're not just building software. We're building the future of hospitality caree
           50% { opacity: 0.6; transform: scale(0.9); }
         }
 
-        /* STATIC TAGLINE - THE STAR */
+        /* STATIC TAGLINE */
         .hero-tagline {
           margin: 0 0 24px;
         }
 
         .tagline-line {
           display: block;
-          font-size: clamp(36px, 6vw, 56px);
+          font-size: clamp(32px, 5vw, 52px);
           font-weight: 700;
           color: #f8fafc;
           line-height: 1.2;
@@ -1045,7 +1160,7 @@ We're not just building software. We're building the future of hospitality caree
 
         .tagline-emphasis {
           display: block;
-          font-size: clamp(40px, 7vw, 68px);
+          font-size: clamp(36px, 6vw, 64px);
           font-weight: 800;
           background: linear-gradient(135deg, #d4a373 0%, #e8c9a0 50%, #d4a373 100%);
           -webkit-background-clip: text;
@@ -1058,14 +1173,10 @@ We're not just building software. We're building the future of hospitality caree
 
         /* SECONDARY TYPEWRITER */
         .hero-descriptor {
-          height: 32px;
-          font-size: 18px;
+          height: 28px;
+          font-size: 17px;
           color: rgba(248, 250, 252, 0.6);
-          margin-bottom: 48px;
-        }
-
-        .typed-text {
-          border-right: 2px solid transparent;
+          margin-bottom: 40px;
         }
 
         .cursor {
@@ -1079,12 +1190,78 @@ We're not just building software. We're building the future of hospitality caree
           51%, 100% { opacity: 0; }
         }
 
+        /* WHO ARE YOU SECTION */
+        .who-are-you {
+          margin-bottom: 40px;
+        }
+
+        .who-label {
+          font-size: 14px;
+          color: rgba(248, 250, 252, 0.5);
+          margin-bottom: 16px;
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
+        }
+
+        .who-options {
+          display: flex;
+          gap: 16px;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        .who-btn {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          padding: 16px 24px;
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 12px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          text-align: left;
+        }
+
+        .who-btn:hover {
+          background: rgba(255, 255, 255, 0.06);
+          border-color: rgba(212, 163, 115, 0.3);
+          transform: translateY(-2px);
+        }
+
+        .who-btn.selected {
+          background: rgba(212, 163, 115, 0.1);
+          border-color: #d4a373;
+        }
+
+        .who-icon {
+          font-size: 28px;
+        }
+
+        .who-text {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .who-text strong {
+          font-size: 15px;
+          color: #f8fafc;
+          font-weight: 600;
+        }
+
+        .who-text small {
+          font-size: 12px;
+          color: rgba(248, 250, 252, 0.5);
+          margin-top: 2px;
+        }
+
+        /* HERO STATS */
         .hero-stats {
           display: flex;
           justify-content: center;
           align-items: center;
           gap: 40px;
-          margin-bottom: 48px;
+          margin-bottom: 32px;
           flex-wrap: wrap;
         }
 
@@ -1095,68 +1272,25 @@ We're not just building software. We're building the future of hospitality caree
         }
 
         .stat-number {
-          font-size: 32px;
+          font-size: 28px;
           font-weight: 700;
           color: #d4a373;
         }
 
         .stat-label {
-          font-size: 13px;
+          font-size: 12px;
           color: rgba(248, 250, 252, 0.5);
           margin-top: 4px;
         }
 
         .stat-divider {
           width: 1px;
-          height: 40px;
+          height: 36px;
           background: rgba(255, 255, 255, 0.1);
         }
 
-        .hero-ctas {
-          display: flex;
-          gap: 16px;
-          justify-content: center;
-          flex-wrap: wrap;
-        }
-
-        .btn-primary {
-          background: linear-gradient(135deg, #d4a373, #c99763);
-          color: #0a0d12;
-          padding: 16px 36px;
-          font-size: 16px;
-          font-weight: 600;
-          border: none;
-          border-radius: 8px;
-          cursor: pointer;
-          text-decoration: none;
-          transition: all 0.3s;
-        }
-
-        .btn-primary:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 12px 40px rgba(212, 163, 115, 0.25);
-        }
-
-        .btn-secondary {
-          background: transparent;
-          color: #d4a373;
-          border: 1px solid rgba(212, 163, 115, 0.4);
-          padding: 16px 36px;
-          font-size: 16px;
-          font-weight: 600;
-          border-radius: 8px;
-          cursor: pointer;
-          text-decoration: none;
-          transition: all 0.3s;
-        }
-
-        .btn-secondary:hover {
-          background: rgba(212, 163, 115, 0.1);
-          border-color: #d4a373;
-        }
-
         .btn-install {
-          margin-top: 24px;
+          margin-top: 20px;
           background: transparent;
           border: 1px solid rgba(255, 255, 255, 0.1);
           color: rgba(248, 250, 252, 0.5);
@@ -1194,14 +1328,14 @@ We're not just building software. We're building the future of hospitality caree
         }
 
         .section-header h2 {
-          font-size: clamp(32px, 5vw, 44px);
+          font-size: clamp(28px, 4vw, 40px);
           font-weight: 700;
           margin: 0 0 16px;
           letter-spacing: -0.02em;
         }
 
         .section-header p {
-          font-size: 18px;
+          font-size: 17px;
           color: rgba(248, 250, 252, 0.6);
           max-width: 600px;
           margin: 0 auto;
@@ -1553,6 +1687,7 @@ We're not just building software. We're building the future of hospitality caree
           font-size: 12px;
         }
 
+        /* SCREENSHOTS */
         .platform-screenshots {
           display: grid;
           grid-template-columns: 1fr 1fr 1fr;
@@ -1575,6 +1710,35 @@ We're not just building software. We're building the future of hospitality caree
         .platform-screenshots img:hover {
           transform: scale(1.03);
           border-color: rgba(212, 163, 115, 0.4);
+        }
+
+        /* Screenshot Placeholders */
+        .screenshot-placeholder {
+          background: rgba(255, 255, 255, 0.03);
+          border: 1px dashed rgba(255, 255, 255, 0.15);
+          border-radius: 10px;
+          padding: 40px 20px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+        }
+
+        .screenshot-placeholder.large {
+          padding: 60px 20px;
+        }
+
+        .screenshot-placeholder span {
+          font-size: 36px;
+          margin-bottom: 12px;
+          opacity: 0.6;
+        }
+
+        .screenshot-placeholder p {
+          font-size: 13px;
+          color: rgba(248, 250, 252, 0.4);
+          margin: 0;
         }
 
         /* ARCHETYPES */
@@ -1741,7 +1905,7 @@ We're not just building software. We're building the future of hospitality caree
         }
 
         .founder-tagline {
-          font-size: 18px;
+          font-size: 17px;
           color: #d4a373;
           margin: 0;
         }
@@ -1835,12 +1999,12 @@ We're not just building software. We're building the future of hospitality caree
         }
 
         .waitlist-content h2 {
-          font-size: 40px;
+          font-size: 36px;
           margin: 0 0 16px;
         }
 
         .waitlist-subtitle {
-          font-size: 18px;
+          font-size: 17px;
           color: rgba(248, 250, 252, 0.6);
           margin-bottom: 40px;
         }
@@ -1927,6 +2091,25 @@ We're not just building software. We're building the future of hospitality caree
           font-size: 16px;
           color: rgba(248, 250, 252, 0.7);
           margin-bottom: 28px;
+        }
+
+        .btn-primary {
+          background: linear-gradient(135deg, #d4a373, #c99763);
+          color: #0a0d12;
+          padding: 16px 36px;
+          font-size: 16px;
+          font-weight: 600;
+          border: none;
+          border-radius: 8px;
+          cursor: pointer;
+          text-decoration: none;
+          display: inline-block;
+          transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 12px 40px rgba(212, 163, 115, 0.25);
         }
 
         /* ============================================
@@ -2044,6 +2227,16 @@ We're not just building software. We're building the future of hospitality caree
 
           .footer-grid {
             grid-template-columns: 1fr 1fr;
+          }
+
+          .who-options {
+            flex-direction: column;
+            align-items: center;
+          }
+
+          .who-btn {
+            width: 100%;
+            max-width: 280px;
           }
         }
 
