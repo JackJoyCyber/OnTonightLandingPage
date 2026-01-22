@@ -1,9 +1,9 @@
 // pages/index.js
 // ============================================================================
-// ONTONIGHT LANDING PAGE - REMARKABLE EDITION v2
+// ONTONIGHT LANDING PAGE - FINAL POLISHED EDITION
 // ============================================================================
-// Static Tagline + Who Are You + Expandable Sections + Scroll Magic
 // "Your Night. Your People. Where Regulars Are Made."
+// Stop resetting. Start building.
 // ============================================================================
 
 import { useState, useEffect, useRef } from 'react';
@@ -24,11 +24,11 @@ export default function LandingPage() {
   const [selectedUserType, setSelectedUserType] = useState(null);
   
   // Expandable sections state - ALL CLOSED by default
-  const [expandedProblem, setExpandedProblem] = useState(null);
   const [expandedPlatform, setExpandedPlatform] = useState(null);
   const [expandedVision, setExpandedVision] = useState(null);
+  const [expandedProblem, setExpandedProblem] = useState(null);
 
-  // Refs for scroll targeting
+  // Refs for accordion items
   const accordionRefs = useRef({});
 
   // PWA
@@ -36,14 +36,14 @@ export default function LandingPage() {
   const [deferredPrompt, setDeferredPrompt] = useState(null);
 
   // ============================================================================
-  // SECONDARY TYPEWRITER - Descriptive statements (NOT the tagline)
+  // TYPEWRITER - "Stop resetting. Start building." + others
   // ============================================================================
   const descriptors = [
-    "Professional identity that travels with you.",
-    "Follow your favorite bartender anywhere.",
+    "Stop resetting. Start building.",
+    "Follow your favorite hospitality pro anywhere.",
     "Verified skills. Portable careers.",
-    "The LinkedIn for hospitality.",
-    "Your career finally follows you."
+    "The career platform for hospitality.",
+    "Your reputation travels with you."
   ];
   const [descriptorIndex, setDescriptorIndex] = useState(0);
   const [typedText, setTypedText] = useState('');
@@ -109,43 +109,40 @@ export default function LandingPage() {
   }, []);
 
   // ============================================================================
-  // ACCORDION HANDLER WITH SCROLL TO TOP OF NEW SECTION
+  // ACCORDION HANDLER - FIXED: No scroll jump, viewport stays locked
   // ============================================================================
   const handlePlatformAccordion = (key) => {
+    // Store current scroll position
+    const currentScroll = window.scrollY;
+    
     if (expandedPlatform === key) {
       setExpandedPlatform(null);
     } else {
       setExpandedPlatform(key);
-      // Scroll to the newly opened accordion after a brief delay for animation
-      setTimeout(() => {
-        const element = accordionRefs.current[key];
-        if (element) {
-          const navHeight = 70;
-          const elementTop = element.getBoundingClientRect().top + window.scrollY - navHeight;
-          window.scrollTo({ top: elementTop, behavior: 'smooth' });
-        }
-      }, 100);
     }
+    
+    // Keep viewport locked after state change
+    requestAnimationFrame(() => {
+      window.scrollTo(0, currentScroll);
+    });
   };
 
   const handleVisionAccordion = (key) => {
+    const currentScroll = window.scrollY;
+    
     if (expandedVision === key) {
       setExpandedVision(null);
     } else {
       setExpandedVision(key);
-      setTimeout(() => {
-        const element = accordionRefs.current[`vision-${key}`];
-        if (element) {
-          const navHeight = 70;
-          const elementTop = element.getBoundingClientRect().top + window.scrollY - navHeight;
-          window.scrollTo({ top: elementTop, behavior: 'smooth' });
-        }
-      }, 100);
     }
+    
+    requestAnimationFrame(() => {
+      window.scrollTo(0, currentScroll);
+    });
   };
 
   // ============================================================================
-  // USER TYPE SELECTION - Navigate to relevant platform section
+  // USER TYPE SELECTION
   // ============================================================================
   const handleUserTypeSelect = (type) => {
     setSelectedUserType(type);
@@ -206,10 +203,10 @@ export default function LandingPage() {
   // DATA
   // ============================================================================
   const problemCards = [
-    { id: 'money', icon: '💰', stat: '$24K', label: 'Lost Per Venue Change', desc: 'Average bartender loses $24,000 in regular tips when changing venues. Your regulars can\'t follow you. Years of relationship building—gone.' },
+    { id: 'money', icon: '💰', stat: '$24K', label: 'Lost Per Venue Change', desc: 'Average hospitality professional loses $24,000 in regular tips when changing venues. Your regulars can\'t follow you. Years of relationship building—gone.' },
     { id: 'turnover', icon: '🔄', stat: '73%', label: 'Annual Turnover', desc: 'The hospitality industry has the highest turnover of any sector. Every departure erases years of relationship building and institutional knowledge.' },
     { id: 'zero', icon: '📉', stat: 'Zero', label: 'Career Infrastructure', desc: 'Lawyers have bar licenses. Doctors have credentials. Engineers have GitHub. Hospitality professionals start from scratch every single move.' },
-    { id: 'workers', icon: '💔', stat: '15.6M', label: 'Workers Affected', desc: 'Over 15 million hospitality professionals in the US alone face this reality. Bartenders. Servers. Sommeliers. Baristas. All of them.' }
+    { id: 'workers', icon: '💔', stat: '15.6M', label: 'Workers Affected', desc: 'Over 15 million hospitality professionals in the US alone face this reality. Bartenders. Servers. Sommeliers. Baristas. Chefs. All of them.' }
   ];
 
   const industryQuotes = [
@@ -226,16 +223,16 @@ export default function LandingPage() {
   ];
 
   const patronFeatures = [
-    { icon: '🔔', title: 'Follow Your Favorites', desc: 'Get notified when your favorite bartender or server is working. Never show up to find they\'re off again.' },
+    { icon: '🔔', title: 'Follow Your Favorites', desc: 'Get notified when your favorite hospitality pro is working. Never show up to find they\'re off again.' },
     { icon: '🗺️', title: 'Track Across Venues', desc: 'When they change jobs, you get notified of their new location. The magic follows the person, not the place.' },
-    { icon: '🧬', title: 'OnScene Genome', desc: '45 questions across 10 dimensions reveal your hospitality personality. Get matched to experiences that fit YOU.' },
-    { icon: '✨', title: 'Personalized Discovery', desc: 'Find new spots that match your vibe. Your genome guides recommendations to places you\'ll actually love.' }
+    { icon: '⭐', title: 'Discover New Spots', desc: 'Find venues based on the professionals who work there. Quality service, guaranteed.' },
+    { icon: '🎫', title: 'Check-In & Earn Badges', desc: 'Build your hospitality reputation. Become a recognized regular at your favorite spots.' }
   ];
 
   const venueFeatures = [
     { icon: '✅', title: 'Verified Staff', desc: 'See DAPA scores before you hire. Know exactly what level of expertise you\'re getting. No more surprises.' },
     { icon: '🌟', title: 'Featured Professionals', desc: 'Showcase your best talent. Let their reputation drive traffic to your venue. Turn retention into competitive advantage.' },
-    { icon: '📈', title: 'Analytics Dashboard', desc: 'Track which OnPros drive repeat visits. Understand your customer relationships at a deeper level.' },
+    { icon: '📈', title: 'Analytics Dashboard', desc: 'Track which professionals drive repeat visits. Understand your customer relationships at a deeper level.' },
     { icon: '🎯', title: 'Culture Matching', desc: 'Find staff whose professional genome aligns with your venue\'s vibe. Better culture fit means longer tenure.' }
   ];
 
@@ -258,24 +255,11 @@ And I've watched the best people I ever trained walk out the door. Every single 
 
 Lawyers switch firms, but their bar membership follows them. Software engineers change companies—their GitHub stays with them. Real estate agents move brokerages and take their client databases.
 
-But a bartender changes venues and loses everything. Every. Single. Time.
+But a hospitality professional changes venues and loses everything. Every. Single. Time.
 
 The regular who tipped $50 every Friday? Can't find you. The professional reputation you spent a decade building? Starts at zero.
 
 This isn't the nature of the industry. This is the absence of professional infrastructure.`
-    },
-    {
-      id: 'solution',
-      title: 'What OnTonight Actually Is',
-      content: `OnTonight is professional infrastructure—the kind that every other industry already has, finally built for hospitality.
-
-For professionals: Your skills are verified through DAPA. Your professional identity is portable. Your customer relationships belong to you.
-
-For customers: Your favorite bartender changes jobs? You get notified. The relationship doesn't end when the employment ends.
-
-For venues: Recruit verified talent—not résumés and promises, but proven skill. Compete on culture instead of wages alone.
-
-This is professional dignity in software form. This is career equity for people who serve.`
     },
     {
       id: 'future',
@@ -334,7 +318,7 @@ We're not just building software. We're building the future of hospitality caree
 
       {/* PARTICLES */}
       <div className="particles">
-        {[...Array(15)].map((_, i) => (
+        {[...Array(12)].map((_, i) => (
           <div key={i} className="particle" style={{
             left: `${Math.random() * 100}%`,
             animationDelay: `${Math.random() * 8}s`,
@@ -351,7 +335,7 @@ We're not just building software. We're building the future of hospitality caree
           <div className="nav-container">
             <div className="nav-logo">OnTonight</div>
             <div className="nav-links">
-              <a href="#problem">The Problem</a>
+              <a href="#what">What It Is</a>
               <a href="#platform">Platform</a>
               <a href="#vision">Vision</a>
               <a href="#waitlist" className="nav-cta">Join Waitlist</a>
@@ -360,7 +344,7 @@ We're not just building software. We're building the future of hospitality caree
         </nav>
 
         {/* ================================================================== */}
-        {/* HERO - STATIC TAGLINE + WHO ARE YOU */}
+        {/* HERO */}
         {/* ================================================================== */}
         <section className="hero">
           <div className="hero-glow" />
@@ -372,7 +356,7 @@ We're not just building software. We're building the future of hospitality caree
               LIVE NOW · TAMPA BAY
             </div>
 
-            {/* STATIC TAGLINE - THE STAR */}
+            {/* STATIC TAGLINE */}
             <h1 className="hero-tagline">
               <span className="tagline-line">Your Night. Your People.</span>
               <span className="tagline-emphasis">Where Regulars Are Made.</span>
@@ -384,7 +368,7 @@ We're not just building software. We're building the future of hospitality caree
               <span className="cursor">|</span>
             </div>
 
-            {/* WHO ARE YOU - User Type Selection */}
+            {/* WHO ARE YOU */}
             <div className="who-are-you">
               <p className="who-label">I am a...</p>
               <div className="who-options">
@@ -392,17 +376,17 @@ We're not just building software. We're building the future of hospitality caree
                   className={`who-btn ${selectedUserType === 'onpro' ? 'selected' : ''}`}
                   onClick={() => handleUserTypeSelect('onpro')}
                 >
-                  <span className="who-icon">🎯</span>
+                  <span className="who-icon">🍸</span>
                   <span className="who-text">
                     <strong>Hospitality Pro</strong>
-                    <small>Bartender, Server, Sommelier</small>
+                    <small>Bartender, Server, Sommelier, Chef</small>
                   </span>
                 </button>
                 <button 
                   className={`who-btn ${selectedUserType === 'patron' ? 'selected' : ''}`}
                   onClick={() => handleUserTypeSelect('patron')}
                 >
-                  <span className="who-icon">💜</span>
+                  <span className="who-icon">❤️</span>
                   <span className="who-text">
                     <strong>Customer</strong>
                     <small>Looking for my people</small>
@@ -421,23 +405,6 @@ We're not just building software. We're building the future of hospitality caree
               </div>
             </div>
 
-            <div className="hero-stats">
-              <div className="stat-item">
-                <span className="stat-number">$66.8B</span>
-                <span className="stat-label">Industry Crisis</span>
-              </div>
-              <div className="stat-divider" />
-              <div className="stat-item">
-                <span className="stat-number">15.6M</span>
-                <span className="stat-label">Workers Affected</span>
-              </div>
-              <div className="stat-divider" />
-              <div className="stat-item">
-                <span className="stat-number">1</span>
-                <span className="stat-label">Solution</span>
-              </div>
-            </div>
-
             {showInstallPrompt && (
               <button onClick={handleInstall} className="btn-install">
                 📱 Add to Home Screen
@@ -452,7 +419,41 @@ We're not just building software. We're building the future of hospitality caree
         </section>
 
         {/* ================================================================== */}
-        {/* THE PROBLEM - EXPANDABLE CARDS */}
+        {/* WHAT IS ONTONIGHT - IMMEDIATE CLARITY */}
+        {/* ================================================================== */}
+        <section id="what" className="section-what">
+          <div className="container">
+            <div className={`section-header animate-on-scroll ${visibleSections['what-header'] ? 'visible' : ''}`} id="what-header">
+              <h2>What Is OnTonight?</h2>
+              <p className="what-subtitle">Professional infrastructure for hospitality. The career platform this industry has always deserved.</p>
+            </div>
+
+            <div className="what-grid">
+              <div className={`what-card animate-on-scroll ${visibleSections['what-pro'] ? 'visible' : ''}`} id="what-pro">
+                <div className="what-icon">🍸</div>
+                <h3>For Hospitality Pros</h3>
+                <p>Your skills are verified. Your reputation is portable. Your customers follow <em>you</em>, not the venue. When you change jobs, you don't start over—you level up.</p>
+              </div>
+              <div className={`what-card animate-on-scroll ${visibleSections['what-patron'] ? 'visible' : ''}`} id="what-patron" style={{animationDelay: '0.1s'}}>
+                <div className="what-icon">❤️</div>
+                <h3>For Customers</h3>
+                <p>Never lose your favorite bartender, server, or sommelier again. When they move to a new venue, you'll know. The relationship survives the job change.</p>
+              </div>
+              <div className={`what-card animate-on-scroll ${visibleSections['what-venue'] ? 'visible' : ''}`} id="what-venue" style={{animationDelay: '0.2s'}}>
+                <div className="what-icon">🏢</div>
+                <h3>For Venues</h3>
+                <p>Recruit verified talent with proven skills—not just resumes and promises. Compete on culture instead of wages alone. Turn great staff into a competitive advantage.</p>
+              </div>
+            </div>
+
+            <div className={`what-summary animate-on-scroll ${visibleSections['what-summary'] ? 'visible' : ''}`} id="what-summary">
+              <p>OnTonight is the <strong>career infrastructure</strong> that every other industry has—finally built for hospitality. Professional dignity in software form.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================== */}
+        {/* THE PROBLEM */}
         {/* ================================================================== */}
         <section id="problem" className="section-problem">
           <div className="container">
@@ -498,7 +499,7 @@ We're not just building software. We're building the future of hospitality caree
         </section>
 
         {/* ================================================================== */}
-        {/* PLATFORM - EXPANDABLE TABS (ALL CLOSED BY DEFAULT) */}
+        {/* PLATFORM - DETAILED ACCORDION */}
         {/* ================================================================== */}
         <section id="platform" className="section-platform">
           <div className="container">
@@ -507,19 +508,18 @@ We're not just building software. We're building the future of hospitality caree
               <p>Three solutions. One complete ecosystem for hospitality.</p>
             </div>
 
-            {/* PLATFORM ACCORDION */}
             <div className="platform-accordion">
-              {/* ONPRO */}
+              {/* ONPRO - 🍸 */}
               <div 
                 ref={(el) => accordionRefs.current['onpro'] = el}
                 className={`accordion-item ${expandedPlatform === 'onpro' ? 'expanded' : ''}`}
               >
                 <button className="accordion-header" onClick={() => handlePlatformAccordion('onpro')}>
                   <div className="accordion-title">
-                    <span className="accordion-icon">🎯</span>
+                    <span className="accordion-icon">🍸</span>
                     <div>
                       <h3>For OnPros</h3>
-                      <p>Bartenders, Servers, Sommeliers, Baristas</p>
+                      <p>Bartenders, Servers, Sommeliers, Chefs, Baristas</p>
                     </div>
                   </div>
                   <span className="accordion-toggle">{expandedPlatform === 'onpro' ? '−' : '+'}</span>
@@ -558,8 +558,9 @@ We're not just building software. We're building the future of hospitality caree
                           <h4>OnPro Premium</h4>
                           <ul>
                             <li>Unlimited assessments</li>
+                            <li>Direct messaging</li>
+                            <li>Private event gig board</li>
                             <li>Advanced analytics</li>
-                            <li>Priority matching</li>
                             <li>Verified badge boost</li>
                           </ul>
                         </div>
@@ -568,12 +569,11 @@ We're not just building software. We're building the future of hospitality caree
 
                     <div className="platform-screenshots">
                       <img src="/screenshots/onpro-profile-status.jpg" alt="OnPro Profile" onClick={() => setLightboxImage('/screenshots/onpro-profile-status.jpg')} />
-                      <img src="/screenshots/onpro-skills-catagories.jpg" alt="Skills" onClick={() => setLightboxImage('/screenshots/onpro-skills-catagories.jpg')} />
-                      <img src="/screenshots/onpro-assessment-dashboard.jpg" alt="Dashboard" onClick={() => setLightboxImage('/screenshots/onpro-assessment-dashboard.jpg')} />
+                      <img src="/screenshots/onpro-skills-catagories.jpg" alt="Skills Categories" onClick={() => setLightboxImage('/screenshots/onpro-skills-catagories.jpg')} />
+                      <img src="/screenshots/onpro-assessment-dashboard.jpg" alt="Assessment Dashboard" onClick={() => setLightboxImage('/screenshots/onpro-assessment-dashboard.jpg')} />
                     </div>
                   </div>
 
-                  {/* ONPRO ARCHETYPES */}
                   <div className="archetypes-section">
                     <h4>OnPro Archetypes</h4>
                     <p>Discover your professional DNA. Which one are you?</p>
@@ -592,14 +592,14 @@ We're not just building software. We're building the future of hospitality caree
                 </div>
               </div>
 
-              {/* PATRON */}
+              {/* PATRON - ❤️ */}
               <div 
                 ref={(el) => accordionRefs.current['patron'] = el}
                 className={`accordion-item ${expandedPlatform === 'patron' ? 'expanded' : ''}`}
               >
                 <button className="accordion-header" onClick={() => handlePlatformAccordion('patron')}>
                   <div className="accordion-title">
-                    <span className="accordion-icon">💜</span>
+                    <span className="accordion-icon">❤️</span>
                     <div>
                       <h3>For Patrons</h3>
                       <p>Customers who value relationships</p>
@@ -611,7 +611,7 @@ We're not just building software. We're building the future of hospitality caree
                 <div className="accordion-content">
                   <div className="platform-content-grid">
                     <div className="platform-features">
-                      <p className="platform-lead">Never lose your favorite bartender again. When they move, you'll know. The relationship survives the job change.</p>
+                      <p className="platform-lead">Never lose your favorite hospitality pro again. When they move, you'll know. The relationship survives the job change.</p>
                       
                       <div className="features-list">
                         {patronFeatures.map((f, i) => (
@@ -625,37 +625,38 @@ We're not just building software. We're building the future of hospitality caree
                         ))}
                       </div>
 
-                      <div className="pricing-row single">
-                        <div className="price-card free full-width">
-                          <span className="price-badge">ALWAYS FREE</span>
-                          <h4>Patron</h4>
+                      <div className="pricing-row">
+                        <div className="price-card free">
+                          <span className="price-badge">FREE</span>
+                          <h4>Patron Basic</h4>
                           <ul>
                             <li>Follow unlimited OnPros</li>
                             <li>Real-time notifications</li>
+                            <li>Venue discovery</li>
+                            <li>Check-in badges</li>
+                          </ul>
+                        </div>
+                        <div className="price-card premium">
+                          <span className="price-badge">$4.99/mo</span>
+                          <h4>Patron Premium</h4>
+                          <ul>
                             <li>OnScene Genome assessment</li>
-                            <li>Venue discovery & check-ins</li>
+                            <li>Direct messaging to OnPros</li>
+                            <li>Private event requests</li>
+                            <li>Personalized recommendations</li>
+                            <li>Priority reservations</li>
                           </ul>
                         </div>
                       </div>
                     </div>
 
                     <div className="platform-screenshots">
-                      <div className="screenshot-placeholder">
-                        <span>📱</span>
-                        <p>Explore Screen</p>
-                      </div>
-                      <div className="screenshot-placeholder">
-                        <span>🧬</span>
-                        <p>Your Genome</p>
-                      </div>
-                      <div className="screenshot-placeholder">
-                        <span>💬</span>
-                        <p>Messaging</p>
-                      </div>
+                      <img src="/screenshots/patron-explore.jpg" alt="Explore OnPros" onClick={() => setLightboxImage('/screenshots/patron-explore.jpg')} />
+                      <img src="/screenshots/patron-genome.jpg" alt="OnScene Genome" onClick={() => setLightboxImage('/screenshots/patron-genome.jpg')} />
+                      <img src="/screenshots/patron-messaging.jpg" alt="Messaging" onClick={() => setLightboxImage('/screenshots/patron-messaging.jpg')} />
                     </div>
                   </div>
 
-                  {/* PATRON ARCHETYPES */}
                   <div className="archetypes-section patron">
                     <h4>Patron Archetypes</h4>
                     <p>How do you experience hospitality?</p>
@@ -674,7 +675,7 @@ We're not just building software. We're building the future of hospitality caree
                 </div>
               </div>
 
-              {/* VENUE */}
+              {/* VENUE - 🏢 */}
               <div 
                 ref={(el) => accordionRefs.current['venue'] = el}
                 className={`accordion-item ${expandedPlatform === 'venue' ? 'expanded' : ''}`}
@@ -719,7 +720,7 @@ We're not just building software. We're building the future of hospitality caree
                           </ul>
                         </div>
                         <div className="price-card premium">
-                          <span className="price-badge">CUSTOM</span>
+                          <span className="price-badge">CUSTOM PRICING</span>
                           <h4>Venue Enterprise</h4>
                           <ul>
                             <li>Multi-location support</li>
@@ -732,16 +733,13 @@ We're not just building software. We're building the future of hospitality caree
                     </div>
 
                     <div className="platform-screenshots single">
-                      <div className="screenshot-placeholder large">
-                        <span>📊</span>
-                        <p>Venue Portal Dashboard</p>
-                      </div>
+                      <img src="/screenshots/venue-portal.jpg" alt="Venue Portal" onClick={() => setLightboxImage('/screenshots/venue-portal.jpg')} />
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* THE SCIENCE */}
+              {/* THE SCIENCE - 🧬 */}
               <div 
                 ref={(el) => accordionRefs.current['science'] = el}
                 className={`accordion-item science ${expandedPlatform === 'science' ? 'expanded' : ''}`}
@@ -769,7 +767,7 @@ We're not just building software. We're building the future of hospitality caree
                         <li><strong>Moral gradient scoring</strong> for nuanced assessment</li>
                         <li><strong>Anti-gaming protection</strong> with scenario-based questions</li>
                       </ul>
-                      <p className="science-value">$300,000+ in IP value</p>
+                      <p className="science-value">The most comprehensive hospitality skills assessment ever built</p>
                     </div>
 
                     <div className="science-card genome">
@@ -777,12 +775,12 @@ We're not just building software. We're building the future of hospitality caree
                       <p className="science-subtitle">Hospitality Personality Assessment</p>
                       <ul>
                         <li><strong>45</strong> questions across 10 dimensions</li>
-                        <li><strong>12 unique archetypes</strong> from Regular to Student</li>
+                        <li><strong>20 unique archetypes</strong> for pros and patrons</li>
                         <li><strong>Visual preference testing</strong> for subconscious insights</li>
                         <li><strong>Scenario responses</strong> for behavioral mapping</li>
                         <li><strong>Value alignment</strong> for authentic matching</li>
                       </ul>
-                      <p className="science-value">Personality-driven recommendations</p>
+                      <p className="science-value">Personality-driven connections and recommendations</p>
                     </div>
                   </div>
                 </div>
@@ -792,7 +790,7 @@ We're not just building software. We're building the future of hospitality caree
         </section>
 
         {/* ================================================================== */}
-        {/* VISION - EXPANDABLE STORY */}
+        {/* FOUNDER'S VISION */}
         {/* ================================================================== */}
         <section id="vision" className="section-vision">
           <div className="container">
@@ -833,7 +831,7 @@ We're not just building software. We're building the future of hospitality caree
         </section>
 
         {/* ================================================================== */}
-        {/* WAITLIST - STATIC, ALWAYS VISIBLE */}
+        {/* WAITLIST */}
         {/* ================================================================== */}
         <section id="waitlist" className="section-waitlist">
           <div className="container">
@@ -867,7 +865,7 @@ We're not just building software. We're building the future of hospitality caree
                         onChange={e => setFormData({ ...formData, userType: e.target.value })}
                       >
                         <option value="">I am a...</option>
-                        <option value="onpro">OnPro (Bartender, Server, Sommelier)</option>
+                        <option value="onpro">OnPro (Bartender, Server, Sommelier, Chef)</option>
                         <option value="patron">Patron (Customer)</option>
                         <option value="venue">Venue Owner/Manager</option>
                       </select>
@@ -948,9 +946,7 @@ We're not just building software. We're building the future of hospitality caree
       {/* STYLES */}
       {/* ================================================================== */}
       <style jsx>{`
-        /* ============================================
-           BASE
-           ============================================ */
+        /* BASE */
         .page {
           min-height: 100vh;
           background: #0a0d12;
@@ -965,9 +961,7 @@ We're not just building software. We're building the future of hospitality caree
           padding: 0 24px;
         }
 
-        /* ============================================
-           SCROLL PROGRESS
-           ============================================ */
+        /* SCROLL PROGRESS */
         .scroll-progress {
           position: fixed;
           top: 0;
@@ -978,9 +972,7 @@ We're not just building software. We're building the future of hospitality caree
           transition: width 0.05s linear;
         }
 
-        /* ============================================
-           PARTICLES
-           ============================================ */
+        /* PARTICLES */
         .particles {
           position: fixed;
           inset: 0;
@@ -1004,9 +996,7 @@ We're not just building software. We're building the future of hospitality caree
           100% { transform: translateY(-20vh) scale(1); opacity: 0; }
         }
 
-        /* ============================================
-           SCROLL ANIMATIONS
-           ============================================ */
+        /* ANIMATIONS */
         .animate-on-scroll {
           opacity: 0;
           transform: translateY(40px);
@@ -1018,15 +1008,13 @@ We're not just building software. We're building the future of hospitality caree
           transform: translateY(0);
         }
 
-        /* ============================================
-           NAVIGATION
-           ============================================ */
+        /* NAV */
         .nav {
           position: fixed;
           top: 0;
           left: 0;
           right: 0;
-          background: rgba(10, 13, 18, 0.85);
+          background: rgba(10, 13, 18, 0.9);
           backdrop-filter: blur(20px);
           border-bottom: 1px solid rgba(255, 255, 255, 0.05);
           z-index: 1000;
@@ -1050,7 +1038,7 @@ We're not just building software. We're building the future of hospitality caree
         .nav-links {
           display: flex;
           align-items: center;
-          gap: 32px;
+          gap: 28px;
         }
 
         .nav-links a {
@@ -1061,9 +1049,7 @@ We're not just building software. We're building the future of hospitality caree
           transition: color 0.2s;
         }
 
-        .nav-links a:hover {
-          color: #f8fafc;
-        }
+        .nav-links a:hover { color: #f8fafc; }
 
         .nav-cta {
           background: #d4a373 !important;
@@ -1073,13 +1059,7 @@ We're not just building software. We're building the future of hospitality caree
           font-weight: 600 !important;
         }
 
-        .nav-cta:hover {
-          background: #c99763 !important;
-        }
-
-        /* ============================================
-           HERO
-           ============================================ */
+        /* HERO */
         .hero {
           min-height: 100vh;
           display: flex;
@@ -1087,7 +1067,7 @@ We're not just building software. We're building the future of hospitality caree
           justify-content: center;
           text-align: center;
           position: relative;
-          padding: 120px 24px 80px;
+          padding: 100px 24px 60px;
         }
 
         .hero-glow {
@@ -1111,10 +1091,7 @@ We're not just building software. We're building the future of hospitality caree
           pointer-events: none;
         }
 
-        .hero .container {
-          position: relative;
-          z-index: 1;
-        }
+        .hero .container { position: relative; z-index: 1; }
 
         .hero-badge {
           display: inline-flex;
@@ -1128,7 +1105,7 @@ We're not just building software. We're building the future of hospitality caree
           padding: 10px 20px;
           border-radius: 50px;
           background: rgba(212, 163, 115, 0.05);
-          margin-bottom: 40px;
+          margin-bottom: 32px;
         }
 
         .badge-dot {
@@ -1144,45 +1121,38 @@ We're not just building software. We're building the future of hospitality caree
           50% { opacity: 0.6; transform: scale(0.9); }
         }
 
-        /* STATIC TAGLINE */
-        .hero-tagline {
-          margin: 0 0 24px;
-        }
+        .hero-tagline { margin: 0 0 20px; }
 
         .tagline-line {
           display: block;
-          font-size: clamp(32px, 5vw, 52px);
+          font-size: clamp(28px, 5vw, 48px);
           font-weight: 700;
           color: #f8fafc;
           line-height: 1.2;
-          letter-spacing: -0.02em;
         }
 
         .tagline-emphasis {
           display: block;
-          font-size: clamp(36px, 6vw, 64px);
+          font-size: clamp(32px, 6vw, 60px);
           font-weight: 800;
           background: linear-gradient(135deg, #d4a373 0%, #e8c9a0 50%, #d4a373 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
           line-height: 1.2;
-          letter-spacing: -0.02em;
-          margin-top: 8px;
+          margin-top: 4px;
         }
 
-        /* SECONDARY TYPEWRITER */
         .hero-descriptor {
           height: 28px;
           font-size: 17px;
           color: rgba(248, 250, 252, 0.6);
-          margin-bottom: 40px;
+          margin-bottom: 36px;
         }
 
         .cursor {
           color: #d4a373;
           animation: blink 1s infinite;
-          margin-left: 2px;
         }
 
         @keyframes blink {
@@ -1190,22 +1160,20 @@ We're not just building software. We're building the future of hospitality caree
           51%, 100% { opacity: 0; }
         }
 
-        /* WHO ARE YOU SECTION */
-        .who-are-you {
-          margin-bottom: 40px;
-        }
+        /* WHO ARE YOU */
+        .who-are-you { margin-bottom: 24px; }
 
         .who-label {
-          font-size: 14px;
+          font-size: 13px;
           color: rgba(248, 250, 252, 0.5);
-          margin-bottom: 16px;
+          margin-bottom: 14px;
           text-transform: uppercase;
           letter-spacing: 0.1em;
         }
 
         .who-options {
           display: flex;
-          gap: 16px;
+          gap: 14px;
           justify-content: center;
           flex-wrap: wrap;
         }
@@ -1213,8 +1181,8 @@ We're not just building software. We're building the future of hospitality caree
         .who-btn {
           display: flex;
           align-items: center;
-          gap: 14px;
-          padding: 16px 24px;
+          gap: 12px;
+          padding: 14px 20px;
           background: rgba(255, 255, 255, 0.03);
           border: 1px solid rgba(255, 255, 255, 0.08);
           border-radius: 12px;
@@ -1234,63 +1202,24 @@ We're not just building software. We're building the future of hospitality caree
           border-color: #d4a373;
         }
 
-        .who-icon {
-          font-size: 28px;
-        }
+        .who-icon { font-size: 26px; }
 
-        .who-text {
-          display: flex;
-          flex-direction: column;
-        }
+        .who-text { display: flex; flex-direction: column; }
 
         .who-text strong {
-          font-size: 15px;
+          font-size: 14px;
           color: #f8fafc;
           font-weight: 600;
         }
 
         .who-text small {
-          font-size: 12px;
+          font-size: 11px;
           color: rgba(248, 250, 252, 0.5);
           margin-top: 2px;
         }
 
-        /* HERO STATS */
-        .hero-stats {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 40px;
-          margin-bottom: 32px;
-          flex-wrap: wrap;
-        }
-
-        .stat-item {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-        }
-
-        .stat-number {
-          font-size: 28px;
-          font-weight: 700;
-          color: #d4a373;
-        }
-
-        .stat-label {
-          font-size: 12px;
-          color: rgba(248, 250, 252, 0.5);
-          margin-top: 4px;
-        }
-
-        .stat-divider {
-          width: 1px;
-          height: 36px;
-          background: rgba(255, 255, 255, 0.1);
-        }
-
         .btn-install {
-          margin-top: 20px;
+          margin-top: 16px;
           background: transparent;
           border: 1px solid rgba(255, 255, 255, 0.1);
           color: rgba(248, 250, 252, 0.5);
@@ -1302,69 +1231,141 @@ We're not just building software. We're building the future of hospitality caree
 
         .scroll-hint {
           position: absolute;
-          bottom: 32px;
+          bottom: 24px;
           left: 50%;
           transform: translateX(-50%);
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 8px;
+          gap: 6px;
           color: rgba(248, 250, 252, 0.3);
-          font-size: 12px;
+          font-size: 11px;
           animation: bounce 2s infinite;
         }
 
         @keyframes bounce {
           0%, 100% { transform: translateX(-50%) translateY(0); }
-          50% { transform: translateX(-50%) translateY(8px); }
+          50% { transform: translateX(-50%) translateY(6px); }
         }
 
-        /* ============================================
-           SECTION HEADERS
-           ============================================ */
+        /* SECTION HEADERS */
         .section-header {
           text-align: center;
-          margin-bottom: 60px;
+          margin-bottom: 50px;
         }
 
         .section-header h2 {
-          font-size: clamp(28px, 4vw, 40px);
+          font-size: clamp(26px, 4vw, 38px);
           font-weight: 700;
-          margin: 0 0 16px;
-          letter-spacing: -0.02em;
+          margin: 0 0 14px;
         }
 
         .section-header p {
-          font-size: 17px;
+          font-size: 16px;
           color: rgba(248, 250, 252, 0.6);
           max-width: 600px;
           margin: 0 auto;
           line-height: 1.6;
         }
 
-        /* ============================================
-           PROBLEM SECTION
-           ============================================ */
-        .section-problem {
-          padding: 120px 0;
-          background: linear-gradient(180deg, #0a0d12 0%, #0f1318 100%);
+        /* WHAT IS ONTONIGHT */
+        .section-what {
+          padding: 100px 0 80px;
+          background: linear-gradient(180deg, #0a0d12 0%, #0e1117 100%);
         }
 
-        .problem-grid {
+        .what-subtitle {
+          font-size: 18px !important;
+          color: #d4a373 !important;
+        }
+
+        .what-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-          gap: 20px;
-          margin-bottom: 80px;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+          margin-bottom: 40px;
         }
 
-        .problem-card {
+        .what-card {
           background: rgba(255, 255, 255, 0.02);
           border: 1px solid rgba(255, 255, 255, 0.06);
           border-radius: 16px;
           padding: 32px 24px;
           text-align: center;
+          transition: all 0.3s ease;
+        }
+
+        .what-card:hover {
+          background: rgba(255, 255, 255, 0.04);
+          border-color: rgba(212, 163, 115, 0.2);
+          transform: translateY(-4px);
+        }
+
+        .what-icon {
+          font-size: 40px;
+          margin-bottom: 16px;
+        }
+
+        .what-card h3 {
+          font-size: 18px;
+          margin: 0 0 12px;
+          color: #d4a373;
+        }
+
+        .what-card p {
+          font-size: 14px;
+          line-height: 1.7;
+          color: rgba(248, 250, 252, 0.7);
+          margin: 0;
+        }
+
+        .what-card em {
+          color: #f8fafc;
+          font-style: italic;
+        }
+
+        .what-summary {
+          text-align: center;
+          max-width: 700px;
+          margin: 0 auto;
+          padding: 28px 32px;
+          background: rgba(212, 163, 115, 0.05);
+          border: 1px solid rgba(212, 163, 115, 0.15);
+          border-radius: 12px;
+        }
+
+        .what-summary p {
+          font-size: 16px;
+          line-height: 1.7;
+          color: rgba(248, 250, 252, 0.85);
+          margin: 0;
+        }
+
+        .what-summary strong {
+          color: #d4a373;
+        }
+
+        /* PROBLEM SECTION */
+        .section-problem {
+          padding: 100px 0;
+          background: #0a0d12;
+        }
+
+        .problem-grid {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 16px;
+          margin-bottom: 60px;
+        }
+
+        .problem-card {
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.06);
+          border-radius: 14px;
+          padding: 28px 20px;
+          text-align: center;
           cursor: pointer;
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: all 0.4s ease;
           position: relative;
           overflow: hidden;
         }
@@ -1372,7 +1373,6 @@ We're not just building software. We're building the future of hospitality caree
         .problem-card:hover {
           background: rgba(255, 255, 255, 0.04);
           border-color: rgba(212, 163, 115, 0.2);
-          transform: translateY(-4px);
         }
 
         .problem-card.expanded {
@@ -1380,37 +1380,34 @@ We're not just building software. We're building the future of hospitality caree
           border-color: rgba(212, 163, 115, 0.3);
         }
 
-        .card-icon {
-          font-size: 40px;
-          margin-bottom: 16px;
-        }
+        .card-icon { font-size: 32px; margin-bottom: 12px; }
 
         .card-stat {
-          font-size: 44px;
+          font-size: 36px;
           font-weight: 800;
           color: #d4a373;
-          margin-bottom: 8px;
+          margin-bottom: 6px;
         }
 
         .card-label {
-          font-size: 14px;
+          font-size: 13px;
           font-weight: 600;
           color: rgba(248, 250, 252, 0.8);
         }
 
         .card-expand-icon {
           position: absolute;
-          top: 16px;
-          right: 16px;
-          width: 28px;
-          height: 28px;
+          top: 12px;
+          right: 12px;
+          width: 24px;
+          height: 24px;
           display: flex;
           align-items: center;
           justify-content: center;
           background: rgba(255, 255, 255, 0.05);
           border-radius: 50%;
           color: rgba(248, 250, 252, 0.5);
-          font-size: 18px;
+          font-size: 16px;
         }
 
         .card-expanded-content {
@@ -1422,13 +1419,13 @@ We're not just building software. We're building the future of hospitality caree
 
         .problem-card.expanded .card-expanded-content {
           max-height: 200px;
-          margin-top: 20px;
+          margin-top: 16px;
           opacity: 1;
         }
 
         .card-expanded-content p {
-          font-size: 14px;
-          line-height: 1.7;
+          font-size: 13px;
+          line-height: 1.6;
           color: rgba(248, 250, 252, 0.7);
           margin: 0;
           text-align: left;
@@ -1441,58 +1438,56 @@ We're not just building software. We're building the future of hospitality caree
         }
 
         .quotes-section h3 {
-          font-size: 24px;
+          font-size: 22px;
           text-align: center;
-          margin-bottom: 32px;
+          margin-bottom: 28px;
           color: rgba(248, 250, 252, 0.9);
         }
 
         .quotes-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-          gap: 20px;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 16px;
         }
 
         .quote-card {
           background: rgba(255, 255, 255, 0.02);
           border: 1px solid rgba(255, 255, 255, 0.06);
           border-radius: 12px;
-          padding: 24px;
+          padding: 20px;
           margin: 0;
         }
 
         .quote-card p {
-          font-size: 15px;
-          line-height: 1.7;
+          font-size: 14px;
+          line-height: 1.6;
           color: rgba(248, 250, 252, 0.8);
           font-style: italic;
-          margin: 0 0 16px;
+          margin: 0 0 12px;
         }
 
         .quote-card cite {
-          font-size: 13px;
+          font-size: 12px;
           color: #d4a373;
           font-style: normal;
         }
 
-        /* ============================================
-           PLATFORM SECTION
-           ============================================ */
+        /* PLATFORM */
         .section-platform {
-          padding: 120px 0;
-          background: #0a0d12;
+          padding: 100px 0;
+          background: linear-gradient(180deg, #0e1117 0%, #0a0d12 100%);
         }
 
         .platform-accordion {
           display: flex;
           flex-direction: column;
-          gap: 16px;
+          gap: 14px;
         }
 
         .accordion-item {
           background: rgba(255, 255, 255, 0.02);
           border: 1px solid rgba(255, 255, 255, 0.06);
-          border-radius: 16px;
+          border-radius: 14px;
           overflow: hidden;
           transition: all 0.3s ease;
         }
@@ -1503,7 +1498,7 @@ We're not just building software. We're building the future of hospitality caree
 
         .accordion-item.expanded {
           border-color: rgba(212, 163, 115, 0.3);
-          background: rgba(212, 163, 115, 0.03);
+          background: rgba(212, 163, 115, 0.02);
         }
 
         .accordion-header {
@@ -1511,7 +1506,7 @@ We're not just building software. We're building the future of hospitality caree
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 24px 28px;
+          padding: 22px 24px;
           background: none;
           border: none;
           cursor: pointer;
@@ -1521,36 +1516,34 @@ We're not just building software. We're building the future of hospitality caree
         .accordion-title {
           display: flex;
           align-items: center;
-          gap: 16px;
+          gap: 14px;
         }
 
-        .accordion-icon {
-          font-size: 32px;
-        }
+        .accordion-icon { font-size: 28px; }
 
         .accordion-title h3 {
-          font-size: 20px;
+          font-size: 18px;
           font-weight: 600;
           color: #f8fafc;
           margin: 0;
         }
 
         .accordion-title p {
-          font-size: 14px;
+          font-size: 13px;
           color: rgba(248, 250, 252, 0.5);
-          margin: 4px 0 0;
+          margin: 3px 0 0;
         }
 
         .accordion-toggle {
-          width: 36px;
-          height: 36px;
+          width: 32px;
+          height: 32px;
           display: flex;
           align-items: center;
           justify-content: center;
           background: rgba(255, 255, 255, 0.05);
           border-radius: 50%;
           color: #d4a373;
-          font-size: 24px;
+          font-size: 22px;
           transition: all 0.3s;
         }
 
@@ -1571,111 +1564,85 @@ We're not just building software. We're building the future of hospitality caree
         .platform-content-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 40px;
-          padding: 0 28px 32px;
+          gap: 36px;
+          padding: 0 24px 28px;
         }
 
         .platform-lead {
-          font-size: 16px;
+          font-size: 15px;
           line-height: 1.7;
           color: rgba(248, 250, 252, 0.8);
-          margin-bottom: 28px;
+          margin-bottom: 24px;
         }
 
         .features-list {
           display: flex;
           flex-direction: column;
-          gap: 20px;
+          gap: 18px;
         }
 
         .feature-item {
           display: flex;
-          gap: 16px;
+          gap: 14px;
         }
 
-        .feature-icon {
-          font-size: 24px;
-          flex-shrink: 0;
-        }
+        .feature-icon { font-size: 22px; flex-shrink: 0; }
 
         .feature-item h4 {
-          font-size: 15px;
+          font-size: 14px;
           font-weight: 600;
           color: #f8fafc;
           margin: 0 0 4px;
         }
 
         .feature-item p {
-          font-size: 14px;
+          font-size: 13px;
           color: rgba(248, 250, 252, 0.6);
-          line-height: 1.6;
+          line-height: 1.5;
           margin: 0;
         }
 
         .pricing-row {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 16px;
-          margin-top: 32px;
-        }
-
-        .pricing-row.single {
-          grid-template-columns: 1fr;
+          gap: 14px;
+          margin-top: 28px;
         }
 
         .price-card {
           background: rgba(0, 0, 0, 0.2);
           border: 1px solid rgba(255, 255, 255, 0.06);
-          border-radius: 12px;
-          padding: 20px;
-        }
-
-        .price-card.full-width {
-          max-width: 300px;
+          border-radius: 10px;
+          padding: 18px;
         }
 
         .price-badge {
           display: inline-block;
-          font-size: 10px;
+          font-size: 9px;
           font-weight: 700;
           letter-spacing: 0.1em;
           padding: 4px 10px;
           border-radius: 4px;
-          margin-bottom: 12px;
+          margin-bottom: 10px;
         }
 
-        .price-card.free .price-badge {
-          background: rgba(34, 197, 94, 0.15);
-          color: #22c55e;
-        }
-
-        .price-card.trial .price-badge {
-          background: rgba(59, 130, 246, 0.15);
-          color: #3b82f6;
-        }
-
-        .price-card.premium .price-badge {
-          background: rgba(212, 163, 115, 0.15);
-          color: #d4a373;
-        }
+        .price-card.free .price-badge { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
+        .price-card.trial .price-badge { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+        .price-card.premium .price-badge { background: rgba(212, 163, 115, 0.15); color: #d4a373; }
 
         .price-card h4 {
-          font-size: 16px;
-          margin: 0 0 12px;
+          font-size: 15px;
+          margin: 0 0 10px;
           color: #f8fafc;
         }
 
-        .price-card ul {
-          list-style: none;
-          padding: 0;
-          margin: 0;
-        }
+        .price-card ul { list-style: none; padding: 0; margin: 0; }
 
         .price-card li {
-          font-size: 13px;
+          font-size: 12px;
           color: rgba(248, 250, 252, 0.7);
-          padding: 6px 0;
-          padding-left: 20px;
+          padding: 5px 0;
+          padding-left: 18px;
           position: relative;
         }
 
@@ -1684,14 +1651,14 @@ We're not just building software. We're building the future of hospitality caree
           position: absolute;
           left: 0;
           color: #22c55e;
-          font-size: 12px;
+          font-size: 11px;
         }
 
         /* SCREENSHOTS */
         .platform-screenshots {
           display: grid;
           grid-template-columns: 1fr 1fr 1fr;
-          gap: 12px;
+          gap: 10px;
           align-content: start;
         }
 
@@ -1701,82 +1668,49 @@ We're not just building software. We're building the future of hospitality caree
 
         .platform-screenshots img {
           width: 100%;
-          border-radius: 10px;
+          border-radius: 8px;
           border: 1px solid rgba(255, 255, 255, 0.1);
           cursor: pointer;
           transition: all 0.3s;
         }
 
         .platform-screenshots img:hover {
-          transform: scale(1.03);
+          transform: scale(1.02);
           border-color: rgba(212, 163, 115, 0.4);
-        }
-
-        /* Screenshot Placeholders */
-        .screenshot-placeholder {
-          background: rgba(255, 255, 255, 0.03);
-          border: 1px dashed rgba(255, 255, 255, 0.15);
-          border-radius: 10px;
-          padding: 40px 20px;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-        }
-
-        .screenshot-placeholder.large {
-          padding: 60px 20px;
-        }
-
-        .screenshot-placeholder span {
-          font-size: 36px;
-          margin-bottom: 12px;
-          opacity: 0.6;
-        }
-
-        .screenshot-placeholder p {
-          font-size: 13px;
-          color: rgba(248, 250, 252, 0.4);
-          margin: 0;
         }
 
         /* ARCHETYPES */
         .archetypes-section {
-          padding: 32px 28px;
+          padding: 28px 24px;
           border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .archetypes-section h4 {
-          font-size: 18px;
-          margin: 0 0 8px;
+          font-size: 16px;
+          margin: 0 0 6px;
           color: #f8fafc;
         }
 
         .archetypes-section > p {
-          font-size: 14px;
+          font-size: 13px;
           color: rgba(248, 250, 252, 0.5);
-          margin: 0 0 20px;
+          margin: 0 0 16px;
         }
 
         .archetypes-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-          gap: 12px;
-        }
-
-        .patron-grid {
           grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+          gap: 10px;
         }
 
         .archetype-chip {
           display: flex;
           align-items: center;
-          gap: 12px;
-          padding: 12px 16px;
+          gap: 10px;
+          padding: 10px 14px;
           background: rgba(255, 255, 255, 0.03);
           border: 1px solid rgba(255, 255, 255, 0.06);
-          border-radius: 10px;
+          border-radius: 8px;
           transition: all 0.2s;
         }
 
@@ -1785,149 +1719,123 @@ We're not just building software. We're building the future of hospitality caree
           border-color: rgba(212, 163, 115, 0.2);
         }
 
-        .archetype-chip span {
-          font-size: 24px;
-        }
+        .archetype-chip span { font-size: 20px; }
 
         .archetype-chip strong {
           display: block;
-          font-size: 13px;
+          font-size: 12px;
           color: #d4a373;
-          margin-bottom: 2px;
+          margin-bottom: 1px;
         }
 
         .archetype-chip small {
           display: block;
-          font-size: 11px;
+          font-size: 10px;
           color: rgba(248, 250, 252, 0.5);
-          line-height: 1.4;
         }
 
         /* SCIENCE */
         .science-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 24px;
-          padding: 0 28px 32px;
+          gap: 20px;
+          padding: 0 24px 28px;
         }
 
         .science-card {
           background: rgba(0, 0, 0, 0.2);
           border: 1px solid rgba(255, 255, 255, 0.06);
-          border-radius: 12px;
-          padding: 28px;
+          border-radius: 10px;
+          padding: 24px;
         }
 
-        .science-card.dapa {
-          border-color: rgba(34, 197, 94, 0.2);
-        }
+        .science-card.dapa { border-color: rgba(34, 197, 94, 0.2); }
+        .science-card.genome { border-color: rgba(139, 92, 246, 0.2); }
 
-        .science-card.genome {
-          border-color: rgba(139, 92, 246, 0.2);
-        }
-
-        .science-card h4 {
-          font-size: 20px;
-          margin: 0 0 4px;
-        }
-
-        .science-card.dapa h4 {
-          color: #22c55e;
-        }
-
-        .science-card.genome h4 {
-          color: #8b5cf6;
-        }
+        .science-card h4 { font-size: 18px; margin: 0 0 4px; }
+        .science-card.dapa h4 { color: #22c55e; }
+        .science-card.genome h4 { color: #8b5cf6; }
 
         .science-subtitle {
-          font-size: 13px;
+          font-size: 12px;
           color: rgba(248, 250, 252, 0.5);
-          margin-bottom: 20px;
+          margin-bottom: 16px;
         }
 
-        .science-card ul {
-          list-style: none;
-          padding: 0;
-          margin: 0 0 20px;
-        }
+        .science-card ul { list-style: none; padding: 0; margin: 0 0 16px; }
 
         .science-card li {
-          font-size: 14px;
+          font-size: 13px;
           color: rgba(248, 250, 252, 0.75);
-          padding: 8px 0;
+          padding: 6px 0;
           border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         .science-value {
-          font-size: 13px;
+          font-size: 12px;
           color: #d4a373;
-          font-weight: 600;
+          font-weight: 500;
         }
 
-        /* ============================================
-           VISION SECTION
-           ============================================ */
+        /* VISION */
         .section-vision {
-          padding: 120px 0;
-          background: linear-gradient(180deg, #0f1318 0%, #0a0d12 100%);
+          padding: 100px 0;
+          background: #0a0d12;
         }
 
         .founder-intro {
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 20px;
-          margin-bottom: 16px;
+          gap: 16px;
+          margin-bottom: 12px;
         }
 
         .founder-photo {
-          width: 80px;
-          height: 80px;
+          width: 70px;
+          height: 70px;
           background: rgba(212, 163, 115, 0.1);
           border: 2px dashed rgba(212, 163, 115, 0.3);
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 36px;
+          font-size: 32px;
           opacity: 0.6;
         }
 
-        .founder-text h2 {
-          font-size: 28px;
-          margin: 0;
-        }
+        .founder-text h2 { font-size: 26px; margin: 0; }
 
         .founder-text p {
-          font-size: 14px;
+          font-size: 13px;
           color: rgba(248, 250, 252, 0.5);
-          margin: 4px 0 0;
+          margin: 3px 0 0;
         }
 
         .founder-tagline {
-          font-size: 17px;
+          font-size: 16px;
           color: #d4a373;
           margin: 0;
         }
 
         .vision-accordion {
-          max-width: 800px;
+          max-width: 750px;
           margin: 0 auto;
           display: flex;
           flex-direction: column;
-          gap: 12px;
+          gap: 10px;
         }
 
         .vision-item {
           background: rgba(255, 255, 255, 0.02);
           border: 1px solid rgba(255, 255, 255, 0.06);
-          border-radius: 12px;
+          border-radius: 10px;
           overflow: hidden;
           transition: all 0.3s;
         }
 
         .vision-item.expanded {
-          background: rgba(212, 163, 115, 0.03);
+          background: rgba(212, 163, 115, 0.02);
           border-color: rgba(212, 163, 115, 0.2);
         }
 
@@ -1936,7 +1844,7 @@ We're not just building software. We're building the future of hospitality caree
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 20px 24px;
+          padding: 18px 22px;
           background: none;
           border: none;
           cursor: pointer;
@@ -1944,22 +1852,22 @@ We're not just building software. We're building the future of hospitality caree
         }
 
         .vision-header h3 {
-          font-size: 18px;
+          font-size: 16px;
           font-weight: 600;
           color: #f8fafc;
           margin: 0;
         }
 
         .vision-toggle {
-          width: 32px;
-          height: 32px;
+          width: 28px;
+          height: 28px;
           display: flex;
           align-items: center;
           justify-content: center;
           background: rgba(255, 255, 255, 0.05);
           border-radius: 50%;
           color: #d4a373;
-          font-size: 20px;
+          font-size: 18px;
         }
 
         .vision-content {
@@ -1969,73 +1877,62 @@ We're not just building software. We're building the future of hospitality caree
         }
 
         .vision-item.expanded .vision-content {
-          max-height: 1000px;
+          max-height: 800px;
         }
 
         .vision-content p {
-          font-size: 16px;
+          font-size: 15px;
           line-height: 1.8;
           color: rgba(248, 250, 252, 0.8);
-          margin: 0 0 20px;
-          padding: 0 24px;
+          margin: 0 0 16px;
+          padding: 0 22px;
         }
 
-        .vision-content p:last-child {
-          padding-bottom: 24px;
-        }
+        .vision-content p:last-child { padding-bottom: 22px; }
 
-        /* ============================================
-           WAITLIST SECTION
-           ============================================ */
+        /* WAITLIST */
         .section-waitlist {
-          padding: 120px 0;
-          background: linear-gradient(180deg, #0a0d12 0%, #12161c 100%);
+          padding: 100px 0;
+          background: linear-gradient(180deg, #0e1117 0%, #0a0d12 100%);
         }
 
         .waitlist-content {
-          max-width: 600px;
+          max-width: 560px;
           margin: 0 auto;
           text-align: center;
         }
 
-        .waitlist-content h2 {
-          font-size: 36px;
-          margin: 0 0 16px;
-        }
+        .waitlist-content h2 { font-size: 32px; margin: 0 0 12px; }
 
         .waitlist-subtitle {
-          font-size: 17px;
+          font-size: 16px;
           color: rgba(248, 250, 252, 0.6);
-          margin-bottom: 40px;
+          margin-bottom: 32px;
         }
 
-        .waitlist-form {
-          text-align: left;
-        }
+        .waitlist-form { text-align: left; }
 
         .form-row {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 16px;
-          margin-bottom: 16px;
+          gap: 14px;
+          margin-bottom: 14px;
         }
 
         .waitlist-form input,
         .waitlist-form select {
           width: 100%;
-          padding: 16px 20px;
+          padding: 14px 18px;
           background: rgba(255, 255, 255, 0.05);
           border: 1px solid rgba(255, 255, 255, 0.1);
           border-radius: 8px;
           color: #f8fafc;
-          font-size: 15px;
+          font-size: 14px;
           font-family: inherit;
           transition: all 0.2s;
         }
 
-        .waitlist-form input::placeholder {
-          color: rgba(248, 250, 252, 0.4);
-        }
+        .waitlist-form input::placeholder { color: rgba(248, 250, 252, 0.4); }
 
         .waitlist-form input:focus,
         .waitlist-form select:focus {
@@ -2045,10 +1942,10 @@ We're not just building software. We're building the future of hospitality caree
         }
 
         .form-disclaimer {
-          font-size: 12px;
+          font-size: 11px;
           color: rgba(248, 250, 252, 0.4);
           text-align: center;
-          margin: 20px 0;
+          margin: 18px 0;
         }
 
         .btn-submit {
@@ -2056,8 +1953,8 @@ We're not just building software. We're building the future of hospitality caree
           background: linear-gradient(135deg, #d4a373, #c99763);
           color: #0a0d12;
           border: none;
-          padding: 18px;
-          font-size: 17px;
+          padding: 16px;
+          font-size: 16px;
           font-weight: 600;
           border-radius: 8px;
           cursor: pointer;
@@ -2066,57 +1963,37 @@ We're not just building software. We're building the future of hospitality caree
 
         .btn-submit:hover {
           transform: translateY(-2px);
-          box-shadow: 0 12px 40px rgba(212, 163, 115, 0.25);
+          box-shadow: 0 10px 30px rgba(212, 163, 115, 0.25);
         }
 
-        .btn-submit:disabled {
-          opacity: 0.6;
-          cursor: not-allowed;
-        }
+        .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
 
-        .waitlist-success {
-          padding: 40px 0;
-        }
+        .waitlist-success { padding: 32px 0; }
 
-        .success-icon {
-          font-size: 56px;
-          margin-bottom: 20px;
-        }
-
-        .waitlist-success h2 {
-          margin-bottom: 12px;
-        }
+        .success-icon { font-size: 48px; margin-bottom: 16px; }
 
         .waitlist-success p {
-          font-size: 16px;
+          font-size: 15px;
           color: rgba(248, 250, 252, 0.7);
-          margin-bottom: 28px;
+          margin-bottom: 24px;
         }
 
         .btn-primary {
           background: linear-gradient(135deg, #d4a373, #c99763);
           color: #0a0d12;
-          padding: 16px 36px;
-          font-size: 16px;
+          padding: 14px 32px;
+          font-size: 15px;
           font-weight: 600;
           border: none;
           border-radius: 8px;
           cursor: pointer;
           text-decoration: none;
           display: inline-block;
-          transition: all 0.3s;
         }
 
-        .btn-primary:hover {
-          transform: translateY(-3px);
-          box-shadow: 0 12px 40px rgba(212, 163, 115, 0.25);
-        }
-
-        /* ============================================
-           FOOTER
-           ============================================ */
+        /* FOOTER */
         .footer {
-          padding: 80px 24px 40px;
+          padding: 60px 24px 32px;
           background: #080a0e;
           border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
@@ -2124,61 +2001,56 @@ We're not just building software. We're building the future of hospitality caree
         .footer-grid {
           display: grid;
           grid-template-columns: 2fr 1fr 1fr 1fr;
-          gap: 48px;
-          margin-bottom: 48px;
+          gap: 40px;
+          margin-bottom: 40px;
         }
 
         .footer-logo {
-          font-size: 22px;
+          font-size: 20px;
           font-weight: 700;
           color: #d4a373;
-          margin-bottom: 12px;
+          margin-bottom: 10px;
         }
 
         .footer-tagline-text {
-          font-size: 14px;
+          font-size: 13px;
           color: rgba(248, 250, 252, 0.5);
-          line-height: 1.6;
+          line-height: 1.5;
         }
 
         .footer-links h4 {
-          font-size: 12px;
+          font-size: 11px;
           font-weight: 600;
           color: rgba(248, 250, 252, 0.8);
           text-transform: uppercase;
           letter-spacing: 0.1em;
-          margin: 0 0 16px;
+          margin: 0 0 14px;
         }
 
         .footer-links a,
         .footer-links p {
           display: block;
-          font-size: 14px;
+          font-size: 13px;
           color: rgba(248, 250, 252, 0.5);
           text-decoration: none;
-          margin-bottom: 10px;
-          transition: color 0.2s;
+          margin-bottom: 8px;
         }
 
-        .footer-links a:hover {
-          color: #d4a373;
-        }
+        .footer-links a:hover { color: #d4a373; }
 
         .footer-bottom {
-          padding-top: 32px;
+          padding-top: 24px;
           border-top: 1px solid rgba(255, 255, 255, 0.05);
           text-align: center;
         }
 
         .footer-bottom p {
-          font-size: 13px;
+          font-size: 12px;
           color: rgba(248, 250, 252, 0.4);
           margin: 0;
         }
 
-        /* ============================================
-           LIGHTBOX
-           ============================================ */
+        /* LIGHTBOX */
         .lightbox {
           position: fixed;
           inset: 0;
@@ -2188,91 +2060,47 @@ We're not just building software. We're building the future of hospitality caree
           justify-content: center;
           z-index: 9999;
           cursor: pointer;
-          padding: 40px;
+          padding: 32px;
         }
 
         .lightbox img {
           max-width: 100%;
           max-height: 90vh;
-          border-radius: 12px;
+          border-radius: 10px;
         }
 
         .lightbox-close {
           position: absolute;
-          top: 24px;
-          right: 24px;
+          top: 20px;
+          right: 20px;
           background: none;
           border: none;
           color: white;
-          font-size: 36px;
+          font-size: 32px;
           cursor: pointer;
         }
 
-        /* ============================================
-           RESPONSIVE
-           ============================================ */
+        /* RESPONSIVE */
         @media (max-width: 900px) {
-          .platform-content-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .platform-screenshots {
-            order: -1;
-            grid-template-columns: repeat(3, 1fr);
-          }
-
-          .science-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .footer-grid {
-            grid-template-columns: 1fr 1fr;
-          }
-
-          .who-options {
-            flex-direction: column;
-            align-items: center;
-          }
-
-          .who-btn {
-            width: 100%;
-            max-width: 280px;
-          }
+          .what-grid { grid-template-columns: 1fr; }
+          .problem-grid { grid-template-columns: repeat(2, 1fr); }
+          .quotes-grid { grid-template-columns: 1fr; }
+          .platform-content-grid { grid-template-columns: 1fr; }
+          .platform-screenshots { order: -1; grid-template-columns: repeat(3, 1fr); }
+          .science-grid { grid-template-columns: 1fr; }
+          .footer-grid { grid-template-columns: 1fr 1fr; }
         }
 
         @media (max-width: 600px) {
-          .nav-links a:not(.nav-cta) {
-            display: none;
-          }
-
-          .hero-stats {
-            gap: 20px;
-          }
-
-          .stat-divider {
-            display: none;
-          }
-
-          .form-row {
-            grid-template-columns: 1fr;
-          }
-
-          .pricing-row {
-            grid-template-columns: 1fr;
-          }
-
-          .platform-screenshots {
-            grid-template-columns: 1fr;
-          }
-
-          .archetypes-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .footer-grid {
-            grid-template-columns: 1fr;
-            gap: 32px;
-          }
+          .nav-links a:not(.nav-cta) { display: none; }
+          .who-options { flex-direction: column; align-items: center; }
+          .who-btn { width: 100%; max-width: 280px; }
+          .problem-grid { grid-template-columns: 1fr; }
+          .form-row { grid-template-columns: 1fr; }
+          .pricing-row { grid-template-columns: 1fr; }
+          .platform-screenshots { grid-template-columns: 1fr; }
+          .archetypes-grid { grid-template-columns: 1fr; }
+          .footer-grid { grid-template-columns: 1fr; gap: 28px; }
         }
       `}</style>
     </>
