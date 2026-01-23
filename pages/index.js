@@ -1,14 +1,12 @@
 // pages/index.js
 // ============================================================================
-// ONTONIGHT LANDING PAGE - V3 FINAL FIXES
+// ONTONIGHT LANDING PAGE - V4 MOBILE OPTIMIZED
 // ============================================================================
 // FIXES:
-// - Font matches app (Urbanist light weight)
-// - Accordion scroll COMPLETELY FIXED (no scroll on toggle)
-// - Correct screenshot filenames
-// - Proper image sizing
-// - Footer links corrected
-// - Nav links restored (The Problem, Platform, Vision)
+// - Mobile profile cards: wider (340px max), more content height (280px)
+// - Screenshots: smaller across all breakpoints (100px desktop, 80px tablet, 65px mobile, 55px small)
+// - $66.8B stat explained in Problem section
+// - All previous V3 fixes maintained
 // ============================================================================
 
 import { useState, useEffect, useRef } from 'react';
@@ -226,10 +224,10 @@ export default function LandingPage() {
   // DATA
   // ============================================================================
   const problemCards = [
-    { id: 'money', icon: '💰', stat: '$24K', label: 'Lost Per Venue Change', desc: 'Average hospitality professional loses $24,000 in regular tips when changing venues. Your regulars can\'t follow you. Years of relationship building—gone.' },
-    { id: 'turnover', icon: '🔄', stat: '73%', label: 'Annual Turnover', desc: 'The hospitality industry has the highest turnover of any sector. Every departure erases years of relationship building and institutional knowledge.' },
-    { id: 'zero', icon: '📉', stat: 'Zero', label: 'Career Infrastructure', desc: 'Lawyers have bar licenses. Doctors have credentials. Engineers have GitHub. Hospitality professionals start from scratch every single move.' },
-    { id: 'workers', icon: '💔', stat: '15.6M', label: 'Workers Affected', desc: 'Over 15 million hospitality professionals in the US alone face this reality. Bartenders. Servers. Sommeliers. Baristas. Chefs. All of them.' }
+    { id: 'money', icon: 'ðŸ’°', stat: '$24K', label: 'Lost Per Venue Change', desc: 'Average hospitality professional loses $24,000 in regular tips when changing venues. Your regulars can\'t follow you. Years of relationship buildingâ€”gone.' },
+    { id: 'turnover', icon: 'ðŸ”„', stat: '73%', label: 'Annual Turnover', desc: 'The hospitality industry has the highest turnover of any sector. Every departure erases years of relationship building and institutional knowledge.' },
+    { id: 'zero', icon: 'ðŸ“‰', stat: 'Zero', label: 'Career Infrastructure', desc: 'Lawyers have bar licenses. Doctors have credentials. Engineers have GitHub. Hospitality professionals start from scratch every single move.' },
+    { id: 'workers', icon: 'ðŸ’”', stat: '15.6M', label: 'Workers Affected', desc: 'Over 15 million hospitality professionals in the US alone face this reality. Bartenders. Servers. Sommeliers. Baristas. Chefs. All of them.' }
   ];
 
   const industryQuotes = [
@@ -239,33 +237,33 @@ export default function LandingPage() {
   ];
 
   const onproFeatures = [
-    { icon: '🎯', title: 'Verified Professional Identity', desc: 'DAPA assessment proves your expertise across 6 dimensions: Technical, Ethical, Emotional Intelligence, Velocity, Commercial, and Leadership.' },
-    { icon: '📊', title: 'Skills That Travel', desc: 'When you change venues, your verified skills come with you. No more starting over. No more proving yourself from scratch.' },
-    { icon: '👥', title: 'Customer Relationships', desc: 'Your regulars follow YOU. When you move, they get notified. The relationship doesn\'t end with the employment.' },
-    { icon: '🏆', title: 'Professional Genome', desc: 'Discover your archetype. Are you The Craftsman? The Hustler? The Therapist? Your genome reveals your professional DNA.' }
+    { icon: 'ðŸŽ¯', title: 'Verified Professional Identity', desc: 'DAPA assessment proves your expertise across 6 dimensions: Technical, Ethical, Emotional Intelligence, Velocity, Commercial, and Leadership.' },
+    { icon: 'ðŸ“Š', title: 'Skills That Travel', desc: 'When you change venues, your verified skills come with you. No more starting over. No more proving yourself from scratch.' },
+    { icon: 'ðŸ‘¥', title: 'Customer Relationships', desc: 'Your regulars follow YOU. When you move, they get notified. The relationship doesn\'t end with the employment.' },
+    { icon: 'ðŸ†', title: 'Professional Genome', desc: 'Discover your archetype. Are you The Craftsman? The Hustler? The Therapist? Your genome reveals your professional DNA.' }
   ];
 
   const patronFeatures = [
-    { icon: '🔔', title: 'Follow Your Favorites', desc: 'Get notified when your favorite hospitality pro is working. Never show up to find they\'re off again.' },
-    { icon: '🗺️', title: 'Track Across Venues', desc: 'When they change jobs, you get notified of their new location. The magic follows the person, not the place.' },
-    { icon: '⭐', title: 'Discover New Spots', desc: 'Find venues based on the professionals who work there. Quality service, guaranteed.' },
-    { icon: '🎫', title: 'Check-In & Earn Badges', desc: 'Build your hospitality reputation. Become a recognized regular at your favorite spots.' }
+    { icon: 'ðŸ””', title: 'Follow Your Favorites', desc: 'Get notified when your favorite hospitality pro is working. Never show up to find they\'re off again.' },
+    { icon: 'ðŸ—ºï¸', title: 'Track Across Venues', desc: 'When they change jobs, you get notified of their new location. The magic follows the person, not the place.' },
+    { icon: 'â­', title: 'Discover New Spots', desc: 'Find venues based on the professionals who work there. Quality service, guaranteed.' },
+    { icon: 'ðŸŽ«', title: 'Check-In & Earn Badges', desc: 'Build your hospitality reputation. Become a recognized regular at your favorite spots.' }
   ];
 
   const venueFeatures = [
-    { icon: '✅', title: 'Verified Staff', desc: 'See DAPA scores before you hire. Know exactly what level of expertise you\'re getting. No more surprises.' },
-    { icon: '🌟', title: 'Featured Professionals', desc: 'Showcase your best talent. Let their reputation drive traffic to your venue. Turn retention into competitive advantage.' },
-    { icon: '📈', title: 'Analytics Dashboard', desc: 'Track which professionals drive repeat visits. Understand your customer relationships at a deeper level.' },
-    { icon: '🎯', title: 'Culture Matching', desc: 'Find staff whose professional genome aligns with your venue\'s vibe. Better culture fit means longer tenure.' }
+    { icon: 'âœ…', title: 'Verified Staff', desc: 'See DAPA scores before you hire. Know exactly what level of expertise you\'re getting. No more surprises.' },
+    { icon: 'ðŸŒŸ', title: 'Featured Professionals', desc: 'Showcase your best talent. Let their reputation drive traffic to your venue. Turn retention into competitive advantage.' },
+    { icon: 'ðŸ“ˆ', title: 'Analytics Dashboard', desc: 'Track which professionals drive repeat visits. Understand your customer relationships at a deeper level.' },
+    { icon: 'ðŸŽ¯', title: 'Culture Matching', desc: 'Find staff whose professional genome aligns with your venue\'s vibe. Better culture fit means longer tenure.' }
   ];
 
   const visionSections = [
     { 
       id: 'story', 
       title: 'Almost 30 Years Behind the Bar',
-      content: `Almost 30 years in hospitality. Not watching from an office—living it. Behind the stick where ice never stops flowing and the POS screen glows like a beacon through double shifts.
+      content: `Almost 30 years in hospitality. Not watching from an officeâ€”living it. Behind the stick where ice never stops flowing and the POS screen glows like a beacon through double shifts.
 
-I've made drinks until my hands cramped. I've worked stations where you pour four cocktails simultaneously while maintaining three separate conversations, each guest believing they have your full attention—because in that moment, they do.
+I've made drinks until my hands cramped. I've worked stations where you pour four cocktails simultaneously while maintaining three separate conversations, each guest believing they have your full attentionâ€”because in that moment, they do.
 
 I know what it means to be good at this work. The muscle memory. The emotional intelligence. The technical precision of a 200-drink rush hour.
 
@@ -276,7 +274,7 @@ And I've watched the best people I ever trained walk out the door. Every single 
       title: 'The Pattern You Can\'t Unsee',
       content: `Once you see it, you can't look away. Every industry has professional infrastructure except hospitality.
 
-Lawyers switch firms, but their bar membership follows them. Software engineers change companies—their GitHub stays with them. Real estate agents move brokerages and take their client databases.
+Lawyers switch firms, but their bar membership follows them. Software engineers change companiesâ€”their GitHub stays with them. Real estate agents move brokerages and take their client databases.
 
 But a hospitality professional changes venues and loses everything. Every. Single. Time.
 
@@ -291,36 +289,36 @@ This isn't the nature of the industry. This is the absence of professional infra
 
 We're live now in Tampa Bay. From here, we're expanding to Miami, Nashville, Austin, and major hospitality markets nationwide.
 
-This isn't a product launch. This is a correction—the professional infrastructure that should have existed all along.
+This isn't a product launch. This is a correctionâ€”the professional infrastructure that should have existed all along.
 
 We're not just building software. We're building the future of hospitality careers.`
     }
   ];
 
   const onproArchetypes = [
-    { emoji: '🎨', name: 'The Craftsman', desc: 'Precision and technique define your service.' },
-    { emoji: '💼', name: 'The Closer', desc: 'You read the room and know when to upsell.' },
-    { emoji: '🎓', name: 'The Mentor', desc: 'Training the next generation is your calling.' },
-    { emoji: '⚡', name: 'The Hustler', desc: 'Speed and efficiency are your superpowers.' },
-    { emoji: '🫂', name: 'The Therapist', desc: 'People open up to you. You create safe space.' },
-    { emoji: '🎭', name: 'The Showman', desc: 'Every shift is a performance.' },
-    { emoji: '👔', name: 'The Professional', desc: 'Consistency, reliability, excellence.' },
-    { emoji: '🔬', name: 'The Innovator', desc: 'You push boundaries and create new classics.' },
-    { emoji: '🛡️', name: 'The Guardian', desc: 'Safety and ethics are non-negotiable.' },
-    { emoji: '🤝', name: 'The Diplomat', desc: 'Conflict resolution is your strength.' },
-    { emoji: '🚀', name: 'The Entrepreneur', desc: 'You think like an owner.' },
-    { emoji: '❤️', name: 'The Caregiver', desc: 'Hospitality in its truest form.' }
+    { emoji: 'ðŸŽ¨', name: 'The Craftsman', desc: 'Precision and technique define your service.' },
+    { emoji: 'ðŸ’¼', name: 'The Closer', desc: 'You read the room and know when to upsell.' },
+    { emoji: 'ðŸŽ“', name: 'The Mentor', desc: 'Training the next generation is your calling.' },
+    { emoji: 'âš¡', name: 'The Hustler', desc: 'Speed and efficiency are your superpowers.' },
+    { emoji: 'ðŸ«‚', name: 'The Therapist', desc: 'People open up to you. You create safe space.' },
+    { emoji: 'ðŸŽ­', name: 'The Showman', desc: 'Every shift is a performance.' },
+    { emoji: 'ðŸ‘”', name: 'The Professional', desc: 'Consistency, reliability, excellence.' },
+    { emoji: 'ðŸ”¬', name: 'The Innovator', desc: 'You push boundaries and create new classics.' },
+    { emoji: 'ðŸ›¡ï¸', name: 'The Guardian', desc: 'Safety and ethics are non-negotiable.' },
+    { emoji: 'ðŸ¤', name: 'The Diplomat', desc: 'Conflict resolution is your strength.' },
+    { emoji: 'ðŸš€', name: 'The Entrepreneur', desc: 'You think like an owner.' },
+    { emoji: 'â¤ï¸', name: 'The Caregiver', desc: 'Hospitality in its truest form.' }
   ];
 
   const patronArchetypes = [
-    { emoji: '👑', name: 'The Regular', desc: 'Loyalty is your currency.' },
-    { emoji: '🦋', name: 'The Social Butterfly', desc: 'You know someone everywhere.' },
-    { emoji: '🎉', name: 'The Celebrator', desc: 'Every moment is worth celebrating.' },
-    { emoji: '😌', name: 'The Relaxer', desc: 'Unwinding is an art form.' },
-    { emoji: '💪', name: 'The Supporter', desc: 'You champion your favorites.' },
-    { emoji: '🧐', name: 'The Critic', desc: 'High standards push excellence.' },
-    { emoji: '📖', name: 'The Storyteller', desc: 'Every night becomes a story.' },
-    { emoji: '📚', name: 'The Student', desc: 'Always learning the craft.' }
+    { emoji: 'ðŸ‘‘', name: 'The Regular', desc: 'Loyalty is your currency.' },
+    { emoji: 'ðŸ¦‹', name: 'The Social Butterfly', desc: 'You know someone everywhere.' },
+    { emoji: 'ðŸŽ‰', name: 'The Celebrator', desc: 'Every moment is worth celebrating.' },
+    { emoji: 'ðŸ˜Œ', name: 'The Relaxer', desc: 'Unwinding is an art form.' },
+    { emoji: 'ðŸ’ª', name: 'The Supporter', desc: 'You champion your favorites.' },
+    { emoji: 'ðŸ§', name: 'The Critic', desc: 'High standards push excellence.' },
+    { emoji: 'ðŸ“–', name: 'The Storyteller', desc: 'Every night becomes a story.' },
+    { emoji: 'ðŸ“š', name: 'The Student', desc: 'Always learning the craft.' }
   ];
 
   // ============================================================================
@@ -330,7 +328,7 @@ We're not just building software. We're building the future of hospitality caree
     if (failedImages[src]) {
       return (
         <div className="screenshot-placeholder" onClick={onClick}>
-          <span className="placeholder-icon">📱</span>
+          <span className="placeholder-icon">ðŸ“±</span>
           <span className="placeholder-text">{alt}</span>
         </div>
       );
@@ -379,7 +377,7 @@ We're not just building software. We're building the future of hospitality caree
           <div className="nav-container">
             <div className="nav-live-badge">
               <span className="badge-dot" />
-              LIVE NOW · TAMPA BAY
+              LIVE NOW Â· TAMPA BAY
             </div>
             <div className="nav-links">
               <a href="#problem">The Problem</a>
@@ -417,17 +415,17 @@ We're not just building software. We're building the future of hospitality caree
         className="who-card-header"
         onClick={() => setSelectedUserType(selectedUserType === 'onpro' ? null : 'onpro')}
       >
-        <span className="who-icon">🍸</span>
+        <span className="who-icon">ðŸ¸</span>
         <div className="who-title">
           <strong>Hospitality Pro</strong>
           <span className="term-badge">OnPro</span>
         </div>
-        <span className="who-toggle">{selectedUserType === 'onpro' ? '−' : '+'}</span>
+        <span className="who-toggle">{selectedUserType === 'onpro' ? 'âˆ’' : '+'}</span>
       </button>
       <div className="who-card-content">
         <p>Your professional identity follows you. Skills verified. Reputation preserved. Customers follow <em>you</em>, not your venue.</p>
         <button className="who-cta" onClick={() => handleUserTypeSelect('onpro')}>
-          Learn More →
+          Learn More â†’
         </button>
       </div>
     </div>
@@ -437,17 +435,17 @@ We're not just building software. We're building the future of hospitality caree
         className="who-card-header"
         onClick={() => setSelectedUserType(selectedUserType === 'patron' ? null : 'patron')}
       >
-        <span className="who-icon">🎩</span>
+        <span className="who-icon">ðŸŽ©</span>
         <div className="who-title">
           <strong>Customer</strong>
           <span className="term-badge">Patron</span>
         </div>
-        <span className="who-toggle">{selectedUserType === 'patron' ? '−' : '+'}</span>
+        <span className="who-toggle">{selectedUserType === 'patron' ? 'âˆ’' : '+'}</span>
       </button>
       <div className="who-card-content">
         <p>Never lose your favorite bartender again. When they move venues, you'll know. The relationship <em>survives</em> the job change.</p>
         <button className="who-cta" onClick={() => handleUserTypeSelect('patron')}>
-          Learn More →
+          Learn More â†’
         </button>
       </div>
     </div>
@@ -457,16 +455,16 @@ We're not just building software. We're building the future of hospitality caree
         className="who-card-header"
         onClick={() => setSelectedUserType(selectedUserType === 'venue' ? null : 'venue')}
       >
-        <span className="who-icon">🏢</span>
+        <span className="who-icon">ðŸ¢</span>
         <div className="who-title">
           <strong>Venue Owner</strong>
         </div>
-        <span className="who-toggle">{selectedUserType === 'venue' ? '−' : '+'}</span>
+        <span className="who-toggle">{selectedUserType === 'venue' ? 'âˆ’' : '+'}</span>
       </button>
       <div className="who-card-content">
         <p>Recruit verified talent with proven skills. See DAPA scores before you hire. <em>Compete on culture</em>, not just wages.</p>
         <button className="who-cta" onClick={() => handleUserTypeSelect('venue')}>
-          Learn More →
+          Learn More â†’
         </button>
       </div>
     </div>
@@ -492,13 +490,13 @@ We're not just building software. We're building the future of hospitality caree
 
             {showInstallPrompt && (
               <button className="btn-install" onClick={handleInstall}>
-                📱 Install App
+                ðŸ“± Install App
               </button>
             )}
           </div>
 
           <div className="scroll-hint">
-            <span>↓</span>
+            <span>â†“</span>
             <span>Explore</span>
           </div>
         </section>
@@ -508,6 +506,7 @@ We're not just building software. We're building the future of hospitality caree
           <div className="container">
             <div className={`section-header animate-on-scroll ${visibleSections['problem-header'] ? 'visible' : ''}`} id="problem-header">
               <h2>The $66.8 Billion Problem</h2>
+              <p className="problem-stat-explain">$5,864 turnover cost per employee × 11.4M annual separations = industry crisis</p>
               <p>Every year, hospitality loses more than money. It loses people, relationships, and institutional knowledge.</p>
             </div>
 
@@ -523,7 +522,7 @@ We're not just building software. We're building the future of hospitality caree
                   <div className="card-icon">{card.icon}</div>
                   <div className="card-stat">{card.stat}</div>
                   <div className="card-label">{card.label}</div>
-                  <div className="card-expand-icon">{expandedProblem === card.id ? '−' : '+'}</div>
+                  <div className="card-expand-icon">{expandedProblem === card.id ? 'âˆ’' : '+'}</div>
                   
                   <div className="card-expanded-content">
                     <p>{card.desc}</p>
@@ -538,7 +537,7 @@ We're not just building software. We're building the future of hospitality caree
                 {industryQuotes.map((quote, i) => (
                   <blockquote key={i} className="quote-card">
                     <p>"{quote.text}"</p>
-                    <cite>— {quote.source}</cite>
+                    <cite>â€” {quote.source}</cite>
                   </blockquote>
                 ))}
               </div>
@@ -562,13 +561,13 @@ We're not just building software. We're building the future of hospitality caree
               >
                 <button className="accordion-header" onClick={() => handlePlatformAccordion('onpro')}>
                   <div className="accordion-title">
-                    <span className="accordion-icon">🍸</span>
+                    <span className="accordion-icon">ðŸ¸</span>
                     <div>
                       <h3>For OnPros</h3>
                       <p>Bartenders, Servers, Sommeliers, Chefs, Baristas</p>
                     </div>
                   </div>
-                  <span className="accordion-toggle">{expandedPlatform === 'onpro' ? '−' : '+'}</span>
+                  <span className="accordion-toggle">{expandedPlatform === 'onpro' ? 'âˆ’' : '+'}</span>
                 </button>
                 
                 <div className="accordion-content">
@@ -657,13 +656,13 @@ We're not just building software. We're building the future of hospitality caree
               >
                 <button className="accordion-header" onClick={() => handlePlatformAccordion('patron')}>
                   <div className="accordion-title">
-                    <span className="accordion-icon">🎩</span>
+                    <span className="accordion-icon">ðŸŽ©</span>
                     <div>
                       <h3>For Patrons</h3>
                       <p>Customers who value relationships</p>
                     </div>
                   </div>
-                  <span className="accordion-toggle">{expandedPlatform === 'patron' ? '−' : '+'}</span>
+                  <span className="accordion-toggle">{expandedPlatform === 'patron' ? 'âˆ’' : '+'}</span>
                 </button>
                 
                 <div className="accordion-content">
@@ -752,13 +751,13 @@ We're not just building software. We're building the future of hospitality caree
               >
                 <button className="accordion-header" onClick={() => handlePlatformAccordion('venue')}>
                   <div className="accordion-title">
-                    <span className="accordion-icon">🏢</span>
+                    <span className="accordion-icon">ðŸ¢</span>
                     <div>
                       <h3>For Venues</h3>
                       <p>Bars, Restaurants, Hotels, Clubs</p>
                     </div>
                   </div>
-                  <span className="accordion-toggle">{expandedPlatform === 'venue' ? '−' : '+'}</span>
+                  <span className="accordion-toggle">{expandedPlatform === 'venue' ? 'âˆ’' : '+'}</span>
                 </button>
                 
                 <div className="accordion-content">
@@ -820,13 +819,13 @@ We're not just building software. We're building the future of hospitality caree
               >
                 <button className="accordion-header" onClick={() => handlePlatformAccordion('science')}>
                   <div className="accordion-title">
-                    <span className="accordion-icon">🧬</span>
+                    <span className="accordion-icon">ðŸ§¬</span>
                     <div>
                       <h3>The Science</h3>
                       <p>Proprietary assessment technology</p>
                     </div>
                   </div>
-                  <span className="accordion-toggle">{expandedPlatform === 'science' ? '−' : '+'}</span>
+                  <span className="accordion-toggle">{expandedPlatform === 'science' ? 'âˆ’' : '+'}</span>
                 </button>
                 
                 <div className="accordion-content">
@@ -869,7 +868,7 @@ We're not just building software. We're building the future of hospitality caree
             <div className={`section-header animate-on-scroll ${visibleSections['vision-header'] ? 'visible' : ''}`} id="vision-header">
               <div className="founder-intro">
                 <div className="founder-photo">
-                  <span>👤</span>
+                  <span>ðŸ‘¤</span>
                 </div>
                 <div className="founder-text">
                   <h2>Hi, I'm Jack Joy</h2>
@@ -889,7 +888,7 @@ We're not just building software. We're building the future of hospitality caree
                 >
                   <button className="vision-header" onClick={() => handleVisionAccordion(section.id)}>
                     <h3>{section.title}</h3>
-                    <span className="vision-toggle">{expandedVision === section.id ? '−' : '+'}</span>
+                    <span className="vision-toggle">{expandedVision === section.id ? 'âˆ’' : '+'}</span>
                   </button>
                   <div className="vision-content">
                     {section.content.split('\n\n').map((para, i) => (
@@ -953,16 +952,16 @@ We're not just building software. We're building the future of hospitality caree
                     </p>
 
                     <button type="submit" className="btn-submit" disabled={loading}>
-                      {loading ? 'Submitting...' : 'Get Early Access →'}
+                      {loading ? 'Submitting...' : 'Get Early Access â†’'}
                     </button>
                   </form>
                 </>
               ) : (
                 <div className="waitlist-success">
-                  <div className="success-icon">🎉</div>
+                  <div className="success-icon">ðŸŽ‰</div>
                   <h2>Welcome to the Movement</h2>
                   <p>You're among the first 2,000. Check your email for next steps and your exclusive access code.</p>
-                  <a href="https://app.on-tonight.com" className="btn-primary">Launch the App →</a>
+                  <a href="https://app.on-tonight.com" className="btn-primary">Launch the App â†’</a>
                 </div>
               )}
             </div>
@@ -992,11 +991,11 @@ We're not just building software. We're building the future of hospitality caree
                 <h4>Connect</h4>
                 <a href="/media">Media</a>
                 <a href="/partner">Partner</a>
-                <a href="https://app.on-tonight.com" className="footer-app-link">Launch App →</a>
+                <a href="https://app.on-tonight.com" className="footer-app-link">Launch App â†’</a>
               </div>
             </div>
             <div className="footer-bottom">
-              <p>© {new Date().getFullYear()} OnTonight LLC. All rights reserved.</p>
+              <p>Â© {new Date().getFullYear()} OnTonight LLC. All rights reserved.</p>
             </div>
           </div>
         </footer>
@@ -1005,7 +1004,7 @@ We're not just building software. We're building the future of hospitality caree
       {/* LIGHTBOX */}
       {lightboxImage && (
         <div className="lightbox" onClick={() => setLightboxImage(null)}>
-          <button className="lightbox-close">×</button>
+          <button className="lightbox-close">Ã—</button>
           <img src={lightboxImage} alt="Screenshot" />
         </div>
       )}
@@ -1329,7 +1328,7 @@ We're not just building software. We're building the future of hospitality caree
 }
 
 .who-card.expanded .who-card-content {
-  max-height: 200px;
+  max-height: 280px;
 }
 
 .who-card-content p {
@@ -1373,7 +1372,7 @@ We're not just building software. We're building the future of hospitality caree
   }
   .who-card { 
     width: 100%; 
-    max-width: 300px; 
+    max-width: 340px; 
   }
 }
 
@@ -1464,6 +1463,13 @@ We're not just building software. We're building the future of hospitality caree
           max-width: 600px;
           margin: 0 auto;
           line-height: 1.6;
+        }
+
+        .problem-stat-explain {
+          font-size: 13px;
+          color: #d4a373;
+          margin-bottom: 8px !important;
+          font-weight: 400;
         }
 
         /* PROBLEM SECTION */
@@ -1764,7 +1770,7 @@ We're not just building software. We're building the future of hospitality caree
         }
 
         .price-card li::before {
-          content: '✓';
+          content: 'âœ“';
           position: absolute;
           left: 0;
           color: #22c55e;
@@ -1776,16 +1782,16 @@ We're not just building software. We're building the future of hospitality caree
           display: flex;
           flex-direction: column;
           gap: 10px;
-          width: 140px;
+          width: 100px;
           flex-shrink: 0;
         }
 
         .onpro-screenshots {
-          width: 140px;
+          width: 100px;
         }
 
         .venue-screenshots {
-          width: 140px;
+          width: 100px;
         }
 
         .platform-screenshots img,
@@ -2285,11 +2291,11 @@ We're not just building software. We're building the future of hospitality caree
             flex-direction: row; 
             width: 100%; 
             justify-content: center;
-            gap: 12px;
+            gap: 10px;
           }
           .platform-screenshots img,
           .screenshot-placeholder {
-            width: 100px;
+            width: 80px;
           }
           .onpro-screenshots, .venue-screenshots { width: 100%; }
           .science-grid { grid-template-columns: 1fr; }
@@ -2317,10 +2323,11 @@ We're not just building software. We're building the future of hospitality caree
           .platform-screenshots { 
             flex-direction: row;
             flex-wrap: wrap;
+            gap: 8px;
           }
           .platform-screenshots img,
           .screenshot-placeholder {
-            width: 80px;
+            width: 65px;
           }
           .archetypes-grid { grid-template-columns: repeat(2, 1fr); }
           .patron-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2346,7 +2353,7 @@ We're not just building software. We're building the future of hospitality caree
           .archetypes-grid, .patron-grid { grid-template-columns: 1fr; }
           .platform-screenshots img,
           .screenshot-placeholder {
-            width: 70px;
+            width: 55px;
           }
         }
       `}</style>
