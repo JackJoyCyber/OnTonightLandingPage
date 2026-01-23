@@ -1,12 +1,14 @@
 // pages/index.js
 // ============================================================================
-// ONTONIGHT LANDING PAGE - V4 MOBILE OPTIMIZED
+// ONTONIGHT LANDING PAGE - V3 FINAL FIXES
 // ============================================================================
 // FIXES:
-// - Mobile profile cards: wider (340px max), more content height (280px)
-// - Screenshots: smaller across all breakpoints (100px desktop, 80px tablet, 65px mobile, 55px small)
-// - $66.8B stat explained in Problem section
-// - All previous V3 fixes maintained
+// - Font matches app (Urbanist light weight)
+// - Accordion scroll COMPLETELY FIXED (no scroll on toggle)
+// - Correct screenshot filenames
+// - Proper image sizing
+// - Footer links corrected
+// - Nav links restored (The Problem, Platform, Vision)
 // ============================================================================
 
 import { useState, useEffect, useRef } from 'react';
@@ -506,7 +508,6 @@ We're not just building software. We're building the future of hospitality caree
           <div className="container">
             <div className={`section-header animate-on-scroll ${visibleSections['problem-header'] ? 'visible' : ''}`} id="problem-header">
               <h2>The $66.8 Billion Problem</h2>
-              <p className="problem-stat-explain">$5,864 turnover cost per employee × 11.4M annual separations = industry crisis</p>
               <p>Every year, hospitality loses more than money. It loses people, relationships, and institutional knowledge.</p>
             </div>
 
@@ -1465,13 +1466,6 @@ We're not just building software. We're building the future of hospitality caree
           line-height: 1.6;
         }
 
-        .problem-stat-explain {
-          font-size: 13px;
-          color: #d4a373;
-          margin-bottom: 8px !important;
-          font-weight: 400;
-        }
-
         /* PROBLEM SECTION */
         .section-problem {
           padding: 100px 0;
@@ -2291,7 +2285,7 @@ We're not just building software. We're building the future of hospitality caree
             flex-direction: row; 
             width: 100%; 
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
           }
           .platform-screenshots img,
           .screenshot-placeholder {
@@ -2323,7 +2317,6 @@ We're not just building software. We're building the future of hospitality caree
           .platform-screenshots { 
             flex-direction: row;
             flex-wrap: wrap;
-            gap: 8px;
           }
           .platform-screenshots img,
           .screenshot-placeholder {
