@@ -1,9 +1,14 @@
 // pages/index.js
 // ============================================================================
-// ONTONIGHT LANDING PAGE - FINAL POLISHED EDITION
+// ONTONIGHT LANDING PAGE - POLISHED + FIXED EDITION
 // ============================================================================
 // "Your Night. Your People. Where Regulars Are Made."
 // Stop resetting. Start building.
+// ============================================================================
+// FIXES APPLIED:
+// A) Accordion scroll jump - proper scroll-to-header after expansion
+// B) Screenshot fallbacks - styled placeholders when images fail
+// C) Mobile polish - viewport lock, overflow protection, touch improvements
 // ============================================================================
 
 import { useState, useEffect, useRef } from 'react';
@@ -30,6 +35,9 @@ export default function LandingPage() {
 
   // Refs for accordion items
   const accordionRefs = useRef({});
+
+  // Screenshot load tracking
+  const [failedImages, setFailedImages] = useState({});
 
   // PWA
   const [showInstallPrompt, setShowInstallPrompt] = useState(false);
@@ -109,36 +117,53 @@ export default function LandingPage() {
   }, []);
 
   // ============================================================================
-  // ACCORDION HANDLER - FIXED: No scroll jump, viewport stays locked
+  // FIX A: ACCORDION HANDLER - Scroll to header after expansion
   // ============================================================================
   const handlePlatformAccordion = (key) => {
-    // Store current scroll position
-    const currentScroll = window.scrollY;
+    const isClosing = expandedPlatform === key;
     
-    if (expandedPlatform === key) {
+    if (isClosing) {
       setExpandedPlatform(null);
     } else {
       setExpandedPlatform(key);
+      
+      // After state updates and DOM renders, scroll to the opened accordion header
+      setTimeout(() => {
+        const accordionEl = accordionRefs.current[key];
+        if (accordionEl) {
+          const navHeight = 70;
+          const headerEl = accordionEl.querySelector('.accordion-header');
+          if (headerEl) {
+            const rect = headerEl.getBoundingClientRect();
+            const absoluteTop = window.scrollY + rect.top - navHeight - 20;
+            window.scrollTo({ top: absoluteTop, behavior: 'smooth' });
+          }
+        }
+      }, 50);
     }
-    
-    // Keep viewport locked after state change
-    requestAnimationFrame(() => {
-      window.scrollTo(0, currentScroll);
-    });
   };
 
   const handleVisionAccordion = (key) => {
-    const currentScroll = window.scrollY;
+    const isClosing = expandedVision === key;
     
-    if (expandedVision === key) {
+    if (isClosing) {
       setExpandedVision(null);
     } else {
       setExpandedVision(key);
+      
+      setTimeout(() => {
+        const accordionEl = accordionRefs.current[`vision-${key}`];
+        if (accordionEl) {
+          const navHeight = 70;
+          const headerEl = accordionEl.querySelector('.vision-header');
+          if (headerEl) {
+            const rect = headerEl.getBoundingClientRect();
+            const absoluteTop = window.scrollY + rect.top - navHeight - 20;
+            window.scrollTo({ top: absoluteTop, behavior: 'smooth' });
+          }
+        }
+      }, 50);
     }
-    
-    requestAnimationFrame(() => {
-      window.scrollTo(0, currentScroll);
-    });
   };
 
   // ============================================================================
@@ -156,6 +181,13 @@ export default function LandingPage() {
         window.scrollTo({ top: elementTop, behavior: 'smooth' });
       }
     }, 100);
+  };
+
+  // ============================================================================
+  // FIX B: IMAGE ERROR HANDLER
+  // ============================================================================
+  const handleImageError = (imagePath) => {
+    setFailedImages(prev => ({ ...prev, [imagePath]: true }));
   };
 
   // ============================================================================
@@ -301,6 +333,30 @@ We're not just building software. We're building the future of hospitality caree
   ];
 
   // ============================================================================
+  // FIX B: Screenshot component with fallback
+  // ============================================================================
+  const ScreenshotImage = ({ src, alt, onClick }) => {
+    if (failedImages[src]) {
+      return (
+        <div className="screenshot-placeholder" onClick={onClick}>
+          <span className="placeholder-icon">📱</span>
+          <span className="placeholder-text">{alt}</span>
+        </div>
+      );
+    }
+    
+    return (
+      <img 
+        src={src} 
+        alt={alt} 
+        onClick={onClick}
+        onError={() => handleImageError(src)}
+        loading="lazy"
+      />
+    );
+  };
+
+  // ============================================================================
   // RENDER
   // ============================================================================
   return (
@@ -308,6 +364,8 @@ We're not just building software. We're building the future of hospitality caree
       <Head>
         <title>OnTonight - Your Night. Your People. Where Regulars Are Made.</title>
         <meta name="description" content="Professional identity platform for hospitality. Build portable careers, follow your people, elevate the industry. Live now in Tampa Bay." />
+        {/* FIX C: Viewport with zoom prevention for mobile */}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#d4a373" />
         <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -377,77 +435,77 @@ We're not just building software. We're building the future of hospitality caree
                   onClick={() => handleUserTypeSelect('onpro')}
                 >
                   <span className="who-icon">🍸</span>
-                  <span className="who-text">
+                  <div className="who-text">
                     <strong>Hospitality Pro</strong>
                     <small>Bartender, Server, Sommelier, Chef</small>
-                  </span>
+                  </div>
                 </button>
                 <button 
                   className={`who-btn ${selectedUserType === 'patron' ? 'selected' : ''}`}
                   onClick={() => handleUserTypeSelect('patron')}
                 >
                   <span className="who-icon">❤️</span>
-                  <span className="who-text">
+                  <div className="who-text">
                     <strong>Customer</strong>
-                    <small>Looking for my people</small>
-                  </span>
+                    <small>I value great service</small>
+                  </div>
                 </button>
                 <button 
                   className={`who-btn ${selectedUserType === 'venue' ? 'selected' : ''}`}
                   onClick={() => handleUserTypeSelect('venue')}
                 >
                   <span className="who-icon">🏢</span>
-                  <span className="who-text">
+                  <div className="who-text">
                     <strong>Venue Owner</strong>
                     <small>Bar, Restaurant, Hotel</small>
-                  </span>
+                  </div>
                 </button>
               </div>
             </div>
 
             {showInstallPrompt && (
-              <button onClick={handleInstall} className="btn-install">
-                📱 Add to Home Screen
+              <button className="btn-install" onClick={handleInstall}>
+                📱 Install App
               </button>
             )}
-          </div>
 
-          <div className="scroll-hint">
-            <span>Scroll to explore</span>
-            <div className="scroll-arrow">↓</div>
+            <div className="scroll-hint">
+              <span>↓</span>
+              <span>Explore</span>
+            </div>
           </div>
         </section>
 
         {/* ================================================================== */}
-        {/* WHAT IS ONTONIGHT - IMMEDIATE CLARITY */}
+        {/* WHAT IS ONTONIGHT */}
         {/* ================================================================== */}
         <section id="what" className="section-what">
           <div className="container">
             <div className={`section-header animate-on-scroll ${visibleSections['what-header'] ? 'visible' : ''}`} id="what-header">
               <h2>What Is OnTonight?</h2>
-              <p className="what-subtitle">Professional infrastructure for hospitality. The career platform this industry has always deserved.</p>
+              <p className="what-subtitle">Career infrastructure for hospitality—finally.</p>
             </div>
 
             <div className="what-grid">
               <div className={`what-card animate-on-scroll ${visibleSections['what-pro'] ? 'visible' : ''}`} id="what-pro">
                 <div className="what-icon">🍸</div>
                 <h3>For Hospitality Pros</h3>
-                <p>Your skills are verified. Your reputation is portable. Your customers follow <em>you</em>, not the venue. When you change jobs, you don't start over—you level up.</p>
+                <p>Your professional identity follows you. Skills verified. Reputation preserved. Customers follow <em>you</em>, not your venue.</p>
               </div>
-              <div className={`what-card animate-on-scroll ${visibleSections['what-patron'] ? 'visible' : ''}`} id="what-patron" style={{animationDelay: '0.1s'}}>
+              <div className={`what-card animate-on-scroll ${visibleSections['what-patron'] ? 'visible' : ''}`} id="what-patron">
                 <div className="what-icon">❤️</div>
                 <h3>For Customers</h3>
-                <p>Never lose your favorite bartender, server, or sommelier again. When they move to a new venue, you'll know. The relationship survives the job change.</p>
+                <p>Never lose your favorite bartender again. When they move venues, you'll know. The relationship <em>survives</em> the job change.</p>
               </div>
-              <div className={`what-card animate-on-scroll ${visibleSections['what-venue'] ? 'visible' : ''}`} id="what-venue" style={{animationDelay: '0.2s'}}>
+              <div className={`what-card animate-on-scroll ${visibleSections['what-venue'] ? 'visible' : ''}`} id="what-venue">
                 <div className="what-icon">🏢</div>
                 <h3>For Venues</h3>
-                <p>Recruit verified talent with proven skills—not just resumes and promises. Compete on culture instead of wages alone. Turn great staff into a competitive advantage.</p>
+                <p>Recruit verified talent with proven skills. See DAPA scores before you hire. <em>Compete on culture</em>, not just wages.</p>
               </div>
             </div>
 
             <div className={`what-summary animate-on-scroll ${visibleSections['what-summary'] ? 'visible' : ''}`} id="what-summary">
-              <p>OnTonight is the <strong>career infrastructure</strong> that every other industry has—finally built for hospitality. Professional dignity in software form.</p>
+              <p><strong>OnTonight</strong> is career infrastructure for hospitality professionals. Think of it as LinkedIn for bartenders, servers, sommeliers, and chefs—except built specifically for how this industry actually works.</p>
             </div>
           </div>
         </section>
@@ -568,9 +626,21 @@ We're not just building software. We're building the future of hospitality caree
                     </div>
 
                     <div className="platform-screenshots">
-                      <img src="/screenshots/onpro-profile-status.jpg" alt="OnPro Profile" onClick={() => setLightboxImage('/screenshots/onpro-profile-status.jpg')} />
-                      <img src="/screenshots/onpro-skills-catagories.jpg" alt="Skills Categories" onClick={() => setLightboxImage('/screenshots/onpro-skills-catagories.jpg')} />
-                      <img src="/screenshots/onpro-assessment-dashboard.jpg" alt="Assessment Dashboard" onClick={() => setLightboxImage('/screenshots/onpro-assessment-dashboard.jpg')} />
+                      <ScreenshotImage 
+                        src="/screenshots/onpro-profile-status.jpg" 
+                        alt="OnPro Profile" 
+                        onClick={() => setLightboxImage('/screenshots/onpro-profile-status.jpg')} 
+                      />
+                      <ScreenshotImage 
+                        src="/screenshots/onpro-skills-catagories.jpg" 
+                        alt="Skills Categories" 
+                        onClick={() => setLightboxImage('/screenshots/onpro-skills-catagories.jpg')} 
+                      />
+                      <ScreenshotImage 
+                        src="/screenshots/onpro-assessment-dashboard.jpg" 
+                        alt="Assessment Dashboard" 
+                        onClick={() => setLightboxImage('/screenshots/onpro-assessment-dashboard.jpg')} 
+                      />
                     </div>
                   </div>
 
@@ -651,9 +721,21 @@ We're not just building software. We're building the future of hospitality caree
                     </div>
 
                     <div className="platform-screenshots">
-                      <img src="/screenshots/patron-explore.jpg" alt="Explore OnPros" onClick={() => setLightboxImage('/screenshots/patron-explore.jpg')} />
-                      <img src="/screenshots/patron-genome.jpg" alt="OnScene Genome" onClick={() => setLightboxImage('/screenshots/patron-genome.jpg')} />
-                      <img src="/screenshots/patron-messaging.jpg" alt="Messaging" onClick={() => setLightboxImage('/screenshots/patron-messaging.jpg')} />
+                      <ScreenshotImage 
+                        src="/screenshots/patron-explore.jpg" 
+                        alt="Explore OnPros" 
+                        onClick={() => setLightboxImage('/screenshots/patron-explore.jpg')} 
+                      />
+                      <ScreenshotImage 
+                        src="/screenshots/patron-genome.jpg" 
+                        alt="OnScene Genome" 
+                        onClick={() => setLightboxImage('/screenshots/patron-genome.jpg')} 
+                      />
+                      <ScreenshotImage 
+                        src="/screenshots/patron-messaging.jpg" 
+                        alt="Messaging" 
+                        onClick={() => setLightboxImage('/screenshots/patron-messaging.jpg')} 
+                      />
                     </div>
                   </div>
 
@@ -733,7 +815,11 @@ We're not just building software. We're building the future of hospitality caree
                     </div>
 
                     <div className="platform-screenshots single">
-                      <img src="/screenshots/venue-portal.jpg" alt="Venue Portal" onClick={() => setLightboxImage('/screenshots/venue-portal.jpg')} />
+                      <ScreenshotImage 
+                        src="/screenshots/venue-portal.jpg" 
+                        alt="Venue Portal" 
+                        onClick={() => setLightboxImage('/screenshots/venue-portal.jpg')} 
+                      />
                     </div>
                   </div>
                 </div>
@@ -911,48 +997,65 @@ We're not just building software. We're building the future of hospitality caree
               </div>
               <div className="footer-links">
                 <h4>Platform</h4>
-                <a href="https://app.on-tonight.com">Launch App</a>
-                <a href="/careers">Careers</a>
-                <a href="/partner">Partner With Us</a>
+                <a href="#what">What It Is</a>
+                <a href="#platform">Features</a>
+                <a href="#vision">Our Story</a>
               </div>
               <div className="footer-links">
-                <h4>Legal</h4>
-                <a href="/privacy">Privacy Policy</a>
-                <a href="/terms">Terms of Service</a>
+                <h4>Company</h4>
                 <a href="/contact">Contact</a>
+                <a href="/privacy">Privacy</a>
+                <a href="/terms">Terms</a>
               </div>
               <div className="footer-links">
                 <h4>Connect</h4>
+                <p>Tampa, FL</p>
                 <a href="mailto:hello@on-tonight.com">hello@on-tonight.com</a>
-                <p>Tampa Bay, Florida</p>
               </div>
             </div>
             <div className="footer-bottom">
-              <p>© 2025 OnTonight LLC. All rights reserved.</p>
+              <p>© {new Date().getFullYear()} OnTonight LLC. All rights reserved.</p>
             </div>
           </div>
         </footer>
-
-        {/* LIGHTBOX */}
-        {lightboxImage && (
-          <div className="lightbox" onClick={() => setLightboxImage(null)}>
-            <img src={lightboxImage} alt="Screenshot" />
-            <button className="lightbox-close">×</button>
-          </div>
-        )}
       </div>
+
+      {/* LIGHTBOX */}
+      {lightboxImage && (
+        <div className="lightbox" onClick={() => setLightboxImage(null)}>
+          <button className="lightbox-close">×</button>
+          <img src={lightboxImage} alt="Screenshot" />
+        </div>
+      )}
 
       {/* ================================================================== */}
       {/* STYLES */}
       {/* ================================================================== */}
       <style jsx>{`
-        /* BASE */
+        /* ============================================= */
+        /* FIX C: MOBILE - Prevent horizontal scroll */
+        /* ============================================= */
+        :global(html), :global(body) {
+          overflow-x: hidden;
+          max-width: 100vw;
+        }
+
+        /* ============================================= */
+        /* BASE STYLES */
+        /* ============================================= */
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
         .page {
-          min-height: 100vh;
+          font-family: 'Urbanist', -apple-system, sans-serif;
           background: #0a0d12;
           color: #f8fafc;
-          font-family: 'Urbanist', -apple-system, BlinkMacSystemFont, sans-serif;
+          min-height: 100vh;
           overflow-x: hidden;
+          max-width: 100vw;
         }
 
         .container {
@@ -978,6 +1081,7 @@ We're not just building software. We're building the future of hospitality caree
           inset: 0;
           pointer-events: none;
           z-index: 0;
+          overflow: hidden;
         }
 
         .particle {
@@ -1189,12 +1293,17 @@ We're not just building software. We're building the future of hospitality caree
           cursor: pointer;
           transition: all 0.3s ease;
           text-align: left;
+          -webkit-tap-highlight-color: transparent;
         }
 
         .who-btn:hover {
           background: rgba(255, 255, 255, 0.06);
           border-color: rgba(212, 163, 115, 0.3);
           transform: translateY(-2px);
+        }
+
+        .who-btn:active {
+          transform: translateY(0);
         }
 
         .who-btn.selected {
@@ -1348,26 +1457,25 @@ We're not just building software. We're building the future of hospitality caree
         /* PROBLEM SECTION */
         .section-problem {
           padding: 100px 0;
-          background: #0a0d12;
+          background: #0e1117;
         }
 
         .problem-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          gap: 16px;
+          gap: 18px;
           margin-bottom: 60px;
         }
 
         .problem-card {
           background: rgba(255, 255, 255, 0.02);
           border: 1px solid rgba(255, 255, 255, 0.06);
-          border-radius: 14px;
+          border-radius: 16px;
           padding: 28px 20px;
           text-align: center;
           cursor: pointer;
-          transition: all 0.4s ease;
+          transition: all 0.3s ease;
           position: relative;
-          overflow: hidden;
         }
 
         .problem-card:hover {
@@ -1380,20 +1488,9 @@ We're not just building software. We're building the future of hospitality caree
           border-color: rgba(212, 163, 115, 0.3);
         }
 
-        .card-icon { font-size: 32px; margin-bottom: 12px; }
-
-        .card-stat {
-          font-size: 36px;
-          font-weight: 800;
-          color: #d4a373;
-          margin-bottom: 6px;
-        }
-
-        .card-label {
-          font-size: 13px;
-          font-weight: 600;
-          color: rgba(248, 250, 252, 0.8);
-        }
+        .card-icon { font-size: 32px; margin-bottom: 14px; }
+        .card-stat { font-size: 32px; font-weight: 800; color: #d4a373; margin-bottom: 6px; }
+        .card-label { font-size: 13px; color: rgba(248, 250, 252, 0.6); }
 
         .card-expand-icon {
           position: absolute;
@@ -1406,73 +1503,70 @@ We're not just building software. We're building the future of hospitality caree
           justify-content: center;
           background: rgba(255, 255, 255, 0.05);
           border-radius: 50%;
+          font-size: 14px;
           color: rgba(248, 250, 252, 0.5);
-          font-size: 16px;
         }
 
         .card-expanded-content {
           max-height: 0;
           overflow: hidden;
-          transition: max-height 0.4s ease, margin-top 0.4s ease, opacity 0.4s ease;
-          opacity: 0;
+          transition: max-height 0.4s ease, padding 0.4s ease;
         }
 
         .problem-card.expanded .card-expanded-content {
           max-height: 200px;
-          margin-top: 16px;
-          opacity: 1;
+          padding-top: 16px;
         }
 
         .card-expanded-content p {
           font-size: 13px;
-          line-height: 1.6;
+          line-height: 1.7;
           color: rgba(248, 250, 252, 0.7);
           margin: 0;
           text-align: left;
         }
 
         /* QUOTES */
-        .quotes-section {
-          padding-top: 40px;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
+        .quotes-section { text-align: center; }
 
         .quotes-section h3 {
-          font-size: 22px;
-          text-align: center;
+          font-size: 14px;
+          font-weight: 600;
+          color: rgba(248, 250, 252, 0.5);
+          text-transform: uppercase;
+          letter-spacing: 0.1em;
           margin-bottom: 28px;
-          color: rgba(248, 250, 252, 0.9);
         }
 
         .quotes-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 16px;
+          gap: 20px;
         }
 
         .quote-card {
           background: rgba(255, 255, 255, 0.02);
           border: 1px solid rgba(255, 255, 255, 0.06);
           border-radius: 12px;
-          padding: 20px;
-          margin: 0;
+          padding: 24px;
+          text-align: left;
         }
 
         .quote-card p {
           font-size: 14px;
-          line-height: 1.6;
+          line-height: 1.7;
           color: rgba(248, 250, 252, 0.8);
+          margin: 0 0 14px;
           font-style: italic;
-          margin: 0 0 12px;
         }
 
         .quote-card cite {
           font-size: 12px;
-          color: #d4a373;
+          color: rgba(248, 250, 252, 0.5);
           font-style: normal;
         }
 
-        /* PLATFORM */
+        /* PLATFORM SECTION */
         .section-platform {
           padding: 100px 0;
           background: linear-gradient(180deg, #0e1117 0%, #0a0d12 100%);
@@ -1481,24 +1575,20 @@ We're not just building software. We're building the future of hospitality caree
         .platform-accordion {
           display: flex;
           flex-direction: column;
-          gap: 14px;
+          gap: 12px;
         }
 
         .accordion-item {
           background: rgba(255, 255, 255, 0.02);
           border: 1px solid rgba(255, 255, 255, 0.06);
-          border-radius: 14px;
+          border-radius: 16px;
           overflow: hidden;
           transition: all 0.3s ease;
         }
 
-        .accordion-item:hover {
-          border-color: rgba(255, 255, 255, 0.1);
-        }
-
         .accordion-item.expanded {
-          border-color: rgba(212, 163, 115, 0.3);
-          background: rgba(212, 163, 115, 0.02);
+          background: rgba(255, 255, 255, 0.03);
+          border-color: rgba(212, 163, 115, 0.2);
         }
 
         .accordion-header {
@@ -1506,24 +1596,25 @@ We're not just building software. We're building the future of hospitality caree
           display: flex;
           justify-content: space-between;
           align-items: center;
-          padding: 22px 24px;
+          padding: 24px 28px;
           background: none;
           border: none;
           cursor: pointer;
           text-align: left;
+          -webkit-tap-highlight-color: transparent;
         }
 
         .accordion-title {
           display: flex;
           align-items: center;
-          gap: 14px;
+          gap: 18px;
         }
 
-        .accordion-icon { font-size: 28px; }
+        .accordion-icon { font-size: 32px; }
 
         .accordion-title h3 {
-          font-size: 18px;
-          font-weight: 600;
+          font-size: 20px;
+          font-weight: 700;
           color: #f8fafc;
           margin: 0;
         }
@@ -1531,12 +1622,12 @@ We're not just building software. We're building the future of hospitality caree
         .accordion-title p {
           font-size: 13px;
           color: rgba(248, 250, 252, 0.5);
-          margin: 3px 0 0;
+          margin: 4px 0 0;
         }
 
         .accordion-toggle {
-          width: 32px;
-          height: 32px;
+          width: 36px;
+          height: 36px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -1544,17 +1635,13 @@ We're not just building software. We're building the future of hospitality caree
           border-radius: 50%;
           color: #d4a373;
           font-size: 22px;
-          transition: all 0.3s;
-        }
-
-        .accordion-item.expanded .accordion-toggle {
-          background: rgba(212, 163, 115, 0.15);
+          flex-shrink: 0;
         }
 
         .accordion-content {
           max-height: 0;
           overflow: hidden;
-          transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+          transition: max-height 0.5s ease;
         }
 
         .accordion-item.expanded .accordion-content {
@@ -1564,21 +1651,22 @@ We're not just building software. We're building the future of hospitality caree
         .platform-content-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 36px;
-          padding: 0 24px 28px;
+          gap: 40px;
+          padding: 0 28px 32px;
         }
 
         .platform-lead {
-          font-size: 15px;
+          font-size: 16px;
           line-height: 1.7;
           color: rgba(248, 250, 252, 0.8);
-          margin-bottom: 24px;
+          margin: 0 0 28px;
         }
 
         .features-list {
           display: flex;
           flex-direction: column;
-          gap: 18px;
+          gap: 20px;
+          margin-bottom: 32px;
         }
 
         .feature-item {
@@ -1586,10 +1674,13 @@ We're not just building software. We're building the future of hospitality caree
           gap: 14px;
         }
 
-        .feature-icon { font-size: 22px; flex-shrink: 0; }
+        .feature-icon {
+          font-size: 24px;
+          flex-shrink: 0;
+        }
 
         .feature-item h4 {
-          font-size: 14px;
+          font-size: 15px;
           font-weight: 600;
           color: #f8fafc;
           margin: 0 0 4px;
@@ -1597,49 +1688,56 @@ We're not just building software. We're building the future of hospitality caree
 
         .feature-item p {
           font-size: 13px;
+          line-height: 1.6;
           color: rgba(248, 250, 252, 0.6);
-          line-height: 1.5;
           margin: 0;
         }
 
+        /* PRICING */
         .pricing-row {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 14px;
-          margin-top: 28px;
+          gap: 16px;
         }
 
         .price-card {
-          background: rgba(0, 0, 0, 0.2);
-          border: 1px solid rgba(255, 255, 255, 0.06);
-          border-radius: 10px;
-          padding: 18px;
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 12px;
+          padding: 20px;
+        }
+
+        .price-card.premium {
+          background: rgba(212, 163, 115, 0.05);
+          border-color: rgba(212, 163, 115, 0.2);
         }
 
         .price-badge {
           display: inline-block;
-          font-size: 9px;
+          font-size: 11px;
           font-weight: 700;
-          letter-spacing: 0.1em;
+          color: #d4a373;
+          background: rgba(212, 163, 115, 0.15);
           padding: 4px 10px;
           border-radius: 4px;
           margin-bottom: 10px;
         }
 
-        .price-card.free .price-badge { background: rgba(34, 197, 94, 0.15); color: #22c55e; }
-        .price-card.trial .price-badge { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
-        .price-card.premium .price-badge { background: rgba(212, 163, 115, 0.15); color: #d4a373; }
-
         .price-card h4 {
-          font-size: 15px;
-          margin: 0 0 10px;
+          font-size: 16px;
+          font-weight: 600;
           color: #f8fafc;
+          margin: 0 0 12px;
         }
 
-        .price-card ul { list-style: none; padding: 0; margin: 0; }
+        .price-card ul {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+        }
 
         .price-card li {
-          font-size: 12px;
+          font-size: 13px;
           color: rgba(248, 250, 252, 0.7);
           padding: 5px 0;
           padding-left: 18px;
@@ -1654,11 +1752,11 @@ We're not just building software. We're building the future of hospitality caree
           font-size: 11px;
         }
 
-        /* SCREENSHOTS */
+        /* FIX B: SCREENSHOTS & PLACEHOLDERS */
         .platform-screenshots {
           display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          gap: 10px;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 12px;
           align-content: start;
         }
 
@@ -1666,115 +1764,154 @@ We're not just building software. We're building the future of hospitality caree
           grid-template-columns: 1fr;
         }
 
-        .platform-screenshots img {
+        .platform-screenshots img,
+        .screenshot-placeholder {
           width: 100%;
-          border-radius: 8px;
-          border: 1px solid rgba(255, 255, 255, 0.1);
+          border-radius: 12px;
           cursor: pointer;
-          transition: all 0.3s;
+          transition: transform 0.3s ease;
+          aspect-ratio: 9/16;
+          object-fit: cover;
         }
 
-        .platform-screenshots img:hover {
+        .platform-screenshots img:hover,
+        .screenshot-placeholder:hover {
           transform: scale(1.02);
-          border-color: rgba(212, 163, 115, 0.4);
+        }
+
+        .screenshot-placeholder {
+          background: linear-gradient(145deg, rgba(212, 163, 115, 0.1), rgba(212, 163, 115, 0.05));
+          border: 1px dashed rgba(212, 163, 115, 0.3);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+        }
+
+        .placeholder-icon {
+          font-size: 48px;
+          opacity: 0.6;
+        }
+
+        .placeholder-text {
+          font-size: 12px;
+          color: rgba(248, 250, 252, 0.5);
+          text-align: center;
+          padding: 0 12px;
         }
 
         /* ARCHETYPES */
         .archetypes-section {
-          padding: 28px 24px;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          padding: 0 28px 28px;
+          border-top: 1px solid rgba(255, 255, 255, 0.06);
+          margin-top: 20px;
+          padding-top: 28px;
         }
 
         .archetypes-section h4 {
-          font-size: 16px;
-          margin: 0 0 6px;
+          font-size: 18px;
+          font-weight: 700;
           color: #f8fafc;
+          margin: 0 0 6px;
         }
 
         .archetypes-section > p {
-          font-size: 13px;
+          font-size: 14px;
           color: rgba(248, 250, 252, 0.5);
-          margin: 0 0 16px;
+          margin: 0 0 20px;
         }
 
         .archetypes-grid {
           display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-          gap: 10px;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 12px;
+        }
+
+        .patron-grid {
+          grid-template-columns: repeat(4, 1fr);
         }
 
         .archetype-chip {
           display: flex;
           align-items: center;
           gap: 10px;
-          padding: 10px 14px;
-          background: rgba(255, 255, 255, 0.03);
+          background: rgba(255, 255, 255, 0.02);
           border: 1px solid rgba(255, 255, 255, 0.06);
-          border-radius: 8px;
-          transition: all 0.2s;
+          border-radius: 10px;
+          padding: 12px 14px;
         }
 
-        .archetype-chip:hover {
-          background: rgba(255, 255, 255, 0.05);
-          border-color: rgba(212, 163, 115, 0.2);
-        }
-
-        .archetype-chip span { font-size: 20px; }
+        .archetype-chip span:first-child { font-size: 22px; }
 
         .archetype-chip strong {
           display: block;
-          font-size: 12px;
-          color: #d4a373;
-          margin-bottom: 1px;
+          font-size: 13px;
+          color: #f8fafc;
         }
 
         .archetype-chip small {
           display: block;
-          font-size: 10px;
+          font-size: 11px;
           color: rgba(248, 250, 252, 0.5);
+          margin-top: 2px;
         }
 
         /* SCIENCE */
         .science-grid {
           display: grid;
           grid-template-columns: 1fr 1fr;
-          gap: 20px;
-          padding: 0 24px 28px;
+          gap: 24px;
+          padding: 0 28px 28px;
         }
 
         .science-card {
-          background: rgba(0, 0, 0, 0.2);
-          border: 1px solid rgba(255, 255, 255, 0.06);
-          border-radius: 10px;
-          padding: 24px;
+          background: rgba(255, 255, 255, 0.02);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          border-radius: 14px;
+          padding: 28px;
         }
 
-        .science-card.dapa { border-color: rgba(34, 197, 94, 0.2); }
+        .science-card.dapa { border-color: rgba(212, 163, 115, 0.2); }
         .science-card.genome { border-color: rgba(139, 92, 246, 0.2); }
 
-        .science-card h4 { font-size: 18px; margin: 0 0 4px; }
-        .science-card.dapa h4 { color: #22c55e; }
-        .science-card.genome h4 { color: #8b5cf6; }
-
-        .science-subtitle {
-          font-size: 12px;
-          color: rgba(248, 250, 252, 0.5);
-          margin-bottom: 16px;
+        .science-card h4 {
+          font-size: 20px;
+          font-weight: 700;
+          color: #f8fafc;
+          margin: 0 0 6px;
         }
 
-        .science-card ul { list-style: none; padding: 0; margin: 0 0 16px; }
+        .science-subtitle {
+          font-size: 13px;
+          color: rgba(248, 250, 252, 0.5);
+          margin: 0 0 20px;
+        }
+
+        .science-card ul {
+          list-style: none;
+          padding: 0;
+          margin: 0 0 20px;
+        }
 
         .science-card li {
-          font-size: 13px;
+          font-size: 14px;
           color: rgba(248, 250, 252, 0.75);
-          padding: 6px 0;
+          padding: 8px 0;
           border-bottom: 1px solid rgba(255, 255, 255, 0.04);
         }
 
+        .science-card li:last-child { border: none; }
+
+        .science-card li strong { color: #d4a373; }
+
         .science-value {
-          font-size: 12px;
-          color: #d4a373;
-          font-weight: 500;
+          font-size: 13px;
+          font-style: italic;
+          color: rgba(248, 250, 252, 0.5);
+          margin: 0;
+          padding-top: 8px;
+          border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
 
         /* VISION */
@@ -1787,40 +1924,44 @@ We're not just building software. We're building the future of hospitality caree
           display: flex;
           align-items: center;
           justify-content: center;
-          gap: 16px;
-          margin-bottom: 12px;
+          gap: 20px;
+          margin-bottom: 16px;
         }
 
         .founder-photo {
-          width: 70px;
-          height: 70px;
-          background: rgba(212, 163, 115, 0.1);
-          border: 2px dashed rgba(212, 163, 115, 0.3);
+          width: 80px;
+          height: 80px;
+          background: linear-gradient(135deg, rgba(212, 163, 115, 0.2), rgba(212, 163, 115, 0.1));
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 32px;
-          opacity: 0.6;
+          font-size: 36px;
         }
 
-        .founder-text h2 { font-size: 26px; margin: 0; }
-
-        .founder-text p {
-          font-size: 13px;
-          color: rgba(248, 250, 252, 0.5);
-          margin: 3px 0 0;
-        }
-
-        .founder-tagline {
-          font-size: 16px;
-          color: #d4a373;
+        .founder-text h2 {
+          font-size: 28px;
+          font-weight: 700;
           margin: 0;
         }
 
+        .founder-text p {
+          font-size: 14px;
+          color: rgba(248, 250, 252, 0.5);
+          margin: 4px 0 0;
+        }
+
+        .founder-tagline {
+          font-size: 17px;
+          color: rgba(248, 250, 252, 0.7);
+          text-align: center;
+          margin: 0 0 40px;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
         .vision-accordion {
-          max-width: 750px;
-          margin: 0 auto;
           display: flex;
           flex-direction: column;
           gap: 10px;
@@ -1849,6 +1990,7 @@ We're not just building software. We're building the future of hospitality caree
           border: none;
           cursor: pointer;
           text-align: left;
+          -webkit-tap-highlight-color: transparent;
         }
 
         .vision-header h3 {
@@ -1930,6 +2072,7 @@ We're not just building software. We're building the future of hospitality caree
           font-size: 14px;
           font-family: inherit;
           transition: all 0.2s;
+          -webkit-appearance: none;
         }
 
         .waitlist-form input::placeholder { color: rgba(248, 250, 252, 0.4); }
@@ -1959,11 +2102,16 @@ We're not just building software. We're building the future of hospitality caree
           border-radius: 8px;
           cursor: pointer;
           transition: all 0.3s;
+          -webkit-tap-highlight-color: transparent;
         }
 
         .btn-submit:hover {
           transform: translateY(-2px);
           box-shadow: 0 10px 30px rgba(212, 163, 115, 0.25);
+        }
+
+        .btn-submit:active {
+          transform: translateY(0);
         }
 
         .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
@@ -2080,7 +2228,9 @@ We're not just building software. We're building the future of hospitality caree
           cursor: pointer;
         }
 
-        /* RESPONSIVE */
+        /* ============================================= */
+        /* FIX C: RESPONSIVE - IMPROVED MOBILE */
+        /* ============================================= */
         @media (max-width: 900px) {
           .what-grid { grid-template-columns: 1fr; }
           .problem-grid { grid-template-columns: repeat(2, 1fr); }
@@ -2093,14 +2243,39 @@ We're not just building software. We're building the future of hospitality caree
 
         @media (max-width: 600px) {
           .nav-links a:not(.nav-cta) { display: none; }
+          .nav-container { padding: 12px 16px; }
+          .nav-cta { padding: 8px 16px !important; font-size: 13px !important; }
+          
+          .hero { padding: 80px 16px 40px; }
           .who-options { flex-direction: column; align-items: center; }
           .who-btn { width: 100%; max-width: 280px; }
+          
           .problem-grid { grid-template-columns: 1fr; }
           .form-row { grid-template-columns: 1fr; }
           .pricing-row { grid-template-columns: 1fr; }
           .platform-screenshots { grid-template-columns: 1fr; }
-          .archetypes-grid { grid-template-columns: 1fr; }
+          .archetypes-grid { grid-template-columns: repeat(2, 1fr); }
+          .patron-grid { grid-template-columns: repeat(2, 1fr); }
           .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+          
+          .container { padding: 0 16px; }
+          .section-what, .section-problem, .section-platform, .section-vision, .section-waitlist {
+            padding: 60px 0;
+          }
+          
+          .accordion-header { padding: 18px 16px; }
+          .platform-content-grid { padding: 0 16px 24px; }
+          .archetypes-section { padding: 0 16px 20px; }
+          .science-grid { padding: 0 16px 20px; }
+          
+          .founder-intro { flex-direction: column; gap: 12px; }
+          .founder-photo { width: 64px; height: 64px; font-size: 28px; }
+          .founder-text { text-align: center; }
+          .founder-text h2 { font-size: 24px; }
+        }
+
+        @media (max-width: 380px) {
+          .archetypes-grid, .patron-grid { grid-template-columns: 1fr; }
         }
       `}</style>
     </>
