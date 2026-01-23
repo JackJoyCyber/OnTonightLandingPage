@@ -1,14 +1,19 @@
 // pages/index.js
 // ============================================================================
-// ONTONIGHT LANDING PAGE - POLISHED + FIXED EDITION
+// ONTONIGHT LANDING PAGE - V2 COMPREHENSIVE UPDATE
 // ============================================================================
 // "Your Night. Your People. Where Regulars Are Made."
 // Stop resetting. Start building.
 // ============================================================================
-// FIXES APPLIED:
-// A) Accordion scroll jump - proper scroll-to-header after expansion
-// B) Screenshot fallbacks - styled placeholders when images fail
-// C) Mobile polish - viewport lock, overflow protection, touch improvements
+// UPDATES:
+// - Swapped nav: OnTonight in hero badge position, LIVE NOW in nav
+// - Stats row below "I Am A" section
+// - Expanded user type cards with platform terminology and descriptions
+// - Fixed accordion scroll (scroll lock approach)
+// - Screenshot sizing fixed
+// - Footer reorganized with correct page links
+// - Explore arrow positioned below cards
+// - Patron emoji changed from heart to 🎩 (tophat)
 // ============================================================================
 
 import { useState, useEffect, useRef } from 'react';
@@ -117,52 +122,65 @@ export default function LandingPage() {
   }, []);
 
   // ============================================================================
-  // FIX A: ACCORDION HANDLER - Scroll to header after expansion
+  // ACCORDION HANDLER - FIXED: Scroll lock approach
   // ============================================================================
   const handlePlatformAccordion = (key) => {
     const isClosing = expandedPlatform === key;
     
+    // Get the clicked accordion element
+    const clickedAccordion = accordionRefs.current[key];
+    
     if (isClosing) {
       setExpandedPlatform(null);
     } else {
+      // Store the position of the clicked accordion header before state change
+      const headerRect = clickedAccordion?.querySelector('.accordion-header')?.getBoundingClientRect();
+      const headerTopBeforeChange = headerRect ? headerRect.top : 0;
+      
       setExpandedPlatform(key);
       
-      // After state updates and DOM renders, scroll to the opened accordion header
-      setTimeout(() => {
-        const accordionEl = accordionRefs.current[key];
-        if (accordionEl) {
-          const navHeight = 70;
-          const headerEl = accordionEl.querySelector('.accordion-header');
-          if (headerEl) {
-            const rect = headerEl.getBoundingClientRect();
-            const absoluteTop = window.scrollY + rect.top - navHeight - 20;
-            window.scrollTo({ top: absoluteTop, behavior: 'smooth' });
+      // After render, restore the header to its visual position
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (clickedAccordion) {
+            const newHeaderRect = clickedAccordion.querySelector('.accordion-header')?.getBoundingClientRect();
+            if (newHeaderRect && headerRect) {
+              const delta = newHeaderRect.top - headerTopBeforeChange;
+              if (Math.abs(delta) > 5) {
+                window.scrollBy({ top: delta, behavior: 'instant' });
+              }
+            }
           }
-        }
-      }, 50);
+        });
+      });
     }
   };
 
   const handleVisionAccordion = (key) => {
     const isClosing = expandedVision === key;
+    const clickedAccordion = accordionRefs.current[`vision-${key}`];
     
     if (isClosing) {
       setExpandedVision(null);
     } else {
+      const headerRect = clickedAccordion?.querySelector('.vision-header')?.getBoundingClientRect();
+      const headerTopBeforeChange = headerRect ? headerRect.top : 0;
+      
       setExpandedVision(key);
       
-      setTimeout(() => {
-        const accordionEl = accordionRefs.current[`vision-${key}`];
-        if (accordionEl) {
-          const navHeight = 70;
-          const headerEl = accordionEl.querySelector('.vision-header');
-          if (headerEl) {
-            const rect = headerEl.getBoundingClientRect();
-            const absoluteTop = window.scrollY + rect.top - navHeight - 20;
-            window.scrollTo({ top: absoluteTop, behavior: 'smooth' });
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (clickedAccordion) {
+            const newHeaderRect = clickedAccordion.querySelector('.vision-header')?.getBoundingClientRect();
+            if (newHeaderRect && headerRect) {
+              const delta = newHeaderRect.top - headerTopBeforeChange;
+              if (Math.abs(delta) > 5) {
+                window.scrollBy({ top: delta, behavior: 'instant' });
+              }
+            }
           }
-        }
-      }, 50);
+        });
+      });
     }
   };
 
@@ -184,7 +202,7 @@ export default function LandingPage() {
   };
 
   // ============================================================================
-  // FIX B: IMAGE ERROR HANDLER
+  // IMAGE ERROR HANDLER
   // ============================================================================
   const handleImageError = (imagePath) => {
     setFailedImages(prev => ({ ...prev, [imagePath]: true }));
@@ -333,7 +351,7 @@ We're not just building software. We're building the future of hospitality caree
   ];
 
   // ============================================================================
-  // FIX B: Screenshot component with fallback
+  // Screenshot component with fallback
   // ============================================================================
   const ScreenshotImage = ({ src, alt, onClick }) => {
     if (failedImages[src]) {
@@ -364,7 +382,6 @@ We're not just building software. We're building the future of hospitality caree
       <Head>
         <title>OnTonight - Your Night. Your People. Where Regulars Are Made.</title>
         <meta name="description" content="Professional identity platform for hospitality. Build portable careers, follow your people, elevate the industry. Live now in Tampa Bay." />
-        {/* FIX C: Viewport with zoom prevention for mobile */}
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <link rel="manifest" href="/manifest.json" />
         <meta name="theme-color" content="#d4a373" />
@@ -387,13 +404,15 @@ We're not just building software. We're building the future of hospitality caree
 
       <div className="page">
         {/* ================================================================== */}
-        {/* NAVIGATION */}
+        {/* NAVIGATION - LIVE NOW moved to nav, OnTonight in hero */}
         {/* ================================================================== */}
         <nav className="nav">
           <div className="nav-container">
-            <div className="nav-logo">OnTonight</div>
+            <div className="nav-live-badge">
+              <span className="badge-dot" />
+              LIVE NOW · TAMPA BAY
+            </div>
             <div className="nav-links">
-              <a href="#what">What It Is</a>
               <a href="#platform">Platform</a>
               <a href="#vision">Vision</a>
               <a href="#waitlist" className="nav-cta">Join Waitlist</a>
@@ -402,16 +421,16 @@ We're not just building software. We're building the future of hospitality caree
         </nav>
 
         {/* ================================================================== */}
-        {/* HERO */}
+        {/* HERO - OnTonight is now the hero badge */}
         {/* ================================================================== */}
         <section className="hero">
           <div className="hero-glow" />
           <div className="hero-glow-2" />
           
           <div className="container">
-            <div className="hero-badge">
-              <span className="badge-dot" />
-              LIVE NOW · TAMPA BAY
+            {/* ONTONIGHT AS HERO BADGE - THE FIRST THING SEEN */}
+            <div className="hero-brand-badge">
+              OnTonight
             </div>
 
             {/* STATIC TAGLINE */}
@@ -426,40 +445,58 @@ We're not just building software. We're building the future of hospitality caree
               <span className="cursor">|</span>
             </div>
 
-            {/* WHO ARE YOU */}
+            {/* WHO ARE YOU - EXPANDED CARDS WITH DESCRIPTIONS */}
             <div className="who-are-you">
               <p className="who-label">I am a...</p>
               <div className="who-options">
                 <button 
-                  className={`who-btn ${selectedUserType === 'onpro' ? 'selected' : ''}`}
+                  className={`who-btn expanded ${selectedUserType === 'onpro' ? 'selected' : ''}`}
                   onClick={() => handleUserTypeSelect('onpro')}
                 >
                   <span className="who-icon">🍸</span>
                   <div className="who-text">
-                    <strong>Hospitality Pro</strong>
-                    <small>Bartender, Server, Sommelier, Chef</small>
+                    <strong>Hospitality Pro <span className="term-badge">OnPro</span></strong>
+                    <p className="who-desc">Your professional identity follows you. Skills verified. Reputation preserved. Customers follow <em>you</em>, not your venue.</p>
                   </div>
                 </button>
                 <button 
-                  className={`who-btn ${selectedUserType === 'patron' ? 'selected' : ''}`}
+                  className={`who-btn expanded ${selectedUserType === 'patron' ? 'selected' : ''}`}
                   onClick={() => handleUserTypeSelect('patron')}
                 >
-                  <span className="who-icon">❤️</span>
+                  <span className="who-icon">🎩</span>
                   <div className="who-text">
-                    <strong>Customer</strong>
-                    <small>I value great service</small>
+                    <strong>Customer <span className="term-badge">Patron</span></strong>
+                    <p className="who-desc">Never lose your favorite bartender again. When they move venues, you'll know. The relationship <em>survives</em> the job change.</p>
                   </div>
                 </button>
                 <button 
-                  className={`who-btn ${selectedUserType === 'venue' ? 'selected' : ''}`}
+                  className={`who-btn expanded ${selectedUserType === 'venue' ? 'selected' : ''}`}
                   onClick={() => handleUserTypeSelect('venue')}
                 >
                   <span className="who-icon">🏢</span>
                   <div className="who-text">
                     <strong>Venue Owner</strong>
-                    <small>Bar, Restaurant, Hotel</small>
+                    <p className="who-desc">Recruit verified talent with proven skills. See DAPA scores before you hire. <em>Compete on culture</em>, not just wages.</p>
                   </div>
                 </button>
+              </div>
+            </div>
+
+            {/* STATS ROW - Below user types for emotional impact */}
+            <div className="hero-stats">
+              <div className="stat-item">
+                <span className="stat-value">$66.8B</span>
+                <span className="stat-label">Industry Crisis</span>
+              </div>
+              <div className="stat-divider">|</div>
+              <div className="stat-item">
+                <span className="stat-value">15.6M</span>
+                <span className="stat-label">Workers Affected</span>
+              </div>
+              <div className="stat-divider">|</div>
+              <div className="stat-item">
+                <span className="stat-value">1</span>
+                <span className="stat-label">Solution</span>
               </div>
             </div>
 
@@ -468,45 +505,12 @@ We're not just building software. We're building the future of hospitality caree
                 📱 Install App
               </button>
             )}
-
-            <div className="scroll-hint">
-              <span>↓</span>
-              <span>Explore</span>
-            </div>
           </div>
-        </section>
 
-        {/* ================================================================== */}
-        {/* WHAT IS ONTONIGHT */}
-        {/* ================================================================== */}
-        <section id="what" className="section-what">
-          <div className="container">
-            <div className={`section-header animate-on-scroll ${visibleSections['what-header'] ? 'visible' : ''}`} id="what-header">
-              <h2>What Is OnTonight?</h2>
-              <p className="what-subtitle">Career infrastructure for hospitality—finally.</p>
-            </div>
-
-            <div className="what-grid">
-              <div className={`what-card animate-on-scroll ${visibleSections['what-pro'] ? 'visible' : ''}`} id="what-pro">
-                <div className="what-icon">🍸</div>
-                <h3>For Hospitality Pros</h3>
-                <p>Your professional identity follows you. Skills verified. Reputation preserved. Customers follow <em>you</em>, not your venue.</p>
-              </div>
-              <div className={`what-card animate-on-scroll ${visibleSections['what-patron'] ? 'visible' : ''}`} id="what-patron">
-                <div className="what-icon">❤️</div>
-                <h3>For Customers</h3>
-                <p>Never lose your favorite bartender again. When they move venues, you'll know. The relationship <em>survives</em> the job change.</p>
-              </div>
-              <div className={`what-card animate-on-scroll ${visibleSections['what-venue'] ? 'visible' : ''}`} id="what-venue">
-                <div className="what-icon">🏢</div>
-                <h3>For Venues</h3>
-                <p>Recruit verified talent with proven skills. See DAPA scores before you hire. <em>Compete on culture</em>, not just wages.</p>
-              </div>
-            </div>
-
-            <div className={`what-summary animate-on-scroll ${visibleSections['what-summary'] ? 'visible' : ''}`} id="what-summary">
-              <p><strong>OnTonight</strong> is career infrastructure for hospitality professionals. Think of it as LinkedIn for bartenders, servers, sommeliers, and chefs—except built specifically for how this industry actually works.</p>
-            </div>
+          {/* SCROLL HINT - Outside container, positioned at bottom of hero */}
+          <div className="scroll-hint">
+            <span>↓</span>
+            <span>Explore</span>
           </div>
         </section>
 
@@ -662,14 +666,14 @@ We're not just building software. We're building the future of hospitality caree
                 </div>
               </div>
 
-              {/* PATRON - ❤️ */}
+              {/* PATRON - 🎩 */}
               <div 
                 ref={(el) => accordionRefs.current['patron'] = el}
                 className={`accordion-item ${expandedPlatform === 'patron' ? 'expanded' : ''}`}
               >
                 <button className="accordion-header" onClick={() => handlePlatformAccordion('patron')}>
                   <div className="accordion-title">
-                    <span className="accordion-icon">❤️</span>
+                    <span className="accordion-icon">🎩</span>
                     <div>
                       <h3>For Patrons</h3>
                       <p>Customers who value relationships</p>
@@ -986,7 +990,7 @@ We're not just building software. We're building the future of hospitality caree
         </section>
 
         {/* ================================================================== */}
-        {/* FOOTER */}
+        {/* FOOTER - REORGANIZED WITH CORRECT LINKS */}
         {/* ================================================================== */}
         <footer className="footer">
           <div className="container">
@@ -996,21 +1000,23 @@ We're not just building software. We're building the future of hospitality caree
                 <p className="footer-tagline-text">Your Night. Your People.<br />Where Regulars Are Made.</p>
               </div>
               <div className="footer-links">
-                <h4>Platform</h4>
-                <a href="#what">What It Is</a>
-                <a href="#platform">Features</a>
-                <a href="#vision">Our Story</a>
+                <h4>Company</h4>
+                <a href="/careers">Careers</a>
+                <a href="/support">Support</a>
+                <a href="/media">Media</a>
+                <a href="/partner">Partner</a>
+                <a href="/contact">Contact</a>
               </div>
               <div className="footer-links">
-                <h4>Company</h4>
-                <a href="/contact">Contact</a>
-                <a href="/privacy">Privacy</a>
-                <a href="/terms">Terms</a>
+                <h4>Legal</h4>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
               </div>
               <div className="footer-links">
                 <h4>Connect</h4>
                 <p>Tampa, FL</p>
                 <a href="mailto:hello@on-tonight.com">hello@on-tonight.com</a>
+                <a href="https://app.on-tonight.com" className="footer-app-link">Launch App →</a>
               </div>
             </div>
             <div className="footer-bottom">
@@ -1033,7 +1039,7 @@ We're not just building software. We're building the future of hospitality caree
       {/* ================================================================== */}
       <style jsx>{`
         /* ============================================= */
-        /* FIX C: MOBILE - Prevent horizontal scroll */
+        /* MOBILE - Prevent horizontal scroll */
         /* ============================================= */
         :global(html), :global(body) {
           overflow-x: hidden;
@@ -1112,7 +1118,7 @@ We're not just building software. We're building the future of hospitality caree
           transform: translateY(0);
         }
 
-        /* NAV */
+        /* NAV - LIVE NOW BADGE IS NOW HERE */
         .nav {
           position: fixed;
           top: 0;
@@ -1133,10 +1139,27 @@ We're not just building software. We're building the future of hospitality caree
           margin: 0 auto;
         }
 
-        .nav-logo {
-          font-size: 22px;
-          font-weight: 700;
+        .nav-live-badge {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          font-size: 12px;
+          font-weight: 600;
+          letter-spacing: 0.1em;
           color: #d4a373;
+        }
+
+        .badge-dot {
+          width: 8px;
+          height: 8px;
+          background: #22c55e;
+          border-radius: 50%;
+          animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.6; transform: scale(0.9); }
         }
 
         .nav-links {
@@ -1171,7 +1194,7 @@ We're not just building software. We're building the future of hospitality caree
           justify-content: center;
           text-align: center;
           position: relative;
-          padding: 100px 24px 60px;
+          padding: 100px 24px 80px;
         }
 
         .hero-glow {
@@ -1197,61 +1220,42 @@ We're not just building software. We're building the future of hospitality caree
 
         .hero .container { position: relative; z-index: 1; }
 
-        .hero-badge {
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          font-size: 11px;
-          font-weight: 600;
-          letter-spacing: 0.15em;
-          color: #d4a373;
-          border: 1px solid rgba(212, 163, 115, 0.3);
-          padding: 10px 20px;
-          border-radius: 50px;
-          background: rgba(212, 163, 115, 0.05);
-          margin-bottom: 32px;
-        }
-
-        .badge-dot {
-          width: 8px;
-          height: 8px;
-          background: #22c55e;
-          border-radius: 50%;
-          animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-          0%, 100% { opacity: 1; transform: scale(1); }
-          50% { opacity: 0.6; transform: scale(0.9); }
-        }
-
-        .hero-tagline { margin: 0 0 20px; }
-
-        .tagline-line {
-          display: block;
-          font-size: clamp(28px, 5vw, 48px);
-          font-weight: 700;
-          color: #f8fafc;
-          line-height: 1.2;
-        }
-
-        .tagline-emphasis {
-          display: block;
-          font-size: clamp(32px, 6vw, 60px);
+        /* HERO BRAND BADGE - OnTonight is now prominently displayed */
+        .hero-brand-badge {
+          font-size: clamp(42px, 8vw, 72px);
           font-weight: 800;
           background: linear-gradient(135deg, #d4a373 0%, #e8c9a0 50%, #d4a373 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;
-          line-height: 1.2;
+          margin-bottom: 24px;
+          letter-spacing: -0.02em;
+        }
+
+        .hero-tagline { margin: 0 0 16px; }
+
+        .tagline-line {
+          display: block;
+          font-size: clamp(22px, 4vw, 36px);
+          font-weight: 600;
+          color: #f8fafc;
+          line-height: 1.3;
+        }
+
+        .tagline-emphasis {
+          display: block;
+          font-size: clamp(24px, 4.5vw, 40px);
+          font-weight: 700;
+          color: rgba(248, 250, 252, 0.9);
+          line-height: 1.3;
           margin-top: 4px;
         }
 
         .hero-descriptor {
           height: 28px;
-          font-size: 17px;
+          font-size: 16px;
           color: rgba(248, 250, 252, 0.6);
-          margin-bottom: 36px;
+          margin-bottom: 40px;
         }
 
         .cursor {
@@ -1264,42 +1268,45 @@ We're not just building software. We're building the future of hospitality caree
           51%, 100% { opacity: 0; }
         }
 
-        /* WHO ARE YOU */
-        .who-are-you { margin-bottom: 24px; }
+        /* WHO ARE YOU - EXPANDED CARDS */
+        .who-are-you { margin-bottom: 32px; }
 
         .who-label {
           font-size: 13px;
           color: rgba(248, 250, 252, 0.5);
-          margin-bottom: 14px;
+          margin-bottom: 18px;
           text-transform: uppercase;
           letter-spacing: 0.1em;
         }
 
         .who-options {
           display: flex;
-          gap: 14px;
+          gap: 16px;
           justify-content: center;
           flex-wrap: wrap;
         }
 
         .who-btn {
           display: flex;
-          align-items: center;
-          gap: 12px;
-          padding: 14px 20px;
+          align-items: flex-start;
+          gap: 14px;
+          padding: 20px;
           background: rgba(255, 255, 255, 0.03);
           border: 1px solid rgba(255, 255, 255, 0.08);
-          border-radius: 12px;
+          border-radius: 16px;
           cursor: pointer;
           transition: all 0.3s ease;
           text-align: left;
           -webkit-tap-highlight-color: transparent;
+          max-width: 320px;
+          flex: 1;
+          min-width: 280px;
         }
 
         .who-btn:hover {
           background: rgba(255, 255, 255, 0.06);
           border-color: rgba(212, 163, 115, 0.3);
-          transform: translateY(-2px);
+          transform: translateY(-3px);
         }
 
         .who-btn:active {
@@ -1311,20 +1318,80 @@ We're not just building software. We're building the future of hospitality caree
           border-color: #d4a373;
         }
 
-        .who-icon { font-size: 26px; }
-
-        .who-text { display: flex; flex-direction: column; }
-
-        .who-text strong {
-          font-size: 14px;
-          color: #f8fafc;
-          font-weight: 600;
+        .who-icon { 
+          font-size: 32px;
+          flex-shrink: 0;
+          margin-top: 2px;
         }
 
-        .who-text small {
+        .who-text { display: flex; flex-direction: column; gap: 8px; }
+
+        .who-text strong {
+          font-size: 16px;
+          color: #f8fafc;
+          font-weight: 700;
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          flex-wrap: wrap;
+        }
+
+        .term-badge {
+          font-size: 10px;
+          font-weight: 600;
+          color: #d4a373;
+          background: rgba(212, 163, 115, 0.15);
+          padding: 3px 8px;
+          border-radius: 4px;
+          letter-spacing: 0.05em;
+        }
+
+        .who-desc {
+          font-size: 13px;
+          line-height: 1.6;
+          color: rgba(248, 250, 252, 0.6);
+          margin: 0;
+        }
+
+        .who-desc em {
+          color: #d4a373;
+          font-style: normal;
+          font-weight: 500;
+        }
+
+        /* HERO STATS */
+        .hero-stats {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 24px;
+          margin-bottom: 20px;
+        }
+
+        .stat-item {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 4px;
+        }
+
+        .stat-value {
+          font-size: 28px;
+          font-weight: 800;
+          color: #d4a373;
+        }
+
+        .stat-label {
           font-size: 11px;
           color: rgba(248, 250, 252, 0.5);
-          margin-top: 2px;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+        }
+
+        .stat-divider {
+          color: rgba(248, 250, 252, 0.2);
+          font-size: 24px;
+          font-weight: 300;
         }
 
         .btn-install {
@@ -1338,9 +1405,10 @@ We're not just building software. We're building the future of hospitality caree
           cursor: pointer;
         }
 
+        /* SCROLL HINT - Positioned at bottom of hero section */
         .scroll-hint {
           position: absolute;
-          bottom: 24px;
+          bottom: 30px;
           left: 50%;
           transform: translateX(-50%);
           display: flex;
@@ -1350,6 +1418,7 @@ We're not just building software. We're building the future of hospitality caree
           color: rgba(248, 250, 252, 0.3);
           font-size: 11px;
           animation: bounce 2s infinite;
+          z-index: 10;
         }
 
         @keyframes bounce {
@@ -1375,83 +1444,6 @@ We're not just building software. We're building the future of hospitality caree
           max-width: 600px;
           margin: 0 auto;
           line-height: 1.6;
-        }
-
-        /* WHAT IS ONTONIGHT */
-        .section-what {
-          padding: 100px 0 80px;
-          background: linear-gradient(180deg, #0a0d12 0%, #0e1117 100%);
-        }
-
-        .what-subtitle {
-          font-size: 18px !important;
-          color: #d4a373 !important;
-        }
-
-        .what-grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 24px;
-          margin-bottom: 40px;
-        }
-
-        .what-card {
-          background: rgba(255, 255, 255, 0.02);
-          border: 1px solid rgba(255, 255, 255, 0.06);
-          border-radius: 16px;
-          padding: 32px 24px;
-          text-align: center;
-          transition: all 0.3s ease;
-        }
-
-        .what-card:hover {
-          background: rgba(255, 255, 255, 0.04);
-          border-color: rgba(212, 163, 115, 0.2);
-          transform: translateY(-4px);
-        }
-
-        .what-icon {
-          font-size: 40px;
-          margin-bottom: 16px;
-        }
-
-        .what-card h3 {
-          font-size: 18px;
-          margin: 0 0 12px;
-          color: #d4a373;
-        }
-
-        .what-card p {
-          font-size: 14px;
-          line-height: 1.7;
-          color: rgba(248, 250, 252, 0.7);
-          margin: 0;
-        }
-
-        .what-card em {
-          color: #f8fafc;
-          font-style: italic;
-        }
-
-        .what-summary {
-          text-align: center;
-          max-width: 700px;
-          margin: 0 auto;
-          padding: 28px 32px;
-          background: rgba(212, 163, 115, 0.05);
-          border: 1px solid rgba(212, 163, 115, 0.15);
-          border-radius: 12px;
-        }
-
-        .what-summary p {
-          font-size: 16px;
-          line-height: 1.7;
-          color: rgba(248, 250, 252, 0.85);
-          margin: 0;
-        }
-
-        .what-summary strong {
-          color: #d4a373;
         }
 
         /* PROBLEM SECTION */
@@ -1752,7 +1744,7 @@ We're not just building software. We're building the future of hospitality caree
           font-size: 11px;
         }
 
-        /* FIX B: SCREENSHOTS & PLACEHOLDERS */
+        /* SCREENSHOTS - FIXED SIZING */
         .platform-screenshots {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -1762,11 +1754,13 @@ We're not just building software. We're building the future of hospitality caree
 
         .platform-screenshots.single {
           grid-template-columns: 1fr;
+          max-width: 200px;
         }
 
         .platform-screenshots img,
         .screenshot-placeholder {
           width: 100%;
+          max-width: 160px;
           border-radius: 12px;
           cursor: pointer;
           transition: transform 0.3s ease;
@@ -1790,15 +1784,15 @@ We're not just building software. We're building the future of hospitality caree
         }
 
         .placeholder-icon {
-          font-size: 48px;
+          font-size: 36px;
           opacity: 0.6;
         }
 
         .placeholder-text {
-          font-size: 12px;
+          font-size: 11px;
           color: rgba(248, 250, 252, 0.5);
           text-align: center;
-          padding: 0 12px;
+          padding: 0 8px;
         }
 
         /* ARCHETYPES */
@@ -2139,7 +2133,7 @@ We're not just building software. We're building the future of hospitality caree
           display: inline-block;
         }
 
-        /* FOOTER */
+        /* FOOTER - REORGANIZED */
         .footer {
           padding: 60px 24px 32px;
           background: #080a0e;
@@ -2186,6 +2180,12 @@ We're not just building software. We're building the future of hospitality caree
 
         .footer-links a:hover { color: #d4a373; }
 
+        .footer-app-link {
+          color: #d4a373 !important;
+          font-weight: 600;
+          margin-top: 8px !important;
+        }
+
         .footer-bottom {
           padding-top: 24px;
           border-top: 1px solid rgba(255, 255, 255, 0.05);
@@ -2229,14 +2229,17 @@ We're not just building software. We're building the future of hospitality caree
         }
 
         /* ============================================= */
-        /* FIX C: RESPONSIVE - IMPROVED MOBILE */
+        /* RESPONSIVE */
         /* ============================================= */
         @media (max-width: 900px) {
-          .what-grid { grid-template-columns: 1fr; }
+          .who-options { flex-direction: column; align-items: center; }
+          .who-btn { max-width: 100%; width: 100%; }
+          .hero-stats { flex-wrap: wrap; gap: 16px; }
+          .stat-divider { display: none; }
           .problem-grid { grid-template-columns: repeat(2, 1fr); }
           .quotes-grid { grid-template-columns: 1fr; }
           .platform-content-grid { grid-template-columns: 1fr; }
-          .platform-screenshots { order: -1; grid-template-columns: repeat(3, 1fr); }
+          .platform-screenshots { order: -1; grid-template-columns: repeat(3, 1fr); justify-items: center; }
           .science-grid { grid-template-columns: 1fr; }
           .footer-grid { grid-template-columns: 1fr 1fr; }
         }
@@ -2245,21 +2248,31 @@ We're not just building software. We're building the future of hospitality caree
           .nav-links a:not(.nav-cta) { display: none; }
           .nav-container { padding: 12px 16px; }
           .nav-cta { padding: 8px 16px !important; font-size: 13px !important; }
+          .nav-live-badge { font-size: 10px; }
           
-          .hero { padding: 80px 16px 40px; }
-          .who-options { flex-direction: column; align-items: center; }
-          .who-btn { width: 100%; max-width: 280px; }
+          .hero { padding: 80px 16px 60px; }
+          .hero-brand-badge { font-size: clamp(36px, 10vw, 56px); }
+          
+          .who-btn { padding: 16px; }
+          .who-icon { font-size: 28px; }
+          .who-text strong { font-size: 15px; }
+          .who-desc { font-size: 12px; }
+          
+          .hero-stats { gap: 12px; }
+          .stat-value { font-size: 22px; }
+          .stat-label { font-size: 10px; }
           
           .problem-grid { grid-template-columns: 1fr; }
           .form-row { grid-template-columns: 1fr; }
           .pricing-row { grid-template-columns: 1fr; }
-          .platform-screenshots { grid-template-columns: 1fr; }
+          .platform-screenshots { grid-template-columns: repeat(3, 1fr); }
+          .platform-screenshots img, .screenshot-placeholder { max-width: 100%; }
           .archetypes-grid { grid-template-columns: repeat(2, 1fr); }
           .patron-grid { grid-template-columns: repeat(2, 1fr); }
           .footer-grid { grid-template-columns: 1fr; gap: 28px; }
           
           .container { padding: 0 16px; }
-          .section-what, .section-problem, .section-platform, .section-vision, .section-waitlist {
+          .section-problem, .section-platform, .section-vision, .section-waitlist {
             padding: 60px 0;
           }
           
