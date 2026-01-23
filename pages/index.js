@@ -836,7 +836,7 @@ We're not just building software. We're building the future of hospitality caree
                       <p className="science-subtitle">Dynamic Adaptive Proficiency Assessment</p>
                       <ul>
                         <li><strong>600+</strong> questions across 9 categories</li>
-                        <li><strong>6-axis genome:</strong> Technical, Ethical, EQ, Velocity, Commercial, Leadership</li>
+                        <li><strong>6-axis genome:</strong> Technical(Knowledge), Ethical(Integrity), Emotional, Velocity(Speed|Pressure), Commercial(Sales|Revenue), Leadership</li>
                         <li><strong>Adaptive difficulty</strong> that responds to performance</li>
                         <li><strong>Moral gradient scoring</strong> for nuanced assessment</li>
                         <li><strong>Anti-gaming protection</strong> with scenario-based questions</li>
