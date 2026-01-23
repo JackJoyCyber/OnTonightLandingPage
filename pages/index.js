@@ -507,10 +507,9 @@ We're not just building software. We're building the future of hospitality caree
         <section id="problem" className="section-problem">
           <div className="container">
             <div className={`section-header animate-on-scroll ${visibleSections['problem-header'] ? 'visible' : ''}`} id="problem-header">
-  <h2>The $66.8 Billion Problem</h2>
-  <p className="problem-stat-explain">Annual cost of turnover in US hospitality: $5,864 per hourly employee × 11.4 million annual separations.</p>
-  <p>Every year, hospitality loses more than money. It loses people, relationships, and institutional knowledge.</p>
-</div>
+              <h2>The $66.8 Billion Problem</h2>
+              <p>Every year, hospitality loses more than money. It loses people, relationships, and institutional knowledge.</p>
+            </div>
 
             <div className="problem-grid">
               {problemCards.map((card, i) => (
@@ -1490,13 +1489,6 @@ We're not just building software. We're building the future of hospitality caree
           transition: all 0.3s ease;
           position: relative;
         }
-
-.problem-stat-explain {
-  font-size: 13px;
-  color: #d4a373;
-  margin-bottom: 8px !important;
-  font-weight: 400;
-}
 
         .problem-card:hover {
           background: rgba(255, 255, 255, 0.04);
