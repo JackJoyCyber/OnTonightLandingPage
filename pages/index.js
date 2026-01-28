@@ -1,15 +1,15 @@
 // pages/index.js
 // ============================================================================
-// ONTONIGHT LANDING PAGE - V3 RADIANT DARK OCEAN THEME
+// ONTONIGHT LANDING PAGE - V3 SHARP DARK OCEAN THEME
 // ============================================================================
 // THEME UPDATES:
-// - Logo text uses gold color scheme (#d4a373) instead of white
-// - All backgrounds use "radiant dark ocean" colors instead of black:
-//   - Base: #0c1520 (deep ocean)
-//   - Section accent: #0f1926 (midnight ocean)
-//   - Footer: #0a1018 (deepest ocean)
-// - Gold accented borders on nav and footer
-// - Consistent button text colors with dark ocean theme
+// - Logo "OnTonight" is SHARP: font-weight 500, bright gold #e8c49a, NO glow
+// - Darker ocean backgrounds for more contrast:
+//   - Base: #080d14 (deep midnight ocean)
+//   - Section accent: #0a1119 (dark ocean)
+//   - Footer: #060a10 (deepest ocean)
+// - Hero glows reduced 50%+ for crisp, clean look
+// - Brighter gold accents (#e8c49a) that pop against dark background
 // ============================================================================
 // PREVIOUS FIXES:
 // - Font matches app (Urbanist light weight)
@@ -1033,7 +1033,7 @@ We're not just building software. We're building the future of hospitality caree
 
         .page {
           font-family: 'Urbanist', -apple-system, sans-serif;
-          background: #0c1520;
+          background: #080d14;
           color: #f8fafc;
           min-height: 100vh;
           overflow-x: hidden;
@@ -1066,9 +1066,9 @@ We're not just building software. We're building the future of hospitality caree
 
         .particle {
           position: absolute;
-          width: 3px;
-          height: 3px;
-          background: rgba(212, 163, 115, 0.4);
+          width: 2px;
+          height: 2px;
+          background: rgba(232, 196, 154, 0.5);
           border-radius: 50%;
           animation: float-particle linear infinite;
         }
@@ -1097,9 +1097,9 @@ We're not just building software. We're building the future of hospitality caree
           top: 0;
           left: 0;
           right: 0;
-          background: rgba(12, 21, 32, 0.92);
+          background: rgba(8, 13, 20, 0.95);
           backdrop-filter: blur(20px);
-          border-bottom: 1px solid rgba(212, 163, 115, 0.08);
+          border-bottom: 1px solid rgba(232, 196, 154, 0.1);
           z-index: 1000;
         }
 
@@ -1172,35 +1172,34 @@ We're not just building software. We're building the future of hospitality caree
 
         .hero-glow {
           position: absolute;
-          top: -200px;
+          top: -100px;
           left: 50%;
           transform: translateX(-50%);
-          width: 900px;
-          height: 900px;
-          background: radial-gradient(circle, rgba(212, 163, 115, 0.12) 0%, transparent 60%);
+          width: 600px;
+          height: 600px;
+          background: radial-gradient(circle, rgba(232, 196, 154, 0.06) 0%, transparent 50%);
           pointer-events: none;
         }
 
         .hero-glow-2 {
           position: absolute;
-          bottom: -300px;
-          right: -200px;
-          width: 600px;
-          height: 600px;
-          background: radial-gradient(circle, rgba(139, 92, 246, 0.06) 0%, transparent 60%);
+          bottom: -200px;
+          right: -100px;
+          width: 400px;
+          height: 400px;
+          background: radial-gradient(circle, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
           pointer-events: none;
         }
 
         .hero .container { position: relative; z-index: 1; }
 
-        /* HERO BRAND - Gold theme, matching OnTonight brand */
+        /* HERO BRAND - Sharp gold, no glow, crisp and stunning */
         .hero-brand-badge {
           font-size: clamp(48px, 10vw, 80px);
-          font-weight: 300;
-          color: #d4a373;
+          font-weight: 500;
+          color: #e8c49a;
           margin-bottom: 20px;
           letter-spacing: -0.02em;
-          text-shadow: 0 0 40px rgba(212, 163, 115, 0.15);
         }
 
         .hero-tagline { margin: 0 0 16px; }
@@ -1479,7 +1478,7 @@ We're not just building software. We're building the future of hospitality caree
         /* PROBLEM SECTION */
         .section-problem {
           padding: 100px 0;
-          background: #0f1926;
+          background: #0a1119;
         }
 
         .problem-grid {
@@ -1594,7 +1593,7 @@ We're not just building software. We're building the future of hospitality caree
         /* PLATFORM */
         .section-platform {
           padding: 100px 0;
-          background: linear-gradient(180deg, #0f1926 0%, #0c1520 100%);
+          background: linear-gradient(180deg, #0a1119 0%, #080d14 100%);
         }
 
         .platform-accordion {
@@ -1959,7 +1958,7 @@ We're not just building software. We're building the future of hospitality caree
         /* VISION */
         .section-vision {
           padding: 100px 0;
-          background: #0c1520;
+          background: #080d14;
         }
 
         .founder-intro {
@@ -2080,7 +2079,7 @@ We're not just building software. We're building the future of hospitality caree
         /* WAITLIST */
         .section-waitlist {
           padding: 100px 0;
-          background: linear-gradient(180deg, #0f1926 0%, #0c1520 100%);
+          background: linear-gradient(180deg, #0a1119 0%, #080d14 100%);
         }
 
         .waitlist-content {
@@ -2187,8 +2186,8 @@ We're not just building software. We're building the future of hospitality caree
         /* FOOTER */
         .footer {
           padding: 60px 24px 32px;
-          background: #0a1018;
-          border-top: 1px solid rgba(212, 163, 115, 0.08);
+          background: #060a10;
+          border-top: 1px solid rgba(232, 196, 154, 0.1);
         }
 
         .footer-grid {
@@ -2200,8 +2199,8 @@ We're not just building software. We're building the future of hospitality caree
 
         .footer-logo {
           font-size: 20px;
-          font-weight: 300;
-          color: #d4a373;
+          font-weight: 500;
+          color: #e8c49a;
           margin-bottom: 10px;
         }
 
