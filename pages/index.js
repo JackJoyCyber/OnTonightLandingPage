@@ -1,8 +1,17 @@
 // pages/index.js
 // ============================================================================
-// ONTONIGHT LANDING PAGE - V3 FINAL FIXES
+// ONTONIGHT LANDING PAGE - V3 RADIANT DARK OCEAN THEME
 // ============================================================================
-// FIXES:
+// THEME UPDATES:
+// - Logo text uses gold color scheme (#d4a373) instead of white
+// - All backgrounds use "radiant dark ocean" colors instead of black:
+//   - Base: #0c1520 (deep ocean)
+//   - Section accent: #0f1926 (midnight ocean)
+//   - Footer: #0a1018 (deepest ocean)
+// - Gold accented borders on nav and footer
+// - Consistent button text colors with dark ocean theme
+// ============================================================================
+// PREVIOUS FIXES:
 // - Font matches app (Urbanist light weight)
 // - Accordion scroll COMPLETELY FIXED (no scroll on toggle)
 // - Correct screenshot filenames
@@ -1024,7 +1033,7 @@ We're not just building software. We're building the future of hospitality caree
 
         .page {
           font-family: 'Urbanist', -apple-system, sans-serif;
-          background: #0a0d12;
+          background: #0c1520;
           color: #f8fafc;
           min-height: 100vh;
           overflow-x: hidden;
@@ -1088,9 +1097,9 @@ We're not just building software. We're building the future of hospitality caree
           top: 0;
           left: 0;
           right: 0;
-          background: rgba(10, 13, 18, 0.9);
+          background: rgba(12, 21, 32, 0.92);
           backdrop-filter: blur(20px);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+          border-bottom: 1px solid rgba(212, 163, 115, 0.08);
           z-index: 1000;
         }
 
@@ -1144,7 +1153,7 @@ We're not just building software. We're building the future of hospitality caree
 
         .nav-cta {
           background: #d4a373 !important;
-          color: #0a0d12 !important;
+          color: #0c1520 !important;
           padding: 10px 24px !important;
           border-radius: 6px;
           font-weight: 600 !important;
@@ -1184,13 +1193,14 @@ We're not just building software. We're building the future of hospitality caree
 
         .hero .container { position: relative; z-index: 1; }
 
-        /* HERO BRAND - Matching app style: light weight, clean */
+        /* HERO BRAND - Gold theme, matching OnTonight brand */
         .hero-brand-badge {
           font-size: clamp(48px, 10vw, 80px);
           font-weight: 300;
-          color: #f8fafc;
+          color: #d4a373;
           margin-bottom: 20px;
           letter-spacing: -0.02em;
+          text-shadow: 0 0 40px rgba(212, 163, 115, 0.15);
         }
 
         .hero-tagline { margin: 0 0 16px; }
@@ -1469,7 +1479,7 @@ We're not just building software. We're building the future of hospitality caree
         /* PROBLEM SECTION */
         .section-problem {
           padding: 100px 0;
-          background: #0e1117;
+          background: #0f1926;
         }
 
         .problem-grid {
@@ -1584,7 +1594,7 @@ We're not just building software. We're building the future of hospitality caree
         /* PLATFORM */
         .section-platform {
           padding: 100px 0;
-          background: linear-gradient(180deg, #0e1117 0%, #0a0d12 100%);
+          background: linear-gradient(180deg, #0f1926 0%, #0c1520 100%);
         }
 
         .platform-accordion {
@@ -1949,7 +1959,7 @@ We're not just building software. We're building the future of hospitality caree
         /* VISION */
         .section-vision {
           padding: 100px 0;
-          background: #0a0d12;
+          background: #0c1520;
         }
 
         .founder-intro {
@@ -2070,7 +2080,7 @@ We're not just building software. We're building the future of hospitality caree
         /* WAITLIST */
         .section-waitlist {
           padding: 100px 0;
-          background: linear-gradient(180deg, #0e1117 0%, #0a0d12 100%);
+          background: linear-gradient(180deg, #0f1926 0%, #0c1520 100%);
         }
 
         .waitlist-content {
@@ -2132,7 +2142,7 @@ We're not just building software. We're building the future of hospitality caree
         .btn-submit {
           width: 100%;
           background: linear-gradient(135deg, #d4a373, #c99763);
-          color: #0a0d12;
+          color: #0c1520;
           border: none;
           padding: 16px;
           font-size: 15px;
@@ -2163,7 +2173,7 @@ We're not just building software. We're building the future of hospitality caree
 
         .btn-primary {
           background: linear-gradient(135deg, #d4a373, #c99763);
-          color: #0a0d12;
+          color: #0c1520;
           padding: 14px 32px;
           font-size: 14px;
           font-weight: 600;
@@ -2177,8 +2187,8 @@ We're not just building software. We're building the future of hospitality caree
         /* FOOTER */
         .footer {
           padding: 60px 24px 32px;
-          background: #080a0e;
-          border-top: 1px solid rgba(255, 255, 255, 0.05);
+          background: #0a1018;
+          border-top: 1px solid rgba(212, 163, 115, 0.08);
         }
 
         .footer-grid {
@@ -2191,7 +2201,7 @@ We're not just building software. We're building the future of hospitality caree
         .footer-logo {
           font-size: 20px;
           font-weight: 300;
-          color: #f8fafc;
+          color: #d4a373;
           margin-bottom: 10px;
         }
 
