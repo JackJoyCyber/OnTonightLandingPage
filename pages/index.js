@@ -1,14 +1,14 @@
 // pages/index.js
 // ============================================================================
-// ONTONIGHT LANDING PAGE - V3 SHARP DARK OCEAN THEME
+// ONTONIGHT LANDING PAGE - V3 BALANCED DARK OCEAN THEME
 // ============================================================================
 // THEME UPDATES:
 // - Logo "OnTonight" is SHARP: font-weight 500, bright gold #e8c49a, NO glow
-// - Darker ocean backgrounds for more contrast:
-//   - Base: #080d14 (deep midnight ocean)
-//   - Section accent: #0a1119 (dark ocean)
-//   - Footer: #060a10 (deepest ocean)
-// - Hero glows reduced 50%+ for crisp, clean look
+// - Balanced dark ocean backgrounds (not too light, not too black):
+//   - Base: #0a121b (dark ocean with visible blue tint)
+//   - Section accent: #0c1620 (slightly lighter ocean)
+//   - Footer: #080f18 (deepest ocean)
+// - Hero glows subtle for crisp, clean look
 // - Brighter gold accents (#e8c49a) that pop against dark background
 // ============================================================================
 // PREVIOUS FIXES:
@@ -1033,7 +1033,7 @@ We're not just building software. We're building the future of hospitality caree
 
         .page {
           font-family: 'Urbanist', -apple-system, sans-serif;
-          background: #080d14;
+          background: #0a121b;
           color: #f8fafc;
           min-height: 100vh;
           overflow-x: hidden;
@@ -1097,7 +1097,7 @@ We're not just building software. We're building the future of hospitality caree
           top: 0;
           left: 0;
           right: 0;
-          background: rgba(8, 13, 20, 0.95);
+          background: rgba(10, 18, 27, 0.95);
           backdrop-filter: blur(20px);
           border-bottom: 1px solid rgba(232, 196, 154, 0.1);
           z-index: 1000;
@@ -1478,7 +1478,7 @@ We're not just building software. We're building the future of hospitality caree
         /* PROBLEM SECTION */
         .section-problem {
           padding: 100px 0;
-          background: #0a1119;
+          background: #0c1620;
         }
 
         .problem-grid {
@@ -1593,7 +1593,7 @@ We're not just building software. We're building the future of hospitality caree
         /* PLATFORM */
         .section-platform {
           padding: 100px 0;
-          background: linear-gradient(180deg, #0a1119 0%, #080d14 100%);
+          background: linear-gradient(180deg, #0c1620 0%, #0a121b 100%);
         }
 
         .platform-accordion {
@@ -1958,7 +1958,7 @@ We're not just building software. We're building the future of hospitality caree
         /* VISION */
         .section-vision {
           padding: 100px 0;
-          background: #080d14;
+          background: #0a121b;
         }
 
         .founder-intro {
@@ -2079,7 +2079,7 @@ We're not just building software. We're building the future of hospitality caree
         /* WAITLIST */
         .section-waitlist {
           padding: 100px 0;
-          background: linear-gradient(180deg, #0a1119 0%, #080d14 100%);
+          background: linear-gradient(180deg, #0c1620 0%, #0a121b 100%);
         }
 
         .waitlist-content {
@@ -2186,7 +2186,7 @@ We're not just building software. We're building the future of hospitality caree
         /* FOOTER */
         .footer {
           padding: 60px 24px 32px;
-          background: #060a10;
+          background: #080f18;
           border-top: 1px solid rgba(232, 196, 154, 0.1);
         }
 
