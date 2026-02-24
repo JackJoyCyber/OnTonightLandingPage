@@ -27,12 +27,50 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const SIGNUP_ACCESS_CODE = 'ONTONIGHT2026';
 const SIGNUP_CREDITS = 2;
 
+// Simple in-memory rate limiter
+const rateLimitMap = new Map();
+function isRateLimited(ip) {
+  const now = Date.now();
+  const windowMs = 60 * 1000;
+  const maxRequests = 5;
+  if (!rateLimitMap.has(ip)) {
+    rateLimitMap.set(ip, { count: 1, resetTime: now + windowMs });
+    return false;
+  }
+  const data = rateLimitMap.get(ip);
+  if (now > data.resetTime) {
+    rateLimitMap.set(ip, { count: 1, resetTime: now + windowMs });
+    return false;
+  }
+  if (data.count >= maxRequests) return true;
+  data.count++;
+  return false;
+}
+
+const BLOCKED_EMAIL_DOMAINS = [
+  'mailinator.com', 'guerrillamail.com', 'temp-mail.org',
+  'throwam.com', 'yopmail.com', 'sharklasers.com', 'trashmail.com'
+];
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
+  // Rate limit by IP
+  const ip = req.headers['x-forwarded-for']?.split(',')[0]?.trim() || 
+             req.socket?.remoteAddress || 'unknown';
+  if (isRateLimited(ip)) {
+    return res.status(429).json({ error: 'Too many requests. Please try again in a minute.' });
+  }
+
   const { name, email, userType, city } = req.body;
+
+  // Block disposable email domains
+  const emailDomain = email?.split('@')[1]?.toLowerCase();
+  if (BLOCKED_EMAIL_DOMAINS.includes(emailDomain)) {
+    return res.status(400).json({ error: 'Please use a valid email address.' });
+  }
 
   // Validation
   if (!name || !email || !userType) {
