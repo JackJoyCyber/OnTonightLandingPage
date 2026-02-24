@@ -104,7 +104,7 @@ export default async function handler(req, res) {
     try {
       passwordSetupLink = await admin.auth().generatePasswordResetLink(
         email.toLowerCase().trim(),
-        { url: 'https://app.on-tonight.com/login' }
+        { url: 'https://app.on-tonight.com' }
       );
       console.log(`✅ Generated password setup link for ${email}`);
     } catch (linkError) {
