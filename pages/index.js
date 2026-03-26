@@ -442,7 +442,7 @@ We're not just building software. We're building the future of hospitality caree
               <a href="#problem">The Problem</a>
               <a href="#platform">Platform</a>
               <a href="#vision">Our Story</a>
-              <a href="https://app.on-tonight.com/signup" className="nav-cta">Claim Your Profile</a>
+              <a href="https://app.on-tonight.com" className="nav-cta">Claim Your Profile</a>
             </div>
           </div>
         </nav>
@@ -531,10 +531,10 @@ We're not just building software. We're building the future of hospitality caree
 
             {/* Primary CTA */}
             <div className="hero-cta-block">
-              <a href="https://app.on-tonight.com/signup" className="btn-hero-primary">
+              <a href="https://app.on-tonight.com" className="btn-hero-primary">
                 Claim Your Profile — It's Free
               </a>
-              <p className="hero-cta-sub">30-day free trial · Cancel anytime · Live in Tampa Bay.</p>
+              <p className="hero-cta-sub">30 days free. No credit card required. Live in Tampa Bay.</p>
             </div>
 
             {showInstallPrompt && (
@@ -719,7 +719,7 @@ We're not just building software. We're building the future of hospitality caree
                           </ul>
                         </div>
                         <div className="price-card premium">
-                          <span className="price-badge">$9.99/mo · 30-DAY FREE TRIAL</span>
+                          <span className="price-badge">$9.99/mo — 30 DAYS FREE</span>
                           <h4>OnPro Pro</h4>
                           <ul>
                             <li>Unlimited assessments</li>
@@ -750,7 +750,7 @@ We're not just building software. We're building the future of hospitality caree
                     </div>
                   </div>
                   <div className="accordion-cta">
-                    <a href="https://app.on-tonight.com/signup" className="btn-accordion-cta">Claim Your Profile Free →</a>
+                    <a href="https://app.on-tonight.com" className="btn-accordion-cta">Claim Your Profile Free →</a>
                   </div>
                 </div>
               </div>
@@ -794,7 +794,7 @@ We're not just building software. We're building the future of hospitality caree
                           </ul>
                         </div>
                         <div className="price-card premium">
-                          <span className="price-badge">$4.99/mo · 30-DAY FREE TRIAL</span>
+                          <span className="price-badge">$4.99/mo — 30 DAYS FREE</span>
                           <h4>Patron Insider</h4>
                           <ul>
                             <li>OnScene Genome assessment</li>
@@ -825,7 +825,7 @@ We're not just building software. We're building the future of hospitality caree
                     </div>
                   </div>
                   <div className="accordion-cta">
-                    <a href="https://app.on-tonight.com/signup" className="btn-accordion-cta">Find Your People →</a>
+                    <a href="https://app.on-tonight.com" className="btn-accordion-cta">Find Your People →</a>
                   </div>
                 </div>
               </div>
@@ -984,7 +984,7 @@ We're not just building software. We're building the future of hospitality caree
                   <div className="investor-label">FOR INVESTORS & PARTNERS</div>
                   <p>OnTonight is actively growing. We're building the professional infrastructure that hospitality has needed for a century — and we're looking for partners who see what we see.</p>
                 </div>
-                <a href="/partner" className="btn-investor">Get in Touch →</a>
+                <a href="/investors" className="btn-investor">Get in Touch →</a>
               </div>
             </div>
           </div>
@@ -1005,10 +1005,10 @@ We're not just building software. We're building the future of hospitality caree
                   </p>
 
                   <div className="cta-primary-block">
-                    <a href="https://app.on-tonight.com/signup" className="btn-cta-large">
+                    <a href="https://app.on-tonight.com" className="btn-cta-large">
                       Claim Your Profile Free →
                     </a>
-                    <p className="cta-sub-text">30-day free trial · Cancel anytime · Live in Tampa Bay</p>
+                    <p className="cta-sub-text">30 days free · No credit card · Live in Tampa Bay</p>
                   </div>
 
                   <div className="waitlist-divider">
@@ -1061,7 +1061,7 @@ We're not just building software. We're building the future of hospitality caree
                   <div className="success-icon">🎉</div>
                   <h2>Welcome to the Movement</h2>
                   <p>You're in. We'll be in touch when OnTonight hits your city. In the meantime — if you're in Tampa Bay, you can start right now.</p>
-                  <a href="https://app.on-tonight.com/signup" className="btn-primary">Claim Your Profile Now →</a>
+                  <a href="https://app.on-tonight.com" className="btn-primary">Claim Your Profile Now →</a>
                 </div>
               )}
             </div>
@@ -1094,7 +1094,7 @@ We're not just building software. We're building the future of hospitality caree
                 <h4>Connect</h4>
                 <a href="/media">Press & Media</a>
                 <a href="/partner">Partner With Us</a>
-                <a href="https://app.on-tonight.com/signup" className="footer-app-link">Launch App →</a>
+                <a href="https://app.on-tonight.com" className="footer-app-link">Launch App →</a>
               </div>
             </div>
             <div className="footer-bottom">
