@@ -448,7 +448,7 @@ We're not just building software. We're building the future of hospitality caree
         </nav>
 
         {/* ═══════════════════════════════════════════════════════════════════ */}
-        {/* HERO */}
+        {/* HERO — Reveal sequence: brand → tagline → epigraph → typewriter → cards → CTA */}
         {/* ═══════════════════════════════════════════════════════════════════ */}
         <section className="hero">
           <div className="hero-glow" />
@@ -456,30 +456,30 @@ We're not just building software. We're building the future of hospitality caree
 
           <div className="container">
 
-            {/* Recognition moment — before the product, before the features */}
-            <div className="hero-recognition animate-fade-in">
-              <p className="hero-truth">You've given years to this industry.</p>
-              <p className="hero-truth muted">Every move, you start over.<br />Your regulars don't know where you went.<br />Your career resets like it never happened.</p>
-              <p className="hero-truth gold">That ends now.</p>
-            </div>
+            {/* 1. BRAND — enters first, alone, dominates */}
+            <div className="hero-brand-badge hero-reveal-1">OnTonight</div>
 
-            {/* Brand */}
-            <div className="hero-brand-badge">OnTonight</div>
-
-            {/* Permanent tagline */}
-            <h1 className="hero-tagline">
+            {/* 2. PERMANENT TAGLINE — fades up beneath the brand */}
+            <h1 className="hero-tagline hero-reveal-2">
               <span className="tagline-line">Your Night. Your People.</span>
               <span className="tagline-line-2">Where Regulars Are Made.</span>
             </h1>
 
-            {/* Typewriter */}
-            <div className="hero-descriptor">
+            {/* 3. EPIGRAPH — the emotional pull quote, dim and italic above */}
+            <div className="hero-epigraph hero-reveal-3">
+              <span className="epigraph-line">"You've given years to this industry.</span>
+              <span className="epigraph-line">Every move, you start over.</span>
+              <span className="epigraph-line accent">That ends now."</span>
+            </div>
+
+            {/* 4. TYPEWRITER — starts after epigraph settles */}
+            <div className="hero-descriptor hero-reveal-4">
               <span className="typed-text">{typedText}</span>
               <span className="cursor">|</span>
             </div>
 
-            {/* WHO ARE YOU */}
-            <div className="who-are-you">
+            {/* 5. WHO ARE YOU CARDS — drift up last */}
+            <div className="who-are-you hero-reveal-5">
               <p className="who-label">I am a...</p>
               <div className="who-options">
 
@@ -529,12 +529,12 @@ We're not just building software. We're building the future of hospitality caree
               </div>
             </div>
 
-            {/* Primary CTA */}
-            <div className="hero-cta-block">
+            {/* 6. PRIMARY CTA — final element, maximum weight */}
+            <div className="hero-cta-block hero-reveal-5">
               <a href="https://app.on-tonight.com" className="btn-hero-primary">
                 Claim Your Profile — It's Free
               </a>
-              <p className="hero-cta-sub">30 days free. No credit card required. Live in Tampa Bay.</p>
+              <p className="hero-cta-sub">30-day free trial · Cancel anytime · Live in Tampa Bay</p>
             </div>
 
             {showInstallPrompt && (
@@ -1158,8 +1158,56 @@ We're not just building software. We're building the future of hospitality caree
         }
         .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
 
-        .animate-fade-in { animation: fadeIn 1.2s ease forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        /* ── HERO REVEAL SEQUENCE ───────────────────────────────────────────
+           Each element is invisible by default (opacity:0) and animates in
+           on a staggered delay. Brand hits first — alone. Everything else
+           follows in choreographed order.
+        ──────────────────────────────────────────────────────────────────── */
+
+        @keyframes heroReveal {
+          from { opacity: 0; transform: translateY(18px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes heroRevealUp {
+          from { opacity: 0; transform: translateY(28px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes epigraphIn {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
+
+        /* 1 — Brand: instant, full presence */
+        .hero-reveal-1 {
+          opacity: 0;
+          animation: heroReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+        }
+
+        /* 2 — Tagline: fades up just after brand settles */
+        .hero-reveal-2 {
+          opacity: 0;
+          animation: heroReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.65s forwards;
+        }
+
+        /* 3 — Epigraph: drifts in softly, no vertical movement — just presence */
+        .hero-reveal-3 {
+          opacity: 0;
+          animation: epigraphIn 1.1s ease 1.1s forwards;
+        }
+
+        /* 4 — Typewriter container fades in, actual typing handles the rest */
+        .hero-reveal-4 {
+          opacity: 0;
+          animation: heroReveal 0.7s ease 1.5s forwards;
+        }
+
+        /* 5 — Cards + CTA drift up together as final act */
+        .hero-reveal-5 {
+          opacity: 0;
+          animation: heroRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards;
+        }
 
         /* SECTION EYEBROW */
         .section-eyebrow {
@@ -1209,36 +1257,43 @@ We're not just building software. We're building the future of hospitality caree
         }
         .hero .container { position: relative; z-index: 1; }
 
-        /* HERO RECOGNITION */
-        .hero-recognition { margin-bottom: 40px; }
-        .hero-truth {
-          font-size: clamp(16px, 2.5vw, 20px); font-weight: 300; line-height: 1.7;
-          color: rgba(248, 250, 252, 0.7); margin-bottom: 8px;
-        }
-        .hero-truth.muted { color: rgba(248, 250, 252, 0.45); font-size: clamp(14px, 2vw, 17px); }
-        .hero-truth.gold { color: #e8c49a; font-weight: 500; font-size: clamp(17px, 2.5vw, 22px); margin-top: 16px; }
-
-        /* HERO BRAND */
+        /* HERO BRAND — enters first, dominates */
         .hero-brand-badge {
-          font-size: clamp(52px, 10vw, 88px); font-weight: 500;
-          color: #e8c49a; margin-bottom: 16px; letter-spacing: -0.02em;
+          font-size: clamp(60px, 12vw, 100px); font-weight: 500;
+          color: #e8c49a; margin-bottom: 12px; letter-spacing: -0.03em;
+          line-height: 1;
+        }
+
+        /* EPIGRAPH — emotional pull quote, subordinate to brand */
+        .hero-epigraph {
+          display: flex; flex-direction: column; gap: 2px;
+          margin: 24px 0 20px;
+        }
+        .epigraph-line {
+          display: block; font-size: clamp(13px, 1.8vw, 16px);
+          font-weight: 300; font-style: italic;
+          color: rgba(248, 250, 252, 0.38); line-height: 1.7;
+          letter-spacing: 0.01em;
+        }
+        .epigraph-line.accent {
+          color: rgba(232, 196, 154, 0.55); font-weight: 400;
         }
 
         /* TAGLINE */
-        .hero-tagline { margin: 0 0 16px; }
+        .hero-tagline { margin: 0 0 0; }
         .tagline-line {
           display: block; font-size: clamp(18px, 3vw, 26px);
-          font-weight: 300; color: rgba(248, 250, 252, 0.85); line-height: 1.4;
+          font-weight: 300; color: rgba(248, 250, 252, 0.85); line-height: 1.45;
         }
         .tagline-line-2 {
           display: block; font-size: clamp(16px, 2.5vw, 22px);
-          font-weight: 300; color: rgba(248, 250, 252, 0.65); line-height: 1.4;
+          font-weight: 300; color: rgba(248, 250, 252, 0.6); line-height: 1.45;
         }
 
         /* TYPEWRITER */
         .hero-descriptor {
-          font-size: clamp(14px, 2vw, 17px); font-weight: 300;
-          color: rgba(248, 250, 252, 0.5); margin-bottom: 40px; min-height: 26px;
+          font-size: clamp(13px, 1.8vw, 16px); font-weight: 300;
+          color: rgba(248, 250, 252, 0.45); margin-bottom: 36px; min-height: 24px;
           font-style: italic;
         }
         .typed-text { color: rgba(212, 163, 115, 0.8); }
@@ -1624,8 +1679,8 @@ We're not just building software. We're building the future of hospitality caree
           .nav-container { padding: 12px 16px; }
           .nav-cta { padding: 8px 16px !important; font-size: 12px !important; }
           .hero { padding: 90px 16px 60px; }
-          .hero-brand-badge { font-size: clamp(44px, 14vw, 64px); }
-          .hero-recognition { margin-bottom: 28px; }
+          .hero-brand-badge { font-size: clamp(52px, 16vw, 72px); }
+          .hero-epigraph { margin: 18px 0 16px; }
           .who-card { width: 100%; max-width: 320px; }
           .problem-grid { grid-template-columns: 1fr; }
           .stats-counter-row { padding: 20px 16px; }
