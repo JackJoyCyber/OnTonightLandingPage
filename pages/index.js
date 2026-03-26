@@ -534,7 +534,7 @@ We're not just building software. We're building the future of hospitality caree
               <a href="https://app.on-tonight.com/signup" className="btn-hero-primary">
                 Claim Your Profile — It's Free
               </a>
-              <p className="hero-cta-sub">30 days free. No credit card required. Live in Tampa Bay.</p>
+              <p className="hero-cta-sub">30-day free trial · Cancel anytime · Live in Tampa Bay.</p>
             </div>
 
             {showInstallPrompt && (
@@ -719,7 +719,7 @@ We're not just building software. We're building the future of hospitality caree
                           </ul>
                         </div>
                         <div className="price-card premium">
-                          <span className="price-badge">$9.99/mo — 30 DAYS FREE</span>
+                          <span className="price-badge">$9.99/mo · 30-DAY FREE TRIAL</span>
                           <h4>OnPro Pro</h4>
                           <ul>
                             <li>Unlimited assessments</li>
@@ -794,7 +794,7 @@ We're not just building software. We're building the future of hospitality caree
                           </ul>
                         </div>
                         <div className="price-card premium">
-                          <span className="price-badge">$4.99/mo — 30 DAYS FREE</span>
+                          <span className="price-badge">$4.99/mo · 30-DAY FREE TRIAL</span>
                           <h4>Patron Insider</h4>
                           <ul>
                             <li>OnScene Genome assessment</li>
@@ -885,7 +885,7 @@ We're not just building software. We're building the future of hospitality caree
                     </div>
                   </div>
                   <div className="accordion-cta">
-                    <a href="mailto:partner@on-tonight.com" className="btn-accordion-cta secondary">Partner With Us →</a>
+                    <a href="/partner" className="btn-accordion-cta secondary">Partner With Us →</a>
                   </div>
                 </div>
               </div>
@@ -984,7 +984,7 @@ We're not just building software. We're building the future of hospitality caree
                   <div className="investor-label">FOR INVESTORS & PARTNERS</div>
                   <p>OnTonight is actively growing. We're building the professional infrastructure that hospitality has needed for a century — and we're looking for partners who see what we see.</p>
                 </div>
-                <a href="mailto:partner@on-tonight.com" className="btn-investor">Get in Touch →</a>
+                <a href="/partner" className="btn-investor">Get in Touch →</a>
               </div>
             </div>
           </div>
@@ -1008,7 +1008,7 @@ We're not just building software. We're building the future of hospitality caree
                     <a href="https://app.on-tonight.com/signup" className="btn-cta-large">
                       Claim Your Profile Free →
                     </a>
-                    <p className="cta-sub-text">30 days free · No credit card · Live in Tampa Bay</p>
+                    <p className="cta-sub-text">30-day free trial · Cancel anytime · Live in Tampa Bay</p>
                   </div>
 
                   <div className="waitlist-divider">
@@ -1093,7 +1093,7 @@ We're not just building software. We're building the future of hospitality caree
               <div className="footer-links">
                 <h4>Connect</h4>
                 <a href="/media">Press & Media</a>
-                <a href="mailto:partner@on-tonight.com">Partner With Us</a>
+                <a href="/partner">Partner With Us</a>
                 <a href="https://app.on-tonight.com/signup" className="footer-app-link">Launch App →</a>
               </div>
             </div>
