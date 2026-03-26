@@ -61,8 +61,16 @@ export default function LandingPage() {
   const [typedText, setTypedText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [charIndex, setCharIndex] = useState(0);
+  const [typewriterActive, setTypewriterActive] = useState(false);
+
+  // Delay typewriter start to match hero reveal sequence (3.0s fade-in + 0.9s duration)
+  useEffect(() => {
+    const timer = setTimeout(() => setTypewriterActive(true), 3600);
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
+    if (!typewriterActive) return;
     const current = descriptors[descriptorIndex];
     const typeSpeed = isDeleting ? 25 : 60;
     const pauseTime = isDeleting ? 300 : 2800;
@@ -81,7 +89,7 @@ export default function LandingPage() {
       setTypedText(current.substring(0, charIndex + (isDeleting ? -1 : 1)));
     }, typeSpeed);
     return () => clearTimeout(timeout);
-  }, [charIndex, isDeleting, descriptorIndex]);
+  }, [charIndex, isDeleting, descriptorIndex, typewriterActive]);
 
   // ============================================================================
   // SCROLL PROGRESS
@@ -1159,54 +1167,63 @@ We're not just building software. We're building the future of hospitality caree
         .animate-on-scroll.visible { opacity: 1; transform: translateY(0); }
 
         /* ── HERO REVEAL SEQUENCE ───────────────────────────────────────────
-           Each element is invisible by default (opacity:0) and animates in
-           on a staggered delay. Brand hits first — alone. Everything else
-           follows in choreographed order.
+           Premium staggered entrance. Brand materializes first with pure
+           opacity — no movement, no jump. Everything else follows with
+           generous breathing room. Total sequence ~4.2s. Unhurried.
         ──────────────────────────────────────────────────────────────────── */
 
-        @keyframes heroReveal {
-          from { opacity: 0; transform: translateY(18px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes heroRevealUp {
-          from { opacity: 0; transform: translateY(28px); }
-          to   { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes epigraphIn {
+        /* Brand: pure opacity only — no translateY, no jump */
+        @keyframes brandAppear {
           from { opacity: 0; }
           to   { opacity: 1; }
         }
 
-        /* 1 — Brand: instant, full presence */
+        /* Tagline + typewriter: very subtle lift, 10px max */
+        @keyframes heroLift {
+          from { opacity: 0; transform: translateY(10px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Epigraph: opacity + imperceptible scale breathe */
+        @keyframes epigraphIn {
+          from { opacity: 0; transform: scale(0.98); }
+          to   { opacity: 1; transform: scale(1); }
+        }
+
+        /* Cards + CTA: gentle rise, unhurried */
+        @keyframes heroRise {
+          from { opacity: 0; transform: translateY(12px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 1 — Brand: pure fade, 1.2s, silence before it appears */
         .hero-reveal-1 {
           opacity: 0;
-          animation: heroReveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s forwards;
+          animation: brandAppear 1.2s ease 0.2s forwards;
         }
 
-        /* 2 — Tagline: fades up just after brand settles */
+        /* 2 — Tagline: subtle lift after brand fully settles */
         .hero-reveal-2 {
           opacity: 0;
-          animation: heroReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.65s forwards;
+          animation: heroLift 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1.4s forwards;
         }
 
-        /* 3 — Epigraph: drifts in softly, no vertical movement — just presence */
+        /* 3 — Epigraph: breathes in softly after tagline is read */
         .hero-reveal-3 {
           opacity: 0;
-          animation: epigraphIn 1.1s ease 1.1s forwards;
+          animation: epigraphIn 1.2s ease 2.2s forwards;
         }
 
-        /* 4 — Typewriter container fades in, actual typing handles the rest */
+        /* 4 — Typewriter: fades in once page has settled */
         .hero-reveal-4 {
           opacity: 0;
-          animation: heroReveal 0.7s ease 1.5s forwards;
+          animation: heroLift 0.9s ease 3.0s forwards;
         }
 
-        /* 5 — Cards + CTA drift up together as final act */
+        /* 5 — Cards + CTA: final act, generous delay, drifts up together */
         .hero-reveal-5 {
           opacity: 0;
-          animation: heroRevealUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.8s forwards;
+          animation: heroRise 1.0s cubic-bezier(0.25, 0.46, 0.45, 0.94) 3.4s forwards;
         }
 
         /* SECTION EYEBROW */
