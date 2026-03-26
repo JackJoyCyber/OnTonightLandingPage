@@ -35,8 +35,7 @@ export default function LandingPage() {
   const [expandedPlatform, setExpandedPlatform] = useState(null);
   const [expandedVision, setExpandedVision] = useState(null);
   const [expandedProblem, setExpandedProblem] = useState(null);
-  const [showInstallPrompt, setShowInstallPrompt] = useState(false);
-  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [showInstallPrompt] = useState(false);
   const [failedImages, setFailedImages] = useState({});
   const [countersStarted, setCountersStarted] = useState(false);
   const [counterValues, setCounterValues] = useState({ turnover: 0, workers: 0, cost: 0 });
@@ -192,23 +191,9 @@ export default function LandingPage() {
     }, 100);
   };
 
-  // ============================================================================
-  // PWA
-  // ============================================================================
-  useEffect(() => {
-    const handler = (e) => { e.preventDefault(); setDeferredPrompt(e); setShowInstallPrompt(true); };
-    window.addEventListener('beforeinstallprompt', handler);
-    return () => window.removeEventListener('beforeinstallprompt', handler);
-  }, []);
-
-  const handleInstall = async () => {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
-    setShowInstallPrompt(false);
-    setDeferredPrompt(null);
-  };
-
+// PWA install prompt intentionally disabled on landing page —
+  // install prompt belongs on app.on-tonight.com, not the marketing site
+  
   // ============================================================================
   // FORM
   // ============================================================================
@@ -544,11 +529,6 @@ We're not just building software. We're building the future of hospitality caree
               </a>
               <p className="hero-cta-sub">30-day free trial · Cancel anytime · Live in Tampa Bay</p>
             </div>
-
-            {showInstallPrompt && (
-              <button className="btn-install" onClick={handleInstall}>📱 Install App</button>
-            )}
-
           </div>
 
           <div className="scroll-hint">
@@ -1364,12 +1344,6 @@ We're not just building software. We're building the future of hospitality caree
         }
         .btn-hero-primary:hover { transform: translateY(-2px); box-shadow: 0 16px 40px rgba(212,163,115,0.3); }
         .hero-cta-sub { margin-top: 12px; font-size: 12px; color: rgba(248,250,252,0.35); font-weight: 300; }
-
-        .btn-install {
-          margin-top: 16px; background: transparent;
-          border: 1px solid rgba(255,255,255,0.1); color: rgba(248,250,252,0.5);
-          padding: 10px 20px; font-size: 13px; border-radius: 6px; cursor: pointer;
-        }
 
         /* SCROLL HINT */
         .scroll-hint {
