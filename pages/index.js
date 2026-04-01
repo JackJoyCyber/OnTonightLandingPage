@@ -230,16 +230,24 @@ export default function LandingPage() {
       );
     }
     return (
-      <img
-        src={src}
-        alt={alt}
-        onClick={onClick}
-        onError={() => handleImageError(src)}
-        style={{ cursor: 'zoom-in', borderRadius: 12, border: '1px solid rgba(255,255,255,0.08)' }}
-      />
+      <div className="screenshot-wrap" onClick={onClick}>
+        <img
+          src={src}
+          alt={alt}
+          onError={() => handleImageError(src)}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            borderRadius: 12,
+            border: '1px solid rgba(255,255,255,0.08)',
+            display: 'block',
+          }}
+        />
+        <div className="screenshot-tap-hint">tap to expand</div>
+      </div>
     );
   };
-
   // ============================================================================
   // DATA
   // ============================================================================
@@ -1478,14 +1486,53 @@ We're not just building software. We're building the future of hospitality caree
         .price-card li::before { content: '✓'; position: absolute; left: 0; color: #22c55e; font-size: 11px; }
 
         /* SCREENSHOTS */
-        .platform-screenshots { display: flex; flex-direction: column; gap: 10px; width: 130px; flex-shrink: 0; }
-        .platform-screenshots img { width: 100%; border-radius: 10px; cursor: zoom-in; }
+        .platform-screenshots {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+          width: 130px;
+          flex-shrink: 0;
+        }
         .onpro-screenshots, .venue-screenshots { width: 130px; }
+
+        .screenshot-wrap {
+          position: relative;
+          width: 100%;
+          cursor: zoom-in;
+          border-radius: 12px;
+          overflow: hidden;
+          -webkit-tap-highlight-color: transparent;
+        }
+        .screenshot-wrap:active { opacity: 0.85; }
+
+        .screenshot-tap-hint {
+          display: none;
+          position: absolute;
+          bottom: 8px;
+          left: 50%;
+          transform: translateX(-50%);
+          background: rgba(0,0,0,0.65);
+          color: rgba(255,255,255,0.8);
+          font-size: 10px;
+          font-weight: 500;
+          padding: 4px 10px;
+          border-radius: 20px;
+          white-space: nowrap;
+          pointer-events: none;
+        }
+
         .screenshot-placeholder {
-          width: 130px; height: 100px; background: rgba(255,255,255,0.03);
-          border: 1px dashed rgba(255,255,255,0.1); border-radius: 10px;
-          display: flex; align-items: center; justify-content: center;
-          font-size: 10px; color: rgba(248,250,252,0.3); cursor: pointer;
+          width: 100%;
+          height: 100px;
+          background: rgba(255,255,255,0.03);
+          border: 1px dashed rgba(255,255,255,0.1);
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 10px;
+          color: rgba(248,250,252,0.3);
+          cursor: pointer;
         }
 
         /* ARCHETYPES */
@@ -1640,10 +1687,23 @@ We're not just building software. We're building the future of hospitality caree
         .footer-bottom p { font-size: 11px; color: rgba(248,250,252,0.3); margin: 0; font-weight: 300; }
 
         /* LIGHTBOX */
-        .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,0.95); display: flex; align-items: center; justify-content: center; z-index: 9999; cursor: pointer; padding: 32px; }
-        .lightbox img { max-width: 100%; max-height: 90vh; border-radius: 10px; }
-        .lightbox-close { position: absolute; top: 20px; right: 20px; background: none; border: none; color: white; font-size: 32px; cursor: pointer; }
-
+        .lightbox {
+          position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+          display: flex; align-items: center; justify-content: center;
+          z-index: 9999; cursor: pointer; padding: 16px;
+        }
+        .lightbox img {
+          max-width: 100%; max-height: 88vh;
+          border-radius: 12px; pointer-events: none;
+        }
+        .lightbox-close {
+          position: absolute; top: 16px; right: 16px;
+          width: 44px; height: 44px;
+          display: flex; align-items: center; justify-content: center;
+          background: rgba(255,255,255,0.12); border: none;
+          border-radius: 50%; color: white; font-size: 22px;
+          cursor: pointer; -webkit-tap-highlight-color: transparent;
+        }
         /* RESPONSIVE */
         @media (max-width: 900px) {
           .who-options { flex-wrap: wrap; justify-content: center; }
@@ -1656,11 +1716,25 @@ We're not just building software. We're building the future of hospitality caree
           .footer-grid { grid-template-columns: 1fr 1fr; }
           .archetypes-grid { grid-template-columns: repeat(3, 1fr); }
           .patron-grid { grid-template-columns: repeat(3, 1fr); }
-          .platform-screenshots { flex-direction: row; width: 100%; justify-content: center; gap: 10px; }
-          .platform-screenshots img { width: 90px; }
-          .screenshot-placeholder { width: 90px; }
           .platform-content-grid { grid-template-columns: 1fr; }
-          .onpro-screenshots, .venue-screenshots { width: 100%; flex-direction: row; justify-content: center; }
+          .platform-screenshots {
+            flex-direction: row;
+            flex-wrap: wrap;
+            width: 100%;
+            justify-content: center;
+            gap: 10px;
+          }
+          .platform-screenshots .screenshot-wrap {
+            width: calc(33% - 8px);
+            min-width: 90px;
+            max-width: 140px;
+            aspect-ratio: 9/16;
+          }
+          .screenshot-tap-hint { display: block; }
+          .onpro-screenshots, .venue-screenshots {
+            width: 100%;
+            flex-direction: row;
+          }
           .transform-header-row { grid-template-columns: 1fr 1fr; }
           .transform-row { grid-template-columns: 1fr auto 1fr; }
         }
@@ -1684,7 +1758,13 @@ We're not just building software. We're building the future of hospitality caree
           .container { padding: 0 16px; }
           .section-human-cost, .section-problem, .section-transformation, .section-platform, .section-vision, .section-waitlist { padding: 60px 0; }
           .accordion-header { padding: 18px 16px; }
-          .platform-content-grid { padding: 0 16px 24px; }
+          .platform-screenshots .screenshot-wrap {
+            width: calc(50% - 6px);
+            min-width: 100px;
+            max-width: 180px;
+            aspect-ratio: 9/16;
+          }
+          .screenshot-tap-hint { display: block; font-size: 11px; }
           .archetypes-section { padding: 0 16px 20px; }
           .science-grid { padding: 0 16px 20px; }
           .founder-intro { flex-direction: column; gap: 12px; }
