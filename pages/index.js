@@ -36,7 +36,6 @@ export default function LandingPage() {
   const [expandedVision, setExpandedVision] = useState(null);
   const [expandedProblem, setExpandedProblem] = useState(null);
   const [showInstallPrompt] = useState(false);
-  const [failedImages, setFailedImages] = useState({});
   const [countersStarted, setCountersStarted] = useState(false);
   const [counterValues, setCounterValues] = useState({ turnover: 0, workers: 0, cost: 0 });
 
@@ -214,40 +213,6 @@ export default function LandingPage() {
     setLoading(false);
   };
 
-  const handleImageError = (imagePath) => {
-    setFailedImages(prev => ({ ...prev, [imagePath]: true }));
-  };
-
-  // ============================================================================
-  // SCREENSHOT COMPONENT
-  // ============================================================================
-  const ScreenshotImage = ({ src, alt, onClick }) => {
-    if (failedImages[src]) {
-      return (
-        <div className="screenshot-placeholder" onClick={onClick}>
-          <span>{alt}</span>
-        </div>
-      );
-    }
-    return (
-      <div className="screenshot-wrap" onClick={onClick}>
-        <img
-          src={src}
-          alt={alt}
-          onError={() => handleImageError(src)}
-          style={{
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            borderRadius: 12,
-            border: '1px solid rgba(255,255,255,0.08)',
-            display: 'block',
-          }}
-        />
-        <div className="screenshot-tap-hint">tap to expand</div>
-      </div>
-    );
-  };
   // ============================================================================
   // DATA
   // ============================================================================
@@ -437,7 +402,7 @@ We're not just building software. We're building the future of hospitality caree
           <div className="nav-container">
             <div className="nav-live-badge">
               <span className="badge-dot" />
-              LIVE NOW · TAMPA BAY
+              LIVE NOW · TAMPA BAY · 2026
             </div>
             <div className="nav-links">
               <a href="#problem">The Problem</a>
@@ -727,10 +692,140 @@ We're not just building software. We're building the future of hospitality caree
                         </div>
                       </div>
                     </div>
-                    <div className="platform-screenshots onpro-screenshots">
-                      <ScreenshotImage src="/screenshots/onpro-profile-status.jpg" alt="OnPro Profile" onClick={() => setLightboxImage('/screenshots/onpro-profile-status.jpg')} />
-                      <ScreenshotImage src="/screenshots/onpro-skills-catagories.jpg" alt="Skills Categories" onClick={() => setLightboxImage('/screenshots/onpro-skills-catagories.jpg')} />
-                      <ScreenshotImage src="/screenshots/onpro-assessment-dashboard.jpg" alt="Assessment Dashboard" onClick={() => setLightboxImage('/screenshots/onpro-assessment-dashboard.jpg')} />
+                    <div className="mockup-row">
+
+                      {/* Phone 1: Assessment Dashboard */}
+                      <div className="mock-phone">
+                        <div className="mock-sb"><span className="mock-st">7:48 PM</span><div className="mock-si">●●● WiFi ■</div></div>
+                        <div className="mock-nr"><div className="mock-nc"></div></div>
+                        <div className="mock-scr">
+                          <div className="mock-con">
+                            <div className="mock-ptitle">Assessment Dashboard</div>
+                            <div className="mock-psub">YOUR PROFESSIONAL ANALYTICS</div>
+                            <div className="mock-card">
+                              <div className="mock-ctitle">🧬 Overall Genome Profile</div>
+                              <div className="mock-arch-row"><span className="mock-tier">PROFESSIONAL</span><span className="mock-aname">The Craftsman</span></div>
+                              <svg width="100%" height="90" viewBox="0 0 110 90" style={{display:'block',margin:'2px 0 5px'}}>
+                                <polygon points="55,6 86,24 86,58 55,76 24,58 24,24" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1"/>
+                                <polygon points="55,18 74,30 74,52 55,64 36,52 36,30" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1"/>
+                                <polygon points="55,30 63,36 63,46 55,52 47,46 47,36" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1"/>
+                                <line x1="55" y1="6" x2="55" y2="76" stroke="rgba(255,255,255,0.04)" strokeWidth="0.8"/>
+                                <line x1="86" y1="24" x2="24" y2="58" stroke="rgba(255,255,255,0.04)" strokeWidth="0.8"/>
+                                <line x1="86" y1="58" x2="24" y2="24" stroke="rgba(255,255,255,0.04)" strokeWidth="0.8"/>
+                                <polygon points="55,12 81,32 77,57 55,64 22,55 20,29" fill="rgba(212,163,115,0.16)" stroke="#d4a373" strokeWidth="1.5"/>
+                                <circle cx="55" cy="12" r="2.5" fill="#3b82f6"/><circle cx="81" cy="32" r="2.5" fill="#a78bfa"/>
+                                <circle cx="77" cy="57" r="2.5" fill="#ec4899"/><circle cx="55" cy="64" r="2.5" fill="#f59e0b"/>
+                                <circle cx="22" cy="55" r="2.5" fill="#22c55e"/><circle cx="20" cy="29" r="2.5" fill="#f97316"/>
+                                <text x="55" y="40" textAnchor="middle" fontFamily="Urbanist,sans-serif" fontSize="12" fontWeight="800" fill="white">72</text>
+                                <text x="55" y="50" textAnchor="middle" fontFamily="Urbanist,sans-serif" fontSize="5.5" fill="rgba(255,255,255,0.35)">Overall</text>
+                                <text x="55" y="3.5" textAnchor="middle" fontFamily="Urbanist,sans-serif" fontSize="5.5" fill="rgba(255,255,255,0.4)">Technical</text>
+                                <text x="95" y="27" fontFamily="Urbanist,sans-serif" fontSize="5.5" fill="rgba(255,255,255,0.4)">Ethical</text>
+                                <text x="95" y="62" fontFamily="Urbanist,sans-serif" fontSize="5.5" fill="rgba(255,255,255,0.4)">Emotional</text>
+                                <text x="55" y="87" textAnchor="middle" fontFamily="Urbanist,sans-serif" fontSize="5.5" fill="rgba(255,255,255,0.4)">Velocity</text>
+                                <text x="14" y="62" textAnchor="end" fontFamily="Urbanist,sans-serif" fontSize="5.5" fill="rgba(255,255,255,0.4)">Comm.</text>
+                                <text x="14" y="27" textAnchor="end" fontFamily="Urbanist,sans-serif" fontSize="5.5" fill="rgba(255,255,255,0.4)">Leader</text>
+                              </svg>
+                              <div className="mock-br"><span className="mock-bl">🎯 Technical</span><div className="mock-bt"><div className="mock-bf" style={{width:'78%',background:'#3b82f6'}}></div></div><span className="mock-bv" style={{color:'#60a5fa'}}>78</span></div>
+                              <div className="mock-br"><span className="mock-bl">💎 Ethical</span><div className="mock-bt"><div className="mock-bf" style={{width:'84%',background:'#a78bfa'}}></div></div><span className="mock-bv" style={{color:'#a78bfa'}}>84</span></div>
+                              <div className="mock-br"><span className="mock-bl">❤️ Emotional</span><div className="mock-bt"><div className="mock-bf" style={{width:'71%',background:'#ec4899'}}></div></div><span className="mock-bv" style={{color:'#ec4899'}}>71</span></div>
+                              <div className="mock-br"><span className="mock-bl">⚡ Velocity</span><div className="mock-bt"><div className="mock-bf" style={{width:'65%',background:'#f59e0b'}}></div></div><span className="mock-bv" style={{color:'#f59e0b'}}>65</span></div>
+                              <div className="mock-br"><span className="mock-bl">💰 Commercial</span><div className="mock-bt"><div className="mock-bf" style={{width:'62%',background:'#22c55e'}}></div></div><span className="mock-bv" style={{color:'#22c55e'}}>62</span></div>
+                              <div className="mock-br"><span className="mock-bl">👑 Leadership</span><div className="mock-bt"><div className="mock-bf" style={{width:'74%',background:'#f97316'}}></div></div><span className="mock-bv" style={{color:'#f97316'}}>74</span></div>
+                              <div className="mock-anal">
+                                <div className="mock-anal-title">✨ Genome Analysis</div>
+                                <div className="mock-anal-sub">The Craftsman · Professional</div>
+                                <div className="mock-anal-sub">Strongest: Ethical. Focus: Velocity.</div>
+                                <div className="mock-anal-link">View Full Report →</div>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="mock-nav">
+                            <span className="mock-ni">Home</span><span className="mock-ni mock-act">Explore</span><span className="mock-ni">Check-Ins</span><span className="mock-ni">MyRegulars</span><span className="mock-ni">Profile</span>
+                          </div>
+                        </div>
+                        <div className="mock-hb"><div className="mock-hbl"></div><div className="mock-hbc"></div><div className="mock-hbt"></div></div>
+                      </div>
+
+                      {/* Phone 2: Skills Assessment */}
+                      <div className="mock-phone mock-offset-2">
+                        <div className="mock-sb"><span className="mock-st">8:14 PM</span><div className="mock-si">●●● WiFi ■</div></div>
+                        <div className="mock-nr"><div className="mock-nc"></div></div>
+                        <div className="mock-scr">
+                          <div className="mock-con">
+                            <div className="mock-ptitle">Skills Assessment</div>
+                            <div className="mock-psub">DAPA PROFESSIONAL EVALUATION</div>
+                            <div style={{textAlign:'center',fontSize:'10px',fontWeight:800,color:'#fff',fontFamily:'Urbanist,sans-serif'}}>Prove Your Expertise</div>
+                            <div style={{textAlign:'center',fontSize:'6.5px',color:'rgba(255,255,255,0.4)',fontFamily:'Urbanist,sans-serif',lineHeight:1.5}}>Complete adaptive assessments<br/>across 9 hospitality domains.</div>
+                            <div className="mock-srow">
+                              <div className="mock-sc"><strong>23</strong><span>Completed</span></div>
+                              <div className="mock-sc"><strong>9/9</strong><span>Categories</span></div>
+                              <div className="mock-sc"><strong>81%</strong><span>Average</span></div>
+                              <div className="mock-sc"><strong style={{color:'#a78bfa'}}>Pro</strong><span>Tier</span></div>
+                            </div>
+                            <div className="mock-choose">Choose Your Assessment</div>
+                            <div className="mock-sr mock-hi"><span className="mock-si2">🍸</span><div className="mock-sin"><span className="mock-sn">Mixology</span><span className="mock-ss">Cocktails, spirits & bar craft</span></div><div className="mock-ssc"><span className="mock-spct" style={{color:'#f59e0b'}}>93%</span><span className="mock-stier" style={{color:'#f59e0b'}}>LEGENDARY</span></div></div>
+                            <div className="mock-sr mock-hi"><span className="mock-si2">✨</span><div className="mock-sin"><span className="mock-sn">Customer Service</span><span className="mock-ss">Guest relations & hospitality</span></div><div className="mock-ssc"><span className="mock-spct" style={{color:'#f59e0b'}}>96%</span><span className="mock-stier" style={{color:'#f59e0b'}}>LEGENDARY</span></div></div>
+                            <div className="mock-sr mock-hi"><span className="mock-si2">💻</span><div className="mock-sin"><span className="mock-sn">POS & Technology</span><span className="mock-ss">Point-of-sale & tech systems</span></div><div className="mock-ssc"><span className="mock-spct" style={{color:'#a78bfa'}}>91%</span><span className="mock-stier" style={{color:'#a78bfa'}}>MASTER</span></div></div>
+                            <div className="mock-sr"><span className="mock-si2">🍷</span><div className="mock-sin"><span className="mock-sn">Food & Wine</span><span className="mock-ss">Culinary & wine pairing</span></div><div className="mock-ssc"><span className="mock-spct" style={{color:'#22c55e'}}>82%</span><span className="mock-stier" style={{color:'#22c55e'}}>PROFESSIONAL</span></div></div>
+                            <div className="mock-sr"><span className="mock-si2">🤝</span><div className="mock-sin"><span className="mock-sn">Teamwork</span><span className="mock-ss">Collaboration & leadership</span></div><div className="mock-ssc"><span className="mock-spct" style={{color:'#60a5fa'}}>74%</span><span className="mock-stier" style={{color:'#60a5fa'}}>SKILLED</span></div></div>
+                          </div>
+                          <div className="mock-nav">
+                            <span className="mock-ni">Home</span><span className="mock-ni">Explore</span><span className="mock-ni">Check-Ins</span><span className="mock-ni">MyRegulars</span><span className="mock-ni mock-act">Profile</span>
+                          </div>
+                        </div>
+                        <div className="mock-hb"><div className="mock-hbl"></div><div className="mock-hbc"></div><div className="mock-hbt"></div></div>
+                      </div>
+
+                      {/* Phone 3: Reviews / Shoutouts */}
+                      <div className="mock-phone mock-offset-3">
+                        <div className="mock-sb"><span className="mock-st">9:02 PM</span><div className="mock-si">●●● WiFi ■</div></div>
+                        <div className="mock-nr"><div className="mock-nc"></div></div>
+                        <div className="mock-scr">
+                          <div className="mock-opill"><span>ONPRO</span></div>
+                          <div className="mock-tc">
+                            <div className="mock-tr"><span style={{fontSize:'14px'}}>🎸</span><div className="mock-tt"><span className="mock-ttt">You're OnTonight!</span><span className="mock-tts">🤚 Manually set to ON</span></div><div className="mock-tp"></div></div>
+                            <div className="mock-treset">↻ Reset to Schedule</div>
+                            <div style={{fontSize:'6px',color:'rgba(255,255,255,0.3)',textAlign:'center',fontFamily:'Urbanist,sans-serif',marginTop:'2px'}}>💡 Tip: Toggle manually to override your schedule.</div>
+                          </div>
+                          <div className="mock-ptabs"><span className="mock-ptab">About</span><span className="mock-ptab">Photos (2)</span><span className="mock-ptab">Clips</span><span className="mock-ptab mock-act">Reviews</span><span className="mock-ptab">Manage</span></div>
+                          <div className="mock-rlbl">AWAITING YOUR REVIEW</div>
+                          <div className="mock-rempty">No shoutouts waiting for review.</div>
+                          <div className="mock-rpub">PUBLISHED</div>
+                          <div className="mock-sho"><div className="mock-shh"><div className="mock-sha">S</div><div><div className="mock-shn">Sarah M.</div><div className="mock-shr">Regular</div></div></div><span className="mock-sht">Expert Knowledge</span><div className="mock-shq">"He is just truly amazing!"</div></div>
+                          <div className="mock-sho"><div className="mock-shh"><div className="mock-sha">J</div><div><div className="mock-shn">James T.</div><div className="mock-shr">Regular</div></div></div><span className="mock-sht">Awesome Service</span><div className="mock-shq">"Best bartender in Tampa."</div></div>
+                          <div className="mock-sho"><div className="mock-shh"><div className="mock-sha">M</div><div><div className="mock-shn">Maya R.</div><div className="mock-shr">Regular</div></div></div><span className="mock-sht">Great Personality</span><div className="mock-shq">"Always makes my night."</div></div>
+                          <div className="mock-nav">
+                            <span className="mock-ni">Home</span><span className="mock-ni">Explore</span><span className="mock-ni">Check-Ins</span><span className="mock-ni">MyRegulars</span><span className="mock-ni mock-act">Profile</span>
+                          </div>
+                        </div>
+                        <div className="mock-hb"><div className="mock-hbl"></div><div className="mock-hbc"></div><div className="mock-hbt"></div></div>
+                      </div>
+
+                      {/* Phone 4: MyRegulars */}
+                      <div className="mock-phone mock-offset-4">
+                        <div className="mock-sb"><span className="mock-st">9:44 PM</span><div className="mock-si">●●● WiFi ■</div></div>
+                        <div className="mock-nr"><div className="mock-nc"></div></div>
+                        <div className="mock-scr">
+                          <div className="mock-reg-header">
+                            <div className="mock-reg-left"><span style={{fontSize:'18px'}}>⭐</span><div><span className="mock-reg-title">Your Regulars</span><div className="mock-reg-sub">47 people who keep coming back</div></div></div>
+                            <div className="mock-reg-btn">Select</div>
+                          </div>
+                          <div className="mock-reg-lbl">🏆 Top Fans</div>
+                          <div className="mock-reg-cards">
+                            <div className="mock-reg-card"><span style={{fontSize:'14px'}}>🥇</span><div className="mock-reg-av" style={{background:'linear-gradient(135deg,#60a5fa,#3b82f6)'}}>S</div><div className="mock-reg-info"><span className="mock-reg-name">Sarah M.</span><div className="mock-reg-visits">14 visits</div></div><span className="mock-reg-badge mock-gold">Gold</span></div>
+                            <div className="mock-reg-card"><span style={{fontSize:'14px'}}>🥈</span><div className="mock-reg-av" style={{background:'linear-gradient(135deg,#a78bfa,#8b5cf6)'}}>J</div><div className="mock-reg-info"><span className="mock-reg-name">James T.</span><div className="mock-reg-visits">11 visits</div></div><span className="mock-reg-badge mock-silver">Silver</span></div>
+                            <div className="mock-reg-card"><span style={{fontSize:'14px'}}>🥉</span><div className="mock-reg-av" style={{background:'linear-gradient(135deg,#22c55e,#16a34a)'}}>M</div><div className="mock-reg-info"><span className="mock-reg-name">Maya R.</span><div className="mock-reg-visits">9 visits</div></div><span className="mock-reg-badge mock-bronze">Bronze</span></div>
+                            <div className="mock-reg-card"><span style={{fontSize:'12px',opacity:0.4}}>★</span><div className="mock-reg-av" style={{background:'linear-gradient(135deg,#f59e0b,#d97706)'}}>D</div><div className="mock-reg-info"><span className="mock-reg-name">David K.</span><div className="mock-reg-visits">7 visits</div></div><span className="mock-reg-badge mock-gold">Gold</span></div>
+                            <div className="mock-reg-card"><span style={{fontSize:'12px',opacity:0.4}}>★</span><div className="mock-reg-av" style={{background:'linear-gradient(135deg,#ec4899,#be185d)'}}>L</div><div className="mock-reg-info"><span className="mock-reg-name">Lauren B.</span><div className="mock-reg-visits">6 visits</div></div><span className="mock-reg-badge mock-silver">Silver</span></div>
+                          </div>
+                          <div className="mock-reg-more">+42 more regulars</div>
+                          <div className="mock-nav">
+                            <span className="mock-ni">Home</span><span className="mock-ni">Explore</span><span className="mock-ni">Check-Ins</span><span className="mock-ni mock-act">MyRegulars</span><span className="mock-ni">Profile</span>
+                          </div>
+                        </div>
+                        <div className="mock-hb"><div className="mock-hbl"></div><div className="mock-hbc"></div><div className="mock-hbt"></div></div>
+                      </div>
+
                     </div>
                   </div>
                   <div className="archetypes-section">
@@ -802,10 +897,85 @@ We're not just building software. We're building the future of hospitality caree
                         </div>
                       </div>
                     </div>
-                    <div className="platform-screenshots">
-                      <ScreenshotImage src="/screenshots/patron-genome-result.jpg" alt="Genome Results" onClick={() => setLightboxImage('/screenshots/patron-genome-result.jpg')} />
-                      <ScreenshotImage src="/screenshots/patron-my-spots.jpg" alt="My Spots" onClick={() => setLightboxImage('/screenshots/patron-my-spots.jpg')} />
-                      <ScreenshotImage src="/screenshots/patron-mypeople.jpg" alt="My People" onClick={() => setLightboxImage('/screenshots/patron-mypeople.jpg')} />
+                    <div className="mockup-row">
+
+                      {/* Phone 5: Explore */}
+                      <div className="mock-phone">
+                        <div className="mock-sb"><span className="mock-st">8:37 PM</span><div className="mock-si">●●● WiFi ■</div></div>
+                        <div className="mock-nr"><div className="mock-nc"></div></div>
+                        <div className="mock-scr">
+                          <div className="mock-eh"><div className="mock-esb">🔍 Search name, role, venue, bio...</div><div className="mock-eav">S</div></div>
+                          <div className="mock-etabs">
+                            <div className="mock-etab mock-etab-act"><div className="mock-od"></div> OnTonight (3)</div>
+                            <div className="mock-etab">OnPros (7)</div>
+                            <div className="mock-etab">Venues (3)</div>
+                            <div className="mock-etab">🗺️ Scene</div>
+                          </div>
+                          <div className="mock-eslbl">Following (3)</div>
+                          <div className="mock-ecards">
+                            <div className="mock-ec"><div className="mock-eca" style={{background:'linear-gradient(135deg,#d4a373,#c99763)'}}>A<div className="mock-ering"></div></div><div className="mock-eci"><div className="mock-ecn">Ari Mendez ✦</div><div className="mock-ecr">Bartender</div><div className="mock-ecv">📍 Haiku Tampa</div><div className="mock-onb"><div className="mock-od"></div> ON TONIGHT 🤚</div><div className="mock-ect">🕐 5:00 PM – 11:00 PM</div></div><div className="mock-hrt">🤍</div></div>
+                            <div className="mock-ec"><div className="mock-eca" style={{background:'linear-gradient(135deg,#60a5fa,#3b82f6)'}}>M<div className="mock-ering"></div></div><div className="mock-eci"><div className="mock-ecn">Melanie R. ✦</div><div className="mock-ecr">Bartender</div><div className="mock-ecv">📍 Beacon Rooftop</div><div className="mock-onb"><div className="mock-od"></div> ON TONIGHT 🤚</div><div className="mock-ect">🕐 6:00 PM – 12:00 AM</div></div><div className="mock-hrt">🤍</div></div>
+                            <div className="mock-ec"><div className="mock-eca" style={{background:'linear-gradient(135deg,#a78bfa,#8b5cf6)'}}>S<div className="mock-ering"></div></div><div className="mock-eci"><div className="mock-ecn">Stephan K.</div><div className="mock-ecr">Bartender</div><div className="mock-ecv">📍 Ulele</div><div className="mock-onb"><div className="mock-od"></div> ON TONIGHT 🤚</div></div><div className="mock-hrt">🤍</div></div>
+                          </div>
+                          <div className="mock-nav">
+                            <span className="mock-ni">Home</span><span className="mock-ni mock-act">Explore</span><span className="mock-ni">MySpots</span><span className="mock-ni">MyPros</span><span className="mock-ni">Profile</span>
+                          </div>
+                        </div>
+                        <div className="mock-hb"><div className="mock-hbl"></div><div className="mock-hbc"></div><div className="mock-hbt"></div></div>
+                      </div>
+
+                      {/* Phone 6: Patron Home */}
+                      <div className="mock-phone mock-offset-2">
+                        <div className="mock-sb"><span className="mock-st">9:51 PM</span><div className="mock-si">●●● WiFi ■</div></div>
+                        <div className="mock-nr"><div className="mock-nc"></div></div>
+                        <div className="mock-scr">
+                          <div className="mock-phw">
+                            <div className="mock-phlogo">OnTonight</div>
+                            <div className="mock-phtag">Your Night. Your People.<br/>Where Regulars Are Made.</div>
+                            <div className="mock-phwel">Welcome back, Sarah!</div>
+                            <div className="mock-phbtn">Explore OnTonight</div>
+                            <div className="mock-phcard">
+                              <div className="mock-phci"><div style={{fontSize:'19px'}}>🍷</div><div><span className="mock-phct">The Connoisseur</span><div className="mock-phcv">🧬 Genome Verified</div></div></div>
+                              <div className="mock-phsl">Quality over everything, always</div>
+                              <div className="mock-phbtns"><div className="mock-phbp">View Results</div><div className="mock-phbs">Retake</div></div>
+                            </div>
+                          </div>
+                          <div className="mock-nav">
+                            <span className="mock-ni mock-act">Home</span><span className="mock-ni">Explore</span><span className="mock-ni">MySpots</span><span className="mock-ni">MyPros</span><span className="mock-ni">Profile</span>
+                          </div>
+                        </div>
+                        <div className="mock-hb"><div className="mock-hbl"></div><div className="mock-hbc"></div><div className="mock-hbt"></div></div>
+                      </div>
+
+                      {/* Phone 7: Patron Genome */}
+                      <div className="mock-phone mock-offset-3">
+                        <div className="mock-sb"><span className="mock-st">10:23 PM</span><div className="mock-si">●●● WiFi ■</div></div>
+                        <div className="mock-nr"><div className="mock-nc"></div></div>
+                        <div className="mock-scr">
+                          <div className="mock-con">
+                            <div className="mock-gar"><div style={{fontSize:'20px'}}>🍷</div><div><div className="mock-gn">THE CONNOISSEUR</div><div className="mock-gtag">Quality over everything, always</div></div></div>
+                            <div className="mock-gver">🧬 Genome Verified</div>
+                            <div className="mock-gdesc">You can taste the terroir. Craft matters, story matters, technique matters. You appreciate mastery and won't settle for less.</div>
+                            <div className="mock-gtabs"><div className="mock-gtab mock-act">Overview</div><div className="mock-gtab">Your DNA</div><div className="mock-gtab">Venues</div></div>
+                            <div className="mock-gvc">
+                              <div className="mock-glbl">Your Perfect Venues</div>
+                              <div className="mock-gvl">
+                                <div className="mock-gvi">Wine bars</div>
+                                <div className="mock-gvi">Craft cocktail lounges</div>
+                                <div className="mock-gvi">Omakase</div>
+                                <div className="mock-gvi">Michelin-starred</div>
+                                <div className="mock-gvi">Third-wave coffee</div>
+                              </div>
+                            </div>
+                            <div className="mock-gsc"><div className="mock-glbl">Your Strength</div><div className="mock-gsv">Discerning taste elevates every experience</div></div>
+                          </div>
+                          <div className="mock-nav">
+                            <span className="mock-ni">Home</span><span className="mock-ni">Explore</span><span className="mock-ni">MySpots</span><span className="mock-ni">MyPros</span><span className="mock-ni mock-act">Profile</span>
+                          </div>
+                        </div>
+                        <div className="mock-hb"><div className="mock-hbl"></div><div className="mock-hbc"></div><div className="mock-hbt"></div></div>
+                      </div>
+
                     </div>
                   </div>
                   <div className="archetypes-section patron">
@@ -876,8 +1046,29 @@ We're not just building software. We're building the future of hospitality caree
                         </div>
                       </div>
                     </div>
-                    <div className="platform-screenshots venue-screenshots">
-                      <ScreenshotImage src="/screenshots/venue-analytics-dashboard.jpg" alt="Venue Analytics Dashboard" onClick={() => setLightboxImage('/screenshots/venue-analytics-dashboard.jpg')} />
+                    <div className="mockup-row">
+
+                      {/* Phone 8: Venue Analytics */}
+                      <div className="mock-phone">
+                        <div className="mock-sb"><span className="mock-st">11:07 PM</span><div className="mock-si">●●● WiFi ■</div></div>
+                        <div className="mock-nr"><div className="mock-nc"></div></div>
+                        <div className="mock-scr">
+                          <div className="mock-vh"><div className="mock-vlogo">🏮</div><div className="mock-vhi"><div className="mock-vhn">Venue Dashboard</div><div className="mock-vhs">Haiku Tampa</div></div><div className="mock-vact"><div className="mock-vad"></div> Active</div></div>
+                          <div className="mock-vtabs"><div className="mock-vtab">Overview</div><div className="mock-vtab mock-act">Analytics</div><div className="mock-vtab">Profile</div></div>
+                          <div className="mock-vper"><div className="mock-vpb">7 Days</div><div className="mock-vpb mock-act">30 Days</div><div className="mock-vpb">90 Days</div><div className="mock-vpb">All Time</div></div>
+                          <div className="mock-vstats">
+                            <div className="mock-vs"><div style={{fontSize:'13px'}}>✅</div><div className="mock-vsi"><div className="mock-vsn">284</div><div className="mock-vsl">Total Check-Ins</div><div className="mock-vss">9.5 avg/day</div></div><div className="mock-vst">+18%</div></div>
+                            <div className="mock-vs"><div style={{fontSize:'13px'}}>👥</div><div className="mock-vsi"><div className="mock-vsn">147</div><div className="mock-vsl">Unique Patrons</div><div className="mock-vss">38 new this month</div></div><div className="mock-vst">+12%</div></div>
+                            <div className="mock-vs mock-vs-grn"><div style={{fontSize:'13px'}}>⭐</div><div className="mock-vsi"><div className="mock-vsn" style={{color:'#3ddc6c'}}>63</div><div className="mock-vsl">Total Regulars</div><div className="mock-vss">+8 new this month</div></div><div className="mock-vst">+14%</div></div>
+                            <div className="mock-vs"><div style={{fontSize:'13px'}}>🧬</div><div className="mock-vsi"><div className="mock-vsn">8</div><div className="mock-vsl">Verified OnPros</div><div className="mock-vss">Avg DAPA: 81%</div></div></div>
+                          </div>
+                          <div className="mock-nav">
+                            <span className="mock-ni">Home</span><span className="mock-ni">Explore</span><span className="mock-ni">Staff</span><span className="mock-ni mock-act">Analytics</span><span className="mock-ni">Profile</span>
+                          </div>
+                        </div>
+                        <div className="mock-hb"><div className="mock-hbl"></div><div className="mock-hbc"></div><div className="mock-hbt"></div></div>
+                      </div>
+
                     </div>
                   </div>
                   <div className="accordion-cta">
@@ -1073,7 +1264,7 @@ We're not just building software. We're building the future of hospitality caree
               <div className="footer-brand">
                 <div className="footer-logo">OnTonight</div>
                 <p className="footer-tagline-text">Your Night. Your People.<br />Where Regulars Are Made.</p>
-                <p className="footer-location">🌴 Tampa Bay, FL · Expanding 2025</p>
+                <p className="footer-location">🌴 Tampa Bay, FL · Expanding 2026</p>
               </div>
               <div className="footer-links">
                 <h4>Company</h4>
@@ -1467,7 +1658,7 @@ We're not just building software. We're building the future of hospitality caree
         .accordion-toggle { width: 32px; height: 32px; background: rgba(255,255,255,0.06); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #d4a373; font-size: 20px; flex-shrink: 0; }
         .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease; }
         .accordion-item.expanded .accordion-content { max-height: 2000px; }
-        .platform-content-grid { display: grid; grid-template-columns: 1fr auto; gap: 40px; padding: 0 28px 32px; }
+        .platform-content-grid { display: flex; flex-direction: column; gap: 32px; padding: 0 28px 32px; }
         .platform-lead { font-size: 15px; line-height: 1.7; color: rgba(248,250,252,0.75); margin: 0 0 28px; font-weight: 300; }
         .features-list { display: flex; flex-direction: column; gap: 20px; margin-bottom: 32px; }
         .feature-item { display: flex; gap: 14px; }
@@ -1485,54 +1676,171 @@ We're not just building software. We're building the future of hospitality caree
         .price-card li { font-size: 12px; color: rgba(248,250,252,0.65); padding: 5px 0 5px 18px; position: relative; font-weight: 300; }
         .price-card li::before { content: '✓'; position: absolute; left: 0; color: #22c55e; font-size: 11px; }
 
-        /* SCREENSHOTS */
-        .platform-screenshots {
-          display: flex;
-          flex-direction: column;
-          gap: 10px;
-          width: 130px;
-          flex-shrink: 0;
+        /* PHONE MOCKUPS */
+        .mockup-row { display: flex; gap: 16px; align-items: flex-start; flex-shrink: 0; flex-wrap: wrap; }
+        .mock-phone { width: 210px; height: 410px; border-radius: 32px; background: #090a0c; border: 1.5px solid rgba(255,255,255,0.14); overflow: hidden; flex-shrink: 0; display: flex; flex-direction: column; box-shadow: 0 24px 48px rgba(0,0,0,0.6); }
+        .mock-offset-2 { margin-top: 36px; }
+        .mock-offset-3 { margin-top: 18px; }
+        .mock-offset-4 { margin-top: 26px; }
+        .mock-sb { background: #090a0c; padding: 8px 14px 0; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0; }
+        .mock-st { font-size: 9px; font-weight: 700; color: #fff; font-family: 'Urbanist', sans-serif; }
+        .mock-si { font-size: 7px; color: rgba(255,255,255,0.5); }
+        .mock-nr { background: #090a0c; display: flex; justify-content: center; padding-bottom: 2px; flex-shrink: 0; }
+        .mock-nc { width: 60px; height: 14px; background: #090a0c; border-radius: 0 0 12px 12px; border: 1px solid rgba(255,255,255,0.07); border-top: none; }
+        .mock-scr { flex: 1; overflow: hidden; min-height: 0; display: flex; flex-direction: column; }
+        .mock-nav { background: rgba(9,10,12,0.95); border-top: 1px solid rgba(255,255,255,0.08); display: grid; grid-template-columns: repeat(5,1fr); height: 40px; flex-shrink: 0; align-items: center; margin-top: auto; }
+        .mock-ni { color: #8a949c; font-size: 6.5px; font-weight: 500; font-family: 'Urbanist', sans-serif; text-align: center; padding: 0; letter-spacing: 0.02em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+        .mock-ni.mock-act { color: #d4a373; }
+        .mock-hb { background: #090a0c; height: 20px; display: flex; align-items: center; justify-content: center; gap: 18px; flex-shrink: 0; }
+        .mock-hbl { width: 28px; height: 0; border: 1.5px solid rgba(255,255,255,0.2); border-radius: 1px; }
+        .mock-hbc { width: 14px; height: 14px; border: 1.5px solid rgba(255,255,255,0.2); border-radius: 50%; }
+        .mock-hbt { width: 0; height: 0; border-top: 7px solid transparent; border-bottom: 7px solid transparent; border-left: 10px solid rgba(255,255,255,0.2); }
+        .mock-con { flex: 1; overflow: hidden; min-height: 0; padding: 9px 10px; display: flex; flex-direction: column; gap: 6px; }
+        .mock-ptitle { text-align: center; font-size: 10.5px; font-weight: 800; color: #fff; font-family: 'Urbanist', sans-serif; }
+        .mock-psub { text-align: center; font-size: 6.5px; color: #d4a373; font-weight: 600; letter-spacing: 0.07em; font-family: 'Urbanist', sans-serif; }
+        .mock-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 9px; padding: 8px; }
+        .mock-ctitle { font-size: 7.5px; font-weight: 700; color: #fff; font-family: 'Urbanist', sans-serif; margin-bottom: 4px; }
+        .mock-arch-row { display: flex; align-items: center; gap: 5px; margin-bottom: 5px; }
+        .mock-tier { font-size: 6.5px; font-weight: 700; color: #d4a373; background: rgba(212,163,115,0.15); padding: 2px 5px; border-radius: 3px; font-family: 'Urbanist', sans-serif; }
+        .mock-aname { font-size: 10px; font-weight: 800; color: #fff; font-family: 'Urbanist', sans-serif; }
+        .mock-br { display: flex; align-items: center; gap: 4px; margin-bottom: 2.5px; }
+        .mock-bl { font-size: 6px; color: rgba(255,255,255,0.5); width: 46px; flex-shrink: 0; font-family: 'Urbanist', sans-serif; }
+        .mock-bt { flex: 1; height: 3px; background: rgba(255,255,255,0.07); border-radius: 2px; overflow: hidden; }
+        .mock-bf { height: 100%; border-radius: 2px; }
+        .mock-bv { font-size: 6px; font-weight: 700; width: 14px; text-align: right; font-family: 'Urbanist', sans-serif; }
+        .mock-anal { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; padding: 6px 7px; margin-top: 5px; }
+        .mock-anal-title { font-size: 7px; font-weight: 700; color: #fff; font-family: 'Urbanist', sans-serif; margin-bottom: 2px; }
+        .mock-anal-sub { font-size: 6px; color: rgba(255,255,255,0.4); font-family: 'Urbanist', sans-serif; margin-bottom: 1px; line-height: 1.5; }
+        .mock-anal-link { font-size: 6.5px; color: #d4a373; font-weight: 600; font-family: 'Urbanist', sans-serif; margin-top: 3px; }
+        .mock-srow { display: grid; grid-template-columns: repeat(4,1fr); background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 7px; padding: 6px 3px; }
+        .mock-sc { text-align: center; }
+        .mock-sc strong { font-size: 9px; font-weight: 800; color: #fff; display: block; font-family: 'Urbanist', sans-serif; }
+        .mock-sc span { font-size: 5px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.04em; font-family: 'Urbanist', sans-serif; }
+        .mock-choose { font-size: 6.5px; font-weight: 600; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.07em; font-family: 'Urbanist', sans-serif; }
+        .mock-sr { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 6px; padding: 5px 7px; display: flex; align-items: center; gap: 5px; }
+        .mock-sr.mock-hi { background: rgba(212,163,115,0.05); border-color: rgba(212,163,115,0.18); }
+        .mock-si2 { font-size: 13px; flex-shrink: 0; }
+        .mock-sin { flex: 1; min-width: 0; }
+        .mock-sn { font-size: 7px; font-weight: 700; color: #fff; display: block; font-family: 'Urbanist', sans-serif; }
+        .mock-ss { font-size: 5.5px; color: rgba(255,255,255,0.3); font-family: 'Urbanist', sans-serif; }
+        .mock-ssc { text-align: right; }
+        .mock-spct { font-size: 9px; font-weight: 800; display: block; font-family: 'Urbanist', sans-serif; }
+        .mock-stier { font-size: 5px; font-weight: 700; letter-spacing: 0.05em; font-family: 'Urbanist', sans-serif; }
+        .mock-opill { text-align: center; padding: 5px 0 3px; flex-shrink: 0; }
+        .mock-opill span { font-size: 7px; font-weight: 700; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 4px; padding: 2px 10px; color: rgba(255,255,255,0.55); letter-spacing: 0.05em; font-family: 'Urbanist', sans-serif; }
+        .mock-tc { margin: 0 10px 5px; background: rgba(61,220,108,0.07); border: 1px solid rgba(61,220,108,0.22); border-radius: 8px; padding: 7px 10px; flex-shrink: 0; }
+        .mock-tr { display: flex; align-items: center; gap: 5px; margin-bottom: 3px; }
+        .mock-tt { flex: 1; }
+        .mock-ttt { font-size: 8px; font-weight: 800; color: #fff; display: block; font-family: 'Urbanist', sans-serif; }
+        .mock-tts { font-size: 6px; color: rgba(255,255,255,0.45); font-family: 'Urbanist', sans-serif; }
+        .mock-tp { width: 28px; height: 15px; background: #3ddc6c; border-radius: 8px; position: relative; flex-shrink: 0; }
+        .mock-tp::after { content: ''; position: absolute; top: 2.5px; right: 2.5px; width: 10px; height: 10px; background: #fff; border-radius: 50%; }
+        .mock-treset { font-size: 6.5px; color: rgba(255,255,255,0.4); text-align: center; font-family: 'Urbanist', sans-serif; }
+        .mock-ptabs { display: flex; padding: 5px 10px 0; gap: 9px; border-bottom: 1px solid rgba(255,255,255,0.06); flex-shrink: 0; }
+        .mock-ptab { font-size: 7px; font-weight: 500; color: rgba(255,255,255,0.3); padding-bottom: 5px; font-family: 'Urbanist', sans-serif; white-space: nowrap; }
+        .mock-ptab.mock-act { color: #d4a373; border-bottom: 1.5px solid #d4a373; font-weight: 700; }
+        .mock-rlbl { font-size: 6.5px; font-weight: 700; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.07em; padding: 4px 10px 2px; font-family: 'Urbanist', sans-serif; flex-shrink: 0; }
+        .mock-rempty { font-size: 6.5px; color: rgba(255,255,255,0.2); padding: 0 10px 4px; font-family: 'Urbanist', sans-serif; font-style: italic; flex-shrink: 0; }
+        .mock-rpub { font-size: 6.5px; font-weight: 700; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.07em; padding: 3px 10px; border-top: 1px solid rgba(255,255,255,0.05); font-family: 'Urbanist', sans-serif; flex-shrink: 0; }
+        .mock-sho { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 7px; margin: 0 10px 4px; padding: 6px 8px; flex-shrink: 0; }
+        .mock-shh { display: flex; align-items: center; gap: 6px; margin-bottom: 3px; }
+        .mock-sha { width: 22px; height: 22px; border-radius: 6px; background: rgba(212,163,115,0.18); border: 1px solid rgba(212,163,115,0.28); display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: 800; color: #d4a373; flex-shrink: 0; font-family: 'Urbanist', sans-serif; }
+        .mock-shn { font-size: 7.5px; font-weight: 700; color: #fff; font-family: 'Urbanist', sans-serif; }
+        .mock-shr { font-size: 6px; color: rgba(255,255,255,0.35); font-family: 'Urbanist', sans-serif; }
+        .mock-sht { display: inline-block; font-size: 6px; font-weight: 600; color: #d4a373; background: rgba(212,163,115,0.1); border: 1px solid rgba(212,163,115,0.18); border-radius: 3px; padding: 2px 5px; margin-bottom: 2px; font-family: 'Urbanist', sans-serif; }
+        .mock-shq { font-size: 7px; color: rgba(255,255,255,0.65); font-style: italic; font-family: 'Urbanist', sans-serif; }
+        .mock-reg-header { margin: 8px 10px 6px; background: linear-gradient(135deg,rgba(245,158,11,0.1),rgba(217,119,6,0.1)); border: 1.5px solid rgba(245,158,11,0.28); border-radius: 10px; padding: 8px 10px; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; }
+        .mock-reg-left { display: flex; align-items: center; gap: 7px; }
+        .mock-reg-title { font-size: 9px; font-weight: 800; color: #fff; display: block; font-family: 'Urbanist', sans-serif; }
+        .mock-reg-sub { font-size: 6px; color: rgba(255,255,255,0.45); font-family: 'Urbanist', sans-serif; margin-top: 1px; }
+        .mock-reg-btn { font-size: 6.5px; font-weight: 700; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1); border-radius: 5px; padding: 4px 8px; color: rgba(255,255,255,0.6); font-family: 'Urbanist', sans-serif; }
+        .mock-reg-lbl { font-size: 6.5px; font-weight: 700; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.07em; padding: 2px 10px 5px; font-family: 'Urbanist', sans-serif; flex-shrink: 0; }
+        .mock-reg-cards { padding: 0 10px; display: flex; flex-direction: column; gap: 5px; flex: 1; overflow: hidden; }
+        .mock-reg-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 8px; padding: 7px 9px; display: flex; align-items: center; gap: 8px; }
+        .mock-reg-av { width: 30px; height: 30px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; color: #090a0c; font-family: 'Urbanist', sans-serif; }
+        .mock-reg-info { flex: 1; min-width: 0; }
+        .mock-reg-name { font-size: 8px; font-weight: 700; color: #fff; display: block; font-family: 'Urbanist', sans-serif; }
+        .mock-reg-visits { font-size: 6px; color: rgba(255,255,255,0.4); font-family: 'Urbanist', sans-serif; }
+        .mock-reg-badge { font-size: 6px; font-weight: 700; padding: 2px 6px; border-radius: 4px; font-family: 'Urbanist', sans-serif; }
+        .mock-gold { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.25); }
+        .mock-silver { background: rgba(148,163,184,0.15); color: #94a3b8; border: 1px solid rgba(148,163,184,0.25); }
+        .mock-bronze { background: rgba(180,120,80,0.15); color: #b47850; border: 1px solid rgba(180,120,80,0.25); }
+        .mock-reg-more { font-size: 6.5px; color: rgba(255,255,255,0.3); text-align: center; padding: 4px 0; font-family: 'Urbanist', sans-serif; flex-shrink: 0; }
+        .mock-eh { display: flex; align-items: center; gap: 6px; padding: 7px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); flex-shrink: 0; }
+        .mock-esb { flex: 1; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.09); border-radius: 8px; padding: 6px 9px; font-size: 7px; color: rgba(255,255,255,0.35); font-family: 'Urbanist', sans-serif; }
+        .mock-eav { width: 28px; height: 28px; border-radius: 8px; background: rgba(212,163,115,0.18); border: 1.5px solid rgba(212,163,115,0.4); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: #d4a373; font-family: 'Urbanist', sans-serif; flex-shrink: 0; }
+        .mock-etabs { display: flex; padding: 5px 10px; gap: 4px; border-bottom: 1px solid rgba(255,255,255,0.05); flex-shrink: 0; }
+        .mock-etab { font-size: 6.5px; font-weight: 600; padding: 3px 7px; border-radius: 12px; background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.4); border: 1px solid rgba(255,255,255,0.07); font-family: 'Urbanist', sans-serif; white-space: nowrap; }
+        .mock-etab-act { background: rgba(61,220,108,0.1); color: #3ddc6c; border-color: rgba(61,220,108,0.25); display: flex; align-items: center; gap: 3px; }
+        .mock-od { width: 5px; height: 5px; background: #3ddc6c; border-radius: 50%; flex-shrink: 0; }
+        .mock-eslbl { font-size: 7px; font-weight: 600; color: rgba(255,255,255,0.35); padding: 5px 10px 3px; font-family: 'Urbanist', sans-serif; flex-shrink: 0; }
+        .mock-ecards { padding: 0 10px; display: flex; flex-direction: column; gap: 5px; flex: 1; overflow: hidden; }
+        .mock-ec { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 9px; padding: 7px 8px; display: flex; align-items: center; gap: 7px; }
+        .mock-eca { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; color: #090a0c; position: relative; font-family: 'Urbanist', sans-serif; }
+        .mock-ering { position: absolute; inset: 0; border-radius: 10px; border: 2px solid #3ddc6c; }
+        .mock-eci { flex: 1; min-width: 0; }
+        .mock-ecn { font-size: 8px; font-weight: 700; color: #fff; font-family: 'Urbanist', sans-serif; margin-bottom: 1px; }
+        .mock-ecr { font-size: 6.5px; color: #d4a373; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; font-family: 'Urbanist', sans-serif; }
+        .mock-ecv { font-size: 6px; color: rgba(255,255,255,0.35); font-family: 'Urbanist', sans-serif; margin-bottom: 3px; }
+        .mock-onb { display: inline-flex; align-items: center; gap: 3px; background: rgba(61,220,108,0.1); border: 1px solid rgba(61,220,108,0.22); border-radius: 4px; padding: 2px 5px; font-size: 6px; font-weight: 700; color: #3ddc6c; font-family: 'Urbanist', sans-serif; }
+        .mock-ect { font-size: 5.5px; color: rgba(255,255,255,0.25); font-family: 'Urbanist', sans-serif; margin-top: 2px; }
+        .mock-hrt { width: 26px; height: 26px; background: rgba(212,163,115,0.1); border: 1px solid rgba(212,163,115,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+        .mock-phw { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 16px 14px 10px; }
+        .mock-phlogo { font-size: 24px; font-weight: 300; color: #e8c49a; margin-bottom: 4px; letter-spacing: -0.02em; font-family: 'Urbanist', sans-serif; }
+        .mock-phtag { font-size: 7px; color: rgba(255,255,255,0.4); text-align: center; line-height: 1.6; font-weight: 300; font-family: 'Urbanist', sans-serif; }
+        .mock-phwel { font-size: 7.5px; color: rgba(255,255,255,0.3); margin: 7px 0 11px; font-family: 'Urbanist', sans-serif; }
+        .mock-phbtn { width: 100%; background: #d4a373; border-radius: 8px; padding: 9px; text-align: center; font-size: 8px; font-weight: 700; color: #090a0c; margin-bottom: 8px; font-family: 'Urbanist', sans-serif; }
+        .mock-phcard { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 9px; padding: 9px; }
+        .mock-phci { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+        .mock-phct { font-size: 9px; font-weight: 700; color: #fff; display: block; font-family: 'Urbanist', sans-serif; }
+        .mock-phcv { display: flex; align-items: center; gap: 3px; font-size: 6.5px; color: #d4a373; font-family: 'Urbanist', sans-serif; }
+        .mock-phsl { font-size: 6.5px; color: rgba(255,255,255,0.4); font-style: italic; margin-bottom: 8px; font-family: 'Urbanist', sans-serif; }
+        .mock-phbtns { display: flex; gap: 5px; }
+        .mock-phbp { flex: 1; background: #d4a373; border-radius: 6px; padding: 7px; text-align: center; font-size: 7px; font-weight: 700; color: #090a0c; font-family: 'Urbanist', sans-serif; }
+        .mock-phbs { flex: 0 0 auto; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; padding: 7px 12px; font-size: 7px; font-weight: 600; color: rgba(255,255,255,0.5); font-family: 'Urbanist', sans-serif; }
+        .mock-gar { display: flex; align-items: center; gap: 8px; margin-bottom: 5px; }
+        .mock-gn { font-size: 10px; font-weight: 800; color: #fff; font-family: 'Urbanist', sans-serif; }
+        .mock-gtag { font-size: 6.5px; color: #d4a373; font-style: italic; font-family: 'Urbanist', sans-serif; }
+        .mock-gver { display: inline-flex; align-items: center; gap: 3px; background: rgba(212,163,115,0.1); border: 1px solid rgba(212,163,115,0.18); border-radius: 5px; padding: 3px 8px; margin-bottom: 6px; font-size: 6.5px; font-weight: 600; color: #d4a373; font-family: 'Urbanist', sans-serif; }
+        .mock-gdesc { font-size: 6.5px; color: rgba(255,255,255,0.5); line-height: 1.7; margin-bottom: 7px; font-family: 'Urbanist', sans-serif; }
+        .mock-gtabs { display: flex; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 7px; overflow: hidden; margin-bottom: 6px; }
+        .mock-gtab { flex: 1; text-align: center; padding: 5px 3px; font-size: 7px; font-weight: 500; color: rgba(255,255,255,0.3); font-family: 'Urbanist', sans-serif; }
+        .mock-gtab.mock-act { background: rgba(255,255,255,0.06); color: #fff; font-weight: 700; }
+        .mock-gvc { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 7px; padding: 7px; margin-bottom: 5px; }
+        .mock-glbl { font-size: 6px; font-weight: 700; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 3px; font-family: 'Urbanist', sans-serif; }
+        .mock-gvl { display: flex; flex-direction: column; gap: 3px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 3px; }
+        .mock-gvi { font-size: 7px; color: rgba(255,255,255,0.6); border-bottom: 1px solid rgba(255,255,255,0.04); padding-bottom: 2px; font-family: 'Urbanist', sans-serif; }
+        .mock-gsc { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 7px; padding: 7px; }
+        .mock-gsv { font-size: 7px; color: #d4a373; font-weight: 600; font-family: 'Urbanist', sans-serif; }
+        .mock-vh { display: flex; align-items: center; gap: 7px; padding: 7px 10px; border-bottom: 1px solid rgba(255,255,255,0.05); flex-shrink: 0; }
+        .mock-vlogo { width: 27px; height: 27px; border-radius: 6px; background: linear-gradient(135deg,#d4a373,#c99763); display: flex; align-items: center; justify-content: center; font-size: 12px; flex-shrink: 0; }
+        .mock-vhi { flex: 1; min-width: 0; }
+        .mock-vhn { font-size: 8.5px; font-weight: 700; color: #fff; font-family: 'Urbanist', sans-serif; }
+        .mock-vhs { font-size: 6px; color: rgba(255,255,255,0.3); font-family: 'Urbanist', sans-serif; }
+        .mock-vact { font-size: 6px; font-weight: 700; padding: 2px 6px; border-radius: 3px; background: rgba(61,220,108,0.1); color: #3ddc6c; border: 1px solid rgba(61,220,108,0.2); display: flex; align-items: center; gap: 3px; font-family: 'Urbanist', sans-serif; }
+        .mock-vad { width: 5px; height: 5px; background: #3ddc6c; border-radius: 50%; }
+        .mock-vtabs { display: flex; padding: 5px 10px; gap: 3px; border-bottom: 1px solid rgba(255,255,255,0.05); flex-shrink: 0; }
+        .mock-vtab { font-size: 6.5px; font-weight: 600; padding: 3px 8px; border-radius: 4px; background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.35); border: 1px solid rgba(255,255,255,0.07); font-family: 'Urbanist', sans-serif; }
+        .mock-vtab.mock-act { background: rgba(212,163,115,0.15); color: #d4a373; border-color: rgba(212,163,115,0.28); }
+        .mock-vper { display: flex; gap: 3px; padding: 5px 10px 4px; flex-shrink: 0; }
+        .mock-vpb { padding: 3px 6px; border-radius: 3px; font-size: 6px; font-weight: 600; background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.3); font-family: 'Urbanist', sans-serif; }
+        .mock-vpb.mock-act { background: #d4a373; color: #090a0c; }
+        .mock-vstats { padding: 0 10px; display: flex; flex-direction: column; gap: 5px; flex: 1; overflow: hidden; }
+        .mock-vs { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 7px; padding: 6px 9px; display: flex; align-items: center; gap: 7px; }
+        .mock-vs-grn { background: rgba(61,220,108,0.04); border-color: rgba(61,220,108,0.14); }
+        .mock-vsi { flex: 1; }
+        .mock-vsn { font-size: 14px; font-weight: 800; color: #fff; line-height: 1; font-family: 'Urbanist', sans-serif; }
+        .mock-vsl { font-size: 6px; color: rgba(255,255,255,0.35); font-family: 'Urbanist', sans-serif; }
+        .mock-vss { font-size: 5.5px; color: rgba(255,255,255,0.2); font-family: 'Urbanist', sans-serif; }
+        .mock-vst { font-size: 6.5px; font-weight: 700; padding: 2px 5px; border-radius: 3px; background: rgba(61,220,108,0.1); color: #3ddc6c; font-family: 'Urbanist', sans-serif; }
+        @media (max-width: 900px) {
+          .mockup-row { justify-content: center; }
+          .mock-phone { width: 170px; height: 330px; }
+          .mock-offset-2, .mock-offset-3, .mock-offset-4 { margin-top: 0; }
         }
-        .onpro-screenshots, .venue-screenshots { width: 130px; }
-
-        .screenshot-wrap {
-          position: relative;
-          width: 100%;
-          cursor: zoom-in;
-          border-radius: 12px;
-          overflow: hidden;
-          -webkit-tap-highlight-color: transparent;
-        }
-        .screenshot-wrap:active { opacity: 0.85; }
-
-        .screenshot-tap-hint {
-          display: none;
-          position: absolute;
-          bottom: 8px;
-          left: 50%;
-          transform: translateX(-50%);
-          background: rgba(0,0,0,0.65);
-          color: rgba(255,255,255,0.8);
-          font-size: 10px;
-          font-weight: 500;
-          padding: 4px 10px;
-          border-radius: 20px;
-          white-space: nowrap;
-          pointer-events: none;
-        }
-
-        .screenshot-placeholder {
-          width: 100%;
-          height: 100px;
-          background: rgba(255,255,255,0.03);
-          border: 1px dashed rgba(255,255,255,0.1);
-          border-radius: 10px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          font-size: 10px;
-          color: rgba(248,250,252,0.3);
-          cursor: pointer;
+        @media (max-width: 600px) {
+          .mockup-row { gap: 10px; }
+          .mock-phone { width: 140px; height: 280px; }
         }
 
         /* ARCHETYPES */
