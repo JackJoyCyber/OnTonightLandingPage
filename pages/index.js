@@ -29,6 +29,7 @@ export default function LandingPage() {
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [lightboxImage, setLightboxImage] = useState(null);
+  const [activeMockup, setActiveMockup] = useState(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [visibleSections, setVisibleSections] = useState({});
   const [selectedUserType, setSelectedUserType] = useState(null);
@@ -695,7 +696,7 @@ We're not just building software. We're building the future of hospitality caree
                     <div className="mockup-row">
 
                       {/* Phone 1: Assessment Dashboard */}
-                      <div className="mock-phone">
+                        <div className="mock-phone" style={{cursor:'pointer'}} onClick={() => setActiveMockup('onpro-1')}>
                         <div className="mock-sb"><span className="mock-st">7:48 PM</span><div className="mock-si">●●● WiFi ■</div></div>
                         <div className="mock-nr"><div className="mock-nc"></div></div>
                         <div className="mock-scr">
@@ -747,7 +748,7 @@ We're not just building software. We're building the future of hospitality caree
                       </div>
 
                       {/* Phone 2: Skills Assessment */}
-                      <div className="mock-phone mock-offset-2">
+                        <div className="mock-phone mock-offset-2" style={{cursor:'pointer'}} onClick={() => setActiveMockup('onpro-2')}>
                         <div className="mock-sb"><span className="mock-st">8:14 PM</span><div className="mock-si">●●● WiFi ■</div></div>
                         <div className="mock-nr"><div className="mock-nc"></div></div>
                         <div className="mock-scr">
@@ -777,7 +778,7 @@ We're not just building software. We're building the future of hospitality caree
                       </div>
 
                       {/* Phone 3: Reviews / Shoutouts */}
-                      <div className="mock-phone mock-offset-3">
+                        <div className="mock-phone mock-offset-3" style={{cursor:'pointer'}} onClick={() => setActiveMockup('onpro-3')}>
                         <div className="mock-sb"><span className="mock-st">9:02 PM</span><div className="mock-si">●●● WiFi ■</div></div>
                         <div className="mock-nr"><div className="mock-nc"></div></div>
                         <div className="mock-scr">
@@ -802,7 +803,7 @@ We're not just building software. We're building the future of hospitality caree
                       </div>
 
                       {/* Phone 4: MyRegulars */}
-                      <div className="mock-phone mock-offset-4">
+                        <div className="mock-phone mock-offset-4" style={{cursor:'pointer'}} onClick={() => setActiveMockup('onpro-4')}>
                         <div className="mock-sb"><span className="mock-st">9:44 PM</span><div className="mock-si">●●● WiFi ■</div></div>
                         <div className="mock-nr"><div className="mock-nc"></div></div>
                         <div className="mock-scr">
@@ -900,7 +901,7 @@ We're not just building software. We're building the future of hospitality caree
                     <div className="mockup-row">
 
                       {/* Phone 5: Explore */}
-                      <div className="mock-phone">
+                        <div className="mock-phone" style={{cursor:'pointer'}} onClick={() => setActiveMockup('patron-1')}>
                         <div className="mock-sb"><span className="mock-st">8:37 PM</span><div className="mock-si">●●● WiFi ■</div></div>
                         <div className="mock-nr"><div className="mock-nc"></div></div>
                         <div className="mock-scr">
@@ -925,7 +926,7 @@ We're not just building software. We're building the future of hospitality caree
                       </div>
 
                       {/* Phone 6: Patron Home */}
-                      <div className="mock-phone mock-offset-2">
+                        <div className="mock-phone mock-offset-2" style={{cursor:'pointer'}} onClick={() => setActiveMockup('patron-2')}>
                         <div className="mock-sb"><span className="mock-st">9:51 PM</span><div className="mock-si">●●● WiFi ■</div></div>
                         <div className="mock-nr"><div className="mock-nc"></div></div>
                         <div className="mock-scr">
@@ -948,7 +949,7 @@ We're not just building software. We're building the future of hospitality caree
                       </div>
 
                       {/* Phone 7: Patron Genome */}
-                      <div className="mock-phone mock-offset-3">
+                        <div className="mock-phone mock-offset-3" style={{cursor:'pointer'}} onClick={() => setActiveMockup('patron-3')}>
                         <div className="mock-sb"><span className="mock-st">10:23 PM</span><div className="mock-si">●●● WiFi ■</div></div>
                         <div className="mock-nr"><div className="mock-nc"></div></div>
                         <div className="mock-scr">
@@ -1049,7 +1050,7 @@ We're not just building software. We're building the future of hospitality caree
                     <div className="mockup-row">
 
                       {/* Phone 8: Venue Analytics */}
-                      <div className="mock-phone">
+                        <div className="mock-phone" style={{cursor:'pointer'}} onClick={() => setActiveMockup('venue-1')}>
                         <div className="mock-sb"><span className="mock-st">11:07 PM</span><div className="mock-si">●●● WiFi ■</div></div>
                         <div className="mock-nr"><div className="mock-nc"></div></div>
                         <div className="mock-scr">
@@ -1299,6 +1300,214 @@ We're not just building software. We're building the future of hospitality caree
           <img src={lightboxImage} alt="Screenshot" />
         </div>
       )}
+
+{/* MOCKUP LIGHTBOX */}
+  {activeMockup && (
+    <div className="mockup-lightbox" onClick={() => setActiveMockup(null)}>
+      <button className="mockup-lightbox-close" onClick={(e) => { e.stopPropagation(); setActiveMockup(null); }}>×</button>
+      <div className="mockup-lightbox-hint">Tap anywhere to close</div>
+      <div className="mock-phone mockup-lightbox-phone" onClick={(e) => e.stopPropagation()}>
+        {activeMockup === 'onpro-1' && <>
+          <div className="mock-sb"><span className="mock-st">7:48 PM</span><div className="mock-si">●●● WiFi ■</div></div>
+          <div className="mock-nr"><div className="mock-nc"></div></div>
+          <div className="mock-scr">
+            <div className="mock-con">
+              <div className="mock-ptitle">Assessment Dashboard</div>
+              <div className="mock-psub">YOUR PROFESSIONAL ANALYTICS</div>
+              <div className="mock-card">
+                <div className="mock-ctitle">🧬 Overall Genome Profile</div>
+                <div className="mock-arch-row"><span className="mock-tier">PROFESSIONAL</span><span className="mock-aname">The Craftsman</span></div>
+                <svg width="100%" height="90" viewBox="0 0 110 90" style={{display:'block',margin:'2px 0 5px'}}>
+                  <polygon points="55,6 86,24 86,58 55,76 24,58 24,24" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1"/>
+                  <polygon points="55,18 74,30 74,52 55,64 36,52 36,30" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1"/>
+                  <polygon points="55,30 63,36 63,46 55,52 47,46 47,36" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="1"/>
+                  <line x1="55" y1="6" x2="55" y2="76" stroke="rgba(255,255,255,0.04)" strokeWidth="0.8"/>
+                  <line x1="86" y1="24" x2="24" y2="58" stroke="rgba(255,255,255,0.04)" strokeWidth="0.8"/>
+                  <line x1="86" y1="58" x2="24" y2="24" stroke="rgba(255,255,255,0.04)" strokeWidth="0.8"/>
+                  <polygon points="55,12 81,32 77,57 55,64 22,55 20,29" fill="rgba(212,163,115,0.16)" stroke="#d4a373" strokeWidth="1.5"/>
+                  <circle cx="55" cy="12" r="2.5" fill="#3b82f6"/><circle cx="81" cy="32" r="2.5" fill="#a78bfa"/>
+                  <circle cx="77" cy="57" r="2.5" fill="#ec4899"/><circle cx="55" cy="64" r="2.5" fill="#f59e0b"/>
+                  <circle cx="22" cy="55" r="2.5" fill="#22c55e"/><circle cx="20" cy="29" r="2.5" fill="#f97316"/>
+                  <text x="55" y="40" textAnchor="middle" fontFamily="Urbanist,sans-serif" fontSize="12" fontWeight="800" fill="white">72</text>
+                  <text x="55" y="50" textAnchor="middle" fontFamily="Urbanist,sans-serif" fontSize="5.5" fill="rgba(255,255,255,0.35)">Overall</text>
+                  <text x="55" y="3.5" textAnchor="middle" fontFamily="Urbanist,sans-serif" fontSize="5.5" fill="rgba(255,255,255,0.4)">Technical</text>
+                  <text x="95" y="27" fontFamily="Urbanist,sans-serif" fontSize="5.5" fill="rgba(255,255,255,0.4)">Ethical</text>
+                  <text x="95" y="62" fontFamily="Urbanist,sans-serif" fontSize="5.5" fill="rgba(255,255,255,0.4)">Emotional</text>
+                  <text x="55" y="87" textAnchor="middle" fontFamily="Urbanist,sans-serif" fontSize="5.5" fill="rgba(255,255,255,0.4)">Velocity</text>
+                  <text x="14" y="62" textAnchor="end" fontFamily="Urbanist,sans-serif" fontSize="5.5" fill="rgba(255,255,255,0.4)">Comm.</text>
+                  <text x="14" y="27" textAnchor="end" fontFamily="Urbanist,sans-serif" fontSize="5.5" fill="rgba(255,255,255,0.4)">Leader</text>
+                </svg>
+                <div className="mock-br"><span className="mock-bl">🎯 Technical</span><div className="mock-bt"><div className="mock-bf" style={{width:'78%',background:'#3b82f6'}}></div></div><span className="mock-bv" style={{color:'#60a5fa'}}>78</span></div>
+                <div className="mock-br"><span className="mock-bl">💎 Ethical</span><div className="mock-bt"><div className="mock-bf" style={{width:'84%',background:'#a78bfa'}}></div></div><span className="mock-bv" style={{color:'#a78bfa'}}>84</span></div>
+                <div className="mock-br"><span className="mock-bl">❤️ Emotional</span><div className="mock-bt"><div className="mock-bf" style={{width:'71%',background:'#ec4899'}}></div></div><span className="mock-bv" style={{color:'#ec4899'}}>71</span></div>
+                <div className="mock-br"><span className="mock-bl">⚡ Velocity</span><div className="mock-bt"><div className="mock-bf" style={{width:'65%',background:'#f59e0b'}}></div></div><span className="mock-bv" style={{color:'#f59e0b'}}>65</span></div>
+                <div className="mock-br"><span className="mock-bl">💰 Commercial</span><div className="mock-bt"><div className="mock-bf" style={{width:'62%',background:'#22c55e'}}></div></div><span className="mock-bv" style={{color:'#22c55e'}}>62</span></div>
+                <div className="mock-br"><span className="mock-bl">👑 Leadership</span><div className="mock-bt"><div className="mock-bf" style={{width:'74%',background:'#f97316'}}></div></div><span className="mock-bv" style={{color:'#f97316'}}>74</span></div>
+                <div className="mock-anal">
+                  <div className="mock-anal-title">✨ Genome Analysis</div>
+                  <div className="mock-anal-sub">The Craftsman · Professional</div>
+                  <div className="mock-anal-sub">Strongest: Ethical. Focus: Velocity.</div>
+                  <div className="mock-anal-link">View Full Report →</div>
+                </div>
+              </div>
+            </div>
+            <div className="mock-nav"><span className="mock-ni">Home</span><span className="mock-ni mock-act">Explore</span><span className="mock-ni">Check-Ins</span><span className="mock-ni">MyRegulars</span><span className="mock-ni">Profile</span></div>
+          </div>
+          <div className="mock-hb"><div className="mock-hbl"></div><div className="mock-hbc"></div><div className="mock-hbt"></div></div>
+        </>}
+        {activeMockup === 'onpro-2' && <>
+          <div className="mock-sb"><span className="mock-st">8:14 PM</span><div className="mock-si">●●● WiFi ■</div></div>
+          <div className="mock-nr"><div className="mock-nc"></div></div>
+          <div className="mock-scr">
+            <div className="mock-con">
+              <div className="mock-ptitle">Skills Assessment</div>
+              <div className="mock-psub">DAPA PROFESSIONAL EVALUATION</div>
+              <div style={{textAlign:'center',fontSize:'10px',fontWeight:800,color:'#fff',fontFamily:'Urbanist,sans-serif'}}>Prove Your Expertise</div>
+              <div style={{textAlign:'center',fontSize:'6.5px',color:'rgba(255,255,255,0.4)',fontFamily:'Urbanist,sans-serif',lineHeight:1.5}}>Complete adaptive assessments<br/>across 9 hospitality domains.</div>
+              <div className="mock-srow">
+                <div className="mock-sc"><strong>23</strong><span>Completed</span></div>
+                <div className="mock-sc"><strong>9/9</strong><span>Categories</span></div>
+                <div className="mock-sc"><strong>81%</strong><span>Average</span></div>
+                <div className="mock-sc"><strong style={{color:'#a78bfa'}}>Pro</strong><span>Tier</span></div>
+              </div>
+              <div className="mock-choose">Choose Your Assessment</div>
+              <div className="mock-sr mock-hi"><span className="mock-si2">🍸</span><div className="mock-sin"><span className="mock-sn">Mixology</span><span className="mock-ss">Cocktails, spirits & bar craft</span></div><div className="mock-ssc"><span className="mock-spct" style={{color:'#f59e0b'}}>93%</span><span className="mock-stier" style={{color:'#f59e0b'}}>LEGENDARY</span></div></div>
+              <div className="mock-sr mock-hi"><span className="mock-si2">✨</span><div className="mock-sin"><span className="mock-sn">Customer Service</span><span className="mock-ss">Guest relations & hospitality</span></div><div className="mock-ssc"><span className="mock-spct" style={{color:'#f59e0b'}}>96%</span><span className="mock-stier" style={{color:'#f59e0b'}}>LEGENDARY</span></div></div>
+              <div className="mock-sr mock-hi"><span className="mock-si2">💻</span><div className="mock-sin"><span className="mock-sn">POS & Technology</span><span className="mock-ss">Point-of-sale & tech systems</span></div><div className="mock-ssc"><span className="mock-spct" style={{color:'#a78bfa'}}>91%</span><span className="mock-stier" style={{color:'#a78bfa'}}>MASTER</span></div></div>
+              <div className="mock-sr"><span className="mock-si2">🍷</span><div className="mock-sin"><span className="mock-sn">Food & Wine</span><span className="mock-ss">Culinary & wine pairing</span></div><div className="mock-ssc"><span className="mock-spct" style={{color:'#22c55e'}}>82%</span><span className="mock-stier" style={{color:'#22c55e'}}>PROFESSIONAL</span></div></div>
+              <div className="mock-sr"><span className="mock-si2">🤝</span><div className="mock-sin"><span className="mock-sn">Teamwork</span><span className="mock-ss">Collaboration & leadership</span></div><div className="mock-ssc"><span className="mock-spct" style={{color:'#60a5fa'}}>74%</span><span className="mock-stier" style={{color:'#60a5fa'}}>SKILLED</span></div></div>
+            </div>
+            <div className="mock-nav"><span className="mock-ni">Home</span><span className="mock-ni">Explore</span><span className="mock-ni">Check-Ins</span><span className="mock-ni">MyRegulars</span><span className="mock-ni mock-act">Profile</span></div>
+          </div>
+          <div className="mock-hb"><div className="mock-hbl"></div><div className="mock-hbc"></div><div className="mock-hbt"></div></div>
+        </>}
+        {activeMockup === 'onpro-3' && <>
+          <div className="mock-sb"><span className="mock-st">9:02 PM</span><div className="mock-si">●●● WiFi ■</div></div>
+          <div className="mock-nr"><div className="mock-nc"></div></div>
+          <div className="mock-scr">
+            <div className="mock-opill"><span>ONPRO</span></div>
+            <div className="mock-tc">
+              <div className="mock-tr"><span style={{fontSize:'14px'}}>🎸</span><div className="mock-tt"><span className="mock-ttt">You're OnTonight!</span><span className="mock-tts">🤚 Manually set to ON</span></div><div className="mock-tp"></div></div>
+              <div className="mock-treset">↻ Reset to Schedule</div>
+              <div style={{fontSize:'6px',color:'rgba(255,255,255,0.3)',textAlign:'center',fontFamily:'Urbanist,sans-serif',marginTop:'2px'}}>💡 Tip: Toggle manually to override your schedule.</div>
+            </div>
+            <div className="mock-ptabs"><span className="mock-ptab">About</span><span className="mock-ptab">Photos (2)</span><span className="mock-ptab">Clips</span><span className="mock-ptab mock-act">Reviews</span><span className="mock-ptab">Manage</span></div>
+            <div className="mock-rlbl">AWAITING YOUR REVIEW</div>
+            <div className="mock-rempty">No shoutouts waiting for review.</div>
+            <div className="mock-rpub">PUBLISHED</div>
+            <div className="mock-sho"><div className="mock-shh"><div className="mock-sha">S</div><div><div className="mock-shn">Sarah M.</div><div className="mock-shr">Regular</div></div></div><span className="mock-sht">Expert Knowledge</span><div className="mock-shq">"He is just truly amazing!"</div></div>
+            <div className="mock-sho"><div className="mock-shh"><div className="mock-sha">J</div><div><div className="mock-shn">James T.</div><div className="mock-shr">Regular</div></div></div><span className="mock-sht">Awesome Service</span><div className="mock-shq">"Best bartender in Tampa."</div></div>
+            <div className="mock-sho"><div className="mock-shh"><div className="mock-sha">M</div><div><div className="mock-shn">Maya R.</div><div className="mock-shr">Regular</div></div></div><span className="mock-sht">Great Personality</span><div className="mock-shq">"Always makes my night."</div></div>
+            <div className="mock-nav"><span className="mock-ni">Home</span><span className="mock-ni">Explore</span><span className="mock-ni">Check-Ins</span><span className="mock-ni">MyRegulars</span><span className="mock-ni mock-act">Profile</span></div>
+          </div>
+          <div className="mock-hb"><div className="mock-hbl"></div><div className="mock-hbc"></div><div className="mock-hbt"></div></div>
+        </>}
+        {activeMockup === 'onpro-4' && <>
+          <div className="mock-sb"><span className="mock-st">9:44 PM</span><div className="mock-si">●●● WiFi ■</div></div>
+          <div className="mock-nr"><div className="mock-nc"></div></div>
+          <div className="mock-scr">
+            <div className="mock-reg-header">
+              <div className="mock-reg-left"><span style={{fontSize:'18px'}}>⭐</span><div><span className="mock-reg-title">Your Regulars</span><div className="mock-reg-sub">47 people who keep coming back</div></div></div>
+              <div className="mock-reg-btn">Select</div>
+            </div>
+            <div className="mock-reg-lbl">🏆 Top Fans</div>
+            <div className="mock-reg-cards">
+              <div className="mock-reg-card"><span style={{fontSize:'14px'}}>🥇</span><div className="mock-reg-av" style={{background:'linear-gradient(135deg,#60a5fa,#3b82f6)'}}>S</div><div className="mock-reg-info"><span className="mock-reg-name">Sarah M.</span><div className="mock-reg-visits">14 visits</div></div><span className="mock-reg-badge mock-gold">Gold</span></div>
+              <div className="mock-reg-card"><span style={{fontSize:'14px'}}>🥈</span><div className="mock-reg-av" style={{background:'linear-gradient(135deg,#a78bfa,#8b5cf6)'}}>J</div><div className="mock-reg-info"><span className="mock-reg-name">James T.</span><div className="mock-reg-visits">11 visits</div></div><span className="mock-reg-badge mock-silver">Silver</span></div>
+              <div className="mock-reg-card"><span style={{fontSize:'14px'}}>🥉</span><div className="mock-reg-av" style={{background:'linear-gradient(135deg,#22c55e,#16a34a)'}}>M</div><div className="mock-reg-info"><span className="mock-reg-name">Maya R.</span><div className="mock-reg-visits">9 visits</div></div><span className="mock-reg-badge mock-bronze">Bronze</span></div>
+              <div className="mock-reg-card"><span style={{fontSize:'12px',opacity:0.4}}>★</span><div className="mock-reg-av" style={{background:'linear-gradient(135deg,#f59e0b,#d97706)'}}>D</div><div className="mock-reg-info"><span className="mock-reg-name">David K.</span><div className="mock-reg-visits">7 visits</div></div><span className="mock-reg-badge mock-gold">Gold</span></div>
+              <div className="mock-reg-card"><span style={{fontSize:'12px',opacity:0.4}}>★</span><div className="mock-reg-av" style={{background:'linear-gradient(135deg,#ec4899,#be185d)'}}>L</div><div className="mock-reg-info"><span className="mock-reg-name">Lauren B.</span><div className="mock-reg-visits">6 visits</div></div><span className="mock-reg-badge mock-silver">Silver</span></div>
+            </div>
+            <div className="mock-reg-more">+42 more regulars</div>
+            <div className="mock-nav"><span className="mock-ni">Home</span><span className="mock-ni">Explore</span><span className="mock-ni">Check-Ins</span><span className="mock-ni mock-act">MyRegulars</span><span className="mock-ni">Profile</span></div>
+          </div>
+          <div className="mock-hb"><div className="mock-hbl"></div><div className="mock-hbc"></div><div className="mock-hbt"></div></div>
+        </>}
+        {activeMockup === 'patron-1' && <>
+          <div className="mock-sb"><span className="mock-st">8:37 PM</span><div className="mock-si">●●● WiFi ■</div></div>
+          <div className="mock-nr"><div className="mock-nc"></div></div>
+          <div className="mock-scr">
+            <div className="mock-eh"><div className="mock-esb">🔍 Search name, role, venue, bio...</div><div className="mock-eav">S</div></div>
+            <div className="mock-etabs">
+              <div className="mock-etab mock-etab-act"><div className="mock-od"></div> OnTonight (3)</div>
+              <div className="mock-etab">OnPros (7)</div>
+              <div className="mock-etab">Venues (3)</div>
+              <div className="mock-etab">🗺️ Scene</div>
+            </div>
+            <div className="mock-eslbl">Following (3)</div>
+            <div className="mock-ecards">
+              <div className="mock-ec"><div className="mock-eca" style={{background:'linear-gradient(135deg,#d4a373,#c99763)'}}>A<div className="mock-ering"></div></div><div className="mock-eci"><div className="mock-ecn">Ari Mendez ✦</div><div className="mock-ecr">Bartender</div><div className="mock-ecv">📍 Tampa Venue</div><div className="mock-onb"><div className="mock-od"></div> ON TONIGHT 🤚</div><div className="mock-ect">🕐 5:00 PM – 11:00 PM</div></div><div className="mock-hrt">🤍</div></div>
+              <div className="mock-ec"><div className="mock-eca" style={{background:'linear-gradient(135deg,#60a5fa,#3b82f6)'}}>M<div className="mock-ering"></div></div><div className="mock-eci"><div className="mock-ecn">Melanie R. ✦</div><div className="mock-ecr">Bartender</div><div className="mock-ecv">📍 Rooftop Bar</div><div className="mock-onb"><div className="mock-od"></div> ON TONIGHT 🤚</div><div className="mock-ect">🕐 6:00 PM – 12:00 AM</div></div><div className="mock-hrt">🤍</div></div>
+              <div className="mock-ec"><div className="mock-eca" style={{background:'linear-gradient(135deg,#a78bfa,#8b5cf6)'}}>S<div className="mock-ering"></div></div><div className="mock-eci"><div className="mock-ecn">Stephan K.</div><div className="mock-ecr">Bartender</div><div className="mock-ecv">📍 Tampa Bar</div><div className="mock-onb"><div className="mock-od"></div> ON TONIGHT 🤚</div></div><div className="mock-hrt">🤍</div></div>
+            </div>
+            <div className="mock-nav"><span className="mock-ni">Home</span><span className="mock-ni mock-act">Explore</span><span className="mock-ni">MySpots</span><span className="mock-ni">MyPros</span><span className="mock-ni">Profile</span></div>
+          </div>
+          <div className="mock-hb"><div className="mock-hbl"></div><div className="mock-hbc"></div><div className="mock-hbt"></div></div>
+        </>}
+        {activeMockup === 'patron-2' && <>
+          <div className="mock-sb"><span className="mock-st">9:51 PM</span><div className="mock-si">●●● WiFi ■</div></div>
+          <div className="mock-nr"><div className="mock-nc"></div></div>
+          <div className="mock-scr">
+            <div className="mock-phw">
+              <div className="mock-phlogo">OnTonight</div>
+              <div className="mock-phtag">Your Night. Your People.<br/>Where Regulars Are Made.</div>
+              <div className="mock-phwel">Welcome back, Sarah!</div>
+              <div className="mock-phbtn">Explore OnTonight</div>
+              <div className="mock-phcard">
+                <div className="mock-phci"><div style={{fontSize:'19px'}}>🍷</div><div><span className="mock-phct">The Connoisseur</span><div className="mock-phcv">🧬 Genome Verified</div></div></div>
+                <div className="mock-phsl">Quality over everything, always</div>
+                <div className="mock-phbtns"><div className="mock-phbp">View Results</div><div className="mock-phbs">Retake</div></div>
+              </div>
+            </div>
+            <div className="mock-nav"><span className="mock-ni mock-act">Home</span><span className="mock-ni">Explore</span><span className="mock-ni">MySpots</span><span className="mock-ni">MyPros</span><span className="mock-ni">Profile</span></div>
+          </div>
+          <div className="mock-hb"><div className="mock-hbl"></div><div className="mock-hbc"></div><div className="mock-hbt"></div></div>
+        </>}
+        {activeMockup === 'patron-3' && <>
+          <div className="mock-sb"><span className="mock-st">10:23 PM</span><div className="mock-si">●●● WiFi ■</div></div>
+          <div className="mock-nr"><div className="mock-nc"></div></div>
+          <div className="mock-scr">
+            <div className="mock-con">
+              <div className="mock-gar"><div style={{fontSize:'20px'}}>🍷</div><div><div className="mock-gn">THE CONNOISSEUR</div><div className="mock-gtag">Quality over everything, always</div></div></div>
+              <div className="mock-gver">🧬 Genome Verified</div>
+              <div className="mock-gdesc">You can taste the terroir. Craft matters, story matters, technique matters. You appreciate mastery and won't settle for less.</div>
+              <div className="mock-gtabs"><div className="mock-gtab mock-act">Overview</div><div className="mock-gtab">Your DNA</div><div className="mock-gtab">Venues</div></div>
+              <div className="mock-gvc">
+                <div className="mock-glbl">Your Perfect Venues</div>
+                <div className="mock-gvl">
+                  <div className="mock-gvi">Wine bars</div>
+                  <div className="mock-gvi">Craft cocktail lounges</div>
+                  <div className="mock-gvi">Omakase</div>
+                  <div className="mock-gvi">Michelin-starred</div>
+                  <div className="mock-gvi">Third-wave coffee</div>
+                </div>
+              </div>
+              <div className="mock-gsc"><div className="mock-glbl">Your Strength</div><div className="mock-gsv">Discerning taste elevates every experience</div></div>
+            </div>
+            <div className="mock-nav"><span className="mock-ni">Home</span><span className="mock-ni">Explore</span><span className="mock-ni">MySpots</span><span className="mock-ni">MyPros</span><span className="mock-ni mock-act">Profile</span></div>
+          </div>
+          <div className="mock-hb"><div className="mock-hbl"></div><div className="mock-hbc"></div><div className="mock-hbt"></div></div>
+        </>}
+        {activeMockup === 'venue-1' && <>
+          <div className="mock-sb"><span className="mock-st">11:07 PM</span><div className="mock-si">●●● WiFi ■</div></div>
+          <div className="mock-nr"><div className="mock-nc"></div></div>
+          <div className="mock-scr">
+            <div className="mock-vh"><div className="mock-vlogo">🏮</div><div className="mock-vhi"><div className="mock-vhn">Venue Dashboard</div><div className="mock-vhs">Tampa Venue</div></div><div className="mock-vact"><div className="mock-vad"></div> Active</div></div>
+            <div className="mock-vtabs"><div className="mock-vtab">Overview</div><div className="mock-vtab mock-act">Analytics</div><div className="mock-vtab">Profile</div></div>
+            <div className="mock-vper"><div className="mock-vpb">7 Days</div><div className="mock-vpb mock-act">30 Days</div><div className="mock-vpb">90 Days</div><div className="mock-vpb">All Time</div></div>
+            <div className="mock-vstats">
+              <div className="mock-vs"><div style={{fontSize:'13px'}}>✅</div><div className="mock-vsi"><div className="mock-vsn">284</div><div className="mock-vsl">Total Check-Ins</div><div className="mock-vss">9.5 avg/day</div></div><div className="mock-vst">+18%</div></div>
+              <div className="mock-vs"><div style={{fontSize:'13px'}}>👥</div><div className="mock-vsi"><div className="mock-vsn">147</div><div className="mock-vsl">Unique Patrons</div><div className="mock-vss">38 new this month</div></div><div className="mock-vst">+12%</div></div>
+              <div className="mock-vs mock-vs-grn"><div style={{fontSize:'13px'}}>⭐</div><div className="mock-vsi"><div className="mock-vsn" style={{color:'#3ddc6c'}}>63</div><div className="mock-vsl">Total Regulars</div><div className="mock-vss">+8 new this month</div></div><div className="mock-vst">+14%</div></div>
+              <div className="mock-vs"><div style={{fontSize:'13px'}}>🧬</div><div className="mock-vsi"><div className="mock-vsn">8</div><div className="mock-vsl">Verified OnPros</div><div className="mock-vss">Avg DAPA: 81%</div></div></div>
+            </div>
+            <div className="mock-nav"><span className="mock-ni">Home</span><span className="mock-ni">Explore</span><span className="mock-ni">Staff</span><span className="mock-ni mock-act">Analytics</span><span className="mock-ni">Profile</span></div>
+          </div>
+          <div className="mock-hb"><div className="mock-hbl"></div><div className="mock-hbc"></div><div className="mock-hbt"></div></div>
+        </>}
+      </div>
+    </div>
+  )}
 
       {/* ═══════════════════════════════════════════════════════════════════ */}
       {/* STYLES */}
@@ -1994,24 +2203,82 @@ We're not just building software. We're building the future of hospitality caree
         .footer-bottom { padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.05); text-align: center; }
         .footer-bottom p { font-size: 11px; color: rgba(248,250,252,0.3); margin: 0; font-weight: 300; }
 
-        /* LIGHTBOX */
-        .lightbox {
-          position: fixed; inset: 0; background: rgba(0,0,0,0.95);
-          display: flex; align-items: center; justify-content: center;
-          z-index: 9999; cursor: pointer; padding: 16px;
-        }
-        .lightbox img {
-          max-width: 100%; max-height: 88vh;
-          border-radius: 12px; pointer-events: none;
-        }
-        .lightbox-close {
-          position: absolute; top: 16px; right: 16px;
-          width: 44px; height: 44px;
-          display: flex; align-items: center; justify-content: center;
-          background: rgba(255,255,255,0.12); border: none;
-          border-radius: 50%; color: white; font-size: 22px;
-          cursor: pointer; -webkit-tap-highlight-color: transparent;
-        }
+        /* LIGHTBOX /
+.lightbox {
+position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+display: flex; align-items: center; justify-content: center;
+z-index: 9999; cursor: pointer; padding: 16px;
+}
+.lightbox img {
+max-width: 100%; max-height: 88vh;
+border-radius: 12px; pointer-events: none;
+}
+.lightbox-close {
+position: absolute; top: 16px; right: 16px;
+width: 44px; height: 44px;
+display: flex; align-items: center; justify-content: center;
+background: rgba(255,255,255,0.12); border: none;
+border-radius: 50%; color: white; font-size: 22px;
+cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+/ MOCKUP LIGHTBOX */
+.mockup-lightbox {
+position: fixed; inset: 0; background: rgba(0,0,0,0.92);
+display: flex; flex-direction: column; align-items: center;
+justify-content: center; z-index: 9999; cursor: pointer;
+padding: 16px; backdrop-filter: blur(8px);
+animation: fadeIn 0.2s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.mockup-lightbox-close {
+position: fixed; top: 16px; right: 16px;
+width: 48px; height: 48px;
+display: flex; align-items: center; justify-content: center;
+background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.15);
+border-radius: 50%; color: white; font-size: 24px;
+cursor: pointer; z-index: 10001; transition: background 0.2s;
+-webkit-tap-highlight-color: transparent;
+}
+.mockup-lightbox-close:hover { background: rgba(255,255,255,0.22); }
+.mockup-lightbox-hint {
+position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+font-size: 12px; color: rgba(255,255,255,0.3); letter-spacing: 0.08em;
+font-weight: 300; pointer-events: none;
+}
+.mockup-lightbox-phone {
+width: 375px !important;
+height: 812px !important;
+border-radius: 44px !important;
+cursor: default;
+box-shadow: 0 32px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.1) !important;
+animation: phoneIn 0.25s cubic-bezier(0.34,1.56,0.64,1);
+overflow-y: auto !important;
+}
+@keyframes phoneIn {
+from { opacity: 0; transform: scale(0.88) translateY(20px); }
+to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+@media (max-height: 900px) {
+.mockup-lightbox-phone {
+width: 320px !important;
+height: 693px !important;
+border-radius: 38px !important;
+}
+}
+@media (max-height: 750px) {
+.mockup-lightbox-phone {
+width: 280px !important;
+height: 607px !important;
+border-radius: 32px !important;
+}
+}
+@media (max-width: 400px) {
+.mockup-lightbox-phone {
+width: calc(100vw - 32px) !important;
+height: calc((100vw - 32px) * 2.165) !important;
+border-radius: 32px !important;
+}
+}
         /* RESPONSIVE */
         @media (max-width: 900px) {
           .who-options { flex-wrap: wrap; justify-content: center; }
