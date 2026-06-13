@@ -1110,7 +1110,7 @@ We're not just building software. We're building the future of hospitality caree
                       <ul>
                         <li><strong>45</strong> questions across 10 personality dimensions</li>
                         <li><strong>20 unique archetypes</strong> for both pros and patrons</li>
-                        <li><strong>Visual preference testing</strong> for subconscious insight</li>
+                        <li><strong>Atmosphere preference mapping</strong> for intuitive insight</li>
                         <li><strong>Scenario-based responses</strong> for behavioral mapping</li>
                         <li><strong>Value alignment scoring</strong> for authentic matching</li>
                       </ul>
