@@ -2167,6 +2167,7 @@ We're not just building software. We're building the future of hospitality caree
           border-radius: 8px; color: #f8fafc; font-size: 14px; font-family: inherit;
           font-weight: 300; transition: all 0.2s; -webkit-appearance: none;
         }
+        .waitlist-form select option { background: #0c1620; color: #f8fafc; }
         .waitlist-form input::placeholder { color: rgba(248,250,252,0.35); }
         .waitlist-form input:focus, .waitlist-form select:focus { outline: none; border-color: #d4a373; background: rgba(212,163,115,0.05); }
         .form-disclaimer { font-size: 11px; color: rgba(248,250,252,0.35); text-align: center; margin: 14px 0; font-weight: 300; }
